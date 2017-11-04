@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Construcao" table="Construcao" catalog="drywall" optimistic-lock="version">
+        <id name="codConstrucao" type="java.lang.Integer">
+            <column name="CodConstrucao" />
+            <generator class="identity" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="Descricao" length="50" />
+        </property>
+        <property name="detalhes" type="string">
+            <column name="Detalhes" length="100" />
+        </property>
+        <property name="qualidade" type="java.lang.Integer">
+            <column name="Qualidade" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+        <set name="items" table="Item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodConstrucao" />
+            </key>
+            <one-to-many class="cmd.entidade.Item" />
+        </set>
+        <one-to-one name="forro" class="cmd.entidade.Forro"></one-to-one>
+        <set name="materials" table="Material" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodConstrucao" />
+            </key>
+            <one-to-many class="cmd.entidade.Material" />
+        </set>
+        <one-to-one name="parede" class="cmd.entidade.Parede"></one-to-one>
+    </class>
+</hibernate-mapping>

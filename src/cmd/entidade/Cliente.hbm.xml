@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Cliente" table="Cliente" catalog="drywall" optimistic-lock="version">
+        <id name="codCliente" type="java.lang.Integer">
+            <column name="CodCliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="endereco" class="cmd.entidade.Endereco" fetch="select">
+            <column name="CodEndereco" />
+        </many-to-one>
+        <property name="dataInscricao" type="date">
+            <column name="DataInscricao" length="10" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+        <one-to-one name="pessoaFisica" class="cmd.entidade.PessoaFisica"></one-to-one>
+        <set name="telefones" table="Telefone" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodCliente" not-null="true" />
+            </key>
+            <one-to-many class="cmd.entidade.Telefone" />
+        </set>
+        <one-to-one name="pessoaJuridica" class="cmd.entidade.PessoaJuridica"></one-to-one>
+        <set name="orcamentos" table="Orcamento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodCliente" />
+            </key>
+            <one-to-many class="cmd.entidade.Orcamento" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Telefone" table="Telefone" catalog="drywall" optimistic-lock="version">
+        <composite-id name="id" class="cmd.entidade.TelefoneId">
+            <key-property name="codCliente" type="int">
+                <column name="CodCliente" />
+            </key-property>
+            <key-property name="numero" type="string">
+                <column name="Numero" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cliente" class="cmd.entidade.Cliente" update="false" insert="false" fetch="select">
+            <column name="CodCliente" not-null="true" />
+        </many-to-one>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+    </class>
+</hibernate-mapping>

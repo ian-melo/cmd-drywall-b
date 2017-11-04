@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.MaterialItem" table="MaterialItem" catalog="drywall" optimistic-lock="version">
+        <composite-id name="id" class="cmd.entidade.MaterialItemId">
+            <key-property name="codMaterial" type="int">
+                <column name="CodMaterial" />
+            </key-property>
+            <key-property name="codItem" type="int">
+                <column name="CodItem" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="item" class="cmd.entidade.Item" update="false" insert="false" fetch="select">
+            <column name="CodItem" not-null="true" />
+        </many-to-one>
+        <many-to-one name="material" class="cmd.entidade.Material" update="false" insert="false" fetch="select">
+            <column name="CodMaterial" not-null="true" />
+        </many-to-one>
+        <property name="quantidade" type="java.lang.Integer">
+            <column name="Quantidade" />
+        </property>
+        <property name="precoUnitario" type="big_decimal">
+            <column name="PrecoUnitario" precision="8" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+    </class>
+</hibernate-mapping>

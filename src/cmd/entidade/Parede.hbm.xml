@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Parede" table="Parede" catalog="drywall" optimistic-lock="version">
+        <id name="codConstrucao" type="int">
+            <column name="CodConstrucao" />
+            <generator class="foreign">
+                <param name="property">construcao</param>
+            </generator>
+        </id>
+        <one-to-one name="construcao" class="cmd.entidade.Construcao" constrained="true"></one-to-one>
+        <property name="montante" type="big_decimal">
+            <column name="Montante" precision="10" scale="5" />
+        </property>
+        <property name="alturaLimite" type="big_decimal">
+            <column name="AlturaLimite" precision="10" scale="5" />
+        </property>
+        <property name="ehSt" type="java.lang.Boolean">
+            <column name="EhSt" />
+        </property>
+        <property name="ehRu" type="java.lang.Boolean">
+            <column name="EhRu" />
+        </property>
+        <property name="ehRf" type="java.lang.Boolean">
+            <column name="EhRf" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+    </class>
+</hibernate-mapping>

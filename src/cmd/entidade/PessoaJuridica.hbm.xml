@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.PessoaJuridica" table="PessoaJuridica" catalog="drywall" optimistic-lock="version">
+        <id name="codCliente" type="int">
+            <column name="CodCliente" />
+            <generator class="foreign">
+                <param name="property">cliente</param>
+            </generator>
+        </id>
+        <one-to-one name="cliente" class="cmd.entidade.Cliente" constrained="true"></one-to-one>
+        <property name="cnpj" type="string">
+            <column name="Cnpj" length="20" />
+        </property>
+        <property name="razaoSocial" type="string">
+            <column name="RazaoSocial" length="50" />
+        </property>
+        <property name="ramoAtuacao" type="string">
+            <column name="RamoAtuacao" length="30" />
+        </property>
+        <property name="dataFundacao" type="date">
+            <column name="DataFundacao" length="10" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Funcionario" table="Funcionario" catalog="drywall" optimistic-lock="version">
+        <id name="codFuncionario" type="java.lang.Integer">
+            <column name="CodFuncionario" />
+            <generator class="identity" />
+        </id>
+        <property name="login" type="string">
+            <column name="Login" length="30" />
+        </property>
+        <property name="senha" type="string">
+            <column name="Senha" length="40" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+        <set name="registroAtividades" table="RegistroAtividade" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodFuncionario" />
+            </key>
+            <one-to-many class="cmd.entidade.RegistroAtividade" />
+        </set>
+    </class>
+</hibernate-mapping>

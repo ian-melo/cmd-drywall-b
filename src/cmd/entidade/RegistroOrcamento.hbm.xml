@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.RegistroOrcamento" table="RegistroOrcamento" catalog="drywall" optimistic-lock="version">
+        <id name="codRegistro" type="int">
+            <column name="CodRegistro" />
+            <generator class="foreign">
+                <param name="property">registroAtividade</param>
+            </generator>
+        </id>
+        <one-to-one name="registroAtividade" class="cmd.entidade.RegistroAtividade" constrained="true"></one-to-one>
+        <property name="atividade" type="string">
+            <column name="Atividade" length="30" />
+        </property>
+        <property name="tabela" type="string">
+            <column name="Tabela" length="20" />
+        </property>
+        <property name="detalhe" type="string">
+            <column name="Detalhe" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

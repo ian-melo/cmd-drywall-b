@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.PessoaFisica" table="PessoaFisica" catalog="drywall" optimistic-lock="version">
+        <id name="codCliente" type="int">
+            <column name="CodCliente" />
+            <generator class="foreign">
+                <param name="property">cliente</param>
+            </generator>
+        </id>
+        <one-to-one name="cliente" class="cmd.entidade.Cliente" constrained="true"></one-to-one>
+        <property name="cpf" type="string">
+            <column name="Cpf" length="20" />
+        </property>
+        <property name="nome" type="string">
+            <column name="Nome" length="50" />
+        </property>
+        <property name="dataNascimento" type="date">
+            <column name="DataNascimento" length="10" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+    </class>
+</hibernate-mapping>

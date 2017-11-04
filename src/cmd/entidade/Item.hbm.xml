@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Item" table="Item" catalog="drywall" optimistic-lock="version">
+        <id name="codItem" type="java.lang.Integer">
+            <column name="CodItem" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="construcao" class="cmd.entidade.Construcao" fetch="select">
+            <column name="CodConstrucao" />
+        </many-to-one>
+        <many-to-one name="orcamento" class="cmd.entidade.Orcamento" fetch="select">
+            <column name="CodOrcamento" />
+        </many-to-one>
+        <property name="altura" type="big_decimal">
+            <column name="Altura" precision="10" scale="5" />
+        </property>
+        <property name="largura" type="big_decimal">
+            <column name="Largura" precision="10" scale="5" />
+        </property>
+        <property name="areaPorta" type="big_decimal">
+            <column name="AreaPorta" precision="10" scale="5" />
+        </property>
+        <property name="areaJanela" type="big_decimal">
+            <column name="AreaJanela" precision="10" scale="5" />
+        </property>
+        <property name="precoTotal" type="big_decimal">
+            <column name="PrecoTotal" precision="8" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+        <set name="materialItems" table="MaterialItem" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodItem" not-null="true" />
+            </key>
+            <one-to-many class="cmd.entidade.MaterialItem" />
+        </set>
+    </class>
+</hibernate-mapping>

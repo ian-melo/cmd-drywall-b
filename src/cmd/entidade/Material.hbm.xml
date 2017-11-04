@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/10/2017 11:08:26 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cmd.entidade.Material" table="Material" catalog="drywall" optimistic-lock="version">
+        <id name="codMaterial" type="java.lang.Integer">
+            <column name="CodMaterial" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="construcao" class="cmd.entidade.Construcao" fetch="select">
+            <column name="CodConstrucao" />
+        </many-to-one>
+        <property name="descricao" type="string">
+            <column name="Descricao" length="50" />
+        </property>
+        <property name="nomeUnidade" type="string">
+            <column name="NomeUnidade" length="10" />
+        </property>
+        <property name="constanteMetro" type="big_decimal">
+            <column name="ConstanteMetro" precision="10" scale="5" />
+        </property>
+        <property name="precoUnitario" type="big_decimal">
+            <column name="PrecoUnitario" precision="8" />
+        </property>
+        <property name="ehOpcional" type="java.lang.Boolean">
+            <column name="EhOpcional" />
+        </property>
+        <property name="qualidade" type="java.lang.Integer">
+            <column name="Qualidade" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="Tipo" length="20" />
+        </property>
+        <property name="quantidadeMinima" type="java.lang.Integer">
+            <column name="QuantidadeMinima" />
+        </property>
+        <property name="xdead" type="java.lang.Boolean">
+            <column name="XDEAD" />
+        </property>
+        <set name="materialItems" table="MaterialItem" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodMaterial" not-null="true" />
+            </key>
+            <one-to-many class="cmd.entidade.MaterialItem" />
+        </set>
+    </class>
+</hibernate-mapping>
