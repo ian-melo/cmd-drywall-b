@@ -5,12 +5,8 @@
  */
 package cmd.novo.controle;
 
-import cmd.DAO.DAO;
+import cmd.DAO.TelefoneDAO;
 import cmd.entidade.Telefone;
-import cmd.util.HibernateUtil;
-import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 /**
  *
@@ -18,38 +14,16 @@ import org.hibernate.Session;
  */
 public class CadTelefoneControle {
 
-  
     public boolean Cadastrar(Telefone item) {
-        try {
-            Session s = HibernateUtil.getSessionFactory().openSession();
-            s.beginTransaction();
-            s.save(item);
-            s.getTransaction().commit();
-            s.close();
+        TelefoneDAO telDAO = new TelefoneDAO();
+
+        if (telDAO.inserir(item) == true) {
+            System.out.println("Telefone Cadastrado_");
             return true;
-        } catch (HibernateException e) {
+        } else {
+            System.out.println("Telefone não Cadastrado_");
             return false;
         }
-    }
-
-   
-    public boolean alterar(Telefone item) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    public boolean excluir(Telefone item) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    public Telefone buscar(String consulta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
-    public List<Telefone> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

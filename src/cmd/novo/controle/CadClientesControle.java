@@ -28,9 +28,9 @@ public class CadClientesControle {
         Iterator<Telefone> iterator = item.getTelefones().iterator();
         while (iterator.hasNext()) {
             if (telDao.inserir(iterator.next())) {
-                System.out.println("Telefone Cadastrado");//Remover
+                System.out.println("Telefone Cadastrado_cadCliEndTel");//Remover
             } else {
-                System.out.println("Telefone NÃO Cadastrado");//Remover
+                System.out.println("Telefone NÃO Cadastrado_cadCliEndTel");//Remover
                
             }
         }

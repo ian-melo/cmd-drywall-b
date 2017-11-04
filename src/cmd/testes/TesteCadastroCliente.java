@@ -13,7 +13,6 @@ import cmd.entidade.TelefoneId;
 import cmd.novo.controle.CadClientesControle;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,9 +27,11 @@ public class TesteCadastroCliente {
 
     public static void main(String[] args) {
         TesteCadastro();
+
+        System.exit(0);
     }
 
-    public static void TesteCadastro() {
+    private static void TesteCadastro() {
         /*
          HashSet<Dog> dset = new HashSet<Dog>();
          dset.add(new Dog(2));
@@ -72,7 +73,7 @@ public class TesteCadastroCliente {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date dataDate = new Date();
-        String dS = "11/01/2005";
+        String dS = "11/01/2006";
         try {
             dataDate = formato.parse(dS);
             System.out.println(dataDate);
@@ -98,7 +99,6 @@ public class TesteCadastroCliente {
         tel.setId(telId);
 
         tels.add(tel);
-        
 
         cli.setCodCliente(null);
         cli.setOrcamentos(null);

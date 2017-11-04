@@ -24,6 +24,7 @@ public class ClienteDAO implements DAO<Cliente> {
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("_cli_ " + e);
             return false;
         }
     }
