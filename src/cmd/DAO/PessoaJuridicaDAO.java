@@ -18,11 +18,12 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
         try {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
-            s.update(item);
+            s.save(item);
             s.getTransaction().commit();
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("__ " + e);
             return false;
         }
     }

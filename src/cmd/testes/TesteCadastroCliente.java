@@ -11,11 +11,11 @@ import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
 import cmd.novo.controle.CadClientesControle;
+import cmd.novo.controle.CadPessoaJuridica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import javax.swing.JOptionPane;
 
@@ -26,9 +26,46 @@ import javax.swing.JOptionPane;
 public class TesteCadastroCliente {
 
     public static void main(String[] args) {
-        TesteCadastro();
+        //TesteCadastro();
+        TesteCadastroPessoaJuridicaApenas();
 
         System.exit(0);
+    }
+
+    private static void TesteCadastroPessoaJuridicaApenas() {
+        CadPessoaJuridica cPjur = new CadPessoaJuridica();
+        PessoaJuridica pJu = new PessoaJuridica();
+        Cliente cli = new Cliente();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataDate = new Date();
+        String dS = "10/01/2001";
+        try {
+            dataDate = formato.parse(dS);
+            System.out.println(dataDate);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+
+        //46.031.223/0001-17
+        //03.846.168/0001-00
+        //17.849.785/0001-74
+        //54.272.918/0001-19
+        pJu.setCnpj("46.031.223/0001-17");
+        pJu.setDataFundacao(dataDate);
+        pJu.setRamoAtuacao("Ramo _1_Atuacao");
+        pJu.setRazaoSocial("Razao_1_Social");
+        pJu.setXdead(false);
+        pJu.setCodCliente(2);
+
+        cli.setCodCliente(2);//------------------AQUI
+
+        pJu.setCliente(cli);
+
+        if (cPjur.Cadastrar(pJu) == true) {
+            JOptionPane.showMessageDialog(null, "Cadastrado PESSOA JURIDICA");
+
+        }
     }
 
     private static void TesteCadastro() {
@@ -117,7 +154,7 @@ public class TesteCadastroCliente {
 //            JOptionPane.showMessageDialog(null, "Cadastrado Endereco");
 //
 //        }
-        if (cadCliC.CadastrarClienteEnderecoTelefone(cli) == true) {
+        if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado Varios");
 
         }
