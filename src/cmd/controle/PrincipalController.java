@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//TODO: Implementar
+//TODO: Testar
 package cmd.controle;
 
 /**
- *
- * @author voce
+ * Classe de controle para janela
+ * @author ian-melo
  */
 public class PrincipalController {
-    
+    /**
+     * Abre uma janela
+     * @param janela Janela que quer ser aberta
+     * @deprecated desnecessária lol (por enquanto(?))
+     */
+    public void abrirJanela(Object janela) {
+        
+    }
 }

@@ -17,7 +17,7 @@ public class ConstrucaoController {
     /**
      * Insere um forro
      * @param f Forro a ser inserido
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean inserirForro(Forro f) {
         //Verifica se os dados existem
@@ -37,7 +37,7 @@ public class ConstrucaoController {
     /**
      * Altera um forro
      * @param f Forro a ser alterado
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean alterarForro(Forro f) {
         //Verifica se os dados existem
@@ -57,7 +57,7 @@ public class ConstrucaoController {
     /**
      * Exclui um forro
      * @param f Forro a ser excluído
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean excluirForro(Forro f) {
         //Verifica se os dados existem
@@ -77,7 +77,7 @@ public class ConstrucaoController {
     /**
      * Busca um forro
      * @param codigo Código do forro a ser buscado
-     * @return Forro, caso encontre<br/>null, caso contrário
+     * @return Forro, caso encontre<br>null, caso contrário
      */
     public Forro buscarForro(String codigo) {
         //Verifica se o dado existe
@@ -108,7 +108,7 @@ public class ConstrucaoController {
     /**
      * Insere uma parede
      * @param p Parede a ser inserida
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean inserirParede(Parede p) {
         //Verifica se os dados existem
@@ -128,7 +128,7 @@ public class ConstrucaoController {
     /**
      * Altera uma parede
      * @param p Parede a ser alterada
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean alterarParede(Parede p) {
         //Verifica se os dados existem
@@ -148,7 +148,7 @@ public class ConstrucaoController {
     /**
      * Exclui uma parede
      * @param p Parede a ser excluída
-     * @return true, caso a operação seja concluída<br/>false, caso contrário
+     * @return true, caso a operação seja concluída<br>false, caso contrário
      */
     public boolean excluirParede(Parede p) {
         //Verifica se os dados existem
@@ -168,7 +168,7 @@ public class ConstrucaoController {
     /**
      * Busca uma parede
      * @param codigo Código da parede a ser buscado
-     * @return Parede, caso encontre<br/>null, caso contrário
+     * @return Parede, caso encontre<br>null, caso contrário
      */
     public Parede buscarParede(String codigo) {
         //Verifica se o dado existe
