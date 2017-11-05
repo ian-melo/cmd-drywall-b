@@ -29,7 +29,7 @@ public class UsuárioDAO {
         boolean check = false;
 
         try {
-            stat = con.prepareStatement("SELECT * from funcionario WHERE Login = ? and Senha = ?");
+            stat = con.prepareStatement("SELECT * from Funcionario WHERE Login = ? and Senha = ?");
             stat.setString(1, nome);
             stat.setString(2, senha);
             rs = stat.executeQuery();
