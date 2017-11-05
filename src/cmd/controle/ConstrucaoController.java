@@ -12,7 +12,7 @@ import cmd.entidade.Parede;
  * Classe de controle para CRUD de construção
  * @author voce
  */
-public class ConstrucaoControle {
+public class ConstrucaoController {
     
     /**
      * Insere um forro

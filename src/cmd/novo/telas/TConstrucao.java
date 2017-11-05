@@ -5,7 +5,7 @@
  */
 package cmd.novo.telas;
 
-import cmd.controle.ConstrucaoControle;
+import cmd.controle.ConstrucaoController;
 import cmd.entidade.Construcao;
 import cmd.entidade.Forro;
 import cmd.entidade.Parede;
@@ -24,7 +24,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 
     public static TConstrucao construcaoT;
 
-    private ConstrucaoControle controle;
+    private ConstrucaoController controle;
 
     public static TConstrucao getInstancia() {
         if (construcaoT == null) {
