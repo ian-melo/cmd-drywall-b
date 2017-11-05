@@ -86,6 +86,7 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         pn_conteudo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_orcamento = new javax.swing.JTable();
+        bt_atualizar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Solicitação de Orçamentos");
@@ -102,12 +103,12 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         tb_orcamento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_orcamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Altura", "Largura", "Quantidade de Paredes", "Email", "Valor disponivel/desejado", "Ambiente", "Quantidade de Portas (Se houver)", "Quantidade Janelas (Se houver)", "Possui Portas", "Altura da Porta", "Largura da Porta", "Possui Janelas", "Altura da Janela", "Largura da Janela", "Mao de Obra"
+                "Id", "Altura", "Largura", "Quantidade de Paredes", "Email", "Valor disponivel/desejado", "Ambiente", "Quantidade de Portas (Se houver)", "Quantidade Janelas (Se houver)", "Possui Portas", "Possui Janela", "Altura da Porta", "Largura da Porta", "Altura da Janela", "Largura da Janela", "Mao de Obra"
             }
         ));
         tb_orcamento.setPreferredSize(new java.awt.Dimension(1250, 48));
@@ -126,6 +127,13 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
         jScrollPane2.setViewportView(pn_conteudo);
 
+        bt_atualizar.setText("Atualizar Tabela");
+        bt_atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_atualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,7 +143,9 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_enviarEmail)
-                        .addGap(0, 787, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_atualizar)
+                        .addGap(0, 668, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -145,8 +155,12 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_enviarEmail)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bt_atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1))
+                    .addComponent(btn_enviarEmail))
+                .addGap(120, 120, 120))
         );
 
         pack();
@@ -157,8 +171,13 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         email.show();
     }//GEN-LAST:event_btn_enviarEmailActionPerformed
 
+    private void bt_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_atualizarActionPerformed
+       ReadTable();
+    }//GEN-LAST:event_bt_atualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_atualizar;
     private javax.swing.JButton btn_enviarEmail;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
