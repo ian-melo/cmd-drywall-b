@@ -50,7 +50,7 @@ public class UsuárioDAO {
         PreparedStatement stat = null;
 
         try {
-            stat = con.prepareStatement("INSERT INTO funcionario(CodFuncionario,Login,Senha) VALUES(NULL,?,?)");
+            stat = con.prepareStatement("INSERT INTO Funcionario(CodFuncionario,Login,Senha) VALUES(NULL,?,?)");
             stat.setString(1, u.getLogin());
             stat.setString(2, u.getSenha());
             stat.executeUpdate();
