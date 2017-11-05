@@ -116,10 +116,10 @@ public class TesteCadApenasTelefone {
         //cli.setPessoaJuridica(pJur);
         cli.setPessoaJuridica(null);
         cli.setTelefones(tels);
-        cli.setXdead(true);
+        cli.setXdead(false);
 
         
-        if (cadCliC.CadastrarClienteEnderecoTelefone(cli) == true) {
+        if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado Varios");
 
         }
