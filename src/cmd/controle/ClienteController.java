@@ -6,9 +6,11 @@
 package cmd.controle;
 
 import cmd.DAO.ClienteDAO;
+import cmd.DAO.EnderecoDAO;
 import cmd.DAO.PessoaFisicaDAO;
 import cmd.DAO.PessoaJuridicaDAO;
 import cmd.entidade.Cliente;
+import cmd.entidade.Endereco;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 
@@ -26,11 +28,21 @@ public class ClienteController {
         //Processo de execução das DAOs
         PessoaFisica pFi = c.getPessoaFisica();
         PessoaJuridica pJu = c.getPessoaJuridica();
+        Endereco end = c.getEndereco();
 
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        EnderecoDAO endDAO = new EnderecoDAO();
 
         ClienteDAO cliDao = new ClienteDAO();
+
+        if ((c.getEndereco() != null) && (!endDAO.inserir(end))) {
+            return false;
+        }
+
+        if (!cliDao.inserir(c)) {
+            return false;
+        }
 
         if ((c.getPessoaFisica() != null) && (!pFiDAO.inserir(pFi))) {
             return false;
@@ -39,9 +51,6 @@ public class ClienteController {
             return false;
         }
 
-        if (!cliDao.inserir(c)) {
-            return false;
-        }
         return true;
     }
 }

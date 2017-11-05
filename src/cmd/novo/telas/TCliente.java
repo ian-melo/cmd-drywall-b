@@ -595,14 +595,12 @@ public class TCliente extends javax.swing.JInternalFrame {
             end = new Endereco();
             pJur = new PessoaJuridica();
 
-            Telefone tel = new Telefone();
-            TelefoneId telId = new TelefoneId();
             HashSet<Telefone> tels = new HashSet<>();
 
-            end = PreencheEnderecoVAL(end);//Preenche endereco
-            end.setCodEndereco(2);//ERRO!!!!!!!!!
+            end = preencheEnderecoVAL(end);//Preenche endereco
+            end.setCodEndereco(25);//ERRO!!!!!!!!!
 
-            pJur.setCodCliente(2);
+            pJur.setCodCliente(25);
             pJur.setCnpj(pJu.getTxt_cnpj_pnl());
             pJur.setDataFundacao(pJur.getDataFundacao());
             pJur.setRamoAtuacao(pJur.getRamoAtuacao());
@@ -610,42 +608,8 @@ public class TCliente extends javax.swing.JInternalFrame {
             pJur.setXdead(false);
 
 //===============================TELEFONE=======================================
-            telId.setNumero(txt_tel1.getText());
-            //telId.setCodCliente(cli.getCodCliente());
-            telId.setCodCliente(1);//Temporario
-            tel.setId(telId);
-            tel.setCliente(null);
-            tel.setXdead(false);
+            tels = preencheTelefoneVAL(tels);
 
-            tels.add(tel);
-
-            if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
-                tel = new Telefone();
-                telId = new TelefoneId();
-
-                telId.setNumero(txt_cel1.getText());
-                //telId.setCodCliente(cli.getCodCliente());
-                telId.setCodCliente(1);//Temporario
-                tel.setId(telId);
-                tel.setCliente(null);
-                tel.setXdead(false);
-
-                tels.add(tel);
-            }
-
-            if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
-                tel = new Telefone();
-                telId = new TelefoneId();
-
-                telId.setNumero(txt_cel2.getText());
-                //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
-                telId.setCodCliente(1);//Temporario
-                tel.setId(telId);
-                tel.setCliente(null);
-                tel.setXdead(false);
-
-                tels.add(tel);
-            }
 //==============================================================================
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date dataDate = null;
@@ -690,13 +654,13 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli = new Cliente();
             end = new Endereco();
             pFis = new PessoaFisica();
-
-            Telefone tel = new Telefone();
-            TelefoneId telId = new TelefoneId();
+            
             HashSet<Telefone> tels = new HashSet<>();
 
-            end = PreencheEnderecoVAL(end);//Preenche endereco
+//===============================ENDERECO=======================================
+            end = preencheEnderecoVAL(end);//Preenche endereco
             end.setCodEndereco(2);//ERRO!!!!!!!!!
+//==============================================================================
 
             pFis.setCpf(pFi.getTxt_cpf_pnl());
             pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
@@ -704,43 +668,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             pFis.setXdead(false);
 
 //===============================TELEFONE=======================================
-            telId.setNumero(txt_tel1.getText());
-            //telId.setCodCliente(cli.getCodCliente());
-            telId.setCodCliente(1);//Temporario
-            tel.setId(telId);
-            tel.setCliente(null);
-            tel.setXdead(false);
-
-            tels.add(tel);
-
-            if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
-                tel = new Telefone();
-                telId = new TelefoneId();
-
-                telId.setNumero(txt_cel1.getText());
-                //telId.setCodCliente(cli.getCodCliente());
-                telId.setCodCliente(1);//Temporario
-                tel.setId(telId);
-                tel.setCliente(null);
-                tel.setXdead(false);
-
-                tels.add(tel);
-            }
-
-            if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
-                tel = new Telefone();
-                telId = new TelefoneId();
-
-                telId.setNumero(txt_cel2.getText());
-                //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
-                telId.setCodCliente(1);//Temporario
-                tel.setId(telId);
-                tel.setCliente(null);
-                tel.setXdead(false);
-
-                tels.add(tel);
-            }
+            tels = preencheTelefoneVAL(tels);
 //==============================================================================
+            
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date dataDate = null;
             try {
@@ -845,9 +775,9 @@ public class TCliente extends javax.swing.JInternalFrame {
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
     }
-//Preenche endereço tanto de PessoaJuridica quanto de Pessoa Fisica
 
-    private Endereco PreencheEnderecoVAL(Endereco en) {
+//Preenche ENDEREÇO tanto de PessoaJuridica quanto de Pessoa Fisica
+    private Endereco preencheEnderecoVAL(Endereco en) {
         en.setBairro(txt_bairro.getText());
         en.setCep(txt_cep.getText());
         en.setCidade(txt_cidade.getText());
@@ -858,6 +788,51 @@ public class TCliente extends javax.swing.JInternalFrame {
         en.setXdead(false);
 
         return en;
+    }
+
+//Preenche TELEFONE tanto de PessoaJuridica quanto de Pessoa Fisica
+    private HashSet<Telefone> preencheTelefoneVAL(HashSet<Telefone> tes) {
+        Telefone tel = new Telefone();
+        TelefoneId telId = new TelefoneId();
+
+        telId.setNumero(txt_tel1.getText());
+        //telId.setCodCliente(cli.getCodCliente());
+        telId.setCodCliente(1);//Temporario
+        tel.setId(telId);
+        tel.setCliente(null);
+        tel.setXdead(false);
+
+        tes.add(tel);
+
+        if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
+            tel = new Telefone();
+            telId = new TelefoneId();
+
+            telId.setNumero(txt_cel1.getText());
+            //telId.setCodCliente(cli.getCodCliente());
+            telId.setCodCliente(1);//Temporario
+            tel.setId(telId);
+            tel.setCliente(null);
+            tel.setXdead(false);
+
+            tes.add(tel);
+        }
+
+        if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
+            tel = new Telefone();
+            telId = new TelefoneId();
+
+            telId.setNumero(txt_cel2.getText());
+            //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
+            telId.setCodCliente(1);//Temporario
+            tel.setId(telId);
+            tel.setCliente(null);
+            tel.setXdead(false);
+
+            tes.add(tel);
+        }
+
+        return tes;
     }
 
     //Verifica se o campo foi preenchido
@@ -1067,7 +1042,11 @@ public class TCliente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 private void mouseClicadoCNPJ(MouseEvent e) {
         if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
+            txt_cep.requestFocus();
             txt_cep.setText("04344-020");
+
+            txt_numero.requestFocus();
+            txt_numero.setText("99");
         }
     }
 
