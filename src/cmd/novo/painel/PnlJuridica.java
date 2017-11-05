@@ -7,6 +7,8 @@ package cmd.novo.painel;
 
 import cmd.novo.Validacao;
 import java.awt.Color;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -62,9 +64,19 @@ public class PnlJuridica extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("CNPJ:*");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Razão social:*");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         txt_razaoSocial_pnl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -147,6 +159,14 @@ public class PnlJuridica extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_cnpj_pnlFocusLost
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        mouseClicado(evt);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        mouseClicadoCNPJ(evt);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
@@ -159,4 +179,33 @@ public class PnlJuridica extends javax.swing.JPanel {
     private javax.swing.JTextField txt_ramoAtuacao_pnl;
     private javax.swing.JTextField txt_razaoSocial_pnl;
     // End of variables declaration//GEN-END:variables
+
+    private void mouseClicado(MouseEvent e) {
+        if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
+
+            txt_razaoSocial_pnl.setText("Razao");
+
+//        } else if (e.getModifiersEx() == InputEvent.SHIFT_DOWN_MASK) {
+//            System.out.println("O shift estava pressionado "
+//                    + "enquanto clicou com o mouse");
+//        } else if (e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
+//            System.out.println("O alt estava pressionado "
+//                    + "enquanto clicou com o mouse");
+        } else {
+            //System.out.println("Nenhum modificador...");
+        }
+
+    }
+
+    private void mouseClicadoCNPJ(MouseEvent e) {
+        if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
+            //31.061.861/0001-03
+            txt_cnpj_pnl.setText("31.061.861/0001-03");
+            txt_razaoSocial_pnl.setText("Razao");
+            txt_ramoAtuacao_pnl.setText("Ramo");
+
+        }
+
+    }
+
 }

@@ -5,8 +5,10 @@
  */
 package cmd.novo.telas;
 
+import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
+import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
@@ -20,10 +22,13 @@ import cmd.novo.painel.PnlFisica;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -188,6 +193,11 @@ public class TCliente extends javax.swing.JInternalFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("CEP:*");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Logradouro:*");
@@ -574,24 +584,23 @@ public class TCliente extends javax.swing.JInternalFrame {
 //=======================================
 //     PROGRAMAÇÃO PARA SALVAR NO BD(colocar aqui)
 //=======================================
-            CadClientesControle cadCliC = new CadClientesControle();
-            Cliente cli = new Cliente();
-            Endereco end = new Endereco();
-            PessoaJuridica pJur = new PessoaJuridica();
+            //CadClientesControle cadCliC = new CadClientesControle();
+            ClienteController cliC = new ClienteController();
+
+            Cliente cli = null;
+            Endereco end = null;
+            PessoaJuridica pJur = null;
+
+            cli = new Cliente();
+            end = new Endereco();
+            pJur = new PessoaJuridica();
 
             Telefone tel = new Telefone();
             TelefoneId telId = new TelefoneId();
             HashSet<Telefone> tels = new HashSet<>();
 
-            end.setCodEndereco(2);
-            end.setBairro(txt_bairro.getText());
-            end.setCep(txt_cep.getText());
-            end.setCidade(txt_cidade.getText());
-            end.setComplemento(txt_complemento.getText());
-            end.setLogradouro(txt_logradouro.getText());
-            end.setNumero(txt_numero.getText());
-            end.setUf(txt_uf.getText());
-            end.setXdead(false);
+            end = PreencheEnderecoVAL(end);//Preenche endereco
+            end.setCodEndereco(2);//ERRO!!!!!!!!!
 
             pJur.setCodCliente(2);
             pJur.setCnpj(pJu.getTxt_cnpj_pnl());
@@ -655,7 +664,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
+            if (cliC.inserirCliente(cli) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
@@ -674,23 +683,20 @@ public class TCliente extends javax.swing.JInternalFrame {
 //     PROGRAMAÇÃO PARA SALVAR NO BD(colocar aqui)
 //=======================================
             CadClientesControle cadCliC = new CadClientesControle();
-            Cliente cli = new Cliente();
-            Endereco end = new Endereco();
-            PessoaFisica pFis = new PessoaFisica();
+            Cliente cli = null;
+            Endereco end = null;
+            PessoaFisica pFis = null;
+
+            cli = new Cliente();
+            end = new Endereco();
+            pFis = new PessoaFisica();
 
             Telefone tel = new Telefone();
             TelefoneId telId = new TelefoneId();
             HashSet<Telefone> tels = new HashSet<>();
 
-            end.setCodEndereco(2);
-            end.setBairro(txt_bairro.getText());
-            end.setCep(txt_cep.getText());
-            end.setCidade(txt_cidade.getText());
-            end.setComplemento(txt_complemento.getText());
-            end.setLogradouro(txt_logradouro.getText());
-            end.setNumero(txt_numero.getText());
-            end.setUf(txt_uf.getText());
-            end.setXdead(false);
+            end = PreencheEnderecoVAL(end);//Preenche endereco
+            end.setCodEndereco(2);//ERRO!!!!!!!!!
 
             pFis.setCpf(pFi.getTxt_cpf_pnl());
             pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
@@ -829,11 +835,29 @@ public class TCliente extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(pnl_telefone, "Verifique o Celular 2");
     }//GEN-LAST:event_txt_cel2FocusLost
 
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        mouseClicadoCNPJ(evt);
+    }//GEN-LAST:event_jLabel14MouseClicked
+
     private void pequenoBug() {
         int x = this.getHeight();
         int y = this.getWidth();
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
+    }
+//Preenche endereço tanto de PessoaJuridica quanto de Pessoa Fisica
+
+    private Endereco PreencheEnderecoVAL(Endereco en) {
+        en.setBairro(txt_bairro.getText());
+        en.setCep(txt_cep.getText());
+        en.setCidade(txt_cidade.getText());
+        en.setComplemento(txt_complemento.getText());
+        en.setLogradouro(txt_logradouro.getText());
+        en.setNumero(txt_numero.getText());
+        en.setUf(txt_uf.getText());
+        en.setXdead(false);
+
+        return en;
     }
 
     //Verifica se o campo foi preenchido
@@ -1041,93 +1065,13 @@ public class TCliente extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txt_tel1;
     private javax.swing.JTextField txt_uf;
     // End of variables declaration//GEN-END:variables
-/*
-     ============================================================================
-     *****************CONTEUDO SALVO DA ANTIGA TELA DE CLIENTE*******************
-     ============================================================================
-    
-    
-    
-    
-     public class ClienteFXMLController implements Initializable {
+private void mouseClicadoCNPJ(MouseEvent e) {
+        if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
+            txt_cep.setText("04344-020");
+        }
+    }
 
-     private ClienteDAO dao = new ClienteDAO();
-     private List<Entidadecliente> Listacli;
-     private ObservableList<ClienteTableView> tableview = FXCollections.observableArrayList();
-     @FXML
-     private ComboBox<String> cmb_pessoa;
-     @FXML
-     private Label lb_dataInscricao;
-     @FXML
-     private Button bt_cadastrar;
-     @FXML
-     private Button bt_alterar;
-     @FXML
-     private Button bt_sair;
-     @FXML
-     private TableView<ClienteTableView> tb_fisica;
-     @FXML
-     private TableColumn<ClienteTableView, Integer> tc_id;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_nome;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_cpf;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_dataNasc;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_endereco;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_cep;
-     @FXML
-     private VBox vBox_fisica;
-     @FXML
-     private TextField txt_nome;
-     @FXML
-     private TextField txt_cpf;
-     @FXML
-     private TextField txt_dataNascimento;
-     @FXML
-     private VBox vBox_endereco;
-     @FXML
-     private TextField txt_cep;
-     @FXML
-     private TextField txt_logradouro;
-     @FXML
-     private TextField txt_numero;
-     @FXML
-     private TextField txt_bairro;
-     @FXML
-     private TextField txt_cidade;
-     @FXML
-     private TextField txt_uf;
-     @FXML
-     private VBox vBox_juridica;
-     @FXML
-     private TextField txt_razaoSocial;
-     @FXML
-     private TextField txt_cnpj;
-     @FXML
-     private TextField txt_ramo;
-     @FXML
-     private TextField txt_dataFundacao;
-     @FXML
-     private VBox vBox_telefone;
-     @FXML
-     private TableView<ClienteTableView> tb_juridica;
-     @FXML
-     private TableColumn<ClienteTableView, Integer> tc_id_juridica;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_razaoSocial;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_cnpj;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_dataFunda;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_endereco_Juridica;
-     @FXML
-     private TableColumn<ClienteTableView, String> tc_cep_Juridica;
-
-     /*public void ListandoTableview() {
+    /*public void ListandoTableview() {
      Listacli = dao.ListaClientes();
      tableview.clear();
 
@@ -1257,5 +1201,4 @@ public class TCliente extends javax.swing.JInternalFrame {
      *
      *
      */
-
 }

@@ -5,10 +5,43 @@
  */
 package cmd.controle;
 
+import cmd.DAO.ClienteDAO;
+import cmd.DAO.PessoaFisicaDAO;
+import cmd.DAO.PessoaJuridicaDAO;
+import cmd.entidade.Cliente;
+import cmd.entidade.PessoaFisica;
+import cmd.entidade.PessoaJuridica;
+
 /**
  *
  * @author voce
  */
 public class ClienteController {
-    
+
+    public boolean inserirCliente(Cliente c) {
+        if (c == null || (c.getPessoaFisica() == null && c.getPessoaJuridica() == null)) {
+            return false;
+        }
+
+        //Processo de execução das DAOs
+        PessoaFisica pFi = c.getPessoaFisica();
+        PessoaJuridica pJu = c.getPessoaJuridica();
+
+        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+
+        ClienteDAO cliDao = new ClienteDAO();
+
+        if ((c.getPessoaFisica() != null) && (!pFiDAO.inserir(pFi))) {
+            return false;
+        }
+        if ((c.getPessoaJuridica() != null) && (!pJuDAO.inserir(pJu))) {
+            return false;
+        }
+
+        if (!cliDao.inserir(c)) {
+            return false;
+        }
+        return true;
+    }
 }
