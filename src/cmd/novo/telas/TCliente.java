@@ -7,6 +7,7 @@ package cmd.novo.telas;
 
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
+import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
@@ -612,7 +613,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
                 tel = new Telefone();
                 telId = new TelefoneId();
-                
+
                 telId.setNumero(txt_cel1.getText());
                 //telId.setCodCliente(cli.getCodCliente());
                 telId.setCodCliente(1);//Temporario
@@ -626,7 +627,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
                 tel = new Telefone();
                 telId = new TelefoneId();
-                
+
                 telId.setNumero(txt_cel2.getText());
                 //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
                 telId.setCodCliente(1);//Temporario
@@ -659,13 +660,11 @@ public class TCliente extends javax.swing.JInternalFrame {
 
             }
 
-
         }
 
 //==============================================================================
 //============================PESSOA FISICA=====================================
 //==============================================================================
-        
         if (cmb_pessoa.getSelectedIndex() == 1) {
             if (verificaPessoaFisica() == false) {//verifica os campos
                 return;
@@ -674,9 +673,89 @@ public class TCliente extends javax.swing.JInternalFrame {
 //=======================================
 //     PROGRAMAÇÃO PARA SALVAR NO BD(colocar aqui)
 //=======================================
-            //apagar a mensagem a baixo quando o codigo para salvar no BD for colocado E 
-            //quando a validação for testada
-            JOptionPane.showMessageDialog(null, "Se esta mensagem aparecer, quando algum campo de preenchimento obrigatorio não foi preenchido, há um ERRO");
+            CadClientesControle cadCliC = new CadClientesControle();
+            Cliente cli = new Cliente();
+            Endereco end = new Endereco();
+            PessoaFisica pFis = new PessoaFisica();
+
+            Telefone tel = new Telefone();
+            TelefoneId telId = new TelefoneId();
+            HashSet<Telefone> tels = new HashSet<>();
+
+            end.setCodEndereco(2);
+            end.setBairro(txt_bairro.getText());
+            end.setCep(txt_cep.getText());
+            end.setCidade(txt_cidade.getText());
+            end.setComplemento(txt_complemento.getText());
+            end.setLogradouro(txt_logradouro.getText());
+            end.setNumero(txt_numero.getText());
+            end.setUf(txt_uf.getText());
+            end.setXdead(false);
+
+            pFis.setCpf(pFi.getTxt_cpf_pnl());
+            pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
+            pFis.setNome(pFi.getTxt_nome_pnl());
+            pFis.setXdead(false);
+
+//===============================TELEFONE=======================================
+            telId.setNumero(txt_tel1.getText());
+            //telId.setCodCliente(cli.getCodCliente());
+            telId.setCodCliente(1);//Temporario
+            tel.setId(telId);
+            tel.setCliente(null);
+            tel.setXdead(false);
+
+            tels.add(tel);
+
+            if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
+                tel = new Telefone();
+                telId = new TelefoneId();
+
+                telId.setNumero(txt_cel1.getText());
+                //telId.setCodCliente(cli.getCodCliente());
+                telId.setCodCliente(1);//Temporario
+                tel.setId(telId);
+                tel.setCliente(null);
+                tel.setXdead(false);
+
+                tels.add(tel);
+            }
+
+            if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
+                tel = new Telefone();
+                telId = new TelefoneId();
+
+                telId.setNumero(txt_cel2.getText());
+                //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
+                telId.setCodCliente(1);//Temporario
+                tel.setId(telId);
+                tel.setCliente(null);
+                tel.setXdead(false);
+
+                tels.add(tel);
+            }
+//==============================================================================
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date dataDate = null;
+            try {
+                dataDate = formato.parse(lb_dataInscricao.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(Validacao.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+
+            cli.setCodCliente(null);
+            cli.setOrcamentos(null);
+            cli.setDataInscricao(dataDate);
+            cli.setEndereco(end);
+            cli.setPessoaFisica(pFis);
+            cli.setTelefones(tels);
+            cli.setXdead(false);
+
+            if (cadCliC.CadastrarClientePFisicaEnderecoTelefone(cli) == true) {
+                JOptionPane.showMessageDialog(null, "Cadastrado");
+
+            }
 
         }
 

@@ -23,6 +23,7 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("__ " + e);
             return false;
         }
     }
