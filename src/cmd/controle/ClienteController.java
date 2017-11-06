@@ -126,4 +126,10 @@ public class ClienteController {
         return pJuDAO.listar();
     }
     
+    public List<PessoaFisica> ListaPessoaFisicas() {
+        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        
+        return pFiDAO.listar();
+    }
+    
 }

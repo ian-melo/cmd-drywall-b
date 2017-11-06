@@ -774,13 +774,34 @@ public class TCliente extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             linha = tb_FisicaEjuridica.getSelectedRow();
 
-            PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 4);
-           // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
+            if (cmb_pessoa.getSelectedIndex() == 0) {
 
-            JOptionPane.showMessageDialog(pnl_telefone, peJu.getCnpj());
+                PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 4);
+                // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
+
+                pJu.setTxt_cnpj_pnl(peJu.getCnpj());
+                pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
+                pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
+                pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
+                
+                
+                //JOptionPane.showMessageDialog(pnl_telefone, peJu.getCnpj());
+                
+                
+                
             // tb_FisicaEjuridica.get
-            //escolhido = Carrinho.getItens().get(linha);
-            // System.out.println(escolhido.getLivro().getTitulo());
+                //escolhido = Carrinho.getItens().get(linha);
+                // System.out.println(escolhido.getLivro().getTitulo());
+            }
+
+            if (cmb_pessoa.getSelectedIndex() == 1) {
+                PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 3);
+
+                pFi.setTxt_nome_pnl(peFi.getNome());
+                pFi.setTxt_cpf_pnl(peFi.getCpf());
+                pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
+                
+            }
         }
     }//GEN-LAST:event_tb_FisicaEjuridicaMouseClicked
 
@@ -939,6 +960,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
     private void pFisica() {
+        preencheTabelaFisica();
+        
         pnl_cliente_pai.removeAll();//remove cliente anterior
 
         FlowLayout gerente = new FlowLayout(1);
@@ -1003,9 +1026,55 @@ public class TCliente extends javax.swing.JInternalFrame {
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
-        
-        
+
         tb_FisicaEjuridica.getColumnModel().getColumn(4).setMaxWidth(0);
+
+    }
+    
+    private void preencheTabelaFisica() {
+        tb_FisicaEjuridica.removeAll();
+
+        ClienteController cleC = new ClienteController();
+        //Titulo
+        Vector cabecalho = new Vector();
+        cabecalho.add("Nome");
+        cabecalho.add("CPF");
+        cabecalho.add("Data Nascimento");
+        //cabecalho.add("Telefone");
+//        cabecalho.add("CEP");
+//        cabecalho.add("Logradouro");
+//        cabecalho.add("Numero");
+//        cabecalho.add("Cidade");
+//        cabecalho.add("Bairro");
+//        cabecalho.add("Estado");
+        cabecalho.add("Objeto");
+
+        //Itens
+        Vector dados = new Vector();
+        Vector item;
+
+        for (PessoaFisica fx : cleC.ListaPessoaFisicas()) {
+            item = new Vector();
+            item.add(fx.getNome());
+            item.add(fx.getCpf());
+            item.add(fx.getDataNascimento());
+            //item.add(jx.getCliente().getTelefones());
+//            item.add(jx.getCliente().getEndereco().getCep());
+//            item.add(jx.getCliente().getEndereco().getLogradouro());
+//            item.add(jx.getCliente().getEndereco().getNumero());
+//            item.add(jx.getCliente().getEndereco().getCidade());
+//            item.add(jx.getCliente().getEndereco().getBairro());
+//            item.add(jx.getCliente().getEndereco().getUf());
+            item.add(fx);
+
+            dados.add(item);
+        }
+
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.setDataVector(dados, cabecalho);
+        tb_FisicaEjuridica.setModel(modeloTabela);
+
+        tb_FisicaEjuridica.getColumnModel().getColumn(3).setMaxWidth(0);
 
     }
 

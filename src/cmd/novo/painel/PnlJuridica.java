@@ -33,6 +33,25 @@ public class PnlJuridica extends javax.swing.JPanel {
     public Date getTxt_datafundacao_pnl() {//Fornece acesso a outras classes
         return txt_datafundacao_pnl.getDate();
     }
+    
+    
+    
+    
+    public void setTxt_cnpj_pnl(String cnpj) {//Fornece acesso a outras classes
+        this.txt_cnpj_pnl.setText(cnpj);
+    }
+
+    public void setTxt_razaoSocial_pnl(String razao) {//Fornece acesso a outras classes
+        this.txt_razaoSocial_pnl.setText(razao);
+    }
+
+    public void setTxt_ramoAtuacao_pnl(String ramo) {//Fornece acesso a outras classes
+        this.txt_ramoAtuacao_pnl.setText(ramo);
+    }
+
+    public void setTxt_datafundacao_pnl(Date dat) {//Fornece acesso a outras classes
+        this.txt_datafundacao_pnl.setDate(dat);
+    }
 
     /**
      * Creates new form pnl_empresa

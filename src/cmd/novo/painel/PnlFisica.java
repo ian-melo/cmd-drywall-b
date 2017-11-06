@@ -15,19 +15,32 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class PnlFisica extends javax.swing.JPanel {
-    
+
     public String getTxt_nome_pnl() {//Fornece acesso a outras classes
         return txt_nome_pnl.getText();
     }
+
     public String getTxt_cpf_pnl() {//Fornece acesso a outras classes
         return txt_cpf_pnl.getText();
     }
+
     public Date getTxt_dataNasc_pnl() {//Fornece acesso a outras classes
         return txt_dataNasc_pnl.getDate();
     }
-        
+
     
     
+    public void setTxt_nome_pnl(String nome_pnl) {
+        this.txt_nome_pnl.setText(nome_pnl);
+    }
+
+    public void setTxt_cpf_pnl(String cpf_pnl) {
+        this.txt_cpf_pnl.setText(cpf_pnl);
+    }
+
+    public void setTxt_dataNasc_pnl(Date dataNas_pnl) {
+        this.txt_dataNasc_pnl.setDate(dataNas_pnl);
+    }
 
     /**
      * Creates new form pnl_fisica
@@ -36,7 +49,7 @@ public class PnlFisica extends javax.swing.JPanel {
         initComponents();
 
         pnl_pessoa.setBackground(Color.WHITE);
-        
+
         txt_dataNasc_pnl.setBackground(Color.WHITE);
     }
 
@@ -134,17 +147,17 @@ public class PnlFisica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cpf_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cpf_pnlFocusLost
-       Validacao vali = new Validacao();
-       if( vali.validarCpf(txt_cpf_pnl.getText()) == false){
-           JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o CPF");
-       }
+        Validacao vali = new Validacao();
+        if (vali.validarCpf(txt_cpf_pnl.getText()) == false) {
+            JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o CPF");
+        }
     }//GEN-LAST:event_txt_cpf_pnlFocusLost
 
     private void txt_nome_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nome_pnlFocusLost
-       Validacao vali = new Validacao();
-       if( vali.validarVazio(txt_nome_pnl.getText()) == true){
-           JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o nome");
-       }
+        Validacao vali = new Validacao();
+        if (vali.validarVazio(txt_nome_pnl.getText()) == true) {
+            JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o nome");
+        }
     }//GEN-LAST:event_txt_nome_pnlFocusLost
 
 
