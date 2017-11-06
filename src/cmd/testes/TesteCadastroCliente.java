@@ -5,6 +5,7 @@
  */
 package cmd.testes;
 
+import cmd.DAO.PessoaJuridicaDAO;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
@@ -27,10 +28,11 @@ import javax.swing.JOptionPane;
 public class TesteCadastroCliente {
 
     public static void main(String[] args) {
-         TesteCadastro();
-        //TesteCadastroPessoaJuridicaApenas_1();
+        TesteCadastro();
+        //TesteCadastroPessoaJuridicaApenas();
 
-        TesteListarPessoaJuridica();
+        //TesteListarPessoaJuridica();
+        TesteCadastroPessoaJuridicaApenas_1();
 
         System.exit(0);
     }
@@ -60,7 +62,7 @@ public class TesteCadastroCliente {
         //CadPessoaJuridica cPjur = new CadPessoaJuridica();
 
         PessoaJuridica pJu = new PessoaJuridica();
-        //PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        //PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();//hhhhhhhhhhh
         Cliente cli = new Cliente();
         Endereco end = new Endereco();
 
@@ -72,7 +74,7 @@ public class TesteCadastroCliente {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date dataDate = new Date();
-        String dS = "10/01/2010";
+        String dS = "10/01/2011";
         try {
             dataDate = formato.parse(dS);
             System.out.println(dataDate);
@@ -84,23 +86,30 @@ public class TesteCadastroCliente {
         //end.setClientes();
         end.setBairro("_Bairro");
         end.setCep("05255-050");
-        end.setCidade("_Cidade");
-        end.setComplemento("_Complemento");
-        end.setLogradouro("_Logradouro");
-        end.setNumero("10");
-        end.setUf("WW");
+        end.setCidade("_Cidade_");
+        end.setComplemento("__Complemento");
+        end.setLogradouro("__Logradouro");
+        end.setNumero("190");
+        end.setUf("PP");
         end.setXdead(false);
 
         tel = new Telefone();
         telId = new TelefoneId();
-        telId.setNumero("(21)1000-1005");
+        telId.setNumero("(00)1000-2005");
+        //telId.setCodCliente(75);//--------------------------
         tel.setId(telId);
+        tel.setCliente(cli);
+        tel.setXdead(false);
         tels.add(tel);
 
+        
         tel = new Telefone();
         telId = new TelefoneId();
-        telId.setNumero("(21)10000-1004");
+        telId.setNumero("(00)10000-2006");
+        //telId.setCodCliente(75);//---------------------------
         tel.setId(telId);
+        tel.setCliente(cli);
+        tel.setXdead(false);
         tels.add(tel);
 
         //cli.setCodCliente(null);
@@ -109,14 +118,14 @@ public class TesteCadastroCliente {
         cli.setEndereco(end);
         cli.setTelefones(tels);
         cli.setPessoaJuridica(pJu);
-        cli.setXdead(true);
+        cli.setXdead(false);
 
         pJu.setCliente(cli);
-        pJu.setCnpj("45.131.223/2222-22");
+        pJu.setCnpj("45.331.323/3333-23");
         pJu.setCodCliente(37);
         pJu.setDataFundacao(dataDate);
-        pJu.setRamoAtuacao("ramoAt");
-        pJu.setRazaoSocial("razaoSo");
+        pJu.setRamoAtuacao("ramoAt_2");
+        pJu.setRazaoSocial("razaoSo_2");
         pJu.setXdead(false);
 
         JOptionPane.showMessageDialog(null, cliC.inserirClientePessoaJuridica(pJu));

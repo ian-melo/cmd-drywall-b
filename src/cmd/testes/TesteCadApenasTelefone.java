@@ -5,6 +5,7 @@
  */
 package cmd.testes;
 
+import cmd.DAO.TelefoneDAO;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Telefone;
@@ -27,8 +28,53 @@ public class TesteCadApenasTelefone {
     public static void main(String[] args) {
         //testeCadastroTelefoneUnitario();
 
-        testeCadastroTelefoneComCliente();
+        //testeCadastroTelefoneComCliente();
+        testeCadastroTel();
         System.exit(0);
+    }
+
+    private static void testeCadastroTel() {
+        Telefone tel = new Telefone();
+        TelefoneDAO telDAO = new TelefoneDAO();
+        TelefoneId telId = new TelefoneId();
+
+        telId.setNumero("(11)1000-1001");
+        telId.setCodCliente(40);//IMPORTANTE
+        tel.setId(telId);
+        tel.setCliente(null);
+        tel.setXdead(true);
+        
+
+        if(telDAO.inserir(tel)){
+            JOptionPane.showMessageDialog(null, "Cadastrado");
+        }else{
+            JOptionPane.showMessageDialog(null, "NÃO Cad");
+        }
+
+//        tels.add(tel);
+//
+//        tel = new Telefone();
+//        telId = new TelefoneId();
+//        telId.setNumero("(11)1000-1018");
+//        telId.setCodCliente(9);//IMPORTANTE
+//        tel.setId(telId);
+//        tel.setCliente(null);
+//        tel.setXdead(true);
+//
+//        tels.add(tel);
+//
+//        tel = new Telefone();
+//        telId = new TelefoneId();
+//        telId.setNumero("(11)1000-1019");
+//        telId.setCodCliente(9);//IMPORTANTE
+//        tel.setId(telId);
+//        tel.setCliente(null);
+//        tel.setXdead(true);
+//
+//        tels.add(tel);
+//
+        
+
     }
 
     private static void testeCadastroTelefoneComCliente() {
@@ -73,7 +119,7 @@ public class TesteCadApenasTelefone {
 //        pJur.setXdead(false);
         Telefone tel = new Telefone();
         TelefoneId telId = new TelefoneId();
-        
+
         telId.setNumero("(11)1000-1017");
         telId.setCodCliente(9);//IMPORTANTE
         tel.setId(telId);
@@ -118,7 +164,6 @@ public class TesteCadApenasTelefone {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        
         if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado Varios");
 

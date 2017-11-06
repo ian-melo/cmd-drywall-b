@@ -5,7 +5,6 @@
  */
 package cmd.controle;
 
-
 import cmd.DAO.EnderecoDAO;
 import cmd.DAO.PessoaFisicaDAO;
 import cmd.DAO.PessoaJuridicaDAO;
@@ -36,7 +35,6 @@ public class ClienteController {
 //        PessoaFisica pFi = c.getPessoaFisica();
 //        PessoaJuridica pJu = c.getPessoaJuridica();
 //        Endereco end = c.getEndereco();
-   
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
 
         EnderecoDAO endDAO = new EnderecoDAO();
@@ -50,37 +48,39 @@ public class ClienteController {
 //        if (!cliDao.inserir(c)) {
 //            return false;
 //        }
-        
         if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
             return false;
         }
-        
-        
-        
-        JOptionPane.showMessageDialog(null, "CodCliente=" + pJ.getCliente().getCodCliente());
-       
-        
+
+        int valor = pJ.getCliente().getCodCliente();//pega o valor q retornar do Hibernate
+        JOptionPane.showMessageDialog(null, "CodCliente=" + valor);
+
+        //pJ.getCliente().getTelefones().iterator().hasNext();
+        Telefone tt = new Telefone();
         Iterator<Telefone> iterator = pJ.getCliente().getTelefones().iterator();
         while (iterator.hasNext()) {
-            if (telDAO.inserir(iterator.next())) {
+
+            tt = iterator.next();//Separa objeto telefone em yma variavel
+            tt.getId().setCodCliente(valor);//Força o valor q retorna do Hibernate, no codCliente do objeto Telefone
+
+            //if (telDAO.inserir(iterator.next())) {
+            if (telDAO.inserir(tt)) {
                 System.out.println("Telefone Cadastrado_cadTel");//Remover
             } else {
-                System.out.println("_2_ " + iterator.next().getId().getNumero());
+                //System.out.println("_2_ " + iterator.next().getId().getNumero());
                 System.out.println("Telefone NÃO Cadastrado_cadTel");//Remover
-                //return false;
+                return false;
             }
         }
 
 //        if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
-//            //JOptionPane.showMessageDialog(null, "pJuDAO.inserir(pJ)");
 //            return false;
 //        }
         return true;
     }
-    
-    
+
     public boolean inserirClientePessoaFisica(PessoaFisica pF) {
-        
+
         if (pF == null || pF.getCliente() == null) {
             return false;
         }
@@ -90,21 +90,15 @@ public class ClienteController {
         EnderecoDAO endDAO = new EnderecoDAO();
         TelefoneDAO telDAO = new TelefoneDAO();
 
-        
         if ((pF.getCliente().getEndereco() != null) && (!endDAO.inserir(pF.getCliente().getEndereco()))) {
             return false;
         }
 
-        
         if ((pF.getCliente() != null) && (!pFiDAO.inserir(pF))) {
             return false;
         }
-        
-        
-        
+
         //JOptionPane.showMessageDialog(null, "CodCliente=" + pF.getCliente().getCodCliente());
-       
-        
         Iterator<Telefone> iterator = pF.getCliente().getTelefones().iterator();
         while (iterator.hasNext()) {
             if (telDAO.inserir(iterator.next())) {
@@ -118,18 +112,17 @@ public class ClienteController {
 
         return true;
     }
-    
-    
+
     public List<PessoaJuridica> ListaPessoaJuridica() {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
-        
+
         return pJuDAO.listar();
     }
-    
+
     public List<PessoaFisica> ListaPessoaFisicas() {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-        
+
         return pFiDAO.listar();
     }
-    
+
 }
