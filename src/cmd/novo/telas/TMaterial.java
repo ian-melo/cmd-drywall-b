@@ -5,24 +5,20 @@
  */
 package cmd.novo.telas;
 
-import cmd.entidade.Material;
 import cmd.DAO.MaterialDAO;
+import cmd.DAO.ConstrucaoDAO;
+import cmd.DAO.DAO;
+
+import cmd.entidade.Material;
 import cmd.entidade.Construcao;
 import cmd.novo.GerenteDeJanelas;
 import static cmd.novo.telas.TPrincipal.jDesktopPane1;
-import cmd.novo.MaterialTableView;
-import cmd.util.HibernateUtil;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  *
@@ -35,17 +31,15 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private List<Material> listaMateriais;
     private List<Construcao> listaConstrucao;
     
-    private ObservableList<MaterialTableView> tableview = FXCollections.observableArrayList();
-
     public static TMaterial materialT;
-
+    
     public static TMaterial getInstancia() {
         if (materialT == null) {
             materialT = new TMaterial();
         }
         return materialT;
     }
-
+    
     /**
      * Creates new form MaterialT
      */
@@ -54,34 +48,16 @@ public class TMaterial extends javax.swing.JInternalFrame {
         getContentPane().setBackground(Color.WHITE);
         pnl_botoes.setBackground(Color.WHITE);
         pnl_opcao.setBackground(Color.WHITE);
-
         this.gerenteDeJanelas = new GerenteDeJanelas(jDesktopPane1);
-
+        
         cmb_qualidade.removeAll();
         for (int i = 0; i <= 100; i++) {
             cmb_qualidade.addItem(i);
         }
+        listarMateriais();
+        listarConstrucoes();
     }
 
-    private static String QUERY_BASED_ON_TUDO_MATERIAIS = "from Material";
-
-//    public void ListandoTableView() {
-//        Listamaterial = dao.ListaMaterial();
-//        tableview.clear();
-//
-//        for (Material M : Listamaterial) {
-//            MaterialTableView view = new MaterialTableView(M.getId(), M.getNome(), M.getQuantidade(), M.getPreço(), M.getTipo(), M.getUnidade());
-//            tableview.add(view);
-//        }
-////        tc_id.setCellValueFactory(new PropertyValueFactory<MaterialTableView, Integer>("Id"));
-////        tc_nome.setCellValueFactory(new PropertyValueFactory<MaterialTableView, String>("Nome"));
-////        tc_quantidade.setCellValueFactory(new PropertyValueFactory<MaterialTableView, Integer>("Quantidade"));
-////        tb_materiais.setCellValueFactory(new PropertyValueFactory<MaterialTableView, Float>("Preço"));
-////        tc_tipo.setCellValueFactory(new PropertyValueFactory<MaterialTableView, String>("Tipo"));
-////        tc_unidade.setCellValueFactory(new PropertyValueFactory<MaterialTableView, String>("Unidade"));
-////        tb_materiais.setItems(tableview);
-//    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -328,15 +304,15 @@ public class TMaterial extends javax.swing.JInternalFrame {
         tb_materiais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_materiais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "N. Material", "N. Unidade", "Const. M.", "Preço Uni.", "Qtd Minima", "Descrição", "Tipo", "Opcional"
+                "Cód. constr.", "Cód. material", "Tipo", "Descrição", "Un. medida", "Qualidade", "Opcional?", "Const. metro", "Preço unit.", "Qtde. min."
             }
         ));
         jScrollPane1.setViewportView(tb_materiais);
@@ -564,7 +540,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
 
     private void alterar() {
         Material m = new Material();
-
 //        m.setId(tb_materiais.getSelectionModel().getSelectedItem().getId());
 //        m.setNome(txt_nomeUnidade.getText());
 //        m.setQuantidade(Integer.parseInt(txt_qtdMinima.getText()));
@@ -598,7 +573,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
 //        dao.Create(m);
 
         limparCampos();
-        //ListandoTableView();
+        listarMateriais();
 
     }
 
@@ -618,7 +593,79 @@ public class TMaterial extends javax.swing.JInternalFrame {
         txt_constanteMetro.setText("");
         txt_tipo.setText("");
     }
-
+    
+    @SuppressWarnings("unchecked")
+    private void listarConstrucoes() {
+        DAO mdao = new MaterialDAO();
+        listaMateriais = mdao.listar();
+        
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. constr.");
+        tableHeaders.add("Cód. material");
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Un. medida");
+        tableHeaders.add("Qualidade");
+        tableHeaders.add("Opcional?");
+        tableHeaders.add("Const. metro");
+        tableHeaders.add("Preço unit.");
+        tableHeaders.add("Qtde. min.");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Material m : listaMateriais) {
+            reg = new Vector();
+            reg.add(m.getCodMaterial().toString());
+            reg.add(m.getConstrucao().getCodConstrucao().toString());
+            reg.add(m.getTipo());
+            reg.add(m.getDescricao());
+            reg.add(m.getNomeUnidade());
+            reg.add(m.getQualidade().toString());
+            reg.add((m.getEhOpcional()? "Sim":"Não"));
+            reg.add(m.getConstanteMetro().toString());
+            reg.add(m.getPrecoUnitario().toString());
+            reg.add(m.getQuantidadeMinima().toString());
+            tableData.add(reg);
+        }
+        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void listarMateriais() {
+        DAO mdao = new MaterialDAO();
+        listaMateriais = mdao.listar();
+        
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. constr.");
+        tableHeaders.add("Cód. material");
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Un. medida");
+        tableHeaders.add("Qualidade");
+        tableHeaders.add("Opcional?");
+        tableHeaders.add("Const. metro");
+        tableHeaders.add("Preço unit.");
+        tableHeaders.add("Qtde. min.");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Material m : listaMateriais) {
+            reg = new Vector();
+            reg.add(m.getCodMaterial().toString());
+            reg.add(m.getConstrucao().getCodConstrucao().toString());
+            reg.add(m.getTipo());
+            reg.add(m.getDescricao());
+            reg.add(m.getNomeUnidade());
+            reg.add(m.getQualidade().toString());
+            reg.add((m.getEhOpcional()? "Sim":"Não"));
+            reg.add(m.getConstanteMetro().toString());
+            reg.add(m.getPrecoUnitario().toString());
+            reg.add(m.getQuantidadeMinima().toString());
+            tableData.add(reg);
+        }
+        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_alterar;
     private javax.swing.JButton bt_cadastrar;
@@ -655,57 +702,5 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_qtdMinima;
     private javax.swing.JTextField txt_tipo;
     // End of variables declaration//GEN-END:variables
-
-    private void runQueryBasedOnTudo() {
-        executeHQLQuery(QUERY_BASED_ON_TUDO_MATERIAIS);
-    }
-
-    private void executeHQLQuery(String hql) {
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.createQuery(hql);
-            List resultList = q.list();
-            displayResult(resultList);
-            session.getTransaction().commit();
-            session.close();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-    }
-
-    private void displayResult(List resultList) {
-        Vector<String> tableHeaders = new Vector<String>();
-        Vector tableData = new Vector();
-        tableHeaders.add("CodMaterial");
-        tableHeaders.add("ConstanteMetro");
-        tableHeaders.add("Construcao");
-        tableHeaders.add("Descricao");
-        tableHeaders.add("Opcional");
-        //tableHeaders.add("MaterialItems");
-        tableHeaders.add("NomeUnidade");
-        tableHeaders.add("PrecoUnitario");
-        tableHeaders.add("Qualidade");
-        tableHeaders.add("Tipo");
-
-        for (Object o : resultList) {
-            Material mat = (Material) o;
-            Vector<Object> oneRow = new Vector<Object>();
-            oneRow.add(mat.getCodMaterial());
-            oneRow.add(mat.getConstanteMetro());
-            oneRow.add(mat.getConstrucao().getCodConstrucao());
-            oneRow.add(mat.getDescricao());
-            oneRow.add(mat.getEhOpcional());
-            //oneRow.add(mat.getMaterialItems());
-            oneRow.add(mat.getNomeUnidade());
-            oneRow.add(mat.getPrecoUnitario());
-            oneRow.add(mat.getQualidade());
-            oneRow.add(mat.getTipo());
-
-            tableData.add(oneRow);
-        }
-        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
-
-    }
-
+    
 }
