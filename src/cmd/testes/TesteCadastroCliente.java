@@ -5,6 +5,7 @@
  */
 package cmd.testes;
 
+import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.PessoaJuridica;
@@ -26,10 +27,102 @@ import javax.swing.JOptionPane;
 public class TesteCadastroCliente {
 
     public static void main(String[] args) {
-        //TesteCadastro();
-        TesteCadastroPessoaJuridicaApenas();
+        // TesteCadastro();
+        //TesteCadastroPessoaJuridicaApenas_1();
+
+        TesteListarPessoaJuridica();
 
         System.exit(0);
+    }
+
+    private static void TesteListarPessoaJuridica() {
+        ClienteController cleC = new ClienteController();
+
+        for (PessoaJuridica jx : cleC.ListaPessoaJuridica()) {
+            System.out.println("------------------------------------------------");
+            System.out.println("CodCliente                 = " + jx.getCodCliente());
+            System.out.println("Cnpj                       = " + jx.getCnpj());
+            System.out.println("RazaoSocial                = " + jx.getRazaoSocial());
+            System.out.println("RamoAtuacao                = " + jx.getRamoAtuacao());
+            System.out.println("DataFundacao               = " + jx.getDataFundacao());
+//            System.out.println("Cliente.DataInscricao      = " + jx.getCliente().getDataInscricao());
+//            System.out.println("Cliente.Endereco.Cep       = " + jx.getCliente().getEndereco().getCep());
+//            System.out.println("Cliente.Endereco.Logradouro= " + jx.getCliente().getEndereco().getLogradouro());
+//            System.out.println("Cliente.Endereco.Numero    = " + jx.getCliente().getEndereco().getNumero());
+//            System.out.println("Cliente.Endereco.Cidade    = " + jx.getCliente().getEndereco().getCidade());
+//            System.out.println("Cliente.Endereco.Bairro    = " + jx.getCliente().getEndereco().getBairro());
+//            System.out.println("Cliente.Endereco.Uf        = " + jx.getCliente().getEndereco().getUf());
+
+        }
+    }
+
+    private static void TesteCadastroPessoaJuridicaApenas_1() {
+        //CadPessoaJuridica cPjur = new CadPessoaJuridica();
+
+        PessoaJuridica pJu = new PessoaJuridica();
+        //PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        Cliente cli = new Cliente();
+        Endereco end = new Endereco();
+
+        ClienteController cliC = new ClienteController();
+
+        Telefone tel;
+        HashSet<Telefone> tels = new HashSet<>();
+        TelefoneId telId;
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataDate = new Date();
+        String dS = "10/01/2010";
+        try {
+            dataDate = formato.parse(dS);
+            System.out.println(dataDate);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+
+        //end.setCodEndereco(2);
+        //end.setClientes();
+        end.setBairro("_Bairro");
+        end.setCep("05255-050");
+        end.setCidade("_Cidade");
+        end.setComplemento("_Complemento");
+        end.setLogradouro("_Logradouro");
+        end.setNumero("10");
+        end.setUf("WW");
+        end.setXdead(false);
+
+        tel = new Telefone();
+        telId = new TelefoneId();
+        telId.setNumero("(21)1000-1005");
+        tel.setId(telId);
+        tels.add(tel);
+
+        tel = new Telefone();
+        telId = new TelefoneId();
+        telId.setNumero("(21)10000-1004");
+        tel.setId(telId);
+        tels.add(tel);
+
+        //cli.setCodCliente(null);
+        cli.setOrcamentos(null);
+        cli.setDataInscricao(dataDate);
+        cli.setEndereco(end);
+        cli.setTelefones(tels);
+        cli.setPessoaJuridica(pJu);
+        cli.setXdead(true);
+
+        pJu.setCliente(cli);
+        pJu.setCnpj("45.131.223/2222-22");
+        pJu.setCodCliente(37);
+        pJu.setDataFundacao(dataDate);
+        pJu.setRamoAtuacao("ramoAt");
+        pJu.setRazaoSocial("razaoSo");
+        pJu.setXdead(false);
+
+        JOptionPane.showMessageDialog(null, cliC.inserirClientePessoaJuridica(pJu));
+        //JOptionPane.showMessageDialog(null, cliC.inserirCliente(cli));
+        //JOptionPane.showMessageDialog(null, pJuDAO.inserir(pJu));
+
     }
 
     private static void TesteCadastroPessoaJuridicaApenas() {
@@ -39,7 +132,7 @@ public class TesteCadastroCliente {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date dataDate = new Date();
-        String dS = "10/01/2001";
+        String dS = "10/01/2010";
         try {
             dataDate = formato.parse(dS);
             System.out.println(dataDate);

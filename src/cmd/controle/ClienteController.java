@@ -5,14 +5,17 @@
  */
 package cmd.controle;
 
-import cmd.DAO.ClienteDAO;
+
 import cmd.DAO.EnderecoDAO;
 import cmd.DAO.PessoaFisicaDAO;
 import cmd.DAO.PessoaJuridicaDAO;
-import cmd.entidade.Cliente;
-import cmd.entidade.Endereco;
+import cmd.DAO.TelefoneDAO;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
+import cmd.entidade.Telefone;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,37 +23,107 @@ import cmd.entidade.PessoaJuridica;
  */
 public class ClienteController {
 
-    public boolean inserirCliente(Cliente c) {
-        if (c == null || (c.getPessoaFisica() == null && c.getPessoaJuridica() == null)) {
+    public boolean inserirClientePessoaJuridica(PessoaJuridica pJ) {
+//        if (c == null || (c.getPessoaFisica() == null && c.getPessoaJuridica() == null)) {
+//            return false;
+//        }
+
+        if (pJ == null || pJ.getCliente() == null) {
             return false;
         }
 
         //Processo de execução das DAOs
-        PessoaFisica pFi = c.getPessoaFisica();
-        PessoaJuridica pJu = c.getPessoaJuridica();
-        Endereco end = c.getEndereco();
+//        PessoaFisica pFi = c.getPessoaFisica();
+//        PessoaJuridica pJu = c.getPessoaJuridica();
+//        Endereco end = c.getEndereco();
+   
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+
+        EnderecoDAO endDAO = new EnderecoDAO();
+        TelefoneDAO telDAO = new TelefoneDAO();
+
+        //ClienteDAO cliDao = new ClienteDAO();
+        if ((pJ.getCliente().getEndereco() != null) && (!endDAO.inserir(pJ.getCliente().getEndereco()))) {
+            return false;
+        }
+
+//        if (!cliDao.inserir(c)) {
+//            return false;
+//        }
+        
+        if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
+            return false;
+        }
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "CodCliente=" + pJ.getCliente().getCodCliente());
+       
+        
+        Iterator<Telefone> iterator = pJ.getCliente().getTelefones().iterator();
+        while (iterator.hasNext()) {
+            if (telDAO.inserir(iterator.next())) {
+                System.out.println("Telefone Cadastrado_cadTel");//Remover
+            } else {
+                System.out.println("_2_ " + iterator.next().getId().getNumero());
+                System.out.println("Telefone NÃO Cadastrado_cadTel");//Remover
+                //return false;
+            }
+        }
+
+//        if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
+//            //JOptionPane.showMessageDialog(null, "pJuDAO.inserir(pJ)");
+//            return false;
+//        }
+        return true;
+    }
+    
+    
+    public boolean inserirClientePessoaFisica(PessoaFisica pF) {
+        
+        if (pF == null || pF.getCliente() == null) {
+            return false;
+        }
 
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+
         EnderecoDAO endDAO = new EnderecoDAO();
+        TelefoneDAO telDAO = new TelefoneDAO();
 
-        ClienteDAO cliDao = new ClienteDAO();
-
-        if ((c.getEndereco() != null) && (!endDAO.inserir(end))) {
+        
+        if ((pF.getCliente().getEndereco() != null) && (!endDAO.inserir(pF.getCliente().getEndereco()))) {
             return false;
         }
 
-        if (!cliDao.inserir(c)) {
+        
+        if ((pF.getCliente() != null) && (!pFiDAO.inserir(pF))) {
             return false;
         }
-
-        if ((c.getPessoaFisica() != null) && (!pFiDAO.inserir(pFi))) {
-            return false;
-        }
-        if ((c.getPessoaJuridica() != null) && (!pJuDAO.inserir(pJu))) {
-            return false;
+        
+        
+        
+        //JOptionPane.showMessageDialog(null, "CodCliente=" + pF.getCliente().getCodCliente());
+       
+        
+        Iterator<Telefone> iterator = pF.getCliente().getTelefones().iterator();
+        while (iterator.hasNext()) {
+            if (telDAO.inserir(iterator.next())) {
+                System.out.println("Telefone Cadastrado_cadTel");//Remover
+            } else {
+                //System.out.println("_2_ " + iterator.next().getId().getNumero());
+                System.out.println("Telefone NÃO Cadastrado_cadTel");//Remover
+                return false;
+            }
         }
 
         return true;
     }
+    
+    
+    public List<PessoaJuridica> ListaPessoaJuridica() {
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        
+        return pJuDAO.listar();
+    }
+    
 }

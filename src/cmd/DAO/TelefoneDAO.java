@@ -23,7 +23,7 @@ public class TelefoneDAO implements DAO<Telefone> {
             s.close();
             return true;
         } catch(HibernateException e) {
-            System.out.println("_________ " + e);
+            System.out.println("___telDAO____ " + e);
             return false;
         }
     }

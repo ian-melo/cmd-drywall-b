@@ -15,10 +15,8 @@ import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
 import cmd.novo.Validacao;
 import cmd.novo.cep.WebServiceCep;
-import cmd.novo.controle.CadClientesControle;
 import cmd.novo.painel.PnlJuridica;
 import cmd.novo.painel.PnlFisica;
-//import cmd.novo.painel.PnlTelefone;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -28,11 +26,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -377,9 +376,14 @@ public class TCliente extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Razão Social", "Ramo Atuação", "Telefone", "CEP", "Cidade"
+                "CNPJ", "Razão Social", "Ramo Atuação", "Telefone", "CEP", "Cidade"
             }
         ));
+        tb_FisicaEjuridica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_FisicaEjuridicaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_FisicaEjuridica);
 
         javax.swing.GroupLayout pnl_baixoLayout = new javax.swing.GroupLayout(pnl_baixo);
@@ -581,10 +585,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
 
-//=======================================
-//     PROGRAMAÇÃO PARA SALVAR NO BD(colocar aqui)
-//=======================================
-            //CadClientesControle cadCliC = new CadClientesControle();
             ClienteController cliC = new ClienteController();
 
             Cliente cli = null;
@@ -596,21 +596,15 @@ public class TCliente extends javax.swing.JInternalFrame {
             pJur = new PessoaJuridica();
 
             HashSet<Telefone> tels = new HashSet<>();
-
+//===============================ENDERECO=======================================
             end = preencheEnderecoVAL(end);//Preenche endereco
-            end.setCodEndereco(25);//ERRO!!!!!!!!!
-
-            pJur.setCodCliente(25);
-            pJur.setCnpj(pJu.getTxt_cnpj_pnl());
-            pJur.setDataFundacao(pJur.getDataFundacao());
-            pJur.setRamoAtuacao(pJur.getRamoAtuacao());
-            pJur.setRazaoSocial(pJur.getRazaoSocial());
-            pJur.setXdead(false);
+            //end.setCodEndereco(25);//ERRO!!!!!!!!!
+//==============================================================================
 
 //===============================TELEFONE=======================================
             tels = preencheTelefoneVAL(tels);
-
 //==============================================================================
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date dataDate = null;
             try {
@@ -628,7 +622,14 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            if (cliC.inserirCliente(cli) == true) {
+            pJur.setCliente(cli);
+            pJur.setCnpj(pJu.getTxt_cnpj_pnl());
+            pJur.setDataFundacao(pJur.getDataFundacao());
+            pJur.setRamoAtuacao(pJur.getRamoAtuacao());
+            pJur.setRazaoSocial(pJur.getRazaoSocial());
+            pJur.setXdead(false);
+
+            if (cliC.inserirClientePessoaJuridica(pJur) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
@@ -643,10 +644,8 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
 
-//=======================================
-//     PROGRAMAÇÃO PARA SALVAR NO BD(colocar aqui)
-//=======================================
-            CadClientesControle cadCliC = new CadClientesControle();
+            ClienteController cliC = new ClienteController();
+
             Cliente cli = null;
             Endereco end = null;
             PessoaFisica pFis = null;
@@ -654,7 +653,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli = new Cliente();
             end = new Endereco();
             pFis = new PessoaFisica();
-            
+
             HashSet<Telefone> tels = new HashSet<>();
 
 //===============================ENDERECO=======================================
@@ -662,15 +661,10 @@ public class TCliente extends javax.swing.JInternalFrame {
             end.setCodEndereco(2);//ERRO!!!!!!!!!
 //==============================================================================
 
-            pFis.setCpf(pFi.getTxt_cpf_pnl());
-            pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
-            pFis.setNome(pFi.getTxt_nome_pnl());
-            pFis.setXdead(false);
-
 //===============================TELEFONE=======================================
             tels = preencheTelefoneVAL(tels);
 //==============================================================================
-            
+
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date dataDate = null;
             try {
@@ -680,6 +674,12 @@ public class TCliente extends javax.swing.JInternalFrame {
 
             }
 
+            pFis.setCliente(cli);
+            pFis.setCpf(pFi.getTxt_cpf_pnl());
+            pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
+            pFis.setNome(pFi.getTxt_nome_pnl());
+            pFis.setXdead(false);
+
             cli.setCodCliente(null);
             cli.setOrcamentos(null);
             cli.setDataInscricao(dataDate);
@@ -688,7 +688,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            if (cadCliC.CadastrarClientePFisicaEnderecoTelefone(cli) == true) {
+            if (cliC.inserirClientePessoaFisica(pFis) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
@@ -768,6 +768,21 @@ public class TCliente extends javax.swing.JInternalFrame {
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         mouseClicadoCNPJ(evt);
     }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void tb_FisicaEjuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_FisicaEjuridicaMouseClicked
+        int linha;
+        if (evt.getClickCount() == 1) {
+            linha = tb_FisicaEjuridica.getSelectedRow();
+
+            PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 4);
+           // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
+
+            JOptionPane.showMessageDialog(pnl_telefone, peJu.getCnpj());
+            // tb_FisicaEjuridica.get
+            //escolhido = Carrinho.getItens().get(linha);
+            // System.out.println(escolhido.getLivro().getTitulo());
+        }
+    }//GEN-LAST:event_tb_FisicaEjuridicaMouseClicked
 
     private void pequenoBug() {
         int x = this.getHeight();
@@ -912,6 +927,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
     private void pJuridica() {
+        preencheTabelaJuridico();
+
         pnl_cliente_pai.removeAll();//remove cliente anterior
 
         FlowLayout gerente = new FlowLayout(1);
@@ -939,6 +956,56 @@ public class TCliente extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+    }
+
+    private void preencheTabelaJuridico() {
+        tb_FisicaEjuridica.removeAll();
+
+        ClienteController cleC = new ClienteController();
+        //Titulo
+        Vector cabecalho = new Vector();
+        cabecalho.add("CNPJ");
+        cabecalho.add("Razão Social");
+        cabecalho.add("Ramo Atual");
+        cabecalho.add("Data Fundação");
+        //cabecalho.add("Telefone");
+//        cabecalho.add("CEP");
+//        cabecalho.add("Logradouro");
+//        cabecalho.add("Numero");
+//        cabecalho.add("Cidade");
+//        cabecalho.add("Bairro");
+//        cabecalho.add("Estado");
+        cabecalho.add("Objeto");
+
+        //Itens
+        Vector dados = new Vector();
+        Vector item;
+
+        for (PessoaJuridica jx : cleC.ListaPessoaJuridica()) {
+            item = new Vector();
+            item.add(jx.getCnpj());
+            item.add(jx.getRazaoSocial());
+            item.add(jx.getRamoAtuacao());
+            item.add(jx.getDataFundacao());
+            //item.add(jx.getCliente().getTelefones());
+//            item.add(jx.getCliente().getEndereco().getCep());
+//            item.add(jx.getCliente().getEndereco().getLogradouro());
+//            item.add(jx.getCliente().getEndereco().getNumero());
+//            item.add(jx.getCliente().getEndereco().getCidade());
+//            item.add(jx.getCliente().getEndereco().getBairro());
+//            item.add(jx.getCliente().getEndereco().getUf());
+            item.add(jx);
+
+            dados.add(item);
+        }
+
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.setDataVector(dados, cabecalho);
+        tb_FisicaEjuridica.setModel(modeloTabela);
+        
+        
+        tb_FisicaEjuridica.getColumnModel().getColumn(4).setMaxWidth(0);
 
     }
 
@@ -1172,12 +1239,6 @@ private void mouseClicadoCNPJ(MouseEvent e) {
      * vBox_fisica.setVisible(false); vBox_juridica.setVisible(true);
      *
      * tb_fisica.setVisible(false); tb_juridica.setVisible(true); }
-     *
-     * }
-     *
-     * }
-     *
-     *
      *
      */
 }
