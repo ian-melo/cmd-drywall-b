@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 public class TesteCadastroCliente {
 
     public static void main(String[] args) {
-        // TesteCadastro();
+         TesteCadastro();
         //TesteCadastroPessoaJuridicaApenas_1();
 
         TesteListarPessoaJuridica();

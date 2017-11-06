@@ -324,6 +324,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         );
 
         img_construcao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cmd/imagens/construcao.jpg"))); // NOI18N
+        img_construcao.setToolTipText("Imagem meramente visual");
 
         cmb_qualidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_qualidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));

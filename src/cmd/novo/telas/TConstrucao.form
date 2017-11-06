@@ -598,6 +598,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/cmd/imagens/construcao.jpg"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Imagem meramente visual"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmb_qualidade">

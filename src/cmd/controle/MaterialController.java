@@ -1,90 +1,175 @@
-//TODO: Implementar
 //TODO: Testar
 package cmd.controle;
 
+import cmd.entidade.Construcao;
 import cmd.entidade.Material;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Classe de controle para CRUD de materiais
- * @author ian-melo
+ * @author Usuario, ian-melo
  */
 public class MaterialController {
-    
+
     /**
      * Realiza a inserção de um material
-     * @param input Valores inputados pelo usuário <br>
-     * Na ordem:<br>
-     * - Código do material (não necessário)<br>
-     * - Código da construção<br>
-     * - Descrição - descrição do material<br>
-     * - Unidade métrica - unidade métrica usada para medição<br>
-     * - Constante por metro - constante utilizada para cálculo de orçamento<br>
-     * - Preço unitário - preço unitário do material<br>
-     * - Opcional? - Se o material é opcional - 'true' ou 'false'<br>
-     * - Tipo - tipo do material (ex.: placa, parafuso, rebite...)<br>
-     * - Quantidade mínima - quantidade mínima para uso no cálculo de orçamento<br><br>
-     * NOTA: Se o campo estiver vazio, pode-se preencher com ""
+     * @param construcao Construção ao qual o material pertence
+     * @param descricao Descrição do material
+     * @param nomeUnidade Unidade métrica usada para medição
+     * @param constanteMetro Constante utilizada para cálculo de orçamento
+     * @param precoUnitario Preço unitário do material
+     * @param qualidade Nota de qualidade aferida ao material
+     * @param ehOpcional Se o material é opcional
+     * @param tipo Tipo do material (ex.: placa, parafuso, rebite...)
+     * @param quantidadeMinima Quantidade mínima para uso no cálculo de orçamento
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean inserirMaterial(String[] input) {
+    public boolean inserirMaterial(Construcao construcao, String descricao, String nomeUnidade, 
+            String constanteMetro, String precoUnitario, Boolean ehOpcional, Integer qualidade, 
+            String tipo, Integer quantidadeMinima) {
+        //Instanciamento de material
+        Material m = new Material();
+        m.setCodMaterial(null);//Preenche aqui
+        m.setConstanteMetro(new BigDecimal(constanteMetro));
+        m.setConstrucao(null);
+        m.setDescricao(descricao);
+        m.setEhOpcional(ehOpcional);
+        m.setMaterialItems(null);
+        m.setNomeUnidade(nomeUnidade);
+        m.setPrecoUnitario(new BigDecimal(precoUnitario));
+        m.setQualidade(qualidade);
+        m.setQuantidadeMinima(quantidadeMinima);
+        m.setTipo(tipo);
+        m.setXdead(false);
+        
         return false;
     }
     
     /**
      * Realiza a alteração de um material
-     * @param input Valores inputados pelo usuário <br>
-     * Na ordem:<br>
-     * - Código do material<br>
-     * - Código da construção<br>
-     * - Descrição - descrição do material<br>
-     * - Unidade métrica - unidade métrica usada para medição<br>
-     * - Constante por metro - constante utilizada para cálculo de orçamento<br>
-     * - Preço unitário - preço unitário do material<br>
-     * - Opcional? - Se o material é opcional - 'true' ou 'false'<br>
-     * - Tipo - tipo do material (ex.: placa, parafuso, rebite...)<br>
-     * - Quantidade mínima - quantidade mínima para uso no cálculo de orçamento<br><br>
-     * NOTA: Se o campo estiver vazio, pode-se preencher com ""
+     * @param construcao Construção ao qual o material pertence
+     * @param descricao Descrição do material
+     * @param nomeUnidade Unidade métrica usada para medição
+     * @param constanteMetro Constante utilizada para cálculo de orçamento
+     * @param precoUnitario Preço unitário do material
+     * @param qualidade Nota de qualidade aferida ao material
+     * @param ehOpcional Se o material é opcional
+     * @param tipo Tipo do material (ex.: placa, parafuso, rebite...)
+     * @param quantidadeMinima Quantidade mínima para uso no cálculo de orçamento
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean alterarMaterial(String[] input) {
+    public boolean alterarMaterial(Construcao construcao, String descricao, String nomeUnidade, 
+            String constanteMetro, String precoUnitario, Boolean ehOpcional, Integer qualidade, 
+            String tipo, Integer quantidadeMinima) {
+        Material m = new Material();
+        BigDecimal BigDecimalConstM = new BigDecimal(constanteMetro);
+        BigDecimal BigDecimalPUni = new BigDecimal(precoUnitario);
+        
+        //Instanciamento de material
+        m.setCodMaterial(null);//Preenche aqui
+        m.setConstanteMetro(BigDecimalConstM);
+        m.setConstrucao(null);
+        m.setDescricao(descricao);
+        m.setEhOpcional(ehOpcional);
+        m.setMaterialItems(null);
+        m.setNomeUnidade(nomeUnidade);
+        m.setPrecoUnitario(BigDecimalPUni);
+        m.setQualidade(qualidade);
+        m.setQuantidadeMinima(quantidadeMinima);
+        m.setTipo(tipo);
+        m.setXdead(false);//Preenche aqui
+        
         return false;
     }
     
     /**
      * Realiza a exclusão de um material
-     * @param input Valores inputados pelo usuário <br>
-     * Na ordem:<br>
-     * - Código do material<br>
-     * - Código da construção<br>
-     * - Descrição - descrição do material<br>
-     * - Unidade métrica - unidade métrica usada para medição<br>
-     * - Constante por metro - constante utilizada para cálculo de orçamento<br>
-     * - Preço unitário - preço unitário do material<br>
-     * - Opcional? - Se o material é opcional - 'true' ou 'false'<br>
-     * - Tipo - tipo do material (ex.: placa, parafuso, rebite...)<br>
-     * - Quantidade mínima - quantidade mínima para uso no cálculo de orçamento<br><br>
-     * NOTA: Se o campo estiver vazio, pode-se preencher com ""
+     * @param construcao Construção ao qual o material pertence
+     * @param descricao Descrição do material
+     * @param nomeUnidade Unidade métrica usada para medição
+     * @param constanteMetro Constante utilizada para cálculo de orçamento
+     * @param precoUnitario Preço unitário do material
+     * @param qualidade Nota de qualidade aferida ao material
+     * @param ehOpcional Se o material é opcional
+     * @param tipo Tipo do material (ex.: placa, parafuso, rebite...)
+     * @param quantidadeMinima Quantidade mínima para uso no cálculo de orçamento
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean excluirMaterial(String[] input) {
+    public boolean excluirMaterial(Construcao construcao, String descricao, String nomeUnidade, 
+            String constanteMetro, String precoUnitario, Boolean ehOpcional, Integer qualidade, 
+            String tipo, Integer quantidadeMinima) {
+        Material m = new Material();
+        BigDecimal BigDecimalConstM = new BigDecimal(constanteMetro);
+        BigDecimal BigDecimalPUni = new BigDecimal(precoUnitario);
+        
+        //Instanciamento de material
+        m.setCodMaterial(null);//Preenche aqui
+        m.setConstanteMetro(BigDecimalConstM);
+        m.setConstrucao(null);
+        m.setDescricao(descricao);
+        m.setEhOpcional(ehOpcional);
+        m.setMaterialItems(null);
+        m.setNomeUnidade(nomeUnidade);
+        m.setPrecoUnitario(BigDecimalPUni);
+        m.setQualidade(qualidade);
+        m.setQuantidadeMinima(quantidadeMinima);
+        m.setTipo(tipo);
+        m.setXdead(false);//Preenche aqui
+        
         return false;
     }
     
     /**
-     * Realiza a busca de um material
+     * Realiza a inserção de um material
      * @param codigo Código do material
-     * @return material, se encontrado<br>null, caso contrário
+     * @return true, se realizado<br>false, caso contrário
      */
     public Material buscarMaterial(String codigo) {
+//        Material m = new Material();
+//        BigDecimal BigDecimalConstM = new BigDecimal(constanteMetro);
+//        BigDecimal BigDecimalPUni = new BigDecimal(precoUnitario);
+//        
+//        //Instanciamento de material
+//        m.setCodMaterial(null);//Preenche aqui
+//        m.setConstanteMetro(BigDecimalConstM);
+//        m.setConstrucao(null);
+//        m.setDescricao(descricao);
+//        m.setEhOpcional(ehOpcional);
+//        m.setMaterialItems(null);
+//        m.setNomeUnidade(nomeUnidade);
+//        m.setPrecoUnitario(BigDecimalPUni);
+//        m.setQualidade(qualidade);
+//        m.setQuantidadeMinima(quantidadeMinima);
+//        m.setTipo(tipo);
+//        m.setXdead(false);//Preenche aqui
+        
         return null;
     }
     
     /**
      * Realiza a listagem de materiais
-     * @return lista Lista de materiais
+     * @return lista de materiais
      */
-    public List<Material> listarMaterial() {
+    public List<Material> listarMateriais() {
+        Material m = new Material();
+//        BigDecimal BigDecimalConstM = new BigDecimal(constanteMetro);
+//        BigDecimal BigDecimalPUni = new BigDecimal(precoUnitario);
+//        
+//        //Instanciamento de material
+//        m.setCodMaterial(null);//Preenche aqui
+//        m.setConstanteMetro(BigDecimalConstM);
+//        m.setConstrucao(null);
+//        m.setDescricao(descricao);
+//        m.setEhOpcional(ehOpcional);
+//        m.setMaterialItems(null);
+//        m.setNomeUnidade(nomeUnidade);
+//        m.setPrecoUnitario(BigDecimalPUni);
+//        m.setQualidade(qualidade);
+//        m.setQuantidadeMinima(quantidadeMinima);
+//        m.setTipo(tipo);
+//        m.setXdead(false);//Preenche aqui
+        
         return null;
     }
 }

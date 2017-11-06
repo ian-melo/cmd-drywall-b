@@ -7,12 +7,13 @@ package cmd.novo.telas;
 
 import cmd.entidade.Material;
 import cmd.DAO.MaterialDAO;
+import cmd.entidade.Construcao;
 import cmd.novo.GerenteDeJanelas;
 import static cmd.novo.telas.TPrincipal.jDesktopPane1;
 import cmd.novo.MaterialTableView;
 import cmd.util.HibernateUtil;
 import java.awt.Color;
-//import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
 import javafx.collections.FXCollections;
@@ -31,8 +32,9 @@ public class TMaterial extends javax.swing.JInternalFrame {
 
     GerenteDeJanelas gerenteDeJanelas;
 
-    private MaterialDAO dao = new MaterialDAO();
-    private List<Material> Listamaterial;
+    private List<Material> listaMateriais;
+    private List<Construcao> listaConstrucao;
+    
     private ObservableList<MaterialTableView> tableview = FXCollections.observableArrayList();
 
     public static TMaterial materialT;
@@ -79,6 +81,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
 ////        tc_unidade.setCellValueFactory(new PropertyValueFactory<MaterialTableView, String>("Unidade"));
 ////        tb_materiais.setItems(tableview);
 //    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,20 +129,20 @@ public class TMaterial extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Cadastro Materiais");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -147,7 +150,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel1.setText("Bem-Vindo a Área de Cadastro de Materiais");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Nome da Unidade:");
+        jLabel2.setText("Unidade de medida:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Constante Metro:*");
@@ -421,7 +424,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                                 .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
@@ -466,7 +469,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txt_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel15))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel14))
@@ -488,13 +491,20 @@ public class TMaterial extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
-        if (naoPreenchido() == false) {
+        if (!camposValidados()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
             return;
         }
+        
         cadastrar();
     }//GEN-LAST:event_bt_cadastrarActionPerformed
 
     private void bt_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_alterarActionPerformed
+        if (!camposValidados()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
+            return;
+        }
+        
         alterar();
     }//GEN-LAST:event_bt_alterarActionPerformed
 
@@ -505,16 +515,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private void bt_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_sairActionPerformed
         //this.disable
         this.hide();
-
-//        Teste tt = new Teste();
-//        tt.setVisible(true);
-//        tt.setModal(true);
-//        GeralAviso tt = new GeralAviso(null, "Ola1", "ola2", "o3");
-//        tt.setVisible(true);
-//        tt.setModal(true);
-//        TAviso tt = new TAviso(null, true);
-//        tt.setVisible(true);
-//        tt.setModal(true);
     }//GEN-LAST:event_bt_sairActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -556,122 +556,67 @@ public class TMaterial extends javax.swing.JInternalFrame {
 //
 //        }
 //    }
+    
     private void janelaAviso() {
-
         TAviso tAvi = new TAviso(null, true);
         tAvi.setVisible(true);
     }
 
     private void alterar() {
-        if (naoPreenchido() == false) {
-            return;
-        }
-        MaterialDAO dao = new MaterialDAO();
-        Material M = new Material();
+        Material m = new Material();
 
-//            M.setId(tb_materiais.getSelectionModel().getSelectedItem().getId());
-//            M.setNome(txt_nomeUnidade.getText());
-//            M.setQuantidade(Integer.parseInt(txt_qtdMinima.getText()));
-//            M.setPreço(Float.parseFloat(txt_precoUnitario.getText()));
-//            M.setTipo(txt_tipo.getText());
-//            M.setUnidade(txt_constanteMetro.getText());
-//            dao.Update(M);
-//            txt_nomeUnidade.setText("");
-//            txt_precoUnitario.setText("");
-//            txt_qtdMinima.setText("");
-//            txt_constanteMetro.setText("");
-//            txt_tipo.setText("");
-//            ListandoTableView();
+//        m.setId(tb_materiais.getSelectionModel().getSelectedItem().getId());
+//        m.setNome(txt_nomeUnidade.getText());
+//        m.setQuantidade(Integer.parseInt(txt_qtdMinima.getText()));
+//        m.setPreço(Float.parseFloat(txt_precoUnitario.getText()));
+//        m.setTipo(txt_tipo.getText());
+//        m.setUnidade(txt_constanteMetro.getText());
+//        dao.Update(m);
+//        txt_nomeUnidade.setText("");
+//        txt_precoUnitario.setText("");
+//        txt_qtdMinima.setText("");
+//        txt_constanteMetro.setText("");
+//        txt_tipo.setText("");
+//        ListandoTableView();
+        limparCampos();
     }
 
     private void cadastrar() {
+        rd_sim.isSelected();
+        
+        //null, title, title, BigDecimal.ZERO, BigDecimal.ZERO, iconable, WIDTH, title, SOMEBITS, isIcon, sorteados
+        String nome = cmb_nomeUnidade.getSelectedItem().toString();
+        int quantidade = Integer.parseInt(txt_qtdMinima.getText());
+        float preço = Float.parseFloat(txt_precoUnitario.getText());
+        String tipo = txt_tipo.getText();
+        String unidade = txt_constanteMetro.getText();
+//        m.setNome(nome);
+//        m.setQuantidade(quantidade);
+//        m.setPreço(preço);
+//        m.setTipo(tipo);
+//        m.setUnidade(unidade);
+//        dao.Create(m);
 
-        //Random gerador = new Random();
-        //int numero = gerador.nextInt(3);
-        MaterialDAO dao = new MaterialDAO();
-
-        if (txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
-                || txt_tipo.getText().isEmpty() || txt_constanteMetro.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para continuar");
-
-        } else {
-            boolean val;
-            if (rd_sim.isSelected()) {
-                val = true;
-            } else {
-                val = false;
-            }
-
-            //null, title, title, BigDecimal.ZERO, BigDecimal.ZERO, iconable, WIDTH, title, SOMEBITS, isIcon, sorteados
-//            String nome = cmb_nomeUnidade.getSelectedItem().toString();
-//            int quantidade = Integer.parseInt(txt_qtdMinima.getText());
-//            float preço = Float.parseFloat(txt_precoUnitario.getText());
-//            String tipo = txt_tipo.getText();
-//            String unidade = txt_constanteMetro.getText();
-//            M.setNome(nome);
-//            M.setQuantidade(quantidade);
-//            M.setPreço(preço);
-//            M.setTipo(tipo);
-//            M.setUnidade(unidade);
-//            M.setCod_construl(sorteia());
-//            dao.Create(M);
-//
-//            txt_precoUnitario.setText("");
-//            txt_qtdMinima.setText("");
-//            txt_constanteMetro.setText("");
-//            txt_tipo.setText("");
-            //ListandoTableView();
-        }
+        limparCampos();
+        //ListandoTableView();
 
     }
 
-    private boolean naoPreenchido() {
-        if (txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
+    private boolean camposValidados() {
+        return (!(txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
                 || txt_tipo.getText().isEmpty() || txt_constanteMetro.getText().isEmpty()
-                || txt_descricao.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para continuar");
-            return false;
-        }
-
-        return true;
+                || txt_descricao.getText().isEmpty()));
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TMaterial().setVisible(true);
-            }
-        });
+    
+    private void limparCampos() {
+        cmb_nomeUnidade.setSelectedIndex(0);
+        cmb_qualidade.setSelectedIndex(0);
+        rd_nao.setSelected(true);
+        txt_descricao.setText("");
+        txt_precoUnitario.setText("");
+        txt_qtdMinima.setText("");
+        txt_constanteMetro.setText("");
+        txt_tipo.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
