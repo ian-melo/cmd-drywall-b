@@ -824,8 +824,8 @@ public class TMaterial extends javax.swing.JInternalFrame {
         Vector reg;
         for (Material m : listaMateriais) {
             reg = new Vector();
-            reg.add(m.getCodMaterial().toString());
             reg.add(m.getConstrucao().getCodConstrucao().toString());
+            reg.add(m.getCodMaterial().toString());
             reg.add(m.getTipo());
             reg.add(m.getDescricao());
             reg.add(m.getNomeUnidade());
