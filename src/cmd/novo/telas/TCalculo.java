@@ -60,14 +60,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
         btn_alterar1 = new javax.swing.JButton();
         pnl_janelas = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        rd_S_Janela = new javax.swing.JRadioButton();
-        rd_N_Janela = new javax.swing.JRadioButton();
+        rd_JanelaSim = new javax.swing.JRadioButton();
+        rd_JanelaNao = new javax.swing.JRadioButton();
         lb_qtdJanelas = new javax.swing.JLabel();
         cmb_qtdJanelas = new javax.swing.JComboBox();
         pnl_portas = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        rd_S_Porta = new javax.swing.JRadioButton();
-        rd_N_Porta = new javax.swing.JRadioButton();
+        rd_PortaSim = new javax.swing.JRadioButton();
+        rd_PortaNao = new javax.swing.JRadioButton();
         lb_qtdPortas = new javax.swing.JLabel();
         cmb_qtdPortas = new javax.swing.JComboBox();
         pn_valor_resultados = new javax.swing.JPanel();
@@ -81,14 +81,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         pn_MaoObra = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        rd_Com = new javax.swing.JRadioButton();
-        re_Sem = new javax.swing.JRadioButton();
+        rd_ObraSim = new javax.swing.JRadioButton();
+        rd_ObraNao = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
         pn_info_AlturaLargura = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txt_altura_mascara = new javax.swing.JFormattedTextField();
+        txt_altura = new javax.swing.JFormattedTextField();
         jLabel18 = new javax.swing.JLabel();
-        txt_largura_mascara = new javax.swing.JFormattedTextField();
+        txt_largura = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
@@ -204,22 +204,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Janelas");
 
-        rdGrup_janelas.add(rd_S_Janela);
-        rd_S_Janela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_S_Janela.setText("Sim");
-        rd_S_Janela.addActionListener(new java.awt.event.ActionListener() {
+        rdGrup_janelas.add(rd_JanelaSim);
+        rd_JanelaSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_JanelaSim.setText("Sim");
+        rd_JanelaSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_S_JanelaActionPerformed(evt);
+                rd_JanelaSimActionPerformed(evt);
             }
         });
 
-        rdGrup_janelas.add(rd_N_Janela);
-        rd_N_Janela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_N_Janela.setSelected(true);
-        rd_N_Janela.setText("Não");
-        rd_N_Janela.addActionListener(new java.awt.event.ActionListener() {
+        rdGrup_janelas.add(rd_JanelaNao);
+        rd_JanelaNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_JanelaNao.setSelected(true);
+        rd_JanelaNao.setText("Não");
+        rd_JanelaNao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_N_JanelaActionPerformed(evt);
+                rd_JanelaNaoActionPerformed(evt);
             }
         });
 
@@ -238,15 +238,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_janelasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_janelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rd_N_Janela)
+                    .addComponent(rd_JanelaNao)
                     .addGroup(pnl_janelasLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(30, 30, 30)
                         .addComponent(lb_qtdJanelas))
                     .addGroup(pnl_janelasLayout.createSequentialGroup()
-                        .addComponent(rd_S_Janela)
+                        .addComponent(rd_JanelaSim)
                         .addGap(46, 46, 46)
-                        .addComponent(cmb_qtdJanelas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmb_qtdJanelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_janelasLayout.setVerticalGroup(
@@ -258,31 +258,31 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(lb_qtdJanelas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_janelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rd_S_Janela)
+                    .addComponent(rd_JanelaSim)
                     .addComponent(cmb_qtdJanelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rd_N_Janela))
+                .addComponent(rd_JanelaNao))
         );
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Portas");
 
-        rdGrup_portas.add(rd_S_Porta);
-        rd_S_Porta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_S_Porta.setText("Sim");
-        rd_S_Porta.addActionListener(new java.awt.event.ActionListener() {
+        rdGrup_portas.add(rd_PortaSim);
+        rd_PortaSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_PortaSim.setText("Sim");
+        rd_PortaSim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_S_PortaActionPerformed(evt);
+                rd_PortaSimActionPerformed(evt);
             }
         });
 
-        rdGrup_portas.add(rd_N_Porta);
-        rd_N_Porta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_N_Porta.setSelected(true);
-        rd_N_Porta.setText("Não");
-        rd_N_Porta.addActionListener(new java.awt.event.ActionListener() {
+        rdGrup_portas.add(rd_PortaNao);
+        rd_PortaNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_PortaNao.setSelected(true);
+        rd_PortaNao.setText("Não");
+        rd_PortaNao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_N_PortaActionPerformed(evt);
+                rd_PortaNaoActionPerformed(evt);
             }
         });
 
@@ -301,16 +301,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_portasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_portasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rd_N_Porta)
+                    .addComponent(rd_PortaNao)
                     .addGroup(pnl_portasLayout.createSequentialGroup()
                         .addGroup(pnl_portasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(rd_S_Porta))
+                            .addComponent(rd_PortaSim))
                         .addGap(41, 41, 41)
                         .addGroup(pnl_portasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnl_portasLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(cmb_qtdPortas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmb_qtdPortas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lb_qtdPortas))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -323,10 +323,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(lb_qtdPortas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnl_portasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rd_S_Porta)
+                    .addComponent(rd_PortaSim)
                     .addComponent(cmb_qtdPortas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rd_N_Porta)
+                .addComponent(rd_PortaNao)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -349,7 +349,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel23.setText("#####");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Valor da Mão de Obra(Se houver):");
+        jLabel14.setText("Valor da mão de obra (se houver):");
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setText("#####");
@@ -363,21 +363,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_valor_resultadosLayout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel21))
-                    .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_valor_resultadosLayout.createSequentialGroup()
-                            .addComponent(jLabel15)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel22))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_valor_resultadosLayout.createSequentialGroup()
+                    .addGroup(pn_valor_resultadosLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22))
+                    .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pn_valor_resultadosLayout.createSequentialGroup()
                             .addComponent(jLabel17)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel23)))
-                    .addGroup(pn_valor_resultadosLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel24)))
+                            .addComponent(jLabel23))
+                        .addGroup(pn_valor_resultadosLayout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel24)
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_valor_resultadosLayout.setVerticalGroup(
@@ -386,32 +387,32 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel24))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel21))
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel22))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_valor_resultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel23))
-                .addContainerGap())
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Mão de Obra:");
 
-        rdGrup_maoDeObra.add(rd_Com);
-        rd_Com.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_Com.setText("Com");
+        rdGrup_maoDeObra.add(rd_ObraSim);
+        rd_ObraSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_ObraSim.setText("Com");
 
-        rdGrup_maoDeObra.add(re_Sem);
-        re_Sem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        re_Sem.setSelected(true);
-        re_Sem.setText("Sem");
+        rdGrup_maoDeObra.add(rd_ObraNao);
+        rd_ObraNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rd_ObraNao.setSelected(true);
+        rd_ObraNao.setText("Sem");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Valores finais e Mão de Obra");
@@ -425,9 +426,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pn_MaoObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addGroup(pn_MaoObraLayout.createSequentialGroup()
-                        .addComponent(rd_Com)
+                        .addComponent(rd_ObraSim)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(re_Sem))
+                        .addComponent(rd_ObraNao))
                     .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -440,22 +441,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_MaoObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rd_Com)
-                    .addComponent(re_Sem))
+                    .addComponent(rd_ObraSim)
+                    .addComponent(rd_ObraNao))
                 .addContainerGap())
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Informe Altura da parede:*");
 
-        txt_altura_mascara.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
-        txt_altura_mascara.setToolTipText("");
+        txt_altura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_altura.setToolTipText("");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("m");
 
-        txt_largura_mascara.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
-        txt_largura_mascara.setToolTipText("");
+        txt_largura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_largura.setToolTipText("");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("m");
@@ -472,12 +473,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pn_info_AlturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(pn_info_AlturaLarguraLayout.createSequentialGroup()
-                        .addComponent(txt_altura_mascara, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel18))
                     .addComponent(jLabel20)
                     .addGroup(pn_info_AlturaLarguraLayout.createSequentialGroup()
-                        .addComponent(txt_largura_mascara, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)))
                 .addGap(19, 19, 19))
@@ -490,13 +491,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_info_AlturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(txt_altura_mascara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_info_AlturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(txt_largura_mascara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -579,29 +580,29 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rd_N_PortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_N_PortaActionPerformed
+    private void rd_PortaNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_PortaNaoActionPerformed
         lb_qtdPortas.setEnabled(false);
         cmb_qtdPortas.setEnabled(false);
-    }//GEN-LAST:event_rd_N_PortaActionPerformed
+    }//GEN-LAST:event_rd_PortaNaoActionPerformed
 
-    private void rd_S_JanelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_S_JanelaActionPerformed
+    private void rd_JanelaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_JanelaSimActionPerformed
         cmb_qtdJanelas.setEnabled(true);
         lb_qtdJanelas.setEnabled(true);
-    }//GEN-LAST:event_rd_S_JanelaActionPerformed
+    }//GEN-LAST:event_rd_JanelaSimActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_alterarActionPerformed
 
-    private void rd_S_PortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_S_PortaActionPerformed
+    private void rd_PortaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_PortaSimActionPerformed
         lb_qtdPortas.setEnabled(true);
         cmb_qtdPortas.setEnabled(true);
-    }//GEN-LAST:event_rd_S_PortaActionPerformed
+    }//GEN-LAST:event_rd_PortaSimActionPerformed
 
-    private void rd_N_JanelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_N_JanelaActionPerformed
+    private void rd_JanelaNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_JanelaNaoActionPerformed
         cmb_qtdJanelas.setEnabled(false);
         lb_qtdJanelas.setEnabled(false);
-    }//GEN-LAST:event_rd_N_JanelaActionPerformed
+    }//GEN-LAST:event_rd_JanelaNaoActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
         this.dispose();
@@ -693,15 +694,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup rdGrup_janelas;
     private javax.swing.ButtonGroup rdGrup_maoDeObra;
     private javax.swing.ButtonGroup rdGrup_portas;
-    private javax.swing.JRadioButton rd_Com;
-    private javax.swing.JRadioButton rd_N_Janela;
-    private javax.swing.JRadioButton rd_N_Porta;
-    private javax.swing.JRadioButton rd_S_Janela;
-    private javax.swing.JRadioButton rd_S_Porta;
-    private javax.swing.JRadioButton re_Sem;
+    private javax.swing.JRadioButton rd_JanelaNao;
+    private javax.swing.JRadioButton rd_JanelaSim;
+    private javax.swing.JRadioButton rd_ObraNao;
+    private javax.swing.JRadioButton rd_ObraSim;
+    private javax.swing.JRadioButton rd_PortaNao;
+    private javax.swing.JRadioButton rd_PortaSim;
     private javax.swing.JTable tb_preco_unitario_pecas;
     private javax.swing.JTable tb_qtd_materiais;
-    private javax.swing.JFormattedTextField txt_altura_mascara;
-    private javax.swing.JFormattedTextField txt_largura_mascara;
+    private javax.swing.JFormattedTextField txt_altura;
+    private javax.swing.JFormattedTextField txt_largura;
     // End of variables declaration//GEN-END:variables
 }

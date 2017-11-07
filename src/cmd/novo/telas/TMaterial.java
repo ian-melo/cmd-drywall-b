@@ -744,7 +744,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
     
     private void cadastrar() {
         if (!camposValidados()) {
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para alterar.");
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
             return;
         }
         
