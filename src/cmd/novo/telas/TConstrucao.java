@@ -12,6 +12,7 @@ import cmd.entidade.Parede;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.math.BigDecimal;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,9 +44,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         getContentPane().setBackground(Color.WHITE);
         pnl_encontra.setBackground(Color.WHITE);
         pnl_protecao.setBackground(Color.WHITE);
-        //pnl_tipo.setBackground(Color.WHITE);
+        pnl_tipo.setBackground(Color.WHITE);
+        pn_qualidade.setBackground(Color.WHITE);
 
-        cmb_qualidade.removeAll();
+        cmb_qualidade.removeAllItems();
         for (int i = 0; i <= 100; i++) {
             cmb_qualidade.addItem(i);
         }
@@ -60,10 +62,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup_tipoConstrucao = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -93,10 +95,12 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         chk_rf = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         img_construcao = new javax.swing.JLabel();
-        cmb_qualidade = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        pn_qualidade = new javax.swing.JPanel();
+        cmb_qualidade = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Cadastro da Construção");
@@ -109,9 +113,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Detalhes:*");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Qualidade:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Exclusivo para paredes");
@@ -165,13 +166,13 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         pnl_encontraLayout.setVerticalGroup(
             pnl_encontraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_encontraLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(pnl_encontraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_procurar)
                     .addComponent(jLabel13))
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
 
         txt_descricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -187,7 +188,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 
         btn_salvar.setBackground(new java.awt.Color(153, 153, 255));
         btn_salvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_salvar.setText("Salvar");
+        btn_salvar.setText("Cadastrar");
         btn_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salvarActionPerformed(evt);
@@ -230,11 +231,24 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Tipo de construção:*");
 
+        btnGroup_tipoConstrucao.add(op_parede);
         op_parede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        op_parede.setSelected(true);
         op_parede.setText("Parede");
+        op_parede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                op_paredeActionPerformed(evt);
+            }
+        });
 
+        btnGroup_tipoConstrucao.add(op_forro);
         op_forro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         op_forro.setText("Forro");
+        op_forro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                op_forroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_tipoLayout = new javax.swing.GroupLayout(pnl_tipo);
         pnl_tipo.setLayout(pnl_tipoLayout);
@@ -326,9 +340,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         img_construcao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cmd/imagens/construcao.jpg"))); // NOI18N
         img_construcao.setToolTipText("Imagem meramente visual");
 
-        cmb_qualidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_qualidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
         jLabel14.setBackground(new java.awt.Color(255, 0, 0));
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 0));
@@ -365,6 +376,29 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             }
         });
 
+        cmb_qualidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmb_qualidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Qualidade:");
+
+        javax.swing.GroupLayout pn_qualidadeLayout = new javax.swing.GroupLayout(pn_qualidade);
+        pn_qualidade.setLayout(pn_qualidadeLayout);
+        pn_qualidadeLayout.setHorizontalGroup(
+            pn_qualidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_qualidadeLayout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 35, Short.MAX_VALUE))
+        );
+        pn_qualidadeLayout.setVerticalGroup(
+            pn_qualidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_qualidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel5)
+                .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -372,33 +406,9 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_montante)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_alturaLim, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel17))
-                                    .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(78, 78, 78))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(pnl_encontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 24, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
@@ -413,19 +423,17 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                                     .addComponent(jScrollPane1)
                                     .addComponent(txt_descricao)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnl_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(pnl_tipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pnl_protecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(pn_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(68, 68, 68)
                                 .addComponent(img_construcao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(pnl_protecao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(81, 81, 81))
+                        .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_salvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -436,14 +444,30 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                         .addComponent(btn_limpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_sair)
-                        .addGap(21, 21, 21))))
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_montante)
+                                    .addComponent(txt_alturaLim, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel17))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel2)
+                            .addComponent(pnl_encontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnl_encontra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -455,29 +479,27 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(jLabel15))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pn_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnl_protecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnl_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 15, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(img_construcao)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txt_montante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(pnl_protecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txt_montante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(img_construcao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txt_alturaLim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -500,7 +522,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
         if ("".equals(txt_id.getText())) {
-            JOptionPane.showMessageDialog(rootPane, "Selecione uma construção");
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
             try {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
             } catch (IllegalArgumentException e) {
@@ -614,49 +636,63 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        boolean res; //Resultado da ação
+
+        boolean res = false; //Resultado da ação
         String info; //Texto informativo
         //Retorna, caso os campos estejam inválidos
         if (!validarCampos()) {
             return;
         }
         //Criação dos objetos
-        Construcao co;
+        Construcao co;//é dado new em outro lugar
         Forro fo;
         Parede pa;
+
         //Construção
         co = new Construcao();
+
         co.setDescricao(txt_descricao.getText());
         co.setDetalhes(txt_detalhes.getText());
         co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
-        co.setXdead(Boolean.FALSE);
+        co.setXdead(false);
 // co.setItems(null);//Retirado da erro em relação as atualizações das classes de entidade
-        co.setMaterials(null);
+// co.setMaterials(null);
+
         //Caso forro
         if (op_forro.isSelected()) {
             fo = new Forro();
+ 
+            
             fo.setEhRf(chk_rf.isSelected());
             fo.setEhRu(chk_ru.isSelected());
             fo.setEhSt(chk_st.isSelected());
             fo.setXdead(Boolean.FALSE);
             fo.setConstrucao(co);
             co.setForro(fo);
-            co.setParede(null);
+            //co.setParede(null);
+
             //Inserção de forro
+            controle = new ConstrucaoController();
             res = controle.inserirForro(fo);
             //Caso parede
-        } else {
+        }
+         if (op_parede.isSelected()) {
             pa = new Parede();
+            
             pa.setMontante(BigDecimal.valueOf(Double.parseDouble(txt_montante.getText())));
             pa.setAlturaLimite(BigDecimal.valueOf(Double.parseDouble(txt_alturaLim.getText())));
             pa.setEhRf(chk_rf.isSelected());
             pa.setEhRu(chk_ru.isSelected());
             pa.setEhSt(chk_st.isSelected());
-            pa.setXdead(Boolean.FALSE);
+            pa.setXdead(false);
             pa.setConstrucao(co);
+            
             co.setParede(pa);
-            co.setForro(null);
+            //co.setForro(null);
             //Inserção de parede
+            
+            
+            controle = new ConstrucaoController();
             res = controle.inserirParede(pa);
         }
         //Resultado
@@ -670,6 +706,36 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         if (res) {
             resetarCampos();
         }
+
+//        System.out.println("==============PAREDE=======================");
+//        System.out.println("==============++++++=======================");
+//        System.out.println("AlturaLimite            = " + pa.getAlturaLimite());
+//        System.out.println("CodConstrucao           = " + pa.getCodConstrucao());
+//        System.out.println("EhRf                    = " + pa.getEhRf());
+//        System.out.println("EhRu                    = " + pa.getEhRu());
+//        System.out.println("EhSt                    = " + pa.getEhSt());
+//        System.out.println("Montante                = " + pa.getMontante());
+//        System.out.println("+++++++++++++++CONSTRUCAO++++++++++++++++++");
+//        System.out.println("Construcao.Qualidade    = " + pa.getConstrucao().getDescricao());
+//        System.out.println("Construcao.Detalhes     = " + pa.getConstrucao().getDetalhes());
+//        System.out.println("Construcao.CodConstrucao= " + pa.getConstrucao().getCodConstrucao());
+//        System.out.println("Construcao.Qualidade    = " + pa.getConstrucao().getQualidade());
+//        System.out.println("===========================================");
+//        System.out.println("=");
+//        System.out.println("=");
+//        System.out.println("===============CONSTRUCAO==================");
+//
+//        System.out.println("CodConstrucao = " + co.getCodConstrucao());
+//        System.out.println("Descricao     = " + co.getDescricao());
+//        System.out.println("Detalhes      = " + co.getDetalhes());
+//        System.out.println("Items         = " + co.getItems());
+//        System.out.println("Forro         = " + co.getForro());
+//        System.out.println("Materials     = " + co.getMaterials());
+//        System.out.println("Parede        = " + co.getParede());
+//        System.out.println("Qualidade     = " + co.getQualidade());
+//        System.out.println("===========================================");
+
+
     }//GEN-LAST:event_btn_salvarActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
@@ -753,6 +819,16 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         janelaAviso();
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void op_paredeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_paredeActionPerformed
+        txt_montante.setEnabled(true);
+        txt_alturaLim.setEnabled(true);
+    }//GEN-LAST:event_op_paredeActionPerformed
+
+    private void op_forroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_forroActionPerformed
+        txt_montante.setEnabled(false);
+        txt_alturaLim.setEnabled(false);
+    }//GEN-LAST:event_op_forroActionPerformed
     /**
      * Retorna os campos e botões aos respectivos estados iniciais
      */
@@ -769,7 +845,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         op_parede.setSelected(false);
         op_forro.setSelected(false);
         habilitarParede(false);
-        habilitarAlteravel(false);
+        //habilitarAlteravel(false);//Tem q habilitar em outro local
     }
 
     /**
@@ -823,11 +899,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (txt_id.getText().equals("")) {
-            exibirAlerta("Preencha a pontuação de qualidade.");
-            return false;
-        }
-
+//        if (txt_id.getText().equals("")) {
+//            exibirAlerta("Preencha a pontuação de qualidade.");//?????????????
+//            return false;
+//        }
         if (txt_montante.getText().equals("") && op_parede.isSelected()) {
             exibirAlerta("Preencha a montante limite.");
             return false;
@@ -948,6 +1023,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroup_tipoConstrucao;
     private javax.swing.JButton btn_alterar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_limpar;
@@ -977,6 +1053,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton op_forro;
     private javax.swing.JRadioButton op_parede;
+    private javax.swing.JPanel pn_qualidade;
     private javax.swing.JPanel pnl_encontra;
     private javax.swing.JPanel pnl_protecao;
     private javax.swing.JPanel pnl_tipo;

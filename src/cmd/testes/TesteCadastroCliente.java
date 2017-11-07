@@ -5,15 +5,12 @@
  */
 package cmd.testes;
 
-import cmd.DAO.PessoaJuridicaDAO;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
-import cmd.novo.controle.CadClientesControle;
-import cmd.novo.controle.CadPessoaJuridica;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -135,7 +132,7 @@ public class TesteCadastroCliente {
     }
 
     private static void TesteCadastroPessoaJuridicaApenas() {
-        CadPessoaJuridica cPjur = new CadPessoaJuridica();
+       
         PessoaJuridica pJu = new PessoaJuridica();
         Cliente cli = new Cliente();
 
@@ -164,10 +161,10 @@ public class TesteCadastroCliente {
 
         pJu.setCliente(cli);
 
-        if (cPjur.Cadastrar(pJu) == true) {
+        //if (cPjur.Cadastrar(pJu) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado PESSOA JURIDICA");
 
-        }
+        //}
     }
 
     private static void TesteCadastro() {
@@ -186,11 +183,11 @@ public class TesteCadastroCliente {
          Saída: 5 3 2 1 4
          */
 
-        CadClientesControle cadCliC = new CadClientesControle();
+//        CadClientesControle cadCliC = new CadClientesControle();
         //CadEnderecoControle cadEndC = new CadEnderecoControle();
         //CadTelefoneControle cadTelC = new CadTelefoneControle();
 
-        cadCliC = new CadClientesControle();
+        //cadCliC = new CadClientesControle();
         Cliente cli = new Cliente();
         Endereco end = new Endereco();
         PessoaJuridica pJur = new PessoaJuridica();
@@ -256,9 +253,9 @@ public class TesteCadastroCliente {
 //            JOptionPane.showMessageDialog(null, "Cadastrado Endereco");
 //
 //        }
-        if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
+        //if (cadCliC.CadastrarClientePJuridicoEnderecoTelefone(cli) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado Varios");
 
-        }
+        //}
     }
 }

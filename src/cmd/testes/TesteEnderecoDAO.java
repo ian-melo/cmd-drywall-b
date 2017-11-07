@@ -22,12 +22,13 @@ public class TesteEnderecoDAO {
         //testar_listar();
         //testar_update();
         //testar_deletar();
+        System.exit(0);
     }
 
     private static void testar_busca() {
         EnderecoDAO eDAO = new EnderecoDAO();
         Endereco e = new Endereco();
-        
+
         //e.setId(id);
         e = eDAO.buscar("5");
         System.out.println("+++++++++++++++++++++");
