@@ -2,11 +2,13 @@
 package cmd.controle;
 
 import cmd.DAO.ConstrucaoDAO;
+import cmd.DAO.DAO;
 import cmd.DAO.ForroDAO;
 import cmd.DAO.ParedeDAO;
 import cmd.entidade.Construcao;
 import cmd.entidade.Forro;
 import cmd.entidade.Parede;
+import java.util.List;
 
 /**
  * Classe de controle para CRUD de construção
@@ -194,5 +196,14 @@ public class ConstrucaoController {
         c.setParede(p);
         c.setForro(null);
         return p;
+    }
+    
+    /**
+     * Realiza a listagem das construções existentes
+     * @return Lista de construções
+     */
+    public List<Construcao> listarConstrucoes() {
+        DAO cDao = new ConstrucaoDAO();
+        return cDao.listar();
     }
 }

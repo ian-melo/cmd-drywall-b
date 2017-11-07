@@ -5,10 +5,8 @@
  */
 package cmd.novo.telas;
 
-import cmd.DAO.MaterialDAO;
-import cmd.DAO.ConstrucaoDAO;
-import cmd.DAO.DAO;
-
+import cmd.controle.MaterialController;
+import cmd.controle.ConstrucaoController;
 import cmd.entidade.Material;
 import cmd.entidade.Construcao;
 import cmd.novo.GerenteDeJanelas;
@@ -25,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TMaterial extends javax.swing.JInternalFrame {
-
-    GerenteDeJanelas gerenteDeJanelas;
-
-    private List<Material> listaMateriais;
-    private List<Construcao> listaConstrucao;
     
+    private int linMaterial = -1, linConstrucao = -1;
+    private List<Material> listaMateriais;
+    private List<Construcao> listaConstrucoes;
+    
+    private final MaterialController mControle = new MaterialController();
+    private final ConstrucaoController cControle = new ConstrucaoController();
+    GerenteDeJanelas gerenteDeJanelas;
     public static TMaterial materialT;
     
     public static TMaterial getInstancia() {
@@ -40,9 +40,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         return materialT;
     }
     
-    /**
-     * Creates new form MaterialT
-     */
     public TMaterial() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
@@ -57,7 +54,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         listarMateriais();
         listarConstrucoes();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,7 +107,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_construcoes = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_materiais = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
@@ -393,7 +390,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel26.setName(""); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -404,7 +401,12 @@ public class TMaterial extends javax.swing.JInternalFrame {
                 "Cód. constr.", "Tipo constr.", "Descrição", "Destalhes", "Qualidade"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_construcoesMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tb_construcoes);
 
         jScrollPane1.setToolTipText("");
 
@@ -422,6 +424,11 @@ public class TMaterial extends javax.swing.JInternalFrame {
                 "Cód. constr.", "Cód. material", "Tipo", "Descrição", "Un. medida", "Qualidade", "Opcional?", "Const. metro", "Preço unit.", "Qtde. min."
             }
         ));
+        tb_materiais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_materiaisMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_materiais);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -619,20 +626,10 @@ public class TMaterial extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cadastrarActionPerformed
-        if (!camposValidados()) {
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
-            return;
-        }
-        
         cadastrar();
     }//GEN-LAST:event_bt_cadastrarActionPerformed
 
     private void bt_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_alterarActionPerformed
-        if (!camposValidados()) {
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
-            return;
-        }
-        
         alterar();
     }//GEN-LAST:event_bt_alterarActionPerformed
 
@@ -669,47 +666,88 @@ public class TMaterial extends javax.swing.JInternalFrame {
         janelaAviso();
     }//GEN-LAST:event_jLabel23MouseClicked
 
-//    private void Carregar(MouseEvent event) {
-//        if (event.getClickCount() == 1) {
-//            MaterialTableView view = tb_materiais.getSelectionModel().getSelectedItem();
-//            String nome = view.getNome();
-//            int quantidade = view.getQuantidade();
-//            float preço = view.getPreço();
-//            String tipo = view.getTipo();
-//            String unidade = view.getUnidade();
-//            txt_nomeUnidade.setText(nome);
-//            txt_qtdMinima.setText(Integer.toString(quantidade));
-//            txt_precoUnitario.setText(Float.toString(preço));
-//            txt_tipo.setText(tipo);
-//            txt_constanteMetro.setText(unidade);
-//
-//        }
-//    }
+    private void tb_materiaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_materiaisMouseClicked
+        if (evt.getClickCount() == 1) {
+            linMaterial = tb_materiais.getSelectedRow();
+            carregarCampos();
+        }
+    }//GEN-LAST:event_tb_materiaisMouseClicked
+
+    private void tb_construcoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcoesMouseClicked
+        if (evt.getClickCount() == 1) {
+            linConstrucao = tb_construcoes.getSelectedRow();
+        }
+    }//GEN-LAST:event_tb_construcoesMouseClicked
+
+    private void carregarCampos() {
+        if(linMaterial < 0)
+            return;
+        
+        txt_tipo.setText(tb_materiais.getModel().getValueAt(linMaterial, 2).toString());
+        txt_descricao.setText(tb_materiais.getModel().getValueAt(linMaterial, 3).toString());
+        cmb_nomeUnidade.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 4).toString());
+        cmb_qualidade.setSelectedItem((tb_materiais.getModel().getValueAt(linMaterial, 5).toString()));
+        if (tb_materiais.getModel().getValueAt(linMaterial, 6).toString().equals("Sim"))
+            rd_sim.setEnabled(true); else rd_nao.setEnabled(false);
+        txt_constanteMetro.setText(tb_materiais.getModel().getValueAt(linMaterial, 7).toString());
+        txt_precoUnitario.setText(tb_materiais.getModel().getValueAt(linMaterial, 8).toString());
+        txt_qtdMinima.setText(tb_materiais.getModel().getValueAt(linMaterial, 9).toString());
+        
+        for(int i=0; i<tb_construcoes.getModel().getRowCount();i++) {
+            if(Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 0).toString()) ==
+                    Integer.parseInt(tb_construcoes.getModel().getValueAt(i, 0).toString())) {
+                tb_construcoes.setRowSelectionInterval(i, i);
+                linConstrucao = i;
+                break;
+            }
+        }
+    }
     
-    private void janelaAviso() {
-        TAviso tAvi = new TAviso(null, true);
-        tAvi.setVisible(true);
-    }
-
     private void alterar() {
+        if (!camposValidados()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para alterar.");
+            return;
+        }
+        if(linMaterial < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione o item da tabela para alterar.");
+            return;
+        }
+        
         Material m = new Material();
-//        m.setId(tb_materiais.getSelectionModel().getSelectedItem().getId());
-//        m.setNome(txt_nomeUnidade.getText());
-//        m.setQuantidade(Integer.parseInt(txt_qtdMinima.getText()));
-//        m.setPreço(Float.parseFloat(txt_precoUnitario.getText()));
-//        m.setTipo(txt_tipo.getText());
-//        m.setUnidade(txt_constanteMetro.getText());
-//        dao.Update(m);
-//        txt_nomeUnidade.setText("");
-//        txt_precoUnitario.setText("");
-//        txt_qtdMinima.setText("");
-//        txt_constanteMetro.setText("");
-//        txt_tipo.setText("");
-//        ListandoTableView();
+        Construcao c = new Construcao();
+        try {
+            m.setCodMaterial(Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 1).toString()));
+            m.setTipo(txt_tipo.getText());
+            m.setDescricao(txt_descricao.getText());
+            m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
+            m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
+            m.setEhOpcional((rd_sim.isEnabled()));
+            m.setConstanteMetro(BigDecimal.valueOf(Double.parseDouble(txt_constanteMetro.getText())));
+            m.setPrecoUnitario(BigDecimal.valueOf(Double.parseDouble(txt_precoUnitario.getText())));
+            m.setQuantidadeMinima(Integer.parseInt(txt_qtdMinima.getText()));
+            m.setConstrucao(c);
+            m.getConstrucao().setCodConstrucao(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 0).toString()));
+            m.getConstrucao().setDescricao(tb_construcoes.getModel().getValueAt(linConstrucao, 2).toString());
+            m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
+            m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
+            mControle.alterarMaterial(m);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
+            return;
+        }
+        
         limparCampos();
+        listarMateriais();
+        listarConstrucoes();
     }
-
+    
     private void cadastrar() {
+        if (!camposValidados()) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
+            return;
+        }
+        
+        try {
         rd_sim.isSelected();
         
         //null, title, title, BigDecimal.ZERO, BigDecimal.ZERO, iconable, WIDTH, title, SOMEBITS, isIcon, sorteados
@@ -724,52 +762,33 @@ public class TMaterial extends javax.swing.JInternalFrame {
 //        m.setTipo(tipo);
 //        m.setUnidade(unidade);
 //        dao.Create(m);
-
+        }  catch(Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
+            return;
+        }
+        
         limparCampos();
         listarMateriais();
-
-    }
-
-    private boolean camposValidados() {
-        return (!(txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
-                || txt_tipo.getText().isEmpty() || txt_constanteMetro.getText().isEmpty()
-                || txt_descricao.getText().isEmpty()));
-    }
-    
-    private void limparCampos() {
-        cmb_nomeUnidade.setSelectedIndex(0);
-        cmb_qualidade.setSelectedIndex(0);
-        rd_nao.setSelected(true);
-        txt_descricao.setText("");
-        txt_precoUnitario.setText("");
-        txt_qtdMinima.setText("");
-        txt_constanteMetro.setText("");
-        txt_tipo.setText("");
+        listarConstrucoes();
     }
     
     @SuppressWarnings("unchecked")
     private void listarConstrucoes() {
-        DAO mdao = new MaterialDAO();
-        listaMateriais = mdao.listar();
+        listaConstrucoes = cControle.listarConstrucoes();
         
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. constr.");
-        tableHeaders.add("Cód. material");
-        tableHeaders.add("Tipo");
+        tableHeaders.add("Tipo constr.");
         tableHeaders.add("Descrição");
-        tableHeaders.add("Un. medida");
+        tableHeaders.add("Detalhes");
         tableHeaders.add("Qualidade");
-        tableHeaders.add("Opcional?");
-        tableHeaders.add("Const. metro");
-        tableHeaders.add("Preço unit.");
-        tableHeaders.add("Qtde. min.");
         
         Vector tableData = new Vector();
         Vector reg;
         for (Material m : listaMateriais) {
             reg = new Vector();
-            reg.add(m.getConstrucao().getCodConstrucao().toString());
             reg.add(m.getCodMaterial().toString());
+            reg.add(m.getConstrucao().getCodConstrucao().toString());
             reg.add(m.getTipo());
             reg.add(m.getDescricao());
             reg.add(m.getNomeUnidade());
@@ -785,8 +804,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
     
     @SuppressWarnings("unchecked")
     private void listarMateriais() {
-        DAO mdao = new MaterialDAO();
-        listaMateriais = mdao.listar();
+        listaMateriais = mControle.listarMateriais();
         
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. constr.");
@@ -817,6 +835,36 @@ public class TMaterial extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
+    private boolean camposValidados() {
+        return (!(txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
+                || txt_tipo.getText().isEmpty() || txt_constanteMetro.getText().isEmpty()
+                || txt_descricao.getText().isEmpty() || linConstrucao < 0));
+    }
+    
+    private void limparCampos() {
+        tb_materiais.clearSelection();
+        tb_construcoes.clearSelection();
+        linMaterial = -1;
+        linConstrucao = -1;
+        cmb_nomeUnidade.setSelectedIndex(0);
+        cmb_qualidade.setSelectedIndex(0);
+        rd_nao.setSelected(true);
+        txt_descricao.setText("");
+        txt_precoUnitario.setText("");
+        txt_qtdMinima.setText("");
+        txt_constanteMetro.setText("");
+        txt_tipo.setText("");
+    }
+    
+    private void habilitarBotoes(boolean val) {
+        bt_alterar.setEnabled(val);
+    }
+    
+    private void janelaAviso() {
+        TAviso tAvi = new TAviso(null, true);
+        tAvi.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -856,11 +904,11 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnl_botoes;
     private javax.swing.JPanel pnl_opcao;
     private javax.swing.JRadioButton rd_nao;
     private javax.swing.JRadioButton rd_sim;
+    private javax.swing.JTable tb_construcoes;
     private javax.swing.JTable tb_materiais;
     private javax.swing.JTextField txt_constanteMetro;
     private javax.swing.JTextArea txt_descricao;
