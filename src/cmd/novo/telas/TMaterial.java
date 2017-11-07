@@ -670,6 +670,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             linMaterial = tb_materiais.getSelectedRow();
             carregarCampos();
+            habilitarBotoes(true);
         }
     }//GEN-LAST:event_tb_materiaisMouseClicked
 
@@ -858,6 +859,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         txt_qtdMinima.setText("");
         txt_constanteMetro.setText("");
         txt_tipo.setText("");
+        habilitarBotoes(false);
     }
     
     private void habilitarBotoes(boolean val) {
