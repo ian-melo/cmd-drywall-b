@@ -43,6 +43,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     PnlFisica pFi = new PnlFisica();
     PnlJuridica pJu = new PnlJuridica();
 
+    ClienteController cliC;
+
     //PnlTelefone pTe = new PnlTelefone();
     public static TCliente getInstancia() {
         if (clienteT == null) {
@@ -115,6 +117,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         btn_Cadastrar = new javax.swing.JButton();
         btn_Alterar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
+        btn_Limpar = new javax.swing.JButton();
         pnl_baixo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_FisicaEjuridica = new javax.swing.JTable();
@@ -131,6 +134,23 @@ public class TCliente extends javax.swing.JInternalFrame {
         setClosable(true);
         setResizable(true);
         setTitle("Cadastro de Clientes");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Bem-Vindo a Área de Cadastro de Clientes");
@@ -343,17 +363,30 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_Limpar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_Limpar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_Limpar.setText("Limpar");
+        btn_Limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_botoesLayout = new javax.swing.GroupLayout(pnl_botoes);
         pnl_botoes.setLayout(pnl_botoesLayout);
         pnl_botoesLayout.setHorizontalGroup(
             pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_Cadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_botoesLayout.createSequentialGroup()
+                        .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_Cadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btn_Limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnl_botoesLayout.setVerticalGroup(
             pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,8 +396,10 @@ public class TCliente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Alterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_Limpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btn_Sair)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tb_FisicaEjuridica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -533,15 +568,15 @@ public class TCliente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(pnl_escolha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnl_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(pnl_baixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -585,7 +620,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
 
-            ClienteController cliC = new ClienteController();
+            cliC = new ClienteController();
 
             Cliente cli = null;
             Endereco end = null;
@@ -601,10 +636,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             //end.setCodEndereco(25);//ERRO!!!!!!!!!
 //==============================================================================
 
-//===============================TELEFONE=======================================
-            tels = preencheTelefoneVAL(tels);
-//==============================================================================
-
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date dataDate = null;
             try {
@@ -614,6 +645,17 @@ public class TCliente extends javax.swing.JInternalFrame {
 
             }
 
+            pJur.setCliente(cli);
+            pJur.setCnpj(pJu.getTxt_cnpj_pnl());
+            pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
+            pJur.setRamoAtuacao(pJu.getTxt_ramoAtuacao_pnl());
+            pJur.setRazaoSocial(pJu.getTxt_razaoSocial_pnl());
+            pJur.setXdead(false);
+
+//===============================TELEFONE=======================================
+            tels = preencheTelefoneVAL(tels, cli);
+//==============================================================================
+
             cli.setCodCliente(null);
             cli.setOrcamentos(null);
             cli.setDataInscricao(dataDate);
@@ -622,18 +664,11 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            pJur.setCliente(cli);
-            pJur.setCnpj(pJu.getTxt_cnpj_pnl());
-            pJur.setDataFundacao(pJur.getDataFundacao());
-            pJur.setRamoAtuacao(pJur.getRamoAtuacao());
-            pJur.setRazaoSocial(pJur.getRazaoSocial());
-            pJur.setXdead(false);
-
             if (cliC.inserirClientePessoaJuridica(pJur) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
-
+            preencheTabelaJuridico();//apenas atualiza atabela
         }
 
 //==============================================================================
@@ -644,7 +679,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
 
-            ClienteController cliC = new ClienteController();
+            cliC = new ClienteController();
 
             Cliente cli = null;
             Endereco end = null;
@@ -659,10 +694,6 @@ public class TCliente extends javax.swing.JInternalFrame {
 //===============================ENDERECO=======================================
             end = preencheEnderecoVAL(end);//Preenche endereco
             end.setCodEndereco(2);//ERRO!!!!!!!!!
-//==============================================================================
-
-//===============================TELEFONE=======================================
-            tels = preencheTelefoneVAL(tels);
 //==============================================================================
 
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -680,6 +711,10 @@ public class TCliente extends javax.swing.JInternalFrame {
             pFis.setNome(pFi.getTxt_nome_pnl());
             pFis.setXdead(false);
 
+//===============================TELEFONE=======================================
+            tels = preencheTelefoneVAL(tels, cli);
+//==============================================================================
+
             cli.setCodCliente(null);
             cli.setOrcamentos(null);
             cli.setDataInscricao(dataDate);
@@ -693,8 +728,9 @@ public class TCliente extends javax.swing.JInternalFrame {
 
             }
 
+            preencheTabelaFisica();//Apenas atualiza a tabela
         }
-
+        LimparCampos();
 //        //Exemplo de como funciona para pegar valores dentro do JTextField de outro JPanel
 //        //Colocar igual ao exemplo do JOptionPane.showMessageDialog em baixo
 //        //Ele pega no com um get q foi colocado no JPanel
@@ -783,13 +819,9 @@ public class TCliente extends javax.swing.JInternalFrame {
                 pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
                 pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
                 pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
-                
-                
+
                 //JOptionPane.showMessageDialog(pnl_telefone, peJu.getCnpj());
-                
-                
-                
-            // tb_FisicaEjuridica.get
+                // tb_FisicaEjuridica.get
                 //escolhido = Carrinho.getItens().get(linha);
                 // System.out.println(escolhido.getLivro().getTitulo());
             }
@@ -800,10 +832,18 @@ public class TCliente extends javax.swing.JInternalFrame {
                 pFi.setTxt_nome_pnl(peFi.getNome());
                 pFi.setTxt_cpf_pnl(peFi.getCpf());
                 pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
-                
+
             }
         }
     }//GEN-LAST:event_tb_FisicaEjuridicaMouseClicked
+
+    private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
+        LimparCampos();
+    }//GEN-LAST:event_btn_LimparActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        LimparCampos();
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void pequenoBug() {
         int x = this.getHeight();
@@ -827,15 +867,15 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
 //Preenche TELEFONE tanto de PessoaJuridica quanto de Pessoa Fisica
-    private HashSet<Telefone> preencheTelefoneVAL(HashSet<Telefone> tes) {
+    private HashSet<Telefone> preencheTelefoneVAL(HashSet<Telefone> tes, Cliente cli) {
         Telefone tel = new Telefone();
         TelefoneId telId = new TelefoneId();
 
         telId.setNumero(txt_tel1.getText());
         //telId.setCodCliente(cli.getCodCliente());
-        telId.setCodCliente(1);//Temporario
+        telId.setCodCliente(80);//Temporario
         tel.setId(telId);
-        tel.setCliente(null);
+        tel.setCliente(cli);
         tel.setXdead(false);
 
         tes.add(tel);
@@ -961,7 +1001,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void pFisica() {
         preencheTabelaFisica();
-        
+
         pnl_cliente_pai.removeAll();//remove cliente anterior
 
         FlowLayout gerente = new FlowLayout(1);
@@ -1030,7 +1070,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         tb_FisicaEjuridica.getColumnModel().getColumn(4).setMaxWidth(0);
 
     }
-    
+
     private void preencheTabelaFisica() {
         tb_FisicaEjuridica.removeAll();
 
@@ -1076,6 +1116,35 @@ public class TCliente extends javax.swing.JInternalFrame {
 
         tb_FisicaEjuridica.getColumnModel().getColumn(3).setMaxWidth(0);
 
+    }
+
+    private void LimparCampos() {
+
+        //Limpa tudo dentro de endereço
+        Component componentsEnd[] = pnl_endereco.getComponents();
+        int i;
+        for (i = 0; i < componentsEnd.length; i++) {
+            if (componentsEnd[i] instanceof JTextField) {
+                ((JTextField) componentsEnd[i]).setText("");
+            }
+        }
+
+        Component componentsTel[] = pnl_telefone.getComponents();
+        int j;
+        for (j = 0; j < componentsTel.length; j++) {
+            if (componentsTel[j] instanceof JTextField) {
+                ((JTextField) componentsTel[j]).setText("");
+            }
+        }
+
+        pJu.setTxt_cnpj_pnl("");
+        pJu.setTxt_datafundacao_pnl(null);
+        pJu.setTxt_ramoAtuacao_pnl("");
+        pJu.setTxt_razaoSocial_pnl("");
+
+        pFi.setTxt_cpf_pnl("");
+        pFi.setTxt_dataNasc_pnl(null);
+        pFi.setTxt_nome_pnl("");
     }
 
     private boolean verificaCamposEndereco() {
@@ -1140,6 +1209,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Cadastrar;
+    private javax.swing.JButton btn_Limpar;
     private javax.swing.JButton btn_Sair;
     private javax.swing.JComboBox cmb_pessoa;
     private javax.swing.JLabel jLabel1;
@@ -1187,38 +1257,7 @@ private void mouseClicadoCNPJ(MouseEvent e) {
     }
 
     /*public void ListandoTableview() {
-     Listacli = dao.ListaClientes();
-     tableview.clear();
-
-     for (Entidadecliente cli : Listacli) {
-     ClienteTableView t = new ClienteTableView(cli.getId(), cli.getNome(), cli.getCpf(), cli.getEndereço(), cli.getProjeto(), cli.getProtocolo(), cli.getTelefone(), cli.getEmail());
-     tableview.add(t);
-     }
-     tc_id.setCellValueFactory(new PropertyValueFactory<ClienteTableView, Integer>("Id"));
-     tc_nome.setCellValueFactory(new PropertyValueFactory<ClienteTableView, String>("Nome"));
-     tc_cpf.setCellValueFactory(new PropertyValueFactory<ClienteTableView, String>("Cpf"));
-     tc_endereco.setCellValueFactory(new PropertyValueFactory<ClienteTableView, String>("Endereço"));
-
-     tc_telefone.setCellValueFactory(new PropertyValueFactory<ClienteTableView, String>("Telefone"));
-
-     tb_clientes.setItems(tableview);
-     }
-     */
-//    public void protocolo()
-//    {
-//        Random gerador = new Random();
-//        int numero = gerador.nextInt(1000);
-//        lbl_protocolo.setText(Integer.toString(numero));
-//    }
-//    
-    /**
-     * Initializes the controller class.
-     *
-     * @Override public void initialize(URL url, ResourceBundle rb) {
-     * inicia_ComboBox(); //ListandoTableview(); }
-     *
-     * private void inicia_ComboBox() { ObservableList<String> opcao =
-     * FXCollections.observableArrayList( "Pessoa Físíca", "Pessoa Jurídica" );
+     ísíca", "Pessoa Jurídica" );
      *
      * cmb_pessoa.setItems(opcao); }
      *
