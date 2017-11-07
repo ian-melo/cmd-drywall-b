@@ -688,7 +688,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         cmb_nomeUnidade.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 4).toString());
         cmb_qualidade.setSelectedItem((tb_materiais.getModel().getValueAt(linMaterial, 5).toString()));
         if (tb_materiais.getModel().getValueAt(linMaterial, 6).toString().equals("Sim"))
-            rd_sim.setEnabled(true); else rd_nao.setEnabled(false);
+            rd_sim.setSelected(true); else rd_nao.setSelected(false);
         txt_constanteMetro.setText(tb_materiais.getModel().getValueAt(linMaterial, 7).toString());
         txt_precoUnitario.setText(tb_materiais.getModel().getValueAt(linMaterial, 8).toString());
         txt_qtdMinima.setText(tb_materiais.getModel().getValueAt(linMaterial, 9).toString());
@@ -721,7 +721,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
             m.setDescricao(txt_descricao.getText());
             m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
             m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
-            m.setEhOpcional((rd_sim.isEnabled()));
+            m.setEhOpcional((rd_sim.isSelected()));
             m.setConstanteMetro(BigDecimal.valueOf(Double.parseDouble(txt_constanteMetro.getText())));
             m.setPrecoUnitario(BigDecimal.valueOf(Double.parseDouble(txt_precoUnitario.getText())));
             m.setQuantidadeMinima(Integer.parseInt(txt_qtdMinima.getText()));
@@ -743,26 +743,28 @@ public class TMaterial extends javax.swing.JInternalFrame {
     
     private void cadastrar() {
         if (!camposValidados()) {
-            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
+            JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para alterar.");
             return;
         }
         
+        Material m = new Material();
+        Construcao c = new Construcao();
         try {
-        rd_sim.isSelected();
-        
-        //null, title, title, BigDecimal.ZERO, BigDecimal.ZERO, iconable, WIDTH, title, SOMEBITS, isIcon, sorteados
-        String nome = cmb_nomeUnidade.getSelectedItem().toString();
-        int quantidade = Integer.parseInt(txt_qtdMinima.getText());
-        float preço = Float.parseFloat(txt_precoUnitario.getText());
-        String tipo = txt_tipo.getText();
-        String unidade = txt_constanteMetro.getText();
-//        m.setNome(nome);
-//        m.setQuantidade(quantidade);
-//        m.setPreço(preço);
-//        m.setTipo(tipo);
-//        m.setUnidade(unidade);
-//        dao.Create(m);
-        }  catch(Exception e) {
+            m.setTipo(txt_tipo.getText());
+            m.setDescricao(txt_descricao.getText());
+            m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
+            m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
+            m.setEhOpcional((rd_sim.isSelected()));
+            m.setConstanteMetro(BigDecimal.valueOf(Double.parseDouble(txt_constanteMetro.getText())));
+            m.setPrecoUnitario(BigDecimal.valueOf(Double.parseDouble(txt_precoUnitario.getText())));
+            m.setQuantidadeMinima(Integer.parseInt(txt_qtdMinima.getText()));
+            m.setConstrucao(c);
+            m.getConstrucao().setCodConstrucao(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 0).toString()));
+            m.getConstrucao().setDescricao(tb_construcoes.getModel().getValueAt(linConstrucao, 2).toString());
+            m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
+            m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
+            mControle.inserirMaterial(m);
+        } catch(Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
             return;
         }
@@ -785,21 +787,21 @@ public class TMaterial extends javax.swing.JInternalFrame {
         
         Vector tableData = new Vector();
         Vector reg;
-        for (Material m : listaMateriais) {
+        for (Construcao c : listaConstrucoes) {
             reg = new Vector();
-            reg.add(m.getCodMaterial().toString());
-            reg.add(m.getConstrucao().getCodConstrucao().toString());
-            reg.add(m.getTipo());
-            reg.add(m.getDescricao());
-            reg.add(m.getNomeUnidade());
-            reg.add(m.getQualidade().toString());
-            reg.add((m.getEhOpcional()? "Sim":"Não"));
-            reg.add(m.getConstanteMetro().toString());
-            reg.add(m.getPrecoUnitario().toString());
-            reg.add(m.getQuantidadeMinima().toString());
+            reg.add(c.getCodConstrucao().toString());
+            if(c.getParede() != null && c.getForro() == null)
+                reg.add("Parede");
+            else if(c.getParede() == null && c.getForro() != null)
+                reg.add("Forro");
+            else
+                reg.add("Desconhecido");
+            reg.add(c.getDescricao());
+            reg.add(c.getDetalhes());
+            reg.add(c.getQualidade().toString());
             tableData.add(reg);
         }
-        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
     @SuppressWarnings("unchecked")
