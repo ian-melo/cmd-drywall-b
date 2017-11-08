@@ -5,7 +5,20 @@
  */
 package cmd.novo.telas;
 
+import cmd.DAO.ConstrucaoDAO;
+import cmd.DAO.ParedeDAO;
+import cmd.controle.ClienteController;
+import cmd.controle.ConstrucaoController;
+import cmd.entidade.Construcao;
+import cmd.entidade.Forro;
+import cmd.entidade.Parede;
+import cmd.entidade.PessoaFisica;
+import cmd.entidade.PessoaJuridica;
 import java.awt.Color;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +27,8 @@ import java.awt.Color;
 public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
 
     public static TConstrucaoSelecao construcaoSelecaoT;
+
+    public int cod;
 
     public static TConstrucaoSelecao getInstancia() {
         if (construcaoSelecaoT == null) {
@@ -32,6 +47,8 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         tabbedP_ParedeForro.setBackground(Color.WHITE);
         panel_forro.setBackground(Color.WHITE);
         panel_parede.setBackground(Color.WHITE);
+
+        preencheAmbasTabelas();
     }
 
     /**
@@ -49,17 +66,34 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tb_construcao = new javax.swing.JTable();
+        tb_construcaoParede = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         panel_forro = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tb_construcao1 = new javax.swing.JTable();
+        tb_construcaoForro = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Selecione o tipo");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(153, 153, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -73,8 +107,10 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         tabbedP_ParedeForro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         tabbedP_ParedeForro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        tb_construcao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_construcao.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        tb_construcaoParede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_construcaoParede.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -85,20 +121,25 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tb_construcao);
+        tb_construcaoParede.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_construcaoParedeMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tb_construcaoParede);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 47, Short.MAX_VALUE))
         );
 
@@ -130,8 +171,10 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
 
         tabbedP_ParedeForro.addTab("PAREDE", panel_parede);
 
-        tb_construcao1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_construcao1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        tb_construcaoForro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_construcaoForro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -142,21 +185,26 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tb_construcao1);
+        tb_construcaoForro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_construcaoForroMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tb_construcaoForro);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 478, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 47, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 55, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel2);
@@ -214,8 +262,200 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        TConstrucao.txt_id.setText(String.valueOf(cod));
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void tb_construcaoParedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcaoParedeMouseClicked
+        int linha;
+        if (evt.getClickCount() == 1) {
+            linha = tb_construcaoParede.getSelectedRow();
+
+            cod = (int) tb_construcaoParede.getValueAt(linha, 0);
+
+        }
+    }//GEN-LAST:event_tb_construcaoParedeMouseClicked
+
+    private void tb_construcaoForroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcaoForroMouseClicked
+        int linha;
+        if (evt.getClickCount() == 1) {
+            linha = tb_construcaoForro.getSelectedRow();
+
+            cod = (int) tb_construcaoForro.getValueAt(linha, 0);
+
+        }
+    }//GEN-LAST:event_tb_construcaoForroMouseClicked
+
+    private void preencheTeste() {
+
+        ConstrucaoController conC = new ConstrucaoController();
+        ConstrucaoDAO ccc = new ConstrucaoDAO();
+
+        for (Forro forS : conC.listarForros()) {
+            System.out.println("===================================================");
+
+            System.out.println("" + forS.getCodConstrucao());
+
+            String val = Integer.toString(forS.getCodConstrucao());
+            System.out.println("" + ccc.buscar(val).getDescricao());
+            System.out.println("" + ccc.buscar(val).getDetalhes());
+            System.out.println("" + ccc.buscar(val).getQualidade());
+
+//            System.out.println("" + conC.buscarForro(val).getConstrucao().getDescricao());
+//            System.out.println("" + conC.buscarForro(val).getConstrucao().getDetalhes());
+//            System.out.println("" + conC.buscarForro(val).getConstrucao().getQualidade());
+            System.out.println("" + forS.getEhRf());
+            System.out.println("" + forS.getEhRu());
+            System.out.println("" + forS.getEhSt());
+            System.out.println("" + forS.getCodConstrucao());
+
+        }
+
+    }
+
+    private void preencheAmbasTabelas() {
+        preencheTabForro();
+        preencheTabParede();
+    }
+
+    private void preencheTabForro() {
+        tb_construcaoForro.removeAll();
+
+        ConstrucaoController conC = new ConstrucaoController();
+
+        //foS = conC.listarForros();
+        //Titulo
+        Vector cabecalho = new Vector();
+
+        cabecalho.add("CodConstrucao");//Tem em ambos
+
+        cabecalho.add("Descricao");
+        cabecalho.add("Detalhes");
+        cabecalho.add("Qualidade");
+
+        cabecalho.add("EhRf");
+        cabecalho.add("EhRu");
+        cabecalho.add("EhSt");
+
+        //cabecalho.add("Objeto");///
+        //Itens
+        Vector dados = new Vector();
+        Vector item;
+
+        for (Forro forS : conC.listarForros()) {
+            item = new Vector();
+
+            item.add(forS.getCodConstrucao());
+
+            String val = Integer.toString(forS.getCodConstrucao());
+            item.add(conC.buscarForro(val).getConstrucao().getDescricao());
+            item.add(conC.buscarForro(val).getConstrucao().getDetalhes());
+            item.add(conC.buscarForro(val).getConstrucao().getQualidade());
+
+            if (forS.getEhRf()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            if (forS.getEhRu()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            if (forS.getEhSt()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            //item.add(conS);//Adiciona o objeto em uma coluna q não existe
+            dados.add(item);
+
+        }
+
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.setDataVector(dados, cabecalho);
+        tb_construcaoForro.setModel(modeloTabela);
+
+    }
+
+    private void preencheTabParede() {
+        tb_construcaoParede.removeAll();
+
+        ConstrucaoController conC = new ConstrucaoController();
+
+        //Itens
+        Vector dados = new Vector();
+        Vector item;
+
+        //Titulo
+        Vector cabecalho = new Vector();
+
+        cabecalho.add("CodConstrucao");
+
+        cabecalho.add("Descricao");
+        cabecalho.add("Detalhes");
+        cabecalho.add("Qualidade");
+
+        cabecalho.add("AlturaLimiteo");
+        cabecalho.add("Montante");
+        cabecalho.add("EhRf");
+        cabecalho.add("EhRu");
+        cabecalho.add("EhSt");
+
+        //Itens
+        dados = new Vector();
+        //Vector item;
+
+        //conC.buscarParede(title)//-------------------------------------------------------------
+        ConstrucaoDAO coDAO = new ConstrucaoDAO();
+        for (Parede parS : conC.listarParedes()) {
+            item = new Vector();
+
+            item.add(parS.getCodConstrucao());
+
+            String val = Integer.toString(parS.getCodConstrucao());
+            item.add(coDAO.buscar(val).getDescricao());
+            item.add(coDAO.buscar(val).getDetalhes());
+            item.add(coDAO.buscar(val).getQualidade());
+
+            item.add(parS.getAlturaLimite());
+            item.add(parS.getMontante());
+
+            if (parS.getEhRf()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            if (parS.getEhRu()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            if (parS.getEhSt()) {
+                item.add("SIM");
+            } else {
+                item.add("NÃO");
+            }
+
+            //item.add(conS);//Adiciona o objeto em uma coluna q não existe
+            dados.add(item);
+
+        }
+
+        DefaultTableModel modeloTabela = new DefaultTableModel();
+        modeloTabela.setDataVector(dados, cabecalho);
+        tb_construcaoParede.setModel(modeloTabela);
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,7 +471,7 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panel_forro;
     private javax.swing.JPanel panel_parede;
     private javax.swing.JTabbedPane tabbedP_ParedeForro;
-    private javax.swing.JTable tb_construcao;
-    private javax.swing.JTable tb_construcao1;
+    private javax.swing.JTable tb_construcaoForro;
+    private javax.swing.JTable tb_construcaoParede;
     // End of variables declaration//GEN-END:variables
 }

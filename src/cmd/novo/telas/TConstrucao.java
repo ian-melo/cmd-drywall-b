@@ -34,6 +34,15 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         return construcaoT;
     }
 
+    
+//    public void setTxt_id(String cod) {
+//        this.txt_id.setText(cod);
+//    }
+    
+    
+    
+    
+    
     /**
      * Creates new form ConstrucaoT
      */
@@ -528,8 +537,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             } catch (IllegalArgumentException e) {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
                 //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
             }
+       
+        
+            
+         
         } else {
 
 //Retorna, caso o campo esteja inválido ou não foi encontrado construção
@@ -1060,7 +1072,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_alturaLim;
     private javax.swing.JTextField txt_descricao;
     private javax.swing.JTextArea txt_detalhes;
-    private javax.swing.JTextField txt_id;
+    public static javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_montante;
     // End of variables declaration//GEN-END:variables
 }

@@ -206,4 +206,15 @@ public class ConstrucaoController {
         DAO cDao = new ConstrucaoDAO();
         return cDao.listar();
     }
+    
+     public List<Forro> listarForros() {
+        DAO fDao = new ForroDAO();
+        return fDao.listar();
+    }
+     
+     public List<Parede> listarParedes() {
+        DAO pDao = new ParedeDAO();
+        return pDao.listar();
+    }
+     
 }
