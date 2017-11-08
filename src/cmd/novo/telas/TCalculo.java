@@ -39,12 +39,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_ambiente.setBackground(Color.WHITE);
         pnl_botoes.setBackground(Color.WHITE);
         pnl_valor.setBackground(Color.WHITE);
-        pnl_janela.setBackground(Color.WHITE);
-        pnl_porta.setBackground(Color.WHITE);
-        pnl_maoObra.setBackground(Color.WHITE);
-        pnl_janela.setVisible(false);
-        pnl_porta.setVisible(false);
-        pnl_maoObra.setVisible(false);
+        pnl_portaJanela.setBackground(Color.WHITE);
         habilitarBotoes(false);
     }
 
@@ -69,30 +64,17 @@ public class TCalculo extends javax.swing.JInternalFrame {
         tb_materiais = new javax.swing.JTable();
         pnl_botoes = new javax.swing.JPanel();
         btn_calcular = new javax.swing.JButton();
-        btn_alterar = new javax.swing.JButton();
-        btn_excluir = new javax.swing.JButton();
         btn_sair = new javax.swing.JButton();
         btn_salvar = new javax.swing.JButton();
         btn_limpar = new javax.swing.JButton();
-        pnl_janela = new javax.swing.JPanel();
+        pnl_portaJanela = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        rd_JanelaSim = new javax.swing.JRadioButton();
-        rd_JanelaNao = new javax.swing.JRadioButton();
-        lb_qtdJanelas = new javax.swing.JLabel();
-        cmb_qtdJanelas = new javax.swing.JComboBox();
-        pnl_porta = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        rd_PortaSim = new javax.swing.JRadioButton();
-        rd_PortaNao = new javax.swing.JRadioButton();
-        lb_qtdPortas = new javax.swing.JLabel();
-        cmb_qtdPortas = new javax.swing.JComboBox();
+        txt_largura1 = new javax.swing.JFormattedTextField();
+        txt_largura2 = new javax.swing.JFormattedTextField();
         pnl_valor = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lbl_valTotal = new javax.swing.JLabel();
-        pnl_maoObra = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        rd_ObraSim = new javax.swing.JRadioButton();
-        rd_ObraNao = new javax.swing.JRadioButton();
         pnl_ambiente = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -102,9 +84,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_alturaLargura = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_altura = new javax.swing.JFormattedTextField();
-        jLabel18 = new javax.swing.JLabel();
         txt_largura = new javax.swing.JFormattedTextField();
-        jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -112,8 +92,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         btn_conAdicionar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tb_construcoesOk = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tb_materiaisOk = new javax.swing.JTable();
         btn_conRemover = new javax.swing.JButton();
         btn_conLimpar = new javax.swing.JButton();
 
@@ -184,27 +162,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_alterar.setBackground(new java.awt.Color(153, 153, 255));
-        btn_alterar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_alterar.setText("Alterar");
-        btn_alterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_alterarActionPerformed(evt);
-            }
-        });
-
-        btn_excluir.setBackground(new java.awt.Color(153, 153, 255));
-        btn_excluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_excluir.setText("Excluir");
-        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_excluirActionPerformed(evt);
-            }
-        });
-
         btn_sair.setBackground(new java.awt.Color(153, 153, 255));
         btn_sair.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_sair.setText("Sair");
+        btn_sair.setText("Cancelar");
         btn_sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_sairActionPerformed(evt);
@@ -213,7 +173,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         btn_salvar.setBackground(new java.awt.Color(153, 153, 255));
         btn_salvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_salvar.setText("Salvar ");
+        btn_salvar.setText("OK");
         btn_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salvarActionPerformed(evt);
@@ -236,159 +196,70 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_botoesLayout.createSequentialGroup()
-                        .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_calcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnl_botoesLayout.createSequentialGroup()
+                        .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_calcular))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnl_botoesLayout.setVerticalGroup(
             pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_botoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_calcular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_limpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(btn_salvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_alterar)
+                .addComponent(btn_limpar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_excluir)
-                .addGap(26, 26, 26)
                 .addComponent(btn_sair)
-                .addContainerGap())
+                .addGap(65, 65, 65))
         );
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Janelas?");
-
-        rdGrup_janelas.add(rd_JanelaSim);
-        rd_JanelaSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_JanelaSim.setText("Sim");
-        rd_JanelaSim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_JanelaSimActionPerformed(evt);
-            }
-        });
-
-        rdGrup_janelas.add(rd_JanelaNao);
-        rd_JanelaNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_JanelaNao.setSelected(true);
-        rd_JanelaNao.setText("Não");
-        rd_JanelaNao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_JanelaNaoActionPerformed(evt);
-            }
-        });
-
-        lb_qtdJanelas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_qtdJanelas.setText("Quantidade:");
-        lb_qtdJanelas.setEnabled(false);
-
-        cmb_qtdJanelas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_qtdJanelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cmb_qtdJanelas.setEnabled(false);
-
-        javax.swing.GroupLayout pnl_janelaLayout = new javax.swing.GroupLayout(pnl_janela);
-        pnl_janela.setLayout(pnl_janelaLayout);
-        pnl_janelaLayout.setHorizontalGroup(
-            pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_janelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(rd_JanelaNao)
-                    .addComponent(rd_JanelaSim))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmb_qtdJanelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_qtdJanelas))
-                .addContainerGap())
-        );
-        pnl_janelaLayout.setVerticalGroup(
-            pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_janelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lb_qtdJanelas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_janelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmb_qtdJanelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_janelaLayout.createSequentialGroup()
-                        .addComponent(rd_JanelaSim)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rd_JanelaNao)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel5.setText("Área total das janelas (m²):");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Portas?");
+        jLabel7.setText("Área total das portas (m²):");
 
-        rdGrup_portas.add(rd_PortaSim);
-        rd_PortaSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_PortaSim.setText("Sim");
-        rd_PortaSim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_PortaSimActionPerformed(evt);
-            }
-        });
+        txt_largura1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_largura1.setToolTipText("");
 
-        rdGrup_portas.add(rd_PortaNao);
-        rd_PortaNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_PortaNao.setSelected(true);
-        rd_PortaNao.setText("Não");
-        rd_PortaNao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rd_PortaNaoActionPerformed(evt);
-            }
-        });
+        txt_largura2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_largura2.setToolTipText("");
 
-        lb_qtdPortas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lb_qtdPortas.setText("Quantidade:");
-        lb_qtdPortas.setEnabled(false);
-
-        cmb_qtdPortas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_qtdPortas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cmb_qtdPortas.setEnabled(false);
-
-        javax.swing.GroupLayout pnl_portaLayout = new javax.swing.GroupLayout(pnl_porta);
-        pnl_porta.setLayout(pnl_portaLayout);
-        pnl_portaLayout.setHorizontalGroup(
-            pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_portaLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_portaJanelaLayout = new javax.swing.GroupLayout(pnl_portaJanela);
+        pnl_portaJanela.setLayout(pnl_portaJanelaLayout);
+        pnl_portaJanelaLayout.setHorizontalGroup(
+            pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(rd_PortaNao)
-                    .addComponent(rd_PortaSim))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_qtdPortas)
-                    .addComponent(cmb_qtdPortas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        pnl_portaLayout.setVerticalGroup(
-            pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_portaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lb_qtdPortas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_portaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_portaLayout.createSequentialGroup()
-                        .addComponent(rd_PortaSim)
+                .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rd_PortaNao))
-                    .addComponent(cmb_qtdPortas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_largura2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_largura1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnl_portaJanelaLayout.setVerticalGroup(
+            pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_largura1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_largura2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -414,42 +285,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_valTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Mão de Obra:");
-
-        rdGrup_maoDeObra.add(rd_ObraSim);
-        rd_ObraSim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_ObraSim.setText("Sim");
-
-        rdGrup_maoDeObra.add(rd_ObraNao);
-        rd_ObraNao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rd_ObraNao.setSelected(true);
-        rd_ObraNao.setText("Não");
-
-        javax.swing.GroupLayout pnl_maoObraLayout = new javax.swing.GroupLayout(pnl_maoObra);
-        pnl_maoObra.setLayout(pnl_maoObraLayout);
-        pnl_maoObraLayout.setHorizontalGroup(
-            pnl_maoObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_maoObraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_maoObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(rd_ObraSim)
-                    .addComponent(rd_ObraNao))
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
-        pnl_maoObraLayout.setVerticalGroup(
-            pnl_maoObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_maoObraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rd_ObraSim)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rd_ObraNao))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -482,7 +318,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(chk_st)
                     .addComponent(chk_rf)
                     .addComponent(chk_ru))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         pnl_ambienteLayout.setVerticalGroup(
             pnl_ambienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,22 +337,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Altura da parede:");
+        jLabel2.setText("Altura da parede (m):");
 
         txt_altura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
         txt_altura.setToolTipText("");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("m");
-
         txt_largura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
         txt_largura.setToolTipText("");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("m");
-
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("Perímetro total da parede:");
+        jLabel20.setText("Perímetro total da parede (m):");
 
         jLabel25.setBackground(new java.awt.Color(255, 0, 0));
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
@@ -543,17 +373,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel26)
-                        .addGap(0, 11, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnl_alturaLarguraLayout.createSequentialGroup()
                         .addGroup(pnl_alturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnl_alturaLarguraLayout.createSequentialGroup()
-                                .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel19))
-                            .addGroup(pnl_alturaLarguraLayout.createSequentialGroup()
-                                .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18))
+                            .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnl_alturaLarguraLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -568,17 +392,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel25))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_alturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                .addComponent(txt_altura, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_alturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_alturaLarguraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
+                .addComponent(txt_largura, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -612,20 +432,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(tb_construcoesOk);
 
-        tb_materiaisOk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_materiaisOk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
-            }
-        ));
-        jScrollPane4.setViewportView(tb_materiaisOk);
-
         btn_conRemover.setBackground(new java.awt.Color(153, 153, 255));
         btn_conRemover.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_conRemover.setText("Remover");
@@ -651,52 +457,44 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(pnl_portaJanela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(82, 82, 82)
+                        .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel27)
+                                        .addGap(215, 215, 215))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pnl_janela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(pnl_porta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(pnl_maoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel27)
-                                                .addGap(215, 215, 215))
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btn_conAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_conRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_conLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btn_conAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_conRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_conLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,22 +504,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_ambiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnl_valor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(pnl_janela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pnl_porta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(pnl_maoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel11)))
-                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pnl_ambiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel11))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
@@ -732,36 +528,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(btn_conRemover)
                     .addComponent(btn_conLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rd_PortaNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_PortaNaoActionPerformed
-        lb_qtdPortas.setEnabled(false);
-        cmb_qtdPortas.setEnabled(false);
-    }//GEN-LAST:event_rd_PortaNaoActionPerformed
-
-    private void rd_JanelaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_JanelaSimActionPerformed
-        cmb_qtdJanelas.setEnabled(true);
-        lb_qtdJanelas.setEnabled(true);
-    }//GEN-LAST:event_rd_JanelaSimActionPerformed
-
-    private void rd_PortaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_PortaSimActionPerformed
-        lb_qtdPortas.setEnabled(true);
-        cmb_qtdPortas.setEnabled(true);
-    }//GEN-LAST:event_rd_PortaSimActionPerformed
-
-    private void rd_JanelaNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_JanelaNaoActionPerformed
-        cmb_qtdJanelas.setEnabled(false);
-        lb_qtdJanelas.setEnabled(false);
-    }//GEN-LAST:event_rd_JanelaNaoActionPerformed
 
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         procurar();
@@ -774,14 +546,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
         salvar();
     }//GEN-LAST:event_btn_salvarActionPerformed
-
-    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
-        alterar();
-    }//GEN-LAST:event_btn_alterarActionPerformed
-
-    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
-        excluir();
-    }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
         dispose();
@@ -800,7 +564,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_conLimparActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_formInternalFrameClosed
     
     private void procurar() {
@@ -848,8 +612,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     
     private void habilitarBotoes(boolean val) {
         btn_salvar.setEnabled(val);
-        btn_alterar.setEnabled(val);
-        btn_excluir.setEnabled(val);
     }
     
     
@@ -895,23 +657,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
             }
         ));
-        tb_materiaisOk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
-            }
-        ));
         
         linConstrucao = -1;
         linMaterial = -1;
         linItem = -1;
-        List<Construcao> listaConstrucoes = null;
-        List<Item> listaItens = null;
+        listaConstrucoes = null;
+        listaItens = null;
     }
     
     private void validarTabela() {
@@ -932,27 +683,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_alterar;
     private javax.swing.JButton btn_calcular;
     private javax.swing.JButton btn_conAdicionar;
     private javax.swing.JButton btn_conLimpar;
     private javax.swing.JButton btn_conRemover;
-    private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_sair;
     private javax.swing.JButton btn_salvar;
     private javax.swing.JCheckBox chk_rf;
     private javax.swing.JCheckBox chk_ru;
     private javax.swing.JCheckBox chk_st;
-    private javax.swing.JComboBox cmb_qtdJanelas;
-    private javax.swing.JComboBox cmb_qtdPortas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel25;
@@ -965,31 +709,21 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lb_qtdJanelas;
-    private javax.swing.JLabel lb_qtdPortas;
     private javax.swing.JLabel lbl_valTotal;
     private javax.swing.JPanel pnl_alturaLargura;
     private javax.swing.JPanel pnl_ambiente;
     private javax.swing.JPanel pnl_botoes;
-    private javax.swing.JPanel pnl_janela;
-    private javax.swing.JPanel pnl_maoObra;
-    private javax.swing.JPanel pnl_porta;
+    private javax.swing.JPanel pnl_portaJanela;
     private javax.swing.JPanel pnl_valor;
     private javax.swing.ButtonGroup rdGrup_janelas;
     private javax.swing.ButtonGroup rdGrup_maoDeObra;
     private javax.swing.ButtonGroup rdGrup_portas;
-    private javax.swing.JRadioButton rd_JanelaNao;
-    private javax.swing.JRadioButton rd_JanelaSim;
-    private javax.swing.JRadioButton rd_ObraNao;
-    private javax.swing.JRadioButton rd_ObraSim;
-    private javax.swing.JRadioButton rd_PortaNao;
-    private javax.swing.JRadioButton rd_PortaSim;
     private javax.swing.JTable tb_construcoes;
     private javax.swing.JTable tb_construcoesOk;
     private javax.swing.JTable tb_materiais;
-    private javax.swing.JTable tb_materiaisOk;
     private javax.swing.JFormattedTextField txt_altura;
     private javax.swing.JFormattedTextField txt_largura;
+    private javax.swing.JFormattedTextField txt_largura1;
+    private javax.swing.JFormattedTextField txt_largura2;
     // End of variables declaration//GEN-END:variables
 }
