@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//TODO: Testar
 package cmd.novo.telas;
 
-import cmd.novo.GerenteDeJanelas;
-import static cmd.novo.telas.TPrincipal.jDesktopPane1;
+import cmd.entidade.Construcao;
+import cmd.entidade.Item;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +13,13 @@ import java.awt.Color;
  */
 public class TCalculo extends javax.swing.JInternalFrame {
     
-    GerenteDeJanelas gerenteDeJanelas;
+    private int linConstrucao = -1;
+    private int linMaterial = -1;
+    private int linItem = -1;
+    
+    private List<Construcao> listaConstrucoes = null;
+    private List<Item> listaItens = null;
+    
     public static TCalculo calculoT;
 
     public static TCalculo getInstancia() {
@@ -29,7 +33,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
      * Creates new form NewJFrame
      */
     public TCalculo() {
-        this.gerenteDeJanelas = new GerenteDeJanelas(jDesktopPane1);
         initComponents();
         getContentPane().setBackground(Color.WHITE);
         pnl_alturaLargura.setBackground(Color.WHITE);
@@ -42,6 +45,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_janela.setVisible(false);
         pnl_porta.setVisible(false);
         pnl_maoObra.setVisible(false);
+        habilitarBotoes(false);
     }
 
     /**
@@ -66,9 +70,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_botoes = new javax.swing.JPanel();
         btn_calcular = new javax.swing.JButton();
         btn_alterar = new javax.swing.JButton();
-        btn_deletar = new javax.swing.JButton();
+        btn_excluir = new javax.swing.JButton();
         btn_sair = new javax.swing.JButton();
-        btn_alterar1 = new javax.swing.JButton();
+        btn_salvar = new javax.swing.JButton();
+        btn_limpar = new javax.swing.JButton();
         pnl_janela = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         rd_JanelaSim = new javax.swing.JRadioButton();
@@ -83,7 +88,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         cmb_qtdPortas = new javax.swing.JComboBox();
         pnl_valor = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lbl_valTotal = new javax.swing.JLabel();
         pnl_maoObra = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         rd_ObraSim = new javax.swing.JRadioButton();
@@ -91,9 +96,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_ambiente = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        chk_st = new javax.swing.JCheckBox();
+        chk_rf = new javax.swing.JCheckBox();
+        chk_ru = new javax.swing.JCheckBox();
         pnl_alturaLargura = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_altura = new javax.swing.JFormattedTextField();
@@ -104,19 +109,26 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        btn_conAdicionar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tb_construcoesOk = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tb_materiaisOk = new javax.swing.JTable();
+        btn_conRemover = new javax.swing.JButton();
+        btn_conLimpar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cálculo de Drywall");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Bem-Vindo à área de Cáculo de Drywall");
+        jLabel1.setText("Bem-vindo à área de Cáculo de Drywall");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Escolha a Construção:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Escolha o material:");
+        jLabel11.setText("Escolha o material (adicional):");
 
         tb_construcoes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
@@ -148,20 +160,30 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         btn_calcular.setBackground(new java.awt.Color(153, 153, 255));
         btn_calcular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_calcular.setText("Calcular Parede");
+        btn_calcular.setText("Calcular drywall");
+        btn_calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_calcularActionPerformed(evt);
+            }
+        });
 
         btn_alterar.setBackground(new java.awt.Color(153, 153, 255));
         btn_alterar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_alterar.setText("Alterar Dados");
+        btn_alterar.setText("Alterar");
         btn_alterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_alterarActionPerformed(evt);
             }
         });
 
-        btn_deletar.setBackground(new java.awt.Color(153, 153, 255));
-        btn_deletar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_deletar.setText("Deletar Dados");
+        btn_excluir.setBackground(new java.awt.Color(153, 153, 255));
+        btn_excluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
 
         btn_sair.setBackground(new java.awt.Color(153, 153, 255));
         btn_sair.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -172,12 +194,21 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_alterar1.setBackground(new java.awt.Color(153, 153, 255));
-        btn_alterar1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_alterar1.setText("Salvar Dados");
-        btn_alterar1.addActionListener(new java.awt.event.ActionListener() {
+        btn_salvar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_salvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_salvar.setText("Salvar ");
+        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_alterar1ActionPerformed(evt);
+                btn_salvarActionPerformed(evt);
+            }
+        });
+
+        btn_limpar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_limpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_limpar.setText("Limpar consulta");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
             }
         });
 
@@ -192,10 +223,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_calcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_alterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_deletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btn_alterar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnl_botoesLayout.setVerticalGroup(
@@ -203,12 +235,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_calcular)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(btn_alterar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_limpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(btn_salvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_alterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_deletar)
+                .addComponent(btn_excluir)
                 .addGap(26, 26, 26)
                 .addComponent(btn_sair)
                 .addContainerGap())
@@ -340,11 +374,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Valor total da tipologia: ");
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setText("Valor total do drywall: ");
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel22.setText("#####");
+        lbl_valTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnl_valorLayout = new javax.swing.GroupLayout(pnl_valor);
         pnl_valor.setLayout(pnl_valorLayout);
@@ -353,9 +386,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_valorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel22)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_valTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnl_valorLayout.setVerticalGroup(
             pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,8 +396,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGap(46, 46, 46)
                 .addGroup(pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel22))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(lbl_valTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -412,11 +445,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel30.setName(""); // NOI18N
 
-        jCheckBox1.setText("Seco (ST)");
+        chk_st.setText("Seco (ST)");
 
-        jCheckBox2.setText("Resistência a fogo (RF)");
+        chk_rf.setText("Resistência a fogo (RF)");
 
-        jCheckBox3.setText("Resistência a umidade (RU)");
+        chk_ru.setText("Resistência a umidade (RU)");
 
         javax.swing.GroupLayout pnl_ambienteLayout = new javax.swing.GroupLayout(pnl_ambiente);
         pnl_ambiente.setLayout(pnl_ambienteLayout);
@@ -429,9 +462,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30))
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(chk_st)
+                    .addComponent(chk_rf)
+                    .addComponent(chk_ru))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_ambienteLayout.setVerticalGroup(
@@ -442,12 +475,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(chk_st)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(chk_rf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(chk_ru)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -539,44 +572,114 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel27.setName(""); // NOI18N
 
+        btn_conAdicionar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_conAdicionar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_conAdicionar.setText("Adicionar");
+        btn_conAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_conAdicionarActionPerformed(evt);
+            }
+        });
+
+        tb_construcoesOk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_construcoesOk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+            }
+        ));
+        jScrollPane3.setViewportView(tb_construcoesOk);
+
+        tb_materiaisOk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_materiaisOk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
+            }
+        ));
+        jScrollPane4.setViewportView(tb_materiaisOk);
+
+        btn_conRemover.setBackground(new java.awt.Color(153, 153, 255));
+        btn_conRemover.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_conRemover.setText("Remover");
+        btn_conRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_conRemoverActionPerformed(evt);
+            }
+        });
+
+        btn_conLimpar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_conLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_conLimpar.setText("Limpar");
+        btn_conLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_conLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel27)
-                        .addGap(221, 221, 221)
-                        .addComponent(jLabel11)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnl_janela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnl_janela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pnl_porta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pnl_maoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addComponent(pnl_porta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnl_maoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                                .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel27)
+                                                .addGap(215, 215, 215))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btn_conAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_conRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_conLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,26 +689,37 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnl_ambiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnl_valor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(pnl_janela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pnl_porta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(pnl_maoObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel27)
                             .addComponent(jLabel11)))
                     .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_conAdicionar)
+                    .addComponent(btn_conRemover)
+                    .addComponent(btn_conLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -622,10 +736,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         lb_qtdJanelas.setEnabled(true);
     }//GEN-LAST:event_rd_JanelaSimActionPerformed
 
-    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_alterarActionPerformed
-
     private void rd_PortaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_PortaSimActionPerformed
         lb_qtdPortas.setEnabled(true);
         cmb_qtdPortas.setEnabled(true);
@@ -636,25 +746,185 @@ public class TCalculo extends javax.swing.JInternalFrame {
         lb_qtdJanelas.setEnabled(false);
     }//GEN-LAST:event_rd_JanelaNaoActionPerformed
 
+    private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
+        procurar();
+    }//GEN-LAST:event_btn_calcularActionPerformed
+
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        salvar();
+    }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
+        alterar();
+    }//GEN-LAST:event_btn_alterarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
-    private void btn_alterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_alterar1ActionPerformed
+    private void btn_conAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conAdicionarActionPerformed
+        adicionarTabela();
+    }//GEN-LAST:event_btn_conAdicionarActionPerformed
+
+    private void btn_conRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conRemoverActionPerformed
+        removerTabela();
+    }//GEN-LAST:event_btn_conRemoverActionPerformed
+
+    private void btn_conLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conLimparActionPerformed
+        limparTabela();
+    }//GEN-LAST:event_btn_conLimparActionPerformed
+    
+    private void procurar() {
+        
+    }
+    
+    private void salvar() {
+        
+    }
+    
+    private void alterar() {
+        
+    }
+    
+    private void excluir() {
+        
+    }
+    
+    private void limpar() {
+        txt_altura.setText("");
+        txt_largura.setText("");
+        chk_st.setSelected(false);
+        chk_rf.setSelected(false);
+        chk_ru.setSelected(false);
+        lbl_valTotal.setText("");
+        habilitarBotoes(false);
+        limparTabela();
+    }
+    
+    private boolean validar() {
+        if(txt_altura.getText().isEmpty() || txt_largura.getText().isEmpty() ||
+                !(chk_st.isSelected() || chk_rf.isSelected() || chk_ru.isSelected())) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha os campos obrigatórios.");
+            return false;
+        }
+        try {
+            Double.parseDouble(txt_altura.getText());
+            Double.parseDouble(txt_largura.getText());
+            return true;
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Preencha corretamente os campos.");
+            return false;
+        }
+    }
+    
+    private void habilitarBotoes(boolean val) {
+        btn_salvar.setEnabled(val);
+        btn_alterar.setEnabled(val);
+        btn_excluir.setEnabled(val);
+    }
+    
+    
+    private void adicionarTabela() {
+        
+    }
+    
+    private void removerTabela() {
+        
+    }
+    
+    private void limparTabela() {
+        tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+            }
+        ));
+        tb_materiais.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
+            }
+        ));
+        tb_construcoesOk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+            }
+        ));
+        tb_materiaisOk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
+            }
+        ));
+        
+        linConstrucao = -1;
+        linMaterial = -1;
+        linItem = -1;
+        List<Construcao> listaConstrucoes = null;
+        List<Item> listaItens = null;
+    }
+    
+    private void validarTabela() {
+        
+    }
+    
+    
+    private void carregarConstrucoes() {
+        
+    }
+    
+    private void carregarMateriais() {
+        
+    }
+    
+    private void carregarItemMateriais() {
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_alterar;
-    private javax.swing.JButton btn_alterar1;
     private javax.swing.JButton btn_calcular;
-    private javax.swing.JButton btn_deletar;
+    private javax.swing.JButton btn_conAdicionar;
+    private javax.swing.JButton btn_conLimpar;
+    private javax.swing.JButton btn_conRemover;
+    private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_sair;
+    private javax.swing.JButton btn_salvar;
+    private javax.swing.JCheckBox chk_rf;
+    private javax.swing.JCheckBox chk_ru;
+    private javax.swing.JCheckBox chk_st;
     private javax.swing.JComboBox cmb_qtdJanelas;
     private javax.swing.JComboBox cmb_qtdPortas;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -664,7 +934,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -674,8 +943,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lb_qtdJanelas;
     private javax.swing.JLabel lb_qtdPortas;
+    private javax.swing.JLabel lbl_valTotal;
     private javax.swing.JPanel pnl_alturaLargura;
     private javax.swing.JPanel pnl_ambiente;
     private javax.swing.JPanel pnl_botoes;
@@ -693,7 +965,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rd_PortaNao;
     private javax.swing.JRadioButton rd_PortaSim;
     private javax.swing.JTable tb_construcoes;
+    private javax.swing.JTable tb_construcoesOk;
     private javax.swing.JTable tb_materiais;
+    private javax.swing.JTable tb_materiaisOk;
     private javax.swing.JFormattedTextField txt_altura;
     private javax.swing.JFormattedTextField txt_largura;
     // End of variables declaration//GEN-END:variables
