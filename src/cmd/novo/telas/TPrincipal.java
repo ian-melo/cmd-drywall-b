@@ -32,9 +32,6 @@ public class TPrincipal extends javax.swing.JFrame {
         if (nomeL != null) {
             lb_logado.setText(nomeL);
         }
-
-        //descomentar
-        btn_calForroGesso.setVisible(false);
     }
 
     /**
@@ -48,8 +45,6 @@ public class TPrincipal extends javax.swing.JFrame {
 
         pnl_botoes = new javax.swing.JPanel();
         btn_cadMateriais = new javax.swing.JButton();
-        btn_calForroGesso = new javax.swing.JButton();
-        btn_calParedeGesso = new javax.swing.JButton();
         btn_cadClientes = new javax.swing.JButton();
         btn_calOrcamentoPrj = new javax.swing.JButton();
         btn_relatorios = new javax.swing.JButton();
@@ -72,34 +67,16 @@ public class TPrincipal extends javax.swing.JFrame {
 
         btn_cadMateriais.setBackground(new java.awt.Color(255, 255, 255));
         btn_cadMateriais.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_cadMateriais.setText("Cadastro de Materias");
+        btn_cadMateriais.setText("Registro de Materiais");
         btn_cadMateriais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cadMateriaisActionPerformed(evt);
             }
         });
 
-        btn_calForroGesso.setBackground(new java.awt.Color(255, 255, 255));
-        btn_calForroGesso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_calForroGesso.setText("Cálculo de Forro de Gesso");
-        btn_calForroGesso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_calForroGessoActionPerformed(evt);
-            }
-        });
-
-        btn_calParedeGesso.setBackground(new java.awt.Color(255, 255, 255));
-        btn_calParedeGesso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_calParedeGesso.setText("Cálculo da Parede de Gesso");
-        btn_calParedeGesso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_calParedeGessoActionPerformed(evt);
-            }
-        });
-
         btn_cadClientes.setBackground(new java.awt.Color(255, 255, 255));
         btn_cadClientes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_cadClientes.setText("Cadastro de Clientes");
+        btn_cadClientes.setText("Registro de Clientes");
         btn_cadClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cadClientesActionPerformed(evt);
@@ -108,7 +85,7 @@ public class TPrincipal extends javax.swing.JFrame {
 
         btn_calOrcamentoPrj.setBackground(new java.awt.Color(255, 255, 255));
         btn_calOrcamentoPrj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_calOrcamentoPrj.setText("Cálculo de Orçamento do Projeto");
+        btn_calOrcamentoPrj.setText("Orçamento do Projeto");
         btn_calOrcamentoPrj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_calOrcamentoPrjActionPerformed(evt);
@@ -144,7 +121,7 @@ public class TPrincipal extends javax.swing.JFrame {
 
         btn_cadConstrucao.setBackground(new java.awt.Color(255, 255, 255));
         btn_cadConstrucao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_cadConstrucao.setText("Cadastro de Construção");
+        btn_cadConstrucao.setText("Registro de Construção");
         btn_cadConstrucao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cadConstrucaoActionPerformed(evt);
@@ -164,8 +141,6 @@ public class TPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_cadMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_calForroGesso, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_calParedeGesso, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_cadClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_calOrcamentoPrj, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,24 +160,20 @@ public class TPrincipal extends javax.swing.JFrame {
                 .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lb_logado))
-                .addGap(37, 37, 37)
-                .addComponent(btn_cadMateriais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(btn_cadConstrucao)
-                .addGap(42, 42, 42)
-                .addComponent(btn_calParedeGesso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_calOrcamentoPrj)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_calForroGesso)
-                .addGap(27, 27, 27)
+                .addComponent(btn_cadMateriais)
+                .addGap(51, 51, 51)
                 .addComponent(btn_cadClientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_cadFuncionarios)
-                .addGap(30, 30, 30)
+                .addComponent(btn_calOrcamentoPrj)
+                .addGap(123, 123, 123)
+                .addComponent(btn_relatorios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_solicitacaoOrcamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_relatorios)
+                .addComponent(btn_cadFuncionarios)
                 .addContainerGap(178, Short.MAX_VALUE))
         );
 
@@ -270,16 +241,6 @@ public class TPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_cadMateriaisActionPerformed
 
-    private void btn_calParedeGessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calParedeGessoActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
-        }
-    }//GEN-LAST:event_btn_calParedeGessoActionPerformed
-
     private void btn_calOrcamentoPrjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calOrcamentoPrjActionPerformed
 
         try {
@@ -320,10 +281,6 @@ public class TPrincipal extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btn_cadConstrucaoActionPerformed
-
-    private void btn_calForroGessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calForroGessoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_calForroGessoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,9 +331,7 @@ public class TPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_cadConstrucao;
     private javax.swing.JButton btn_cadFuncionarios;
     private javax.swing.JButton btn_cadMateriais;
-    private javax.swing.JButton btn_calForroGesso;
     private javax.swing.JButton btn_calOrcamentoPrj;
-    private javax.swing.JButton btn_calParedeGesso;
     private javax.swing.JButton btn_relatorios;
     private javax.swing.JButton btn_solicitacaoOrcamento;
     public static javax.swing.JDesktopPane jDesktopPane1;
