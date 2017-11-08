@@ -9,6 +9,7 @@ import cmd.DAO.ClienteDAO;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Construcao;
+import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
@@ -21,9 +22,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
-
+    
+    List<Item> itens;
+    
     GerenteDeJanelas gerenteDeJanelas;
-
     public static TOrcamento tCalculoOrcamento;
 
     public static TOrcamento getInstancia() {
@@ -33,37 +35,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         return tCalculoOrcamento;
         
     }
-    @SuppressWarnings("unchecked")
-    public static void carregar_tabrlas()
-    {
-        ClienteController dao = new ClienteController();
-        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
-        Vector tableHeaders = new Vector();
-        tableHeaders.add("Tipo");
-        tableHeaders.add("Nome");
-        tableHeaders.add("Data");
-        tableHeaders.add("Data da inscrição");
-        
-        Vector tableData = new Vector();
-        Vector reg;
-        for (PessoaFisica c : cli) 
-        {
-            reg = new Vector();
-            reg.add("Pessoa Fisica");
-            reg.add(c.getNome().toString());
-            reg.add(c.getDataNascimento().toString());
-            reg.add(c.getDataNascimento().toString());
-            tableData.add(reg);
-        }
-         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
-    }
+    
     /**
      * Creates new form TCalculoOrcamento
      */
     public TOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
-        carregar_tabrlas();
+        carregarTabelas();
         getContentPane().setBackground(Color.WHITE);
     }
 
@@ -138,7 +117,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tb_endereco);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Selecione o Material/Construção/Tipologia Previamente cadastrado:");
+        jLabel4.setText("Itens do orçamento são listados abaixo:");
 
         tb_materialConstrucaoTipologia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_materialConstrucaoTipologia.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,7 +137,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         btn_cadastrarOrca.setBackground(new java.awt.Color(153, 153, 255));
         btn_cadastrarOrca.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_cadastrarOrca.setText("Cadastrar um Orçamento/Tipologia");
+        btn_cadastrarOrca.setText("Novo orçamento...");
         btn_cadastrarOrca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cadastrarOrcaActionPerformed(evt);
@@ -225,7 +204,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                                 .addComponent(btn_cadCliente))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
                                 .addComponent(btn_cadastrarOrca))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -307,8 +286,36 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_btn_cadastrarOrcaActionPerformed
-
-
+    
+    @SuppressWarnings("unchecked")
+    private void carregarTabelas() {
+        ClienteController dao = new ClienteController();
+        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Nome");
+        tableHeaders.add("Data");
+        tableHeaders.add("Data da inscrição");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (PessoaFisica c : cli) 
+        {
+            reg = new Vector();
+            reg.add("Pessoa Fisica");
+            reg.add(c.getNome().toString());
+            reg.add(c.getDataNascimento().toString());
+            reg.add(c.getDataNascimento().toString());
+            tableData.add(reg);
+        }
+         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void preencherItens(List<Item> li) {
+        itens = li;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
