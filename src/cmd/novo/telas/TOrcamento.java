@@ -20,15 +20,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Usuario
  */
-public class TCalculoOrcamento extends javax.swing.JInternalFrame {
+public class TOrcamento extends javax.swing.JInternalFrame {
 
     GerenteDeJanelas gerenteDeJanelas;
 
-    public static TCalculoOrcamento tCalculoOrcamento;
+    public static TOrcamento tCalculoOrcamento;
 
-    public static TCalculoOrcamento getInstancia() {
+    public static TOrcamento getInstancia() {
         if (tCalculoOrcamento == null) {
-            tCalculoOrcamento = new TCalculoOrcamento();
+            tCalculoOrcamento = new TOrcamento();
         }
         return tCalculoOrcamento;
         
@@ -60,7 +60,7 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
     /**
      * Creates new form TCalculoOrcamento
      */
-    public TCalculoOrcamento() {
+    public TOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
         carregar_tabrlas();

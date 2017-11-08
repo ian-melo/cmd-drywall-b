@@ -244,9 +244,9 @@ public class TPrincipal extends javax.swing.JFrame {
     private void btn_calOrcamentoPrjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calOrcamentoPrjActionPerformed
 
         try {
-            gerenteDeJanelas.abrirJanelas(TCalculoOrcamento.getInstancia());
+            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
         } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TCalculoOrcamento.getInstancia());
+            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
             //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
 
         }
