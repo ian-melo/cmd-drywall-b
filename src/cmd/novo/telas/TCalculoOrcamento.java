@@ -5,8 +5,16 @@
  */
 package cmd.novo.telas;
 
+import cmd.DAO.ClienteDAO;
+import cmd.controle.ClienteController;
+import cmd.entidade.Cliente;
+import cmd.entidade.Construcao;
+import cmd.entidade.PessoaFisica;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,15 +31,39 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
             tCalculoOrcamento = new TCalculoOrcamento();
         }
         return tCalculoOrcamento;
+        
     }
-
+    @SuppressWarnings("unchecked")
+    public static void carregar_tabrlas()
+    {
+        ClienteController dao = new ClienteController();
+        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Nome");
+        tableHeaders.add("Data");
+        tableHeaders.add("Data da inscrição");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (PessoaFisica c : cli) 
+        {
+            reg = new Vector();
+            reg.add("Pessoa Fisica");
+            reg.add(c.getNome().toString());
+            reg.add(c.getDataNascimento().toString());
+            reg.add(c.getDataNascimento().toString());
+            tableData.add(reg);
+        }
+         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
     /**
      * Creates new form TCalculoOrcamento
      */
     public TCalculoOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
-
+        carregar_tabrlas();
         getContentPane().setBackground(Color.WHITE);
     }
 
@@ -47,7 +79,7 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_cliente = new javax.swing.JTable();
+        tb_cli_fis = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_endereco = new javax.swing.JTable();
@@ -73,8 +105,8 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Selecione o Cliente:");
 
-        tb_cliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_cliente.setModel(new javax.swing.table.DefaultTableModel(
+        tb_cli_fis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_cli_fis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -87,7 +119,7 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
                 "Tipo", "Nome", "Data", "Data de Inscrição"
             }
         ));
-        jScrollPane1.setViewportView(tb_cliente);
+        jScrollPane1.setViewportView(tb_cli_fis);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Selecione o local de entrega (Está vinculado ao Cliente selecionado):");
@@ -294,7 +326,7 @@ public class TCalculoOrcamento extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lb_dataEhora;
     private javax.swing.JLabel lb_valorFinal;
-    private javax.swing.JTable tb_cliente;
+    public static javax.swing.JTable tb_cli_fis;
     private javax.swing.JTable tb_endereco;
     private javax.swing.JTable tb_materialConstrucaoTipologia;
     // End of variables declaration//GEN-END:variables

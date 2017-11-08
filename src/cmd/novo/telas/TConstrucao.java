@@ -46,7 +46,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     /**
      * Creates new form ConstrucaoT
      */
-    public TConstrucao() {
+    public TConstrucao() 
+    {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
 
@@ -530,22 +531,26 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chk_stActionPerformed
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
-        if ("".equals(txt_id.getText())) {
+        if ("".equals(txt_id.getText())) 
+        {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
-            try {
+            try 
+            {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-            } catch (IllegalArgumentException e) {
+            } 
+            catch (IllegalArgumentException e) 
+            {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
                 //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
             }
        
-        
-            
-         
-        } else {
+        } 
+        else 
+        {
 
 //Retorna, caso o campo esteja inválido ou não foi encontrado construção
-            if (!validarCodigo()) {
+            if (!validarCodigo()) 
+            {
                 return;
             }
             //Criação dos objetos
@@ -556,13 +561,15 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             fo = controle.buscarForro(txt_id.getText());
             pa = controle.buscarParede(txt_id.getText());
             //Caso forro
-            if (fo != null) {
+            if (fo != null) 
+            {
                 chk_rf.setSelected(fo.getEhRf());
                 chk_ru.setSelected(fo.getEhRu());
                 chk_st.setSelected(fo.getEhSt());
                 co = fo.getConstrucao();
                 //Caso parede
-            } else if (pa != null) {
+            } else if (pa != null) 
+            {
                 txt_montante.setText(pa.getMontante().toString());
                 txt_alturaLim.setText(pa.getAlturaLimite().toString());
                 chk_rf.setSelected(pa.getEhRf());
@@ -571,7 +578,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                 co = pa.getConstrucao();
             }
             //Construção
-            if (co != null) {
+            if (co != null) 
+            {
                 co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
                 txt_descricao.setText(co.getDescricao());
                 txt_detalhes.setText(co.getDetalhes());
@@ -844,7 +852,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     /**
      * Retorna os campos e botões aos respectivos estados iniciais
      */
-    private void resetarCampos() {
+    private void resetarCampos() 
+    {
         txt_alturaLim.setText("");
         txt_descricao.setText("");
         txt_detalhes.setText("");
@@ -866,7 +875,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
      *
      * @param value Valor booleano de decisão
      */
-    private void habilitarParede(boolean value) {
+    private void habilitarParede(boolean value) 
+    {
         txt_alturaLim.setEditable(value);
         txt_montante.setEditable(value);
     }

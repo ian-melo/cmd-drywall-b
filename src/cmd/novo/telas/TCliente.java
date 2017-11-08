@@ -46,8 +46,10 @@ public class TCliente extends javax.swing.JInternalFrame {
     ClienteController cliC;
 
     //PnlTelefone pTe = new PnlTelefone();
-    public static TCliente getInstancia() {
-        if (clienteT == null) {
+    public static TCliente getInstancia() 
+    {
+        if (clienteT == null) 
+        {
             clienteT = new TCliente();
         }
         return clienteT;
@@ -56,7 +58,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form ClienteT
      */
-    public TCliente() {
+    public TCliente() 
+    {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
         pnl_escolha.setBackground(Color.WHITE);
