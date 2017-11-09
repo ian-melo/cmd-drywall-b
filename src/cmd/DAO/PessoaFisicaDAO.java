@@ -92,7 +92,6 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
         } catch(HibernateException e) {
             return null;
         }catch(Exception ex){
-            System.out.println("_" + e);
             System.out.println("_" + ex);
             return null;
         }
