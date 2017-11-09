@@ -34,20 +34,13 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         return construcaoT;
     }
 
-    
 //    public void setTxt_id(String cod) {
 //        this.txt_id.setText(cod);
 //    }
-    
-    
-    
-    
-    
     /**
      * Creates new form ConstrucaoT
      */
-    public TConstrucao() 
-    {
+    public TConstrucao() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
 
@@ -531,64 +524,56 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chk_stActionPerformed
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
-        if ("".equals(txt_id.getText())) 
-        {
+        if ("".equals(txt_id.getText())) {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
-            try 
-            {
+            try {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-            } 
-            catch (IllegalArgumentException e) 
-            {
+            } catch (IllegalArgumentException e) {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
                 //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
             }
-       
-        } 
-        else 
-        {
+            //Este return impede de proceguir
+            return;
+        }
 
 //Retorna, caso o campo esteja inválido ou não foi encontrado construção
-            if (!validarCodigo()) 
-            {
-                return;
-            }
-            //Criação dos objetos
-            Construcao co = null;
-            Forro fo;
-            Parede pa;
-            //Busca da construção
-            fo = controle.buscarForro(txt_id.getText());
-            pa = controle.buscarParede(txt_id.getText());
-            //Caso forro
-            if (fo != null) 
-            {
-                chk_rf.setSelected(fo.getEhRf());
-                chk_ru.setSelected(fo.getEhRu());
-                chk_st.setSelected(fo.getEhSt());
-                co = fo.getConstrucao();
-                //Caso parede
-            } else if (pa != null) 
-            {
-                txt_montante.setText(pa.getMontante().toString());
-                txt_alturaLim.setText(pa.getAlturaLimite().toString());
-                chk_rf.setSelected(pa.getEhRf());
-                chk_ru.setSelected(pa.getEhRu());
-                chk_st.setSelected(pa.getEhSt());
-                co = pa.getConstrucao();
-            }
-            //Construção
-            if (co != null) 
-            {
-                co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
-                txt_descricao.setText(co.getDescricao());
-                txt_detalhes.setText(co.getDetalhes());
-                cmb_qualidade.setSelectedItem(co.getQualidade().toString());
-
-            }
-            //Habilita exclusão e alteração
-            habilitarAlteravel(true);
+        if (!validarCodigo()) {
+            return;
         }
+        //Criação dos objetos
+        Construcao co = null;
+        Forro fo;
+        Parede pa;
+        //Busca da construção
+        controle = new ConstrucaoController();
+
+        pa = controle.buscarParede(txt_id.getText());
+        fo = controle.buscarForro(txt_id.getText());
+        //Caso forro
+        if (fo != null) {
+            chk_rf.setSelected(fo.getEhRf());
+            chk_ru.setSelected(fo.getEhRu());
+            chk_st.setSelected(fo.getEhSt());
+            co = fo.getConstrucao();
+            //Caso parede
+        } else if (pa != null) {
+            txt_montante.setText(pa.getMontante().toString());
+            txt_alturaLim.setText(pa.getAlturaLimite().toString());
+            chk_rf.setSelected(pa.getEhRf());
+            chk_ru.setSelected(pa.getEhRu());
+            chk_st.setSelected(pa.getEhSt());
+            co = pa.getConstrucao();
+        }
+        //Construção
+        if (co != null) {
+            co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
+            txt_descricao.setText(co.getDescricao());
+            txt_detalhes.setText(co.getDetalhes());
+            cmb_qualidade.setSelectedItem(co.getQualidade().toString());
+
+        }
+        //Habilita exclusão e alteração
+        habilitarAlteravel(true);
     }//GEN-LAST:event_btn_procurarActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -681,8 +666,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         //Caso forro
         if (op_forro.isSelected()) {
             fo = new Forro();
- 
-            
+
             fo.setEhRf(chk_rf.isSelected());
             fo.setEhRu(chk_ru.isSelected());
             fo.setEhSt(chk_st.isSelected());
@@ -696,9 +680,9 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             res = controle.inserirForro(fo);
             //Caso parede
         }
-         if (op_parede.isSelected()) {
+        if (op_parede.isSelected()) {
             pa = new Parede();
-            
+
             pa.setMontante(BigDecimal.valueOf(Double.parseDouble(txt_montante.getText())));
             pa.setAlturaLimite(BigDecimal.valueOf(Double.parseDouble(txt_alturaLim.getText())));
             pa.setEhRf(chk_rf.isSelected());
@@ -706,12 +690,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             pa.setEhSt(chk_st.isSelected());
             pa.setXdead(false);
             pa.setConstrucao(co);
-            
+
             co.setParede(pa);
             //co.setForro(null);
             //Inserção de parede
-            
-            
+
             controle = new ConstrucaoController();
             res = controle.inserirParede(pa);
         }
@@ -754,7 +737,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 //        System.out.println("Parede        = " + co.getParede());
 //        System.out.println("Qualidade     = " + co.getQualidade());
 //        System.out.println("===========================================");
-
 
     }//GEN-LAST:event_btn_salvarActionPerformed
 
@@ -852,8 +834,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     /**
      * Retorna os campos e botões aos respectivos estados iniciais
      */
-    private void resetarCampos() 
-    {
+    private void resetarCampos() {
         txt_alturaLim.setText("");
         txt_descricao.setText("");
         txt_detalhes.setText("");
@@ -875,8 +856,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
      *
      * @param value Valor booleano de decisão
      */
-    private void habilitarParede(boolean value) 
-    {
+    private void habilitarParede(boolean value) {
         txt_alturaLim.setEditable(value);
         txt_montante.setEditable(value);
     }

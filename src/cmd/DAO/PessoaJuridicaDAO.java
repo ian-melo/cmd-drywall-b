@@ -83,6 +83,10 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.close();
             return li;
         } catch(HibernateException e) {
+            System.out.println("_" + e);
+            return null;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
             return null;
         }
     }

@@ -67,6 +67,7 @@ public class ParedeDAO implements DAO<Parede> {
             s.close();
             return p;
         } catch(HibernateException e) {
+            
             return null;
         }
     }

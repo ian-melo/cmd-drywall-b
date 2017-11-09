@@ -38,6 +38,9 @@ public class ForroDAO implements DAO<Forro> {
             return true;
         } catch(HibernateException e) {
             return false;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
+            return false;
         }
     }
 
@@ -67,6 +70,10 @@ public class ForroDAO implements DAO<Forro> {
             s.close();
             return f;
         } catch(HibernateException e) {
+            System.out.println("_1_" + e);
+            return null;
+        }catch(Exception ex){
+            System.out.println("_2_" + ex);
             return null;
         }
     }
@@ -82,6 +89,9 @@ public class ForroDAO implements DAO<Forro> {
             s.close();
             return li;
         } catch(HibernateException e) {
+            return null;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
             return null;
         }
     }

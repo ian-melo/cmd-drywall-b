@@ -52,6 +52,9 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             return true;
         } catch(HibernateException e) {
             return false;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
+            return false;
         }
     }
 
@@ -68,6 +71,9 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             return c;
         } catch(HibernateException e) {
             return null;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
+            return null;
         }
     }
 
@@ -82,6 +88,9 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.close();
             return li;
         } catch(HibernateException e) {
+            return null;
+        }catch(Exception ex){
+            System.out.println("_" + ex);
             return null;
         }
     }
