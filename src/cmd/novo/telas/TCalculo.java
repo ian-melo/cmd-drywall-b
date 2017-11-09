@@ -1,24 +1,29 @@
 //TODO: Testar
 package cmd.novo.telas;
 
+import cmd.controle.CalculoController;
 import cmd.entidade.Construcao;
 import cmd.entidade.Item;
+import cmd.entidade.Material;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Usuario
+ * @author Usuario, ian-melo
  */
 public class TCalculo extends javax.swing.JInternalFrame {
     
     private int linConstrucao = -1;
-    private int linMaterial = -1;
+    private int[] linMaterial = null;
     private int linItem = -1;
     
     private List<Construcao> listaConstrucoes = null;
     private List<Item> listaItens = null;
+    
+    private final CalculoController cControle = new CalculoController();
     
     public static TCalculo calculoT;
 
@@ -40,7 +45,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_botoes.setBackground(Color.WHITE);
         pnl_valor.setBackground(Color.WHITE);
         pnl_portaJanela.setBackground(Color.WHITE);
-        habilitarBotoes(false);
     }
 
     /**
@@ -63,15 +67,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_materiais = new javax.swing.JTable();
         pnl_botoes = new javax.swing.JPanel();
-        btn_calcular = new javax.swing.JButton();
-        btn_sair = new javax.swing.JButton();
-        btn_salvar = new javax.swing.JButton();
+        btn_verificar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
+        btn_Ok = new javax.swing.JButton();
         btn_limpar = new javax.swing.JButton();
+        btn_nova = new javax.swing.JButton();
         pnl_portaJanela = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txt_largura1 = new javax.swing.JFormattedTextField();
-        txt_largura2 = new javax.swing.JFormattedTextField();
+        txt_porta = new javax.swing.JFormattedTextField();
+        txt_janela = new javax.swing.JFormattedTextField();
         pnl_valor = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lbl_valTotal = new javax.swing.JLabel();
@@ -91,7 +96,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel27 = new javax.swing.JLabel();
         btn_conAdicionar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tb_construcoesOk = new javax.swing.JTable();
+        tb_itens = new javax.swing.JTable();
         btn_conRemover = new javax.swing.JButton();
         btn_conLimpar = new javax.swing.JButton();
 
@@ -137,6 +142,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
             }
         ));
+        tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_construcoesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_construcoes);
 
         tb_materiais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -151,41 +161,55 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
             }
         ));
+        tb_materiais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_materiaisMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_materiais);
 
-        btn_calcular.setBackground(new java.awt.Color(153, 153, 255));
-        btn_calcular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_calcular.setText("Calcular drywall");
-        btn_calcular.addActionListener(new java.awt.event.ActionListener() {
+        btn_verificar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_verificar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_verificar.setText("Verificar tipologias");
+        btn_verificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_calcularActionPerformed(evt);
+                btn_verificarActionPerformed(evt);
             }
         });
 
-        btn_sair.setBackground(new java.awt.Color(153, 153, 255));
-        btn_sair.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_sair.setText("Cancelar");
-        btn_sair.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_cancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sairActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
 
-        btn_salvar.setBackground(new java.awt.Color(153, 153, 255));
-        btn_salvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_salvar.setText("OK");
-        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
+        btn_Ok.setBackground(new java.awt.Color(153, 153, 255));
+        btn_Ok.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_Ok.setText("OK");
+        btn_Ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salvarActionPerformed(evt);
+                btn_OkActionPerformed(evt);
             }
         });
 
         btn_limpar.setBackground(new java.awt.Color(153, 153, 255));
         btn_limpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_limpar.setText("Limpar consulta");
+        btn_limpar.setText("Redefinir consulta");
         btn_limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_limparActionPerformed(evt);
+            }
+        });
+
+        btn_nova.setBackground(new java.awt.Color(153, 153, 255));
+        btn_nova.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_nova.setText("Nova consulta");
+        btn_nova.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_novaActionPerformed(evt);
             }
         });
 
@@ -196,27 +220,29 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Ok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_limpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_nova, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnl_botoesLayout.createSequentialGroup()
-                        .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_calcular))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btn_verificar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnl_botoesLayout.setVerticalGroup(
             pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_calcular)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_salvar)
+                .addComponent(btn_verificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_nova)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_limpar)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Ok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_sair)
-                .addGap(65, 65, 65))
+                .addComponent(btn_cancelar)
+                .addContainerGap())
         );
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -225,11 +251,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Área total das portas (m²):");
 
-        txt_largura1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
-        txt_largura1.setToolTipText("");
+        txt_porta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_porta.setToolTipText("");
 
-        txt_largura2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
-        txt_largura2.setToolTipText("");
+        txt_janela.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
+        txt_janela.setToolTipText("");
 
         javax.swing.GroupLayout pnl_portaJanelaLayout = new javax.swing.GroupLayout(pnl_portaJanela);
         pnl_portaJanela.setLayout(pnl_portaJanelaLayout);
@@ -241,11 +267,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_largura2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_janela, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_largura1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_portaJanelaLayout.setVerticalGroup(
@@ -254,11 +280,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txt_largura1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_largura2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_janela, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -418,8 +444,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        tb_construcoesOk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_construcoesOk.setModel(new javax.swing.table.DefaultTableModel(
+        tb_itens.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_itens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -430,7 +456,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
             }
         ));
-        jScrollPane3.setViewportView(tb_construcoesOk);
+        jScrollPane3.setViewportView(tb_itens);
 
         btn_conRemover.setBackground(new java.awt.Color(153, 153, 255));
         btn_conRemover.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -463,13 +489,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(pnl_portaJanela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(82, 82, 82)
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -512,7 +538,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -529,72 +555,134 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(btn_conLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
-        procurar();
-    }//GEN-LAST:event_btn_calcularActionPerformed
+    private void btn_verificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verificarActionPerformed
+        verificar();
+    }//GEN-LAST:event_btn_verificarActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         limpar();
     }//GEN-LAST:event_btn_limparActionPerformed
 
-    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        salvar();
-    }//GEN-LAST:event_btn_salvarActionPerformed
+    private void btn_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OkActionPerformed
+        finalizar();
+    }//GEN-LAST:event_btn_OkActionPerformed
 
-    private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
-        dispose();
-    }//GEN-LAST:event_btn_sairActionPerformed
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        cancelar();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_conAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conAdicionarActionPerformed
-        adicionarTabela();
+        adicionar();
     }//GEN-LAST:event_btn_conAdicionarActionPerformed
 
     private void btn_conRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conRemoverActionPerformed
-        removerTabela();
+        remover();
     }//GEN-LAST:event_btn_conRemoverActionPerformed
 
     private void btn_conLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conLimparActionPerformed
-        limparTabela();
+        limpar();
     }//GEN-LAST:event_btn_conLimparActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void btn_novaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novaActionPerformed
+        limparTConstrucoes();
+        limparTMateriais();
+        limparCampos();
+    }//GEN-LAST:event_btn_novaActionPerformed
+
+    private void tb_construcoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcoesMouseClicked
+        if (evt.getClickCount() == 1 &&
+                tb_construcoes.getModel().getValueAt(tb_construcoes.getSelectedRow(),0) != null) {
+            linConstrucao = tb_construcoes.getSelectedRow();
+            carregarMateriais();
+        }
+    }//GEN-LAST:event_tb_construcoesMouseClicked
+
+    private void tb_materiaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_materiaisMouseClicked
+        if (evt.getClickCount() == 1 &&
+                tb_materiais.getModel().getValueAt(tb_materiais.getSelectedRow(),0) != null) {
+            linMaterial = tb_materiais.getSelectedRows();
+        }
+    }//GEN-LAST:event_tb_materiaisMouseClicked
     
-    private void procurar() {
+    private void verificar() {
+        if(!validarCampos())
+            return;
         
+        listaConstrucoes = cControle.procurarTipologias(chk_st.isEnabled(), chk_ru.isEnabled(),
+                chk_rf.isEnabled(), Double.parseDouble(txt_altura.getText()));
+        if(listaConstrucoes == null || listaConstrucoes.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane,"Construções não encontradas.");
+            return;
+        }
+        
+        habilitarCampos(false);
+        carregarConstrucoes();
     }
     
-    private void salvar() {
-        
+    private void finalizar() {
+        TOrcamento.getInstancia().preencherItens(listaItens);
+        dispose();
     }
     
-    private void alterar() {
-        
-    }
-    
-    private void excluir() {
-        
+    private void cancelar() {
+        limparCampos();
+        limparTabelas();
+        dispose();
     }
     
     private void limpar() {
-        txt_altura.setText("");
-        txt_largura.setText("");
-        chk_st.setSelected(false);
-        chk_rf.setSelected(false);
-        chk_ru.setSelected(false);
-        lbl_valTotal.setText("");
-        habilitarBotoes(false);
-        limparTabela();
+        limparCampos();
+        limparTabelas();
     }
     
-    private boolean validar() {
+    private void adicionar() {
+        if(linConstrucao < 0)
+            return;
+        
+        Construcao c = null;
+        List<Material> mOp = null;
+        //TODO materiais opcionais e construção
+        
+        
+        if(listaItens == null)
+            listaItens = new ArrayList<Item>();
+        listaItens.add(cControle.definirItem(
+                Double.parseDouble(txt_altura.getText()),
+                Double.parseDouble(txt_largura.getText()),
+                Double.parseDouble(txt_porta.getText()),
+                Double.parseDouble(txt_janela.getText()), c, mOp));
+    }
+    
+    private void remover() {
+        if(linItem < 0)
+            return;
+        
+        
+    }
+    
+    private void carregarConstrucoes() {
+        
+    }
+    
+    private void carregarMateriais() {
+        
+    }
+    
+    private void carregarItens() {
+        
+    }
+    
+    private boolean validarCampos() {
         if(txt_altura.getText().isEmpty() || txt_largura.getText().isEmpty() ||
                 !(chk_st.isSelected() || chk_rf.isSelected() || chk_ru.isSelected())) {
             JOptionPane.showMessageDialog(rootPane, "Preencha os campos obrigatórios.");
@@ -610,86 +698,73 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
     }
     
-    private void habilitarBotoes(boolean val) {
-        btn_salvar.setEnabled(val);
+    private void limparCampos() {
+        txt_altura.setText("");
+        txt_largura.setText("");
+        chk_st.setSelected(false);
+        chk_rf.setSelected(false);
+        chk_ru.setSelected(false);
+        lbl_valTotal.setText("");
+        habilitarCampos(true);
     }
     
-    
-    private void adicionarTabela() {
-        
+    private void habilitarCampos(boolean val) {
+        txt_altura.setEnabled(val);
+        txt_largura.setEnabled(val);
+        txt_porta.setEnabled(val);
+        txt_janela.setEnabled(val);
+        chk_st.setEnabled(val);
+        chk_ru.setEnabled(val);
+        chk_rf.setEnabled(val);
     }
     
-    private void removerTabela() {
-        
+    private void limparTabelas() {
+        limparTConstrucoes();
+        limparTMateriais();
+        limparTItens();
     }
     
-    private void limparTabela() {
+    private void limparTConstrucoes() {
         tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+            null,
             new String [] {
                 "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
             }
         ));
+        linConstrucao = -1;
+        listaConstrucoes = null;
+    }
+    
+    private void limparTMateriais() {
         tb_materiais.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
+            null,
             new String [] {
                 "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
             }
         ));
-        tb_construcoesOk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+        linMaterial = null;
+    }
+    
+    private void limparTItens() {
+        tb_itens.setModel(new javax.swing.table.DefaultTableModel(
+            null,
             new String [] {
-                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+                "Cód. constr.", "Altura", "Largura", "Área porta (m²)", "Área janela (m²)", "Preço total"
             }
         ));
-        
-        linConstrucao = -1;
-        linMaterial = -1;
         linItem = -1;
-        listaConstrucoes = null;
         listaItens = null;
     }
     
-    private void validarTabela() {
-        
-    }
-    
-    
-    private void carregarConstrucoes() {
-        
-    }
-    
-    private void carregarMateriais() {
-        
-    }
-    
-    private void carregarItemMateriais() {
-        
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_calcular;
+    private javax.swing.JButton btn_Ok;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_conAdicionar;
     private javax.swing.JButton btn_conLimpar;
     private javax.swing.JButton btn_conRemover;
     private javax.swing.JButton btn_limpar;
-    private javax.swing.JButton btn_sair;
-    private javax.swing.JButton btn_salvar;
+    private javax.swing.JButton btn_nova;
+    private javax.swing.JButton btn_verificar;
     private javax.swing.JCheckBox chk_rf;
     private javax.swing.JCheckBox chk_ru;
     private javax.swing.JCheckBox chk_st;
@@ -719,11 +794,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup rdGrup_maoDeObra;
     private javax.swing.ButtonGroup rdGrup_portas;
     private javax.swing.JTable tb_construcoes;
-    private javax.swing.JTable tb_construcoesOk;
+    private javax.swing.JTable tb_itens;
     private javax.swing.JTable tb_materiais;
     private javax.swing.JFormattedTextField txt_altura;
+    private javax.swing.JFormattedTextField txt_janela;
     private javax.swing.JFormattedTextField txt_largura;
-    private javax.swing.JFormattedTextField txt_largura1;
-    private javax.swing.JFormattedTextField txt_largura2;
+    private javax.swing.JFormattedTextField txt_porta;
     // End of variables declaration//GEN-END:variables
 }

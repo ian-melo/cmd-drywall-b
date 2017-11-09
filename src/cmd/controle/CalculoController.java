@@ -2,7 +2,7 @@
 //TODO: Testar
 package cmd.controle;
 
-import cmd.entidade.Construcao;
+import cmd.entidade.*;
 import java.util.List;
 
 /**
@@ -23,13 +23,15 @@ public class CalculoController {
      */
     private List<Construcao> itens;
     
-    public List<Construcao> definirItens(boolean ehSt, boolean ehRu, boolean ehRf,
-            double altura, double largura) {
+    public List<Item> definirItens(double altura, double largura, double areaPorta, double areaJanela) {
         return null;
     }
     
-    private void procurarTipologias(boolean ehSt, boolean ehRu, boolean ehRf,
-            double altura) {
-        
+    public List<Construcao> procurarTipologias(boolean ehSt, boolean ehRu, boolean ehRf, double altura) {
+        return null;
+    }
+    
+    public Item definirItem(double altura, double largura, double areaPorta, double areaJanela, Construcao c, List<Material> mOp) {
+        return null;
     }
 }
