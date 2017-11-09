@@ -209,91 +209,79 @@ CREATE TABLE RegistroOrcamento(
 /*==================================================*/
 
 INSERT INTO `endereco` (`CodEndereco`, `Logradouro`, `Numero`, `Complemento`, `Cep`, `Bairro`, `Cidade`, `Uf`, `XDEAD`) VALUES
-(1, 'Logradouro', '90', 'Complemento', '2222', 'bairro', 'cidade', 'SP', 0),
-(2, 'Logradouro2', '22', 'Complemento2', '333', 'bairro2', 'cidade2', 'SP', 0),
-(3, '_Logradouro5', '33', '_Complemento5', '555', '_bairro5', '_cidade5', 'SP', 0),
-(4, 'Logradouro2', '22', 'Complemento2', '333', 'bairro2', 'cidade2', 'SP', 1),
-(5, '_Logradouro5', '33', '_Complemento5', '555', '_bairro5', '_cidade5', 'SP', 0),
-(6, 'Logradouro2', '22', 'Complemento2', '333', 'bairro2', 'cidade2', 'SP', 1),
-(7, 'Logradouro2', '22', 'Complemento2', '333', 'bairro2', 'cidade2', 'SP', 0),
-(8, 'Logradouro2', '22', 'Compl8888', '333', 'bairro2', 'cid88', 'SP', 0),
-(9, 'Logradouro2', '22', 'Complemento2', '4444', 'bairro2', 'cidade2', 'SP', 1);
+(1, 'Rua Gondelim', '90', 'Casa b', '04340-010', 'Americanópolis', 'São Paulo', 'SP', 0),
+(2, 'Rua Inhambú', '22', '', '04520-010', 'Vila Uberabinha', 'São Paulo', 'SP', 0),
+(3, 'Rua João Cachoeira', '33', '', '04535-010', 'Vila Nova Conceição', 'São Paulo', 'SP', 0),
+(4, 'Rua Inhanduí', '44', '', '04535-020', 'Vila Nova Conceição', 'São Paulo', 'SP', 0),
+(5, 'Rua Barão de Paranapiacaba', '93', '', '01004-000', 'Se', 'São Paulo', 'SP', 0),
+(6, 'Vila Bueno', '55', '', '04535-010', 'Centro', 'São Paulo', 'SP', 0),
+(7, 'Rua Aurora - até 334 - lado par', '35', '', '01209-000', 'Santa Efigênia', 'São Paulo', 'SP', 0);
+
 
 
 INSERT INTO `cliente` (`CodCliente`, `DataInscricao`, `CodEndereco`, `XDEAD`) VALUES
-(1, '2017-10-04', 2, 0),
-(2, '2017-10-25', 6, 0),
+(1, '2017-10-04', 1, 0),
+(2, '2017-10-25', 2, 0),
 (3, '2017-10-11', 3, 0),
-(4, '2017-10-25', 5, 0);
+(4, '2017-10-12', 4, 0),
+(5, '2017-10-21', 5, 0),
+(6, '2017-10-28', 6, 0),
+(7, '2017-10-08', 7, 0);
 
 INSERT INTO `construcao` (`CodConstrucao`, `Descricao`, `Detalhes`, `Qualidade`, `XDEAD`) VALUES
-(1, 'ffffff', 'sdfsdfsdfsdfsdf', 3, 0),
-(2, 'sdfsdf', 'sdfsdfsdfsdfsdf', 3, 0),
-(3, 'ssdfsd', 'sdfsdfwefwaf', 3, 0),
-(4, 'wefwdcwacf fdc', 'wefwsfc', 6, 0),
-(5, 'ssdfsdsdfsdfsdf', 'sdfsddddddddddddddd', 2, 0),
-(6, 'sdfsdfdcthjnyukuiuiiiii', 'iiiiiiiiiiiiiiiiiiiiiiiii', 8, 0);
+(1, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '73/48/600 - MONTANTE SIMPLES\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
+(2, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '95/70/600 - MONTANTE SIMPLES\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
+(3, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '120/90/600 - MONTANTE SIMPLES\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
+(4, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '73/48/600 - MONTANTE DUPLO\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
+(5, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '95/70/600 - MONTANTE DUPLO\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 0, 0),
+(6, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '120/90/600 - MONTANTE DUPLO\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
+(7, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '73/48/600 - MONTANTE SIMPLES\nRF 15,0', 1, 0);
 
 
-INSERT INTO `forro` (`CodConstrucao`, `EhSt`, `EhRu`, `EhRf`, `XDEAD`) VALUES
-(1, 4, 2, 3, 0),
-(2, 2, 3, 4, 0),
-(3, 3, 4, 2, 0),
-(6, 1, 0, 0, 0);
 
 INSERT INTO `funcionario` (`CodFuncionario`, `Login`, `Senha`, `XDEAD`) VALUES
 (1, 'adm', '123', 0),
 (2, 'admin', '123', 0),
-(3, 'corcovado', '123', 0),
-(4, 'senior', '123', 0);
+(3, 'senior', '123', 0);
 
 
-INSERT INTO `orcamento` (`CodOrcamento`, `DataHora`, `CodCliente`, `CodEndereco`, `XDEAD`) VALUES
-(1, '2017-10-03', 2, 1, 0),
-(2, '2017-10-24', 2, 8, 0);
-
-
-INSERT INTO `item` (`CodItem`, `Altura`, `Largura`, `AreaPorta`, `AreaJanela`, `PrecoTotal`, `CodConstrucao`, `CodOrcamento`, `XDEAD`) VALUES
-(1, '2.00000', '2.00000', '1.00000', '2.00000', '123.00', 4, 2, 0),
-(2, '2.00000', '2.00000', '2.00000', '2.00000', '12.00', 3, 1, 0);
-
-INSERT INTO `material` (`CodMaterial`, `Descricao`, `NomeUnidade`, `ConstanteMetro`, `PrecoUnitario`, `EhOpcional`, `Qualidade`, `Tipo`, `QuantidadeMinima`, `CodConstrucao`, `XDEAD`) VALUES
-(1, 'Descrição', 'nomeUnidad', '1.00000', '2.00', 1, 2, 'tipo', 3, 1, 0),
-(2, 'Descrição2', 'nomeUn2', '4.00000', '5.00', 1, 6, 'tipo2', 7, 2, 0),
-(3, 'Descrição3', 'we', '2.00000', '2.00', 0, 3, 'tipo3', 2, 1, 0),
-(4, 'Descrição', 'nomeUn2', '1.00000', '2.00', 0, 2, 'tipo', 2, 1, 0),
-(5, 'sdfsdf', 'ewedd', '3.00000', '3.00', 1, 1, 'ddf', 2, 1, 0),
-(6, 'Descrição3', 'nomeUnidad', '4.00000', '34.00', 0, 3, 'tipo2', 2, 6, 0),
-(7, 'dddddddddddd', 'ewedd', '3.00000', '12.00', 1, 1, 'ddf', 4, 5, 0),
-(8, 'ffffff', 'nomeUade', '1.00000', '3.00', 0, 1, 'tipo3', 5, 6, 0),
-(9, 'sdfsdf', 'mmmmm', '4.00000', '11.00', 1, 9, 'ddf', 2, 5, 0),
-(10, 'Descrição2', 'tttt', '1.00000', '2.00', 0, 1, 'tipo', 2, 5, 0),
-(11, 'sdfsdf', 'ccccc', '3.00000', '11.00', 1, 1, 'ddf', 2, 4, 0);
-
-INSERT INTO `materialitem` (`CodMaterial`, `CodItem`, `Quantidade`, `PrecoUnitario`, `XDEAD`) VALUES
-(1, 1, 12, '2.00', 0),
-(2, 1, 21, '12.00', 0);
 
 INSERT INTO `parede` (`CodConstrucao`, `Montante`, `AlturaLimite`, `EhSt`, `EhRu`, `EhRf`, `XDEAD`) VALUES
-(1, '32.00000', '22.00000', 1, 1, 1, 0),
-(3, '32.00000', '23.00000', 0, 0, 1, 0);
+(1, '73.00000', '2.50000', 1, 1, 0, 0),
+(2, '95.00000', '3.00000', 1, 1, 0, 0),
+(3, '120.00000', '3.50000', 1, 1, 0, 0),
+(4, '73.00000', '2.90000', 1, 1, 0, 0),
+(5, '95.00000', '3.60000', 1, 1, 0, 0),
+(6, '120.00000', '4.15000', 1, 1, 0, 0),
+(7, '73.00000', '2.60000', 0, 0, 1, 0);
 
 INSERT INTO `pessoafisica` (`CodCliente`, `Cpf`, `Nome`, `DataNascimento`, `XDEAD`) VALUES
-(1, '12121212121212121212', 'dsfsdfsdf', '2017-10-04', 0),
-(2, '11001100110011001123', 'dsfsdfsdf', '2017-10-27', 0),
-(3, '132349222342', 'sdfsdfsdf', '2017-10-05', 0),
-(4, '1293123', 'dsfsdfsdf', '2017-10-18', 0);
+(1, '121.133.133-11', 'João', '2007-10-04', 0),
+(2, '122.131.112-71', 'Valdir', '2007-10-27', 0),
+(3, '121.311.411-11', 'Mario', '1980-10-05', 0),
+(4, '123.141.131-11', 'Joana', '1980-04-18', 0),
+(5, '123.141.131-11', 'Pedro', '1975-11-20', 0);
 
 INSERT INTO `pessoajuridica` (`CodCliente`, `Cnpj`, `RazaoSocial`, `RamoAtuacao`, `DataFundacao`, `XDEAD`) VALUES
-(4, '232323', 'sdsdf', 'sdfsdf', '2017-10-11', 0);
+(6, '45.131.323/3333-22', 'Novo rumo', 'Transportes', '2010-10-11', 0),
+(7, '75.181.353/3344-24', 'Sorte João', 'Alimentos', '2010-10-11', 0);
 
 INSERT INTO `telefone` (`CodCliente`, `Numero`, `XDEAD`) VALUES
-(1, '11111111', 0),
-(1, '1211111111', 0),
-(1, '22213', 0),
-(2, '1111231111', 0),
-(3, '22213', 0),
-(4, '11111111', 0);
+(1, '(12)1000-1000', 0),
+(2, '(12)1300-1002', 0),
+(2, '(12)14000-1001', 0),
+(3, '(12)10000-1003', 0),
+(3, '(00)1000-1000', 0),
+(3, '(00)1400-1003', 0),
+(4, '(00)1050-1005', 0),
+(5, '(11)1000-2000', 0),
+(5, '(11)20000-1001', 0),
+(5, '(11)1000-1000', 0),
+(6, '(11)1060-1002', 0),
+(6, '(11)1000-1003', 0),
+(6, '(11)1060-1005', 0),
+(7, '(11)1000-1007', 0),
+(7, '(11)10000-1001', 0);
 
 /*==================================================*/
 /*               TABELAS DO APP                     */
