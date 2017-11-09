@@ -6,9 +6,11 @@
 package cmd.novo.telas;
 
 import cmd.DAO.ClienteDAO;
+import cmd.DAO.EnderecoDAO;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Construcao;
+import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
 import cmd.novo.GerenteDeJanelas;
@@ -43,6 +45,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
         carregarTabelas();
+        carregarendereco();
         getContentPane().setBackground(Color.WHITE);
     }
 
@@ -310,7 +313,36 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         }
          tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-    
+    private void carregarendereco()
+    {
+        //ClienteController dao = new ClienteController();
+        EnderecoDAO daos = new EnderecoDAO();
+        List<Endereco> endereco = daos.listar();
+        
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("CEP");
+        tableHeaders.add("Logradouro");
+        tableHeaders.add("Número");
+        tableHeaders.add("Complemento");
+        tableHeaders.add("Bairro");
+        tableHeaders.add("UF");
+        Vector tableData = new Vector();
+        Vector reg;
+        
+        for (Endereco c : endereco) 
+        {
+            reg = new Vector();
+            reg.add(c.getCep().toString());
+            reg.add(c.getLogradouro().toString());
+            reg.add(c.getComplemento().toString());
+            reg.add(c.getNumero().toString());
+            reg.add(c.getComplemento().toString());
+            reg.add(c.getBairro().toString());
+            reg.add(c.getUf().toString());
+            tableData.add(reg);
+        }
+         tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
