@@ -5,7 +5,7 @@
  */
 package cmd.novo.painel;
 
-import cmd.novo.Validacao;
+import cmd.Validacao.Validar;
 import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
@@ -172,7 +172,7 @@ public class PnlJuridica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cnpj_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cnpj_pnlFocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarCnpj(txt_cnpj_pnl.getText()) == false) {
             JOptionPane.showMessageDialog(null, "Verificar o CNPJ");
         }

@@ -5,6 +5,7 @@
  */
 package cmd.novo.telas;
 
+import cmd.Validacao.Validar;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
@@ -13,7 +14,6 @@ import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
-import cmd.novo.Validacao;
 import cmd.novo.cep.WebServiceCep;
 import cmd.novo.painel.PnlJuridica;
 import cmd.novo.painel.PnlFisica;
@@ -644,7 +644,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             try {
                 dataDate = formato.parse(lb_dataInscricao.getText());
             } catch (ParseException ex) {
-                Logger.getLogger(Validacao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
 
             }
 
@@ -704,7 +704,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             try {
                 dataDate = formato.parse(lb_dataInscricao.getText());
             } catch (ParseException ex) {
-                Logger.getLogger(Validacao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
 
             }
 
@@ -750,7 +750,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_CadastrarActionPerformed
 
     private void txt_cepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cepFocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
 
         if (vali.validarCep(txt_cep.getText())) {
             buscaCep(txt_cep.getText());
@@ -772,7 +772,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_cepFocusGained
 
     private void txt_numeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_numeroFocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarNumero(txt_numero.getText())) {
             return;
         }
@@ -781,7 +781,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_numeroFocusLost
 
     private void txt_tel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_tel1FocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarTelefone(txt_tel1.getText())) {
             return;
         }
@@ -789,7 +789,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_tel1FocusLost
 
     private void txt_cel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cel1FocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarTelefone(txt_cel1.getText())) {
             return;
         }
@@ -797,7 +797,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_cel1FocusLost
 
     private void txt_cel2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cel2FocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarTelefone(txt_cel2.getText())) {
             return;
         }

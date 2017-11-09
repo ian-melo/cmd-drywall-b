@@ -5,7 +5,7 @@
  */
 package cmd.novo.painel;
 
-import cmd.novo.Validacao;
+import cmd.Validacao.Validar;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -147,14 +147,14 @@ public class PnlFisica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cpf_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cpf_pnlFocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarCpf(txt_cpf_pnl.getText()) == false) {
             JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o CPF");
         }
     }//GEN-LAST:event_txt_cpf_pnlFocusLost
 
     private void txt_nome_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nome_pnlFocusLost
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarVazio(txt_nome_pnl.getText()) == true) {
             JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o nome");
         }

@@ -5,7 +5,7 @@
  */
 package cmd.novo.telas;
 
-import cmd.novo.Validacao;
+import cmd.Validacao.Validar;
 import cmd.novo.controle.CadFuncionarioControle;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -194,7 +194,7 @@ public class TFuncionario extends javax.swing.JInternalFrame {
             txt_senha_confirma.setText("");
             return;
         }
-        Validacao vali = new Validacao();
+        Validar vali = new Validar();
         if (vali.validarSenha(txt_senha.getText()) == false) {
             JOptionPane.showMessageDialog(null, "Sua senha deve estar entre 6 e 16");
             return;

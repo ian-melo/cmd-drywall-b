@@ -5,7 +5,6 @@
  */
 package cmd.testes;
 
-import cmd.novo.Validacao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
