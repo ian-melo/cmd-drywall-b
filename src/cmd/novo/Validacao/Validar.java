@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cmd.novo;
+package cmd.novo.Validacao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  *
  * @author Usuario
  */
-public class Validacao {
+public class Validar {
 
     public boolean validarVazio(String val) {
         if ("".equals(val.trim())) {
@@ -82,7 +82,7 @@ public class Validacao {
         try {
             dataDate = formato.parse(dataString);
         } catch (ParseException ex) {
-            Logger.getLogger(Validacao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         return dataDate;
