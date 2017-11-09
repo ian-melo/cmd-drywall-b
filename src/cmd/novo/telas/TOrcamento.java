@@ -13,10 +13,12 @@ import cmd.entidade.Construcao;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
+import cmd.entidade.PessoaJuridica;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,7 +46,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     public TOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
-        carregarTabelas();
+        carregarTabelaPessoaFisica();
         carregarendereco();
         getContentPane().setBackground(Color.WHITE);
     }
@@ -77,6 +79,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         lb_dataEhora = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
+        cmb_cliente = new javax.swing.JComboBox();
 
         setClosable(true);
         setTitle("Calculo do Orçamento");
@@ -180,6 +183,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         lb_valorFinal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lb_valorFinal.setText("###,##");
 
+        cmb_cliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cmb_cliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoa Fisica", "Pessoa Juridica" }));
+        cmb_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_clienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,12 +209,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lb_dataEhora)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
                                 .addComponent(btn_cadCliente))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -238,7 +252,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5)
                             .addComponent(lb_dataEhora))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -253,7 +269,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_cadastrarOrca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
@@ -289,6 +305,77 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_btn_cadastrarOrcaActionPerformed
+
+    private void cmb_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_clienteActionPerformed
+        if (cmb_cliente.getSelectedIndex() == 0) {//Pessoa Fisica
+            carregarTabelaPessoaFisica();
+        }
+        if (cmb_cliente.getSelectedIndex() == 1) {//Pessoa Juridica
+            carregarTabelaPessoaJuridica();
+        }
+    }//GEN-LAST:event_cmb_clienteActionPerformed
+    
+    
+     @SuppressWarnings("unchecked")
+    private void carregarTabelaPessoaFisica() {
+        tb_cli_fis.removeAll();
+        ClienteController dao = new ClienteController();
+        
+        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
+        
+        Vector tableHeaders = new Vector();
+        
+        
+        tableHeaders.add("CPF");
+        tableHeaders.add("Nome");
+        tableHeaders.add("Data de Nascimento");
+        //tableHeaders.add("Data da inscrição");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (PessoaFisica c : cli) 
+        {
+            reg = new Vector();
+            
+            
+            reg.add(c.getCpf());
+            reg.add(c.getNome().toString());
+            reg.add(c.getDataNascimento().toString());
+            //reg.add(c.getCliente().getDataInscricao());
+            
+            tableData.add(reg);
+        }
+         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
+    private void carregarTabelaPessoaJuridica() {
+        tb_cli_fis.removeAll();
+        ClienteController dao = new ClienteController();
+
+        List<PessoaJuridica> cli = dao.ListaPessoaJuridica();
+        
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("CNPJ");
+        tableHeaders.add("Nome");
+        tableHeaders.add("Data de fundação");
+        //tableHeaders.add("Data da inscrição");
+        
+        Vector tableData = new Vector();
+        Vector reg;
+        for (PessoaJuridica c : cli) 
+        {
+            reg = new Vector();
+            reg.add(c.getCnpj());
+            reg.add(c.getRazaoSocial());
+            reg.add(c.getDataFundacao());
+            //reg.add(c.getDataNascimento());
+            
+            tableData.add(reg);
+        }
+         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     private void carregarTabelas() {
@@ -354,6 +441,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_sair;
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JComboBox cmb_cliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
