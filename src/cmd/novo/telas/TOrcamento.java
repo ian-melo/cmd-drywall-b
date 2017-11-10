@@ -5,20 +5,20 @@
  */
 package cmd.novo.telas;
 
-import cmd.DAO.ClienteDAO;
 import cmd.DAO.EnderecoDAO;
 import cmd.controle.ClienteController;
+import cmd.controle.EnderecoController;
 import cmd.entidade.Cliente;
-import cmd.entidade.Construcao;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,9 +26,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
-    
+
     List<Item> itens;
-    
+
     GerenteDeJanelas gerenteDeJanelas;
     public static TOrcamento tCalculoOrcamento;
 
@@ -37,18 +37,22 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tCalculoOrcamento = new TOrcamento();
         }
         return tCalculoOrcamento;
-        
+
     }
-    
+
     /**
      * Creates new form TCalculoOrcamento
      */
     public TOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
+
+        getContentPane().setBackground(Color.WHITE);
+
         carregarTabelaPessoaFisica();
         carregarendereco();
-        getContentPane().setBackground(Color.WHITE);
+
+        colocaDataAtual();
     }
 
     /**
@@ -101,9 +105,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Tipo", "Nome", "Data", "Data de Inscrição"
+                "CPF", "Nome", "Data", "Data de Inscrição"
             }
         ));
+        tb_cli_fis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_cli_fisMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_cli_fis);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -220,10 +229,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
                                 .addComponent(btn_cadCliente))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
-                                .addComponent(btn_cadastrarOrca))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -236,6 +241,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                                 .addComponent(lb_valorFinal)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_sair)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_cadastrarOrca)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -256,20 +266,18 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_cadastrarOrca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
@@ -314,98 +322,89 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             carregarTabelaPessoaJuridica();
         }
     }//GEN-LAST:event_cmb_clienteActionPerformed
-    
-    
-     @SuppressWarnings("unchecked")
+
+    private void tb_cli_fisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_cli_fisMouseClicked
+        int linha;
+        if (evt.getClickCount() == 1) {
+            linha = tb_cli_fis.getSelectedRow();
+
+            
+           // String cod = (String) tb_cli_fis.getValueAt(linha, 0);
+            int cod = (Integer) tb_cli_fis.getValueAt(linha, 0);
+
+            carregarEndereco(cod);
+        }
+
+
+    }//GEN-LAST:event_tb_cli_fisMouseClicked
+
+    @SuppressWarnings("unchecked")
     private void carregarTabelaPessoaFisica() {
         tb_cli_fis.removeAll();
         ClienteController dao = new ClienteController();
-        
+
         List<PessoaFisica> cli = dao.ListaPessoaFisicas();
-        
+
         Vector tableHeaders = new Vector();
-        
-        
+        tableHeaders.add("CodCliente");
         tableHeaders.add("CPF");
         tableHeaders.add("Nome");
         tableHeaders.add("Data de Nascimento");
         //tableHeaders.add("Data da inscrição");
-        
+
         Vector tableData = new Vector();
         Vector reg;
-        for (PessoaFisica c : cli) 
-        {
+        for (PessoaFisica c : cli) {
             reg = new Vector();
-            
-            
+
+            reg.add(c.getCodCliente());
+
             reg.add(c.getCpf());
             reg.add(c.getNome().toString());
             reg.add(c.getDataNascimento().toString());
-            //reg.add(c.getCliente().getDataInscricao());
-            
+
             tableData.add(reg);
         }
-         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-    
+
     private void carregarTabelaPessoaJuridica() {
         tb_cli_fis.removeAll();
         ClienteController dao = new ClienteController();
 
         List<PessoaJuridica> cli = dao.ListaPessoaJuridica();
-        
+
         Vector tableHeaders = new Vector();
+
+        tableHeaders.add("CodCliente");
+
         tableHeaders.add("CNPJ");
-        tableHeaders.add("Nome");
+        tableHeaders.add("Razão Social");
         tableHeaders.add("Data de fundação");
         //tableHeaders.add("Data da inscrição");
-        
+
         Vector tableData = new Vector();
         Vector reg;
-        for (PessoaJuridica c : cli) 
-        {
+        for (PessoaJuridica c : cli) {
             reg = new Vector();
+
+            reg.add(c.getCodCliente());
+
             reg.add(c.getCnpj());
             reg.add(c.getRazaoSocial());
             reg.add(c.getDataFundacao());
-            //reg.add(c.getDataNascimento());
-            
+
             tableData.add(reg);
         }
-         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-    
-    
-    
+
     @SuppressWarnings("unchecked")
-    private void carregarTabelas() {
-        ClienteController dao = new ClienteController();
-        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
-        Vector tableHeaders = new Vector();
-        tableHeaders.add("Tipo");
-        tableHeaders.add("Nome");
-        tableHeaders.add("Data");
-        tableHeaders.add("Data da inscrição");
-        
-        Vector tableData = new Vector();
-        Vector reg;
-        for (PessoaFisica c : cli) 
-        {
-            reg = new Vector();
-            reg.add("Pessoa Fisica");
-            reg.add(c.getNome().toString());
-            reg.add(c.getDataNascimento().toString());
-            reg.add(c.getDataNascimento().toString());
-            tableData.add(reg);
-        }
-         tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
-    }
-    private void carregarendereco()
-    {
+    private void carregarendereco() {
         //ClienteController dao = new ClienteController();
         EnderecoDAO daos = new EnderecoDAO();
         List<Endereco> endereco = daos.listar();
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("CEP");
         tableHeaders.add("Logradouro");
@@ -415,26 +414,71 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tableHeaders.add("UF");
         Vector tableData = new Vector();
         Vector reg;
-        
-        for (Endereco c : endereco) 
-        {
+
+        for (Endereco c : endereco) {
             reg = new Vector();
-            reg.add(c.getCep().toString());
-            reg.add(c.getLogradouro().toString());
-            reg.add(c.getComplemento().toString());
-            reg.add(c.getNumero().toString());
-            reg.add(c.getComplemento().toString());
-            reg.add(c.getBairro().toString());
-            reg.add(c.getUf().toString());
+            reg.add(c.getCep());
+            reg.add(c.getLogradouro());
+            reg.add(c.getComplemento());
+            reg.add(c.getNumero());
+            reg.add(c.getComplemento());
+            reg.add(c.getBairro());
+            reg.add(c.getUf());
             tableData.add(reg);
         }
-         tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
+
+    private void carregarEndereco(int cli) {
+        //ClienteController dao = new ClienteController();
+        EnderecoDAO daos = new EnderecoDAO();
+
+        EnderecoController endC = new EnderecoController();
+        Endereco end = new Endereco();
+
+        end = endC.buscar( String.valueOf(cli));
+
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("CEP");
+        tableHeaders.add("Logradouro");
+        tableHeaders.add("Número");
+        tableHeaders.add("Complemento");
+        tableHeaders.add("Bairro");
+        tableHeaders.add("UF");
+        Vector tableData = new Vector();
+        Vector reg;
+
+        reg = new Vector();
+        reg.add(end.getCep());
+        reg.add(end.getLogradouro());
+        reg.add(end.getComplemento());
+        reg.add(end.getNumero());
+        reg.add(end.getComplemento());
+        reg.add(end.getBairro());
+        reg.add(end.getUf());
+        tableData.add(reg);
+
+        tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
+    }
+
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
     }
-    
+
+    private void colocaDataAtual() {
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            lb_dataEhora.setText(sdf.format(new Date(System.currentTimeMillis())));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
