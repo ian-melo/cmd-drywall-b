@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Pessoa Física
+ *
  * @author ian-melo
  */
 public class PessoaFisicaDAO implements DAO<PessoaFisica> {
@@ -22,8 +23,11 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
-            System.out.println("__ " + e);
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        } catch (Exception e) {
+            System.out.println("_" + e);
             return false;
         }
     }
@@ -37,9 +41,9 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -54,7 +58,11 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        } catch (Exception e) {
+            System.out.println("_" + e);
             return false;
         }
     }
@@ -66,14 +74,14 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             pf = (PessoaFisica) (s.createQuery("from PessoaFisica where CodCliente = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return pf;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
@@ -89,12 +97,12 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
     }
-    
+
 }

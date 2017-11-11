@@ -7,13 +7,13 @@ import java.util.List;
 import cmd.entidade.Cliente;
 import org.hibernate.HibernateException;
 
-
 /**
  * Classe DAO para Cliente
+ *
  * @author ian-melo
  */
 public class ClienteDAO implements DAO<Cliente> {
-    
+
     @Override
     public boolean inserir(Cliente item) {
         try {
@@ -23,7 +23,7 @@ public class ClienteDAO implements DAO<Cliente> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_cli_ " + e);
             return false;
         }
@@ -38,7 +38,7 @@ public class ClienteDAO implements DAO<Cliente> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -52,7 +52,11 @@ public class ClienteDAO implements DAO<Cliente> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        } catch (Exception e) {
+            System.out.println("_" + e);
             return false;
         }
     }
@@ -64,11 +68,15 @@ public class ClienteDAO implements DAO<Cliente> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             c = (Cliente) (s.createQuery("from Cliente where CodCliente = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return c;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return null;
+        } catch (Exception e) {
+            System.out.println("_" + e);
             return null;
         }
     }
@@ -83,7 +91,11 @@ public class ClienteDAO implements DAO<Cliente> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return null;
+        } catch (Exception e) {
+            System.out.println("_" + e);
             return null;
         }
     }

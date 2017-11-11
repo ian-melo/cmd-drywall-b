@@ -46,10 +46,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     ClienteController cliC;
 
     //PnlTelefone pTe = new PnlTelefone();
-    public static TCliente getInstancia() 
-    {
-        if (clienteT == null) 
-        {
+    public static TCliente getInstancia() {
+        if (clienteT == null) {
             clienteT = new TCliente();
         }
         return clienteT;
@@ -58,8 +56,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     /**
      * Creates new form ClienteT
      */
-    public TCliente() 
-    {
+    public TCliente() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
         pnl_escolha.setBackground(Color.WHITE);
@@ -667,6 +664,16 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
+            if (!cliC.validaCNPJ(pJur)) {
+                JOptionPane.showMessageDialog(null, "CNPJ, invalido");
+                return;
+            }
+
+            if (!cliC.verificaCNPJemBD(pJur)) {
+                JOptionPane.showMessageDialog(null, "CNPJ, já existe");
+                return;
+            }
+
             if (cliC.inserirClientePessoaJuridica(pJur) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
@@ -725,6 +732,16 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setPessoaFisica(pFis);
             cli.setTelefones(tels);
             cli.setXdead(false);
+
+            if (!cliC.validaCPF(pFis)) {
+                JOptionPane.showMessageDialog(null, "CPF, invalido");
+                return;
+            }
+
+            if (!cliC.verificaCPFemBD(pFis)) {
+                JOptionPane.showMessageDialog(null, "CPF, já existe");
+                return;
+            }
 
             if (cliC.inserirClientePessoaFisica(pFis) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");

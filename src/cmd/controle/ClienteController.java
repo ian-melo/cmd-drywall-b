@@ -9,6 +9,7 @@ import cmd.DAO.EnderecoDAO;
 import cmd.DAO.PessoaFisicaDAO;
 import cmd.DAO.PessoaJuridicaDAO;
 import cmd.DAO.TelefoneDAO;
+import cmd.Validacao.ValidaCPFeCNPJ;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
@@ -111,6 +112,48 @@ public class ClienteController {
         }
 
         return true;
+    }
+
+    public boolean verificaCPFemBD(PessoaFisica pFi) {
+        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        if (pFi == null) {
+            return false;
+        }
+
+        if (pFiDAO.buscar(pFi.getCpf()) == null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean verificaCNPJemBD(PessoaJuridica pJu) {
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        if (pJu == null) {
+            return false;
+        }
+
+        if (pJuDAO.buscar(pJu.getCnpj()) == null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean validaCPF(PessoaFisica pFi) {
+        if (pFi == null) {
+            return false;
+        }
+
+        return ValidaCPFeCNPJ.isCPF(pFi.getCpf());
+    }
+
+    public boolean validaCNPJ(PessoaJuridica pJu) {
+        if (pJu == null || "".equals(pJu.getCnpj())) {
+            return false;
+        }
+
+        return ValidaCPFeCNPJ.isCNPJ(pJu.getCnpj());
     }
 
     public List<PessoaJuridica> ListaPessoaJuridica() {
