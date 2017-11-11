@@ -41,7 +41,6 @@ public class PedidosDAO
                 e.setLargura(rs.getFloat("Largura"));
                 e.setQtd_paredes(rs.getInt("Qtd_paredes"));
                 e.setEmail(rs.getString("Email"));
-                e.setTelefone(rs.getString("Telefone"));
                 e.setValor(rs.getFloat("Valor"));
                 e.setAmbiente(rs.getString("Ambiente"));
                 e.setPossui_porta(rs.getString("Possui_porta"));

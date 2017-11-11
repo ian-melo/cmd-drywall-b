@@ -27,16 +27,6 @@ public class Pedidos
     private float largura_porta;
     private float largura_janela;
     private String mao_obra;
-    private String telefone;
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
     public int getId() {
         return Id;
     }
