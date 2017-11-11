@@ -120,7 +120,7 @@ public class ClienteController {
             return false;
         }
 
-        if (pFiDAO.buscar(pFi.getCpf()) == null) {
+        if (pFiDAO.buscarCPF(pFi.getCpf()) == null) {
             return true;
         }
 
@@ -133,7 +133,7 @@ public class ClienteController {
             return false;
         }
 
-        if (pJuDAO.buscar(pJu.getCnpj()) == null) {
+        if (pJuDAO.buscarCNPJ(pJu.getCnpj()) == null) {
             return true;
         }
 
@@ -145,15 +145,28 @@ public class ClienteController {
             return false;
         }
 
-        return ValidaCPFeCNPJ.isCPF(pFi.getCpf());
+        String cpf = pFi.getCpf();
+//Quabra a string em partes e retira a pontuação
+        cpf = cpf.substring(0, 3) + cpf.substring(4, 7)
+                + cpf.substring(8, 11) + cpf.substring(12, 14);
+
+        return ValidaCPFeCNPJ.isCPF(cpf);
     }
 
     public boolean validaCNPJ(PessoaJuridica pJu) {
         if (pJu == null || "".equals(pJu.getCnpj())) {
             return false;
         }
+        
+        
+         String cnpj = pJu.getCnpj();
 
-        return ValidaCPFeCNPJ.isCNPJ(pJu.getCnpj());
+         //Quabra a string em partes e retira a pontuação
+         cnpj = cnpj.substring(0, 2) + cnpj.substring(3, 6) + 
+                 cnpj.substring(7, 10) + cnpj.substring(11, 15) + cnpj.substring(16, 18);
+        
+        
+        return ValidaCPFeCNPJ.isCNPJ(cnpj);
     }
 
     public List<PessoaJuridica> ListaPessoaJuridica() {
