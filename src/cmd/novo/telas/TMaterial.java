@@ -23,30 +23,30 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TMaterial extends javax.swing.JInternalFrame {
-    
+
     private int linMaterial = -1, linConstrucao = -1;
     private List<Material> listaMateriais;
     private List<Construcao> listaConstrucoes;
-    
+
     private final MaterialController mControle = new MaterialController();
     private final ConstrucaoController cControle = new ConstrucaoController();
     GerenteDeJanelas gerenteDeJanelas;
     public static TMaterial materialT;
-    
+
     public static TMaterial getInstancia() {
         if (materialT == null) {
             materialT = new TMaterial();
         }
         return materialT;
     }
-    
+
     public TMaterial() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
         pnl_botoes.setBackground(Color.WHITE);
         pnl_opcao.setBackground(Color.WHITE);
         this.gerenteDeJanelas = new GerenteDeJanelas(jDesktopPane1);
-        
+
         cmb_qualidade.removeAll();
         for (int i = 0; i <= 100; i++) {
             cmb_qualidade.addItem(i);
@@ -54,7 +54,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         listarMateriais();
         listarConstrucoes();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,7 +67,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         grupRadioOpc = new javax.swing.ButtonGroup();
         txt_constanteMetro = new javax.swing.JTextField();
         txt_precoUnitario = new javax.swing.JTextField();
-        txt_tipo = new javax.swing.JTextField();
         txt_qtdMinima = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_descricao = new javax.swing.JTextArea();
@@ -111,6 +110,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_materiais = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
+        cmb_tipo = new javax.swing.JComboBox();
 
         setClosable(true);
         setTitle("Registro de Materiais");
@@ -118,8 +118,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         txt_constanteMetro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txt_precoUnitario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txt_tipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txt_qtdMinima.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -131,6 +129,11 @@ public class TMaterial extends javax.swing.JInternalFrame {
         cmb_nomeUnidade.setBackground(new java.awt.Color(153, 153, 255));
         cmb_nomeUnidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_nomeUnidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CH", "PÇ", "RL", "CX", "BD" }));
+        cmb_nomeUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_nomeUnidadeActionPerformed(evt);
+            }
+        });
 
         cmb_qualidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_qualidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -434,6 +437,15 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Procure pelo material:");
 
+        cmb_tipo.setBackground(new java.awt.Color(153, 153, 255));
+        cmb_tipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chapa", "Peça", "Rolo", "Caixa", "Balde" }));
+        cmb_tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_tipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -486,8 +498,8 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel21))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txt_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cmb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
                                                 .addComponent(jLabel15))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel8)
@@ -571,8 +583,8 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel21))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel15))
+                                    .addComponent(jLabel15)
+                                    .addComponent(cmb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
@@ -615,7 +627,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -680,45 +692,87 @@ public class TMaterial extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tb_construcoesMouseClicked
 
+    private void cmb_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoActionPerformed
+
+        if (cmb_tipo.getSelectedIndex() == 0) {
+            cmb_nomeUnidade.setSelectedIndex(0);
+        }
+        if (cmb_tipo.getSelectedIndex() == 1) {
+            cmb_nomeUnidade.setSelectedIndex(1);
+        }
+        if (cmb_tipo.getSelectedIndex() == 2) {
+            cmb_nomeUnidade.setSelectedIndex(2);
+        }
+        if (cmb_tipo.getSelectedIndex() == 3) {
+            cmb_nomeUnidade.setSelectedIndex(3);
+        }
+        if (cmb_tipo.getSelectedIndex() == 4) {
+            cmb_nomeUnidade.setSelectedIndex(4);
+        }
+    }//GEN-LAST:event_cmb_tipoActionPerformed
+
+    private void cmb_nomeUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_nomeUnidadeActionPerformed
+        if (cmb_nomeUnidade.getSelectedIndex() == 0) {
+            cmb_tipo.setSelectedIndex(0);
+        }
+        if (cmb_nomeUnidade.getSelectedIndex() == 1) {
+            cmb_tipo.setSelectedIndex(1);
+        }
+        if (cmb_nomeUnidade.getSelectedIndex() == 2) {
+            cmb_tipo.setSelectedIndex(2);
+        }
+        if (cmb_nomeUnidade.getSelectedIndex() == 3) {
+            cmb_tipo.setSelectedIndex(3);
+        }
+        if (cmb_nomeUnidade.getSelectedIndex() == 4) {
+            cmb_tipo.setSelectedIndex(4);
+        }
+    }//GEN-LAST:event_cmb_nomeUnidadeActionPerformed
+
     private void carregarCampos() {
-        if(linMaterial < 0)
+        if (linMaterial < 0) {
             return;
-        
-        txt_tipo.setText(tb_materiais.getModel().getValueAt(linMaterial, 2).toString());
+        }
+
+        cmb_tipo.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 2).toString());
         txt_descricao.setText(tb_materiais.getModel().getValueAt(linMaterial, 3).toString());
         cmb_nomeUnidade.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 4).toString());
         cmb_qualidade.setSelectedItem((tb_materiais.getModel().getValueAt(linMaterial, 5).toString()));
-        if (tb_materiais.getModel().getValueAt(linMaterial, 6).toString().equals("Sim"))
-            rd_sim.setSelected(true); else rd_nao.setSelected(false);
+        if (tb_materiais.getModel().getValueAt(linMaterial, 6).toString().equals("Sim")) {
+            rd_sim.setSelected(true);
+        } else {
+            rd_nao.setSelected(false);
+        }
         txt_constanteMetro.setText(tb_materiais.getModel().getValueAt(linMaterial, 7).toString());
         txt_precoUnitario.setText(tb_materiais.getModel().getValueAt(linMaterial, 8).toString());
         txt_qtdMinima.setText(tb_materiais.getModel().getValueAt(linMaterial, 9).toString());
-        
-        for(int i=0; i<tb_construcoes.getModel().getRowCount();i++) {
-            if(Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 0).toString()) ==
-                    Integer.parseInt(tb_construcoes.getModel().getValueAt(i, 0).toString())) {
+
+        for (int i = 0; i < tb_construcoes.getModel().getRowCount(); i++) {
+            if (Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 0).toString())
+                    == Integer.parseInt(tb_construcoes.getModel().getValueAt(i, 0).toString())) {
                 tb_construcoes.setRowSelectionInterval(i, i);
                 linConstrucao = i;
                 break;
             }
         }
     }
-    
+
     private void alterar() {
         if (!camposValidados()) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para alterar.");
             return;
         }
-        if(linMaterial < 0) {
+        if (linMaterial < 0) {
             JOptionPane.showMessageDialog(rootPane, "Selecione o item da tabela para alterar.");
             return;
         }
-        
+
         Material m = new Material();
         Construcao c = new Construcao();
         try {
             m.setCodMaterial(Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 1).toString()));
-            m.setTipo(txt_tipo.getText());
+            m.setTipo((String) cmb_tipo.getSelectedItem());
+            //m.setTipo(txt_tipo.getText());
             m.setDescricao(txt_descricao.getText());
             m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
             m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
@@ -732,26 +786,27 @@ public class TMaterial extends javax.swing.JInternalFrame {
             m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
             m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
             mControle.alterarMaterial(m);
-        } catch(Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
             return;
         }
-        
+
         limparCampos();
         listarMateriais();
         listarConstrucoes();
     }
-    
+
     private void cadastrar() {
         if (!camposValidados()) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
             return;
         }
-        
+
         Material m = new Material();
         Construcao c = new Construcao();
         try {
-            m.setTipo(txt_tipo.getText());
+            m.setTipo((String) cmb_tipo.getSelectedItem());
+            //m.setTipo(txt_tipo.getText());
             m.setDescricao(txt_descricao.getText());
             m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
             m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
@@ -765,38 +820,40 @@ public class TMaterial extends javax.swing.JInternalFrame {
             m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
             m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
             mControle.inserirMaterial(m);
-        } catch(Exception e) {
+        } catch (Exception e) {
+            System.out.println("_" + e);
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
             return;
         }
-        
+
         limparCampos();
         listarMateriais();
         listarConstrucoes();
     }
-    
+
     @SuppressWarnings("unchecked")
     private void listarConstrucoes() {
         listaConstrucoes = cControle.listarConstrucoes();
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. constr.");
         tableHeaders.add("Tipo constr.");
         tableHeaders.add("Descrição");
         tableHeaders.add("Detalhes");
         tableHeaders.add("Qualidade");
-        
+
         Vector tableData = new Vector();
         Vector reg;
         for (Construcao c : listaConstrucoes) {
             reg = new Vector();
             reg.add(c.getCodConstrucao().toString());
-            if(c.getParede() != null && c.getForro() == null)
+            if (c.getParede() != null && c.getForro() == null) {
                 reg.add("Parede");
-            else if(c.getParede() == null && c.getForro() != null)
+            } else if (c.getParede() == null && c.getForro() != null) {
                 reg.add("Forro");
-            else
+            } else {
                 reg.add("Desconhecido");
+            }
             reg.add(c.getDescricao());
             reg.add(c.getDetalhes());
             reg.add(c.getQualidade().toString());
@@ -804,11 +861,11 @@ public class TMaterial extends javax.swing.JInternalFrame {
         }
         tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-    
+
     @SuppressWarnings("unchecked")
     private void listarMateriais() {
         listaMateriais = mControle.listarMateriais();
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. constr.");
         tableHeaders.add("Cód. material");
@@ -820,7 +877,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
         tableHeaders.add("Const. metro");
         tableHeaders.add("Preço unit.");
         tableHeaders.add("Qtde. min.");
-        
+
         Vector tableData = new Vector();
         Vector reg;
         for (Material m : listaMateriais) {
@@ -831,7 +888,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
             reg.add(m.getDescricao());
             reg.add(m.getNomeUnidade());
             reg.add(m.getQualidade().toString());
-            reg.add((m.getEhOpcional()? "Sim":"Não"));
+            reg.add((m.getEhOpcional() ? "Sim" : "Não"));
             reg.add(m.getConstanteMetro().toString());
             reg.add(m.getPrecoUnitario().toString());
             reg.add(m.getQuantidadeMinima().toString());
@@ -839,13 +896,13 @@ public class TMaterial extends javax.swing.JInternalFrame {
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-    
+
     private boolean camposValidados() {
         return (!(txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
-                || txt_tipo.getText().isEmpty() || txt_constanteMetro.getText().isEmpty()
-                || txt_descricao.getText().isEmpty() || linConstrucao < 0));
+                || txt_constanteMetro.getText().isEmpty() || txt_descricao.getText().isEmpty()
+                || linConstrucao < 0));
     }
-    
+
     private void limparCampos() {
         tb_materiais.clearSelection();
         tb_construcoes.clearSelection();
@@ -858,25 +915,27 @@ public class TMaterial extends javax.swing.JInternalFrame {
         txt_precoUnitario.setText("");
         txt_qtdMinima.setText("");
         txt_constanteMetro.setText("");
-        txt_tipo.setText("");
+        cmb_tipo.setSelectedIndex(0);
+        //txt_tipo.setText("");
         habilitarBotoes(false);
     }
-    
+
     private void habilitarBotoes(boolean val) {
         bt_alterar.setEnabled(val);
     }
-    
+
     private void janelaAviso() {
         TAviso tAvi = new TAviso(null, true);
         tAvi.setVisible(true);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_alterar;
     private javax.swing.JButton bt_cadastrar;
     private javax.swing.JButton bt_sair;
     private javax.swing.JComboBox cmb_nomeUnidade;
     private javax.swing.JComboBox cmb_qualidade;
+    private javax.swing.JComboBox cmb_tipo;
     private javax.swing.ButtonGroup grupRadioOpc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -918,7 +977,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txt_descricao;
     private javax.swing.JTextField txt_precoUnitario;
     private javax.swing.JTextField txt_qtdMinima;
-    private javax.swing.JTextField txt_tipo;
     // End of variables declaration//GEN-END:variables
-    
+
 }
