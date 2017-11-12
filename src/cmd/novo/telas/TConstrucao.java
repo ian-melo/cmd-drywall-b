@@ -12,6 +12,7 @@ import cmd.entidade.Parede;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -77,6 +78,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         txt_id = new javax.swing.JTextField();
         btn_procurar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        btn_buscar = new javax.swing.JButton();
         txt_descricao = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_detalhes = new javax.swing.JTextArea();
@@ -132,7 +134,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         txt_id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btn_procurar.setBackground(new java.awt.Color(153, 153, 255));
-        btn_procurar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_procurar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_procurar.setText("Procurar construção");
         btn_procurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +154,15 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_buscar.setBackground(new java.awt.Color(153, 153, 255));
+        btn_buscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_buscar.setText("Buscar");
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_encontraLayout = new javax.swing.GroupLayout(pnl_encontra);
         pnl_encontra.setLayout(pnl_encontraLayout);
         pnl_encontraLayout.setHorizontalGroup(
@@ -162,9 +173,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                 .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_buscar)
+                .addGap(23, 23, 23)
                 .addComponent(btn_procurar)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
         pnl_encontraLayout.setVerticalGroup(
             pnl_encontraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +187,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_procurar)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(btn_buscar))
                 .addContainerGap())
         );
 
@@ -432,8 +446,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                                         .addComponent(pnl_protecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(8, 8, 8)
-                                        .addComponent(pn_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(68, 68, 68)
+                                        .addComponent(pn_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(107, 107, 107)
+                                        .addComponent(txt_montante, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(63, 63, 63)
                                 .addComponent(img_construcao, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(12, 12, 12))
@@ -449,13 +466,12 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                         .addComponent(btn_sair)
                         .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_montante)
-                                    .addComponent(txt_alturaLim, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)))
+                                .addComponent(txt_alturaLim)
+                                .addGap(370, 370, 370))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -489,9 +505,9 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnl_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(pnl_protecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -524,65 +540,18 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chk_stActionPerformed
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
-        if ("".equals(txt_id.getText())) 
-        {
-            JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
-            try 
-            {
-                gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-            } 
-            catch (IllegalArgumentException e) 
-            {
-                gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-                //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-            }
-            //Este return impede de proceguir
-            return;
-        }
 
-//Retorna, caso o campo esteja inválido ou não foi encontrado construção
-        if (!validarCodigo()) 
-        {
-            return;
+        JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
+        try {
+            gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
+        } catch (IllegalArgumentException e) {
+            gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
+            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
         }
-        //Criação dos objetos
-        Construcao co = null;
-        Forro fo;
-        Parede pa;
-        //Busca da construção
-        controle = new ConstrucaoController();
+        //Este return impede de proceguir
+        return;
 
-        pa = controle.buscarParede(txt_id.getText());
-        fo = controle.buscarForro(txt_id.getText());
-        //Caso forro
-        if (fo != null) 
-        {
-            chk_rf.setSelected(fo.getEhRf());
-            chk_ru.setSelected(fo.getEhRu());
-            chk_st.setSelected(fo.getEhSt());
-            co = fo.getConstrucao();
-            //Caso parede
-        } 
-        else if (pa != null) 
-        {
-            txt_montante.setText(pa.getMontante().toString());
-            txt_alturaLim.setText(pa.getAlturaLimite().toString());
-            chk_rf.setSelected(pa.getEhRf());
-            chk_ru.setSelected(pa.getEhRu());
-            chk_st.setSelected(pa.getEhSt());
-            co = pa.getConstrucao();
-        }
-        //Construção
-        if (co != null) 
-        {
-            co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
-            txt_descricao.setText(co.getDescricao());
-            txt_detalhes.setText(co.getDetalhes());
-            cmb_qualidade.setSelectedItem(co.getQualidade().toString());
 
-        }
-        //Habilita exclusão e alteração
-        habilitarAlteravel(true);
     }//GEN-LAST:event_btn_procurarActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -647,6 +616,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         resetarCampos();
+
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
@@ -840,6 +810,51 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         txt_montante.setEnabled(false);
         txt_alturaLim.setEnabled(false);
     }//GEN-LAST:event_op_forroActionPerformed
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        //Retorna, caso o campo esteja inválido ou não foi encontrado construção
+        if (!validarCodigo()) {
+            return;
+        }
+        //Criação dos objetos
+        Construcao co = null;
+        Forro fo;
+        Parede pa;
+
+        //Busca da construção
+        controle = new ConstrucaoController();
+        pa = controle.buscarParede(txt_id.getText());
+
+        controle = new ConstrucaoController();
+        fo = controle.buscarForro(txt_id.getText());
+        //Caso forro
+        if (fo != null) {
+            chk_rf.setSelected(fo.getEhRf());
+            chk_ru.setSelected(fo.getEhRu());
+            chk_st.setSelected(fo.getEhSt());
+            co = fo.getConstrucao();
+            //Caso parede
+        } else if (pa != null) {
+            txt_montante.setText(pa.getMontante().toString());
+            txt_alturaLim.setText(pa.getAlturaLimite().toString());
+            chk_rf.setSelected(pa.getEhRf());
+            chk_ru.setSelected(pa.getEhRu());
+            chk_st.setSelected(pa.getEhSt());
+            co = pa.getConstrucao();
+        }
+        //Construção
+        if (co != null) {
+            co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
+            txt_descricao.setText(co.getDescricao());
+            txt_detalhes.setText(co.getDetalhes());
+            cmb_qualidade.setSelectedItem(co.getQualidade().toString());
+
+        }
+        //Habilita exclusão e alteração
+        habilitarAlteravel(false);
+        txt_id.setEditable(false);
+        MudaBotao(true);
+    }//GEN-LAST:event_btn_buscarActionPerformed
     /**
      * Retorna os campos e botões aos respectivos estados iniciais
      */
@@ -856,7 +871,14 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         op_parede.setSelected(false);
         op_forro.setSelected(false);
         habilitarParede(false);
+        txt_id.setEditable(true);
+        MudaBotao(false);
         //habilitarAlteravel(false);//Tem q habilitar em outro local
+    }
+
+    private void MudaBotao(boolean val) {
+        btn_alterar.setEnabled(val);
+        btn_excluir.setEnabled(val);
     }
 
     /**
@@ -946,28 +968,27 @@ public class TConstrucao extends javax.swing.JInternalFrame {
      *
      * @return
      */
-    private boolean validarCodigo() 
-    {
-        Forro fo;
-        Parede pa;
-        if (txt_id.getText().equals("")) 
-        {
+    private boolean validarCodigo() {
+        Forro fo = new Forro();
+        Parede pa = new Parede();
+        if (txt_id.getText().equals("")) {
             exibirAlerta("Preencha o ID construção.");
             return false;
         }
-        try 
-        {
+        try {
             Integer.parseInt(txt_id.getText());
-        } 
-        catch (NumberFormatException ex) 
-        {
+        } catch (NumberFormatException ex) {
             exibirAlerta("Preencha o ID da construção corretamente.\n Use somente números.");
             return false;
         }
+
+        controle = new ConstrucaoController();
         fo = controle.buscarForro(txt_id.getText());
+
+        controle = new ConstrucaoController();
         pa = controle.buscarParede(txt_id.getText());
-        if (fo == null && pa == null) 
-        {
+
+        if (fo == null && pa == null) {
             exibirAlerta("Construção não encontrada.\n ID de busca: " + txt_id.getText());
             return false;
         }
@@ -1042,6 +1063,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroup_tipoConstrucao;
     private javax.swing.JButton btn_alterar;
+    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_excluir;
     private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_procurar;

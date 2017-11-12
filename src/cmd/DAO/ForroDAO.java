@@ -4,6 +4,7 @@ package cmd.DAO;
 import cmd.entidade.Forro;
 import cmd.util.HibernateUtil;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -70,10 +71,10 @@ public class ForroDAO implements DAO<Forro> {
             s.close();
             return f;
         } catch(HibernateException e) {
-            System.out.println("_1_" + e);
+            System.out.println("_" + e);
             return null;
         }catch(Exception ex){
-            System.out.println("_2_" + ex);
+            System.out.println("_" + ex);
             return null;
         }
     }

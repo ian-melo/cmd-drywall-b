@@ -8,7 +8,9 @@ import cmd.DAO.ParedeDAO;
 import cmd.entidade.Construcao;
 import cmd.entidade.Forro;
 import cmd.entidade.Parede;
+import static cmd.novo.telas.TConstrucao.txt_id;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * Classe de controle para CRUD de construção
@@ -83,6 +85,7 @@ public class ConstrucaoController {
      */
     public Forro buscarForro(String codigo) {
         //Verifica se o dado existe
+        
         if(codigo.equals(""))
             return null;
         try {
@@ -181,6 +184,7 @@ public class ConstrucaoController {
         } catch(NumberFormatException ex) {
             return null;
         }
+        
         //Processo de execução das DAOs
         Construcao c;
         Parede p;
