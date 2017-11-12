@@ -266,7 +266,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -450,7 +450,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         reg = new Vector();
         reg.add(end.getCep());
         reg.add(end.getLogradouro());
-        reg.add(end.getComplemento());
         reg.add(end.getNumero());
         reg.add(end.getComplemento());
         reg.add(end.getBairro());

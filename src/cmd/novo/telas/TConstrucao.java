@@ -524,11 +524,15 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chk_stActionPerformed
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
-        if ("".equals(txt_id.getText())) {
+        if ("".equals(txt_id.getText())) 
+        {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
-            try {
+            try 
+            {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-            } catch (IllegalArgumentException e) {
+            } 
+            catch (IllegalArgumentException e) 
+            {
                 gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
                 //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
             }
@@ -537,7 +541,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         }
 
 //Retorna, caso o campo esteja inválido ou não foi encontrado construção
-        if (!validarCodigo()) {
+        if (!validarCodigo()) 
+        {
             return;
         }
         //Criação dos objetos
@@ -550,13 +555,16 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         pa = controle.buscarParede(txt_id.getText());
         fo = controle.buscarForro(txt_id.getText());
         //Caso forro
-        if (fo != null) {
+        if (fo != null) 
+        {
             chk_rf.setSelected(fo.getEhRf());
             chk_ru.setSelected(fo.getEhRu());
             chk_st.setSelected(fo.getEhSt());
             co = fo.getConstrucao();
             //Caso parede
-        } else if (pa != null) {
+        } 
+        else if (pa != null) 
+        {
             txt_montante.setText(pa.getMontante().toString());
             txt_alturaLim.setText(pa.getAlturaLimite().toString());
             chk_rf.setSelected(pa.getEhRf());
@@ -565,7 +573,8 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             co = pa.getConstrucao();
         }
         //Construção
-        if (co != null) {
+        if (co != null) 
+        {
             co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
             txt_descricao.setText(co.getDescricao());
             txt_detalhes.setText(co.getDetalhes());
@@ -937,23 +946,29 @@ public class TConstrucao extends javax.swing.JInternalFrame {
      *
      * @return
      */
-    private boolean validarCodigo() {
+    private boolean validarCodigo() 
+    {
         Forro fo;
         Parede pa;
-        if (txt_id.getText().equals("")) {
+        if (txt_id.getText().equals("")) 
+        {
             exibirAlerta("Preencha o ID construção.");
             return false;
         }
-        try {
+        try 
+        {
             Integer.parseInt(txt_id.getText());
-        } catch (NumberFormatException ex) {
-            exibirAlerta("Preencha o ID da construção corretamente.\nUse somente números.");
+        } 
+        catch (NumberFormatException ex) 
+        {
+            exibirAlerta("Preencha o ID da construção corretamente.\n Use somente números.");
             return false;
         }
         fo = controle.buscarForro(txt_id.getText());
         pa = controle.buscarParede(txt_id.getText());
-        if (fo == null && pa == null) {
-            exibirAlerta("Construção não encontrada.\nID de busca: " + txt_id.getText());
+        if (fo == null && pa == null) 
+        {
+            exibirAlerta("Construção não encontrada.\n ID de busca: " + txt_id.getText());
             return false;
         }
         return true;
