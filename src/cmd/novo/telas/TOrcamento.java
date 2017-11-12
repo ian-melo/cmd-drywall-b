@@ -419,7 +419,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             reg = new Vector();
             reg.add(c.getCep());
             reg.add(c.getLogradouro());
-            reg.add(c.getComplemento());
             reg.add(c.getNumero());
             reg.add(c.getComplemento());
             reg.add(c.getBairro());
