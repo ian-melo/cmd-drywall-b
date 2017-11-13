@@ -17,6 +17,8 @@ import javax.swing.ImageIcon;
  */
 public class TPrincipal extends javax.swing.JFrame {
 
+    TCarregamento tCar = new TCarregamento(null, true);
+
     GerenteDeJanelas gerenteDeJanelas;
 
     /**
@@ -210,77 +212,162 @@ public class TPrincipal extends javax.swing.JFrame {
 //       TFuncionario fT = new TFuncionario();
 //        jDesktopPane1.add(fT);
 //        fT.setVisible(true);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        try {
-            gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+                try {
+                    gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+                }
 
-        }
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadFuncionariosActionPerformed
 
     private void btn_solicitacaoOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_solicitacaoOrcamentoActionPerformed
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        try {
-            gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+                try {
+                    gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
 
-        }
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_solicitacaoOrcamentoActionPerformed
 
     private void btn_cadMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadMateriaisActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        }
+                try {
+                    gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+
+                }
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
+
     }//GEN-LAST:event_btn_cadMateriaisActionPerformed
 
     private void btn_calOrcamentoPrjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calOrcamentoPrjActionPerformed
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        try {
-            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+                try {
+                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
 
-        }
+                }
+
+                janelaCarregamentoFecha();
+                
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
+        //t.isAlive();
     }//GEN-LAST:event_btn_calOrcamentoPrjActionPerformed
 
     private void btn_cadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadClientesActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        }
+                try {
+                    gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadClientesActionPerformed
 
     private void btn_relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_relatoriosActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        }
+                try {
+                    gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_relatoriosActionPerformed
 
     private void btn_cadConstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadConstrucaoActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
 
-        }
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+
+                try {
+                    gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadConstrucaoActionPerformed
+    private void janelaCarregamentoAbre() {
+
+        tCar.setVisible(true);
+    }
+
+    private void janelaCarregamentoFecha() {
+
+        tCar.setVisible(false);
+    }
 
     /**
      * @param args the command line arguments
