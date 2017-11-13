@@ -837,12 +837,16 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         fo = controle.buscarForro(txt_id.getText());
         //Caso forro
         if (fo != null) {
+            op_forro.setSelected(true);
+            habilitarParede(false);
             chk_rf.setSelected(fo.getEhRf());
             chk_ru.setSelected(fo.getEhRu());
             chk_st.setSelected(fo.getEhSt());
             co = fo.getConstrucao();
             //Caso parede
         } else if (pa != null) {
+            op_parede.setSelected(true);
+            habilitarParede(true);
             txt_montante.setText(pa.getMontante().toString());
             txt_alturaLim.setText(pa.getAlturaLimite().toString());
             chk_rf.setSelected(pa.getEhRf());

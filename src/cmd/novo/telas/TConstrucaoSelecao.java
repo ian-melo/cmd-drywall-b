@@ -6,18 +6,11 @@
 package cmd.novo.telas;
 
 import cmd.DAO.ConstrucaoDAO;
-import cmd.DAO.ParedeDAO;
-import cmd.controle.ClienteController;
 import cmd.controle.ConstrucaoController;
-import cmd.entidade.Construcao;
 import cmd.entidade.Forro;
 import cmd.entidade.Parede;
-import cmd.entidade.PessoaFisica;
-import cmd.entidade.PessoaJuridica;
 import java.awt.Color;
-import java.util.List;
 import java.util.Vector;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,7 +41,7 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         panel_forro.setBackground(Color.WHITE);
         panel_parede.setBackground(Color.WHITE);
 
-        preencheAmbasTabelas();
+        //preencheAmbasTabelas();//Colocado no evento: formInternalFrameActivated
     }
 
     /**
@@ -79,9 +72,9 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         setTitle("Selecione o tipo");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -266,10 +259,6 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formInternalFrameClosed
-
     private void tb_construcaoParedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcaoParedeMouseClicked
         int linha;
         if (evt.getClickCount() == 1) {
@@ -289,6 +278,10 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_tb_construcaoForroMouseClicked
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        preencheAmbasTabelas();
+    }//GEN-LAST:event_formInternalFrameActivated
 
     private void preencheTeste() {
 
