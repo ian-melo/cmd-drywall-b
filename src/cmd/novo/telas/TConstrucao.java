@@ -12,8 +12,6 @@ import cmd.entidade.Parede;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +19,8 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class TConstrucao extends javax.swing.JInternalFrame {
+
+    TCarregamento tCar = new TCarregamento(null, true);
 
     GerenteDeJanelas gerenteDeJanelas;
 
@@ -550,14 +550,23 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
 
         JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
-        try {
-            gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-        }
-        //Este return impede de proceguir
-        return;
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+
+                try {
+                    gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
 
 
     }//GEN-LAST:event_btn_procurarActionPerformed
@@ -855,8 +864,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             co = pa.getConstrucao();
         }
         //Construção
-        if (co != null) 
-        {
+        if (co != null) {
             co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
             txt_descricao.setText(co.getDescricao());
             txt_detalhes.setText(co.getDetalhes());
@@ -871,8 +879,17 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void cmb_qualidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_qualidadeActionPerformed
-        
+
     }//GEN-LAST:event_cmb_qualidadeActionPerformed
+
+    private void janelaCarregamentoAbre() {
+        tCar.setVisible(true);
+    }
+
+    private void janelaCarregamentoFecha() {
+        tCar.setVisible(false);
+    }
+
     /**
      * Retorna os campos e botões aos respectivos estados iniciais
      */

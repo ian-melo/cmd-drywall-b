@@ -5,10 +5,11 @@
  */
 package cmd.novo.telas;
 
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -17,6 +18,11 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Usuario
  */
 public class TCarregamento extends javax.swing.JDialog {
+
+    private Timer timer;
+    private int porcentagem;
+
+    private TCarregamento tCa = this;
 
     /**
      * Creates new form NewJDialog Aviso padrão de quando for necessario
@@ -44,6 +50,11 @@ public class TCarregamento extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         pn_barraProgresso.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -88,6 +99,30 @@ public class TCarregamento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //Se caso haja algum problema esta tela se fecha sozinha 
+        //Para fecla-la aperte ALT+F4
+
+        porcentagem = 0;
+
+        //480 - 80
+        //240 - 40 segundos aproximadamente
+        //120 - 20
+        // 60 - 10
+        timer = new Timer(240, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                porcentagem++;
+
+                if (porcentagem >= 100) {
+                    tCa.dispose();//Fecha proprio objeto
+                    timer.stop();
+                }
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -100,8 +135,8 @@ public class TCarregamento extends javax.swing.JDialog {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("null".equals(info.getName())) {
-                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                   // javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    // javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -131,7 +166,7 @@ public class TCarregamento extends javax.swing.JDialog {
 
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                            
+
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(TCarregamento.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {

@@ -8,7 +8,6 @@ package cmd.novo.telas;
 import cmd.DAO.EnderecoDAO;
 import cmd.controle.ClienteController;
 import cmd.controle.EnderecoController;
-import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
@@ -27,6 +26,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
 
+    TCarregamento tCar = new TCarregamento(null, true);
+    
     List<Item> itens;
 
     GerenteDeJanelas gerenteDeJanelas;
@@ -305,13 +306,24 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cadClienteActionPerformed
 
     private void btn_cadastrarOrcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarOrcaActionPerformed
-        try {
-            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
-        } catch (IllegalArgumentException e) {
-            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        Thread t = new Thread() {
+            @Override
+            public void run() {
 
-        }
+                try {
+                    gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
+                } catch (IllegalArgumentException e) {
+                    gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
+                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+
+                }
+
+                janelaCarregamentoFecha();
+            }
+        };
+
+        t.start();
+        janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadastrarOrcaActionPerformed
 
     private void cmb_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_clienteActionPerformed
@@ -328,8 +340,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1) {
             linha = tb_cli_fis.getSelectedRow();
 
-            
-           // String cod = (String) tb_cli_fis.getValueAt(linha, 0);
+            // String cod = (String) tb_cli_fis.getValueAt(linha, 0);
             int cod = (Integer) tb_cli_fis.getValueAt(linha, 0);
 
             carregarEndereco(cod);
@@ -337,6 +348,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_tb_cli_fisMouseClicked
+    private void janelaCarregamentoAbre() {
+        tCar.setVisible(true);
+    }
+
+    private void janelaCarregamentoFecha() {
+        tCar.setVisible(false);
+    }
 
     @SuppressWarnings("unchecked")
     private void carregarTabelaPessoaFisica() {
@@ -435,7 +453,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         EnderecoController endC = new EnderecoController();
         Endereco end = new Endereco();
 
-        end = endC.buscar( String.valueOf(cli));
+        end = endC.buscar(String.valueOf(cli));
 
         Vector tableHeaders = new Vector();
         tableHeaders.add("CEP");

@@ -9,7 +9,6 @@ import cmd.Validacao.Validar;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
-import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
