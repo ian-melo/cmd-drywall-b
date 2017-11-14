@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class TOrcamento extends javax.swing.JInternalFrame {
 
     TCarregamento tCar = new TCarregamento(null, true);
-    
+
     List<Item> itens;
 
     GerenteDeJanelas gerenteDeJanelas;
@@ -480,6 +480,34 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
+        // li.get(0).get
+
+        tb_materialConstrucaoTipologia.removeAll();
+
+        //List<PessoaFisica> cli = dao.ListaPessoaFisicas();
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Detalhes");
+        tableHeaders.add("Qualidade");
+        tableHeaders.add("Valor");
+        //tableHeaders.add("Data da inscrição");
+
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Item iTem : itens) {
+            reg = new Vector();
+
+            reg.add(iTem.getConstrucao().getDescricao());
+            reg.add(iTem.getConstrucao().getDetalhes());
+
+            reg.add(iTem.getConstrucao().getQualidade());
+
+            reg.add(iTem.getPrecoTotal());
+
+            tableData.add(reg);
+        }
+        tb_materialConstrucaoTipologia.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
 
     private void colocaDataAtual() {
