@@ -1041,3 +1041,4 @@ INSERT INTO `usuarios` (`Id`, `Nome`, `Email`, `Senha`) VALUES
 
 ALTER TABLE `usuarios`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  
