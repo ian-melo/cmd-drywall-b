@@ -2,13 +2,17 @@
 package cmd.novo.telas;
 
 import cmd.controle.CalculoController;
+import cmd.controle.ConstrucaoController;
+import cmd.controle.MaterialController;
 import cmd.entidade.Construcao;
 import cmd.entidade.Item;
 import cmd.entidade.Material;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -447,15 +451,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
         tb_itens.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_itens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+                "Cód. construção", "Tipo construção", "Altura (m)", "Largura (m)", "Área da porta (m²)", "Área da janela (m²)", "Preço total"
             }
         ));
+        tb_itens.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_itensMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tb_itens);
 
         btn_conRemover.setBackground(new java.awt.Color(153, 153, 255));
@@ -603,7 +612,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1 &&
                 tb_construcoes.getModel().getValueAt(tb_construcoes.getSelectedRow(),0) != null) {
             linConstrucao = tb_construcoes.getSelectedRow();
-            carregarMateriais();
+            listarMateriais();
         }
     }//GEN-LAST:event_tb_construcoesMouseClicked
 
@@ -613,6 +622,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
             linMaterial = tb_materiais.getSelectedRows();
         }
     }//GEN-LAST:event_tb_materiaisMouseClicked
+
+    private void tb_itensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_itensMouseClicked
+        if (evt.getClickCount() == 1 &&
+                tb_itens.getModel().getValueAt(tb_itens.getSelectedRow(),0) != null) {
+            linItem = tb_itens.getSelectedRow();
+        }
+    }//GEN-LAST:event_tb_itensMouseClicked
     
     private void verificar() {
         if(!validarCampos())
@@ -626,7 +642,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
         
         habilitarCampos(false);
-        carregarConstrucoes();
+        listarConstrucoes();
     }
     
     private void finalizar() {
@@ -648,38 +664,128 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private void adicionar() {
         if(linConstrucao < 0)
             return;
-        
-        Construcao c = null;
-        List<Material> mOp = null;
-        //TODO materiais opcionais e construção
-        
-        
+        //Vars
+        ConstrucaoController contc = new ConstrucaoController();
+        MaterialController contm = new MaterialController();
+        List<Material> mOp = new ArrayList<>();
+        Construcao c;
+        Item it;
+        //Construção
+        c = listaConstrucoes.get(linConstrucao);
+        //Materiais adicionais
+        for(int i : linMaterial) {
+            for (Object o : c.getMaterials()) {
+                if(((Material)o).getEhOpcional() &&
+                        ((Material)o).getCodMaterial() == Integer.parseInt((String)tb_materiais.getModel().getValueAt(i, 0))) {
+                    mOp.add((Material)o);
+                    break;
+                }
+            }
+        }
+        //Adição    
         if(listaItens == null)
-            listaItens = new ArrayList<Item>();
-        listaItens.add(cControle.definirItem(
+            listaItens = new ArrayList<>();
+        it = cControle.definirItem(
                 Double.parseDouble(txt_altura.getText()),
                 Double.parseDouble(txt_largura.getText()),
                 Double.parseDouble(txt_porta.getText()),
-                Double.parseDouble(txt_janela.getText()), c, mOp));
+                Double.parseDouble(txt_janela.getText()), c, mOp);
+        listaItens.add(it);
+        listarItens();
     }
     
     private void remover() {
         if(linItem < 0)
             return;
         
-        
+        listaItens.remove(linItem);
+        listarItens();
     }
     
-    private void carregarConstrucoes() {
+    private void listarConstrucoes() {
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. constr.");
+        tableHeaders.add("Tipo constr.");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Detalhes");
+        tableHeaders.add("Qualidade");
         
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Construcao c : listaConstrucoes) {
+            reg = new Vector();
+            reg.add(c.getCodConstrucao().toString());
+            if(c.getParede() != null && c.getForro() == null)
+                reg.add("Parede");
+            else if(c.getParede() == null && c.getForro() != null)
+                reg.add("Forro");
+            else
+                reg.add("Desconhecido");
+            reg.add(c.getDescricao());
+            reg.add(c.getDetalhes());
+            reg.add(c.getQualidade().toString());
+            tableData.add(reg);
+        }
+        tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
-    private void carregarMateriais() {
+    private void listarMateriais() {
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. material");
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Const. metro");
+        tableHeaders.add("Preço unit.");
+        tableHeaders.add("Qtde. min.");
         
+        Vector tableData = new Vector();
+        Vector reg;
+        Material m;
+        for (Object o : listaConstrucoes.get(linConstrucao).getMaterials()) {
+            m = (Material) o;
+            if(m.getEhOpcional()) {
+                reg = new Vector();
+                reg.add(m.getCodMaterial());
+                reg.add(m.getTipo());
+                reg.add(m.getDescricao());
+                reg.add(m.getConstanteMetro());
+                reg.add(m.getPrecoUnitario());
+                reg.add(m.getQuantidadeMinima());
+                tableData.add(reg);
+            }
+        }
+        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
-    private void carregarItens() {
+    private void listarItens() {
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. construção");
+        tableHeaders.add("Tipo construção");
+        tableHeaders.add("Altura (m)");
+        tableHeaders.add("Largura (m)");
+        tableHeaders.add("Área da porta (m²)");
+        tableHeaders.add("Área da janela (m²)");
+        tableHeaders.add("Preço total");
         
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Item it : listaItens) {
+            reg = new Vector();
+            reg.add(it.getConstrucao().getCodConstrucao());
+            if(it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null)
+                reg.add("Parede");
+            else if(it.getConstrucao().getParede() == null && it.getConstrucao().getForro() != null)
+                reg.add("Forro");
+            else
+                reg.add("Desconhecido");
+            reg.add(it.getAltura());
+            reg.add(it.getLargura());
+            reg.add(it.getAreaPorta());
+            reg.add(it.getAreaJanela());
+            reg.add(it.getPrecoTotal());
+            tableData.add(reg);
+        }
+        tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
     private boolean validarCampos() {
