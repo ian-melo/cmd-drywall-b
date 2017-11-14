@@ -107,23 +107,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cálculo de Drywall");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosed(evt);
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Bem-vindo à área de Cáculo de Drywall");
@@ -575,7 +558,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_verificarActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
-        limpar();
+        redefinir();
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OkActionPerformed
@@ -598,14 +581,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         limpar();
     }//GEN-LAST:event_btn_conLimparActionPerformed
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        
-    }//GEN-LAST:event_formInternalFrameClosed
-
     private void btn_novaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novaActionPerformed
-        limparTConstrucoes();
-        limparTMateriais();
-        limparCampos();
+        novo();
     }//GEN-LAST:event_btn_novaActionPerformed
 
     private void tb_construcoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_construcoesMouseClicked
@@ -635,7 +612,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         
         listaConstrucoes = cControle.procurarTipologias(chk_st.isEnabled(), chk_ru.isEnabled(),
-                chk_rf.isEnabled(), Double.parseDouble(txt_altura.getText()));
+                chk_rf.isEnabled(), Double.parseDouble(txt_altura.getText().replaceAll(",", ".")));
         if(listaConstrucoes == null || listaConstrucoes.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane,"Construções não encontradas.");
             return;
@@ -646,7 +623,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
     
     private void finalizar() {
+        if(listaItens == null) {
+            JOptionPane.showMessageDialog(null, "Não há nenhum item formado!");
+            return;
+        }
+        
         TOrcamento.getInstancia().preencherItens(listaItens);
+        limparCampos();
+        limparTabelas();
         dispose();
     }
     
@@ -656,9 +640,19 @@ public class TCalculo extends javax.swing.JInternalFrame {
         dispose();
     }
     
-    private void limpar() {
+    private void redefinir() {
         limparCampos();
         limparTabelas();
+    }
+    
+    private void limpar() {
+        limparTItens();
+    }
+    
+    private void novo() {
+        limparTConstrucoes();
+        limparTMateriais();
+        limparCampos();
     }
     
     private void adicionar() {
@@ -686,10 +680,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if(listaItens == null)
             listaItens = new ArrayList<>();
         it = cControle.definirItem(
-                Double.parseDouble(txt_altura.getText()),
-                Double.parseDouble(txt_largura.getText()),
-                Double.parseDouble(txt_porta.getText()),
-                Double.parseDouble(txt_janela.getText()), c, mOp);
+                Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
         listaItens.add(it);
         listarItens();
     }
@@ -795,8 +789,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return false;
         }
         try {
-            Double.parseDouble(txt_altura.getText());
-            Double.parseDouble(txt_largura.getText());
+            Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
+            Double.parseDouble(txt_largura.getText().replaceAll(",", "."));
+            Double.parseDouble(txt_porta.getText().replaceAll(",", "."));
+            Double.parseDouble(txt_janela.getText().replaceAll(",", "."));
             return true;
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente os campos.");
@@ -807,6 +803,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private void limparCampos() {
         txt_altura.setText("");
         txt_largura.setText("");
+        txt_porta.setText("");
+        txt_janela.setText("");
         chk_st.setSelected(false);
         chk_rf.setSelected(false);
         chk_ru.setSelected(false);
