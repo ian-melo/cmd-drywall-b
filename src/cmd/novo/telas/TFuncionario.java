@@ -6,7 +6,7 @@
 package cmd.novo.telas;
 
 import cmd.Validacao.Validar;
-import cmd.novo.controle.CadFuncionarioControle;
+import cmd.controle.CadFuncionarioControle;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 

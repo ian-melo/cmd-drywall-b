@@ -13,7 +13,7 @@ import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import cmd.entidade.TelefoneId;
-import cmd.novo.cep.WebServiceCep;
+import cmd.cep.WebServiceCep;
 import cmd.novo.painel.PnlJuridica;
 import cmd.novo.painel.PnlFisica;
 import java.awt.Color;
@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -41,8 +42,65 @@ public class TCliente extends javax.swing.JInternalFrame {
     public static TCliente clienteT;
     PnlFisica pFi = new PnlFisica();
     PnlJuridica pJu = new PnlJuridica();
-
+    private Timer timer;
     ClienteController cliC;
+
+    Thread tTempog = new Thread() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(30 * 1000); // aguarda 30 segundos
+                System.out.println("***Desbloqueado***");
+                tCEPg.interrupt();//Não consegui testar.....
+                habilitaCEP(true);//Libera apos 30 segundos de busca
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
+                System.out.println("_" + e);
+               
+            }
+        }
+    };
+
+    private String Cep;
+    Thread tCEPg = new Thread() {
+        @Override
+        public void run() {
+
+            //new Thread(() -> {//Antigo
+            //Faz a busca para o cep 58043-280
+            WebServiceCep webServiceCep = WebServiceCep.searchCep(Cep);
+
+            //A ferramenta de busca ignora qualquer caracter que não seja numero.
+            //caso a busca ocorra bem, imprime os resultados.
+            if (webServiceCep.wasSuccessful()) {
+                txt_logradouro.setText(webServiceCep.getLogradouroFull());
+                txt_cidade.setText(webServiceCep.getCidade());
+                txt_bairro.setText(webServiceCep.getBairro());
+                txt_uf.setText(webServiceCep.getUf());
+                //txt_uf.setSelectedItem(webServiceCep.getUf());
+                System.out.println("Cep: " + webServiceCep.getCep());
+                System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
+                System.out.println("Bairro: " + webServiceCep.getBairro());
+                System.out.println("Cidade: "
+                        + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
+                //caso haja problemas imprime as exceções.
+            } else {
+                //JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+                JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+            }
+            habilitaCEP(true);
+            try {
+                
+                tTempog.interrupt();
+                
+            } catch (Exception e) {
+                System.out.println("_" + e);
+            }
+
+            //}).start();//Antigo
+        }
+    };
 
     //PnlTelefone pTe = new PnlTelefone();
     public static TCliente getInstancia() {
@@ -258,9 +316,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txt_cep.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_cepFocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_cepFocusLost(evt);
             }
@@ -769,23 +824,13 @@ public class TCliente extends javax.swing.JInternalFrame {
         Validar vali = new Validar();
 
         if (vali.validarCep(txt_cep.getText())) {
+
             buscaCep(txt_cep.getText());
         } else {
             JOptionPane.showMessageDialog(pnl_telefone, "Verifique o Cep");
         }
 
     }//GEN-LAST:event_txt_cepFocusLost
-
-    private void txt_cepFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cepFocusGained
-        //txt_cep.selectAll();
-        //txt_cep.select(2, 4);
-        //txt_cidade.grabFocus();
-        //txt_cidade.select(2, 4);
-        //txt_cep.grabFocus();
-//        txt_cep.requestFocus();
-//        txt_cep.select(0, 4);
-
-    }//GEN-LAST:event_txt_cepFocusGained
 
     private void txt_numeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_numeroFocusLost
         Validar vali = new Validar();
@@ -970,40 +1015,74 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
     public void buscaCep(String cep) {
-        txt_logradouro.setEnabled(false);
-        txt_cidade.setEnabled(false);
-        txt_bairro.setEnabled(false);
-        txt_uf.setEnabled(false);
+        habilitaCEP(false);
+        Cep = cep;
+//        Thread tCEP = new Thread() {
+//            @Override
+//            public void run() {
+//
+//                //new Thread(() -> {//Antigo
+//                //Faz a busca para o cep 58043-280
+//                WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+//
+//                //A ferramenta de busca ignora qualquer caracter que não seja numero.
+//                //caso a busca ocorra bem, imprime os resultados.
+//                if (webServiceCep.wasSuccessful()) {
+//                    txt_logradouro.setText(webServiceCep.getLogradouroFull());
+//                    txt_cidade.setText(webServiceCep.getCidade());
+//                    txt_bairro.setText(webServiceCep.getBairro());
+//                    txt_uf.setText(webServiceCep.getUf());
+//                    //txt_uf.setSelectedItem(webServiceCep.getUf());
+//                    System.out.println("Cep: " + webServiceCep.getCep());
+//                    System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
+//                    System.out.println("Bairro: " + webServiceCep.getBairro());
+//                    System.out.println("Cidade: "
+//                            + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
+//
+//                    //caso haja problemas imprime as exceções.
+//                } else {
+//                    //JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+//                    JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+//                }
+//
+//                habilitaCEP(true);
+//
+//                // tTempo.start();
+//                //}).start();//Antigo
+//            }
+//
+//        };
 
-        new Thread(() -> {
-            //Faz a busca para o cep 58043-280
-            WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
-            //A ferramenta de busca ignora qualquer caracter que não seja numero.
+//        Thread tTempo = new Thread() {
+//            @Override
+//            public void run() {
+//
+//                try {
+//
+//                    Thread.sleep(30 * 1000); // aguarda 30 segundos
+//                    System.out.println("***Desbloqueado***");
+//                    tCEP.interrupt();//Não consegui testar.....
+//                    habilitaCEP(true);//Libera apos 30 segundos de busca
+//
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//
+//        };
+        //tCEP.start();
+        //tTempo.start();
+        tCEPg.start();
+        tTempog.start();
 
-            //caso a busca ocorra bem, imprime os resultados.
-            if (webServiceCep.wasSuccessful()) {
-                txt_logradouro.setText(webServiceCep.getLogradouroFull());
-                txt_cidade.setText(webServiceCep.getCidade());
-                txt_bairro.setText(webServiceCep.getBairro());
-                txt_uf.setText(webServiceCep.getUf());
-                //txt_uf.setSelectedItem(webServiceCep.getUf());
-                System.out.println("Cep: " + webServiceCep.getCep());
-                System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
-                System.out.println("Bairro: " + webServiceCep.getBairro());
-                System.out.println("Cidade: "
-                        + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
+    }
 
-                //caso haja problemas imprime as exceções.
-            } else {
-                //JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
-                JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
-            }
-
-            txt_logradouro.setEnabled(true);
-            txt_cidade.setEnabled(true);
-            txt_bairro.setEnabled(true);
-            txt_uf.setEnabled(true);
-        }).start();
+    private void habilitaCEP(boolean val) {
+        txt_logradouro.setEnabled(val);
+        txt_cidade.setEnabled(val);
+        txt_bairro.setEnabled(val);
+        txt_uf.setEnabled(val);
     }
 
     private void pJuridica() {
@@ -1164,6 +1243,8 @@ public class TCliente extends javax.swing.JInternalFrame {
         pFi.setTxt_cpf_pnl("");
         pFi.setTxt_dataNasc_pnl(null);
         pFi.setTxt_nome_pnl("");
+
+        habilitaCEP(true);
     }
 
     private boolean verificaCamposEndereco() {
@@ -1188,7 +1269,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Cadastrar;

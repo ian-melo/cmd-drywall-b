@@ -1,4 +1,4 @@
-package cmd.novo.cep;
+package cmd.cep;
 
 import java.net.MalformedURLException;
 import java.net.URL;
