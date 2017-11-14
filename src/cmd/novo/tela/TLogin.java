@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cmd.novo.telas;
+package cmd.novo.tela;
 
 import cmd.DAO.UsuárioDAO;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,6 +58,11 @@ public class TLogin extends javax.swing.JFrame {
         jLabel2.setText("Login:");
 
         txt_nome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nomeKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Senha:");
@@ -83,6 +89,11 @@ public class TLogin extends javax.swing.JFrame {
         img_cadeado.setToolTipText("");
 
         txt_senha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_senhaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,6 +187,18 @@ public class TLogin extends javax.swing.JFrame {
         }
         //}//retirar quando retirar o IF
     }//GEN-LAST:event_bt_loginActionPerformed
+
+    private void txt_senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_senhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            bt_login.doClick();
+        }
+    }//GEN-LAST:event_txt_senhaKeyPressed
+
+    private void txt_nomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nomeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            bt_login.doClick();
+        }
+    }//GEN-LAST:event_txt_nomeKeyPressed
 
     /**
      * @param args the command line arguments

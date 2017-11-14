@@ -8,9 +8,7 @@ import cmd.DAO.ParedeDAO;
 import cmd.entidade.Construcao;
 import cmd.entidade.Forro;
 import cmd.entidade.Parede;
-import static cmd.novo.telas.TConstrucao.txt_id;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  * Classe de controle para CRUD de construção

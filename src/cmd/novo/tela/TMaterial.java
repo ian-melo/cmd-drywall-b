@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cmd.novo.telas;
+package cmd.novo.tela;
 
 import cmd.controle.MaterialController;
 import cmd.controle.ConstrucaoController;
 import cmd.entidade.Material;
 import cmd.entidade.Construcao;
 import cmd.novo.GerenteDeJanelas;
-import static cmd.novo.telas.TPrincipal.jDesktopPane1;
+import static cmd.novo.tela.TPrincipal.jDesktopPane1;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.List;

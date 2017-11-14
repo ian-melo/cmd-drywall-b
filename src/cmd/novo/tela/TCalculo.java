@@ -1,5 +1,5 @@
 //TODO: Testar
-package cmd.novo.telas;
+package cmd.novo.tela;
 
 import cmd.controle.CalculoController;
 import cmd.controle.ConstrucaoController;
