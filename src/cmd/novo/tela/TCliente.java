@@ -21,17 +21,25 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -57,7 +65,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 System.out.println("_" + e);
-               
+
             }
         }
     };
@@ -91,9 +99,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
             habilitaCEP(true);
             try {
-                
+
                 tTempog.interrupt();
-                
+
             } catch (Exception e) {
                 System.out.println("_" + e);
             }
@@ -530,11 +538,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        try {
-            txt_cel2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txt_cel2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
         txt_cel2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_cel2FocusLost(evt);
@@ -891,11 +895,58 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
 
             if (cmb_pessoa.getSelectedIndex() == 1) {
-                PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 3);
+                LimparCampos();
+                PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 9);
 
                 pFi.setTxt_nome_pnl(peFi.getNome());
                 pFi.setTxt_cpf_pnl(peFi.getCpf());
                 pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
+
+                txt_cep.setText(peFi.getCliente().getEndereco().getCep());
+                txt_logradouro.setText(peFi.getCliente().getEndereco().getLogradouro());
+                txt_numero.setText(peFi.getCliente().getEndereco().getNumero());
+                txt_bairro.setText(peFi.getCliente().getEndereco().getBairro());
+                txt_cidade.setText(peFi.getCliente().getEndereco().getCidade());
+                txt_uf.setText(peFi.getCliente().getEndereco().getUf());
+                txt_complemento.setText(peFi.getCliente().getEndereco().getComplemento());
+
+                try {
+                    Iterator<Telefone> iterator = peFi.getCliente().getTelefones().iterator();
+                    if (iterator.hasNext()) {
+                        String val = iterator.next().getId().getNumero();
+                         txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+               
+                        txt_tel1.setText(val);
+                        //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                        //txt_tel1.
+                    }
+                    //txt_tel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+                    if (iterator.hasNext()) {
+                        String val = iterator.next().getId().getNumero();
+                       txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
+                      //  if (val.length() == 13) {
+                            //txt_cel1.setText(val + "0");
+                       // } else {
+                            txt_cel1.setText(val);
+                            //txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                       // }
+                    }
+
+                    if (iterator.hasNext()) {
+                        String val = iterator.next().getId().getNumero();
+                        txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                        //if (val.length() == 13) {
+                          //  txt_cel2.setText(val + "0");
+
+                       // } else {
+                            txt_cel2.setText(val);
+                            //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                      //  }
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("___" + e);
+                }
 
             }
         }
@@ -1179,12 +1230,12 @@ public class TCliente extends javax.swing.JInternalFrame {
         cabecalho.add("CPF");
         cabecalho.add("Data Nascimento");
         //cabecalho.add("Telefone");
-//        cabecalho.add("CEP");
-//        cabecalho.add("Logradouro");
-//        cabecalho.add("Numero");
-//        cabecalho.add("Cidade");
-//        cabecalho.add("Bairro");
-//        cabecalho.add("Estado");
+        cabecalho.add("CEP");
+        cabecalho.add("Logradouro");
+        cabecalho.add("Numero");
+        cabecalho.add("Bairro");
+        cabecalho.add("Cidade");
+        cabecalho.add("Estado");
         cabecalho.add("Objeto");
 
         //Itens
@@ -1196,14 +1247,15 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(fx.getNome());
             item.add(fx.getCpf());
             item.add(fx.getDataNascimento());
-            //item.add(jx.getCliente().getTelefones());
-//            item.add(jx.getCliente().getEndereco().getCep());
-//            item.add(jx.getCliente().getEndereco().getLogradouro());
-//            item.add(jx.getCliente().getEndereco().getNumero());
-//            item.add(jx.getCliente().getEndereco().getCidade());
-//            item.add(jx.getCliente().getEndereco().getBairro());
-//            item.add(jx.getCliente().getEndereco().getUf());
-            item.add(fx);
+            //item.add(fx.getCliente().getTelefones());
+            item.add(fx.getCliente().getEndereco().getCep());
+            item.add(fx.getCliente().getEndereco().getLogradouro());
+            item.add(fx.getCliente().getEndereco().getNumero());
+            item.add(fx.getCliente().getEndereco().getBairro());
+            item.add(fx.getCliente().getEndereco().getCidade());
+            item.add(fx.getCliente().getEndereco().getUf());
+
+            item.add(fx);//seta o objeto
 
             dados.add(item);
         }
@@ -1212,7 +1264,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
 
-        tb_FisicaEjuridica.getColumnModel().getColumn(3).setMaxWidth(0);
+        tb_FisicaEjuridica.getColumnModel().getColumn(9).setMaxWidth(0);
 
     }
 

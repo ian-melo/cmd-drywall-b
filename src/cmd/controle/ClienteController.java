@@ -157,15 +157,13 @@ public class ClienteController {
         if (pJu == null || "".equals(pJu.getCnpj())) {
             return false;
         }
-        
-        
-         String cnpj = pJu.getCnpj();
 
-         //Quabra a string em partes e retira a pontuação
-         cnpj = cnpj.substring(0, 2) + cnpj.substring(3, 6) + 
-                 cnpj.substring(7, 10) + cnpj.substring(11, 15) + cnpj.substring(16, 18);
-        
-        
+        String cnpj = pJu.getCnpj();
+
+        //Quabra a string em partes e retira a pontuação
+        cnpj = cnpj.substring(0, 2) + cnpj.substring(3, 6)
+                + cnpj.substring(7, 10) + cnpj.substring(11, 15) + cnpj.substring(16, 18);
+
         return ValidaCPFeCNPJ.isCNPJ(cnpj);
     }
 
@@ -177,8 +175,10 @@ public class ClienteController {
 
     public List<PessoaFisica> ListaPessoaFisicas() {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-
-        return pFiDAO.listar();
+        System.out.println("------------Cliente-Controle------------");
+        List<PessoaFisica> pf = pFiDAO.listar();
+        //pFiDAO.fecharListar();
+        return pf;
     }
 
 }
