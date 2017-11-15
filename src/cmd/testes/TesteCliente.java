@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TesteCliente {
     public static void main(String[] args) {
-        DAO cDao = new ClienteDAO();
+        ClienteDAO cDao = new ClienteDAO();
         List<Cliente> clientes = cDao.listar();
         
         for(Cliente c : clientes) {
@@ -17,7 +17,7 @@ public class TesteCliente {
                 System.out.println(c.getPessoaFisica().getNome());
             System.out.println(c.getEndereco().getLogradouro());
         }
-        
+        cDao.fecharListar();
         System.exit(0);
     }
 }

@@ -14,6 +14,8 @@ import org.hibernate.HibernateException;
  */
 public class ClienteDAO implements DAO<Cliente> {
 
+    Session s = null;
+
     @Override
     public boolean inserir(Cliente item) {
         try {
@@ -85,11 +87,11 @@ public class ClienteDAO implements DAO<Cliente> {
     public List<Cliente> listar() {
         try {
             List li;
-            Session s = HibernateUtil.getSessionFactory().openSession();
+            s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             li = s.createQuery("from Cliente").list();
             s.getTransaction().commit();
-            s.close();
+            s.close();//Temporario
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);
@@ -98,5 +100,9 @@ public class ClienteDAO implements DAO<Cliente> {
             System.out.println("_" + e);
             return null;
         }
+    }
+
+    public void fecharListar() {
+        s.close();
     }
 }
