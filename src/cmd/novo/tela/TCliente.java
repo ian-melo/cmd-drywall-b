@@ -886,12 +886,14 @@ public class TCliente extends javax.swing.JInternalFrame {
             linha = tb_FisicaEjuridica.getSelectedRow();
 
             if (cmb_pessoa.getSelectedIndex() == 0) {
+                reformataCamposTelefone();
                 LimparCampos();
                 setInfoPJuridica(linha);
 
             }
 
             if (cmb_pessoa.getSelectedIndex() == 1) {
+                reformataCamposTelefone();
                 LimparCampos();
                 setInfoPFisica(linha);
 
