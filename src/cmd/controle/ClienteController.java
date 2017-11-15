@@ -36,13 +36,13 @@ public class ClienteController {
 //        PessoaFisica pFi = c.getPessoaFisica();
 //        PessoaJuridica pJu = c.getPessoaJuridica();
 //        Endereco end = c.getEndereco();
-        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();//-----------------OK
 
         EnderecoDAO endDAO = new EnderecoDAO();
         TelefoneDAO telDAO = new TelefoneDAO();
 
         //ClienteDAO cliDao = new ClienteDAO();
-        if ((pJ.getCliente().getEndereco() != null) && (!endDAO.inserir(pJ.getCliente().getEndereco()))) {
+        if ((pJ.getCliente().getEndereco() != null) && (!endDAO.inserir(pJ.getCliente().getEndereco()))) {//--OK
             return false;
         }
 
@@ -54,7 +54,7 @@ public class ClienteController {
         }
 
         int valor = pJ.getCliente().getCodCliente();//pega o valor q retornar do Hibernate
-        JOptionPane.showMessageDialog(null, "CodCliente=" + valor);
+        JOptionPane.showMessageDialog(null, "Cod Cliente=" + valor);
 
         //pJ.getCliente().getTelefones().iterator().hasNext();
         Telefone tt = new Telefone();
@@ -86,12 +86,12 @@ public class ClienteController {
             return false;
         }
 
-        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();// --------------------OK
 
         EnderecoDAO endDAO = new EnderecoDAO();
         TelefoneDAO telDAO = new TelefoneDAO();
 
-        if ((pF.getCliente().getEndereco() != null) && (!endDAO.inserir(pF.getCliente().getEndereco()))) {
+        if ((pF.getCliente().getEndereco() != null) && (!endDAO.inserir(pF.getCliente().getEndereco()))) {//-----OK
             return false;
         }
 
@@ -99,10 +99,17 @@ public class ClienteController {
             return false;
         }
 
-        //JOptionPane.showMessageDialog(null, "CodCliente=" + pF.getCliente().getCodCliente());
+        int valor = pF.getCliente().getCodCliente();//pega o valor q retornar do Hibernate
+        JOptionPane.showMessageDialog(null, "Cod Cliente=" + valor);
+
+        Telefone tt = new Telefone();
         Iterator<Telefone> iterator = pF.getCliente().getTelefones().iterator();
         while (iterator.hasNext()) {
-            if (telDAO.inserir(iterator.next())) {
+
+            tt = iterator.next();//Separa objeto telefone em yma variavel
+            tt.getId().setCodCliente(valor);//Força o valor q retorna do Hibernate, no codCliente do objeto Telefone
+
+            if (telDAO.inserir(tt)) {
                 System.out.println("Telefone Cadastrado_cadTel");//Remover
             } else {
                 //System.out.println("_2_ " + iterator.next().getId().getNumero());

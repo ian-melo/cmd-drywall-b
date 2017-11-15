@@ -922,8 +922,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     private void reformataCamposTelefone() {
         try {
             txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-            txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-            txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+            txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)#####-####")));
+            txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)#####-####")));
         } catch (ParseException ex) {
             Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
