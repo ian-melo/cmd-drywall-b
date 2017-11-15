@@ -5,6 +5,7 @@ import cmd.DAO.DAO;
 import cmd.controle.ClienteController;
 import cmd.entidade.Cliente;
 import cmd.entidade.PessoaFisica;
+import cmd.entidade.PessoaJuridica;
 import cmd.entidade.Telefone;
 import java.util.Iterator;
 import java.util.List;
@@ -14,11 +15,52 @@ public class TesteCliente {
     public static void main(String[] args) {
         //imprimeDetlhesPelaDAO();
         //imprimeDetlhesPeloControle();
-        imprimeDetlhesPeloControleModificado();
+        //imprimeDetlhesPeloControleModificado();
+        imprimeDetlhesPeloControleModificadoPessoaJuridica();
 
         System.exit(0);
     }
 
+    
+    private static void imprimeDetlhesPeloControleModificadoPessoaJuridica() {
+
+        ClienteController cliC = new ClienteController();
+        List<PessoaJuridica> pJuridicas = cliC.ListaPessoaJuridica();
+
+        for (PessoaJuridica c : pJuridicas) {
+            if (c.getCnpj()!= null) {
+                System.err.println("=================2=================");
+                System.out.println(c.getCnpj());
+                System.out.println(c.getRazaoSocial());
+                System.out.println(c.getCliente().getDataInscricao());
+                System.out.println(c.getCliente().getEndereco().getUf());
+                
+                
+                Iterator<Telefone> iterator = c.getCliente().getTelefones().iterator();
+                //while (iterator.hasNext()) {
+                if (iterator.hasNext()) {
+                    System.out.println("_" + iterator.next().getId().getNumero());
+                }
+                if (iterator.hasNext()) {
+                    System.out.println("_" + iterator.next().getId().getNumero());
+                }
+
+                if (iterator.hasNext()) {
+                    System.out.println("_" + iterator.next().getId().getNumero());
+                }
+
+                // System.out.println("_" + iterator.next().getId().getNumero());
+            }
+
+        }
+        //cDao.fecharListar();
+
+    }
+    
+    
+    
+    
+    
     private static void imprimeDetlhesPeloControleModificado() {
 
         ClienteController cliC = new ClienteController();

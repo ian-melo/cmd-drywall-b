@@ -65,7 +65,7 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             pj = (PessoaJuridica) (s.createQuery("from PessoaJuridica where CodCliente = :cod")
                 .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
-            s.close();
+            //s.close();
             return pj;
         } catch(HibernateException e) {
             System.out.println("_" + e);
@@ -103,7 +103,7 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.beginTransaction();
             li = s.createQuery("from PessoaJuridica").list();
             s.getTransaction().commit();
-            s.close();
+            //s.close();//Aqui
             return li;
         } catch(HibernateException e) {
             System.out.println("_" + e);

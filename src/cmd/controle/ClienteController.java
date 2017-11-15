@@ -169,7 +169,7 @@ public class ClienteController {
 
     public List<PessoaJuridica> ListaPessoaJuridica() {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
-        System.out.println("------------Cliente-Controle------------");
+        System.out.println("------------Cliente-Controle-----pJuridica-------");
         List<PessoaJuridica> pj = pJuDAO.listar();
         //pFiDAO.fecharListar();
         return pj;
@@ -177,7 +177,7 @@ public class ClienteController {
 
     public List<PessoaFisica> ListaPessoaFisicas() {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-        System.out.println("------------Cliente-Controle------------");
+        System.out.println("------------Cliente-Controle-----pFisica-------");
         List<PessoaFisica> pf = pFiDAO.listar();
         //pFiDAO.fecharListar();
         return pf;
