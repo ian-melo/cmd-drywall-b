@@ -27,12 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -538,7 +535,11 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        txt_cel2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        try {
+            txt_cel2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txt_cel2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_cel2FocusLost(evt);
@@ -879,74 +880,14 @@ public class TCliente extends javax.swing.JInternalFrame {
             linha = tb_FisicaEjuridica.getSelectedRow();
 
             if (cmb_pessoa.getSelectedIndex() == 0) {
+                LimparCampos();
+                setInfoPJuridica(linha);
 
-                PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 4);
-                // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
-
-                pJu.setTxt_cnpj_pnl(peJu.getCnpj());
-                pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
-                pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
-                pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
-
-                //JOptionPane.showMessageDialog(pnl_telefone, peJu.getCnpj());
-                // tb_FisicaEjuridica.get
-                //escolhido = Carrinho.getItens().get(linha);
-                // System.out.println(escolhido.getLivro().getTitulo());
             }
 
             if (cmb_pessoa.getSelectedIndex() == 1) {
                 LimparCampos();
-                PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 9);
-
-                pFi.setTxt_nome_pnl(peFi.getNome());
-                pFi.setTxt_cpf_pnl(peFi.getCpf());
-                pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
-
-                txt_cep.setText(peFi.getCliente().getEndereco().getCep());
-                txt_logradouro.setText(peFi.getCliente().getEndereco().getLogradouro());
-                txt_numero.setText(peFi.getCliente().getEndereco().getNumero());
-                txt_bairro.setText(peFi.getCliente().getEndereco().getBairro());
-                txt_cidade.setText(peFi.getCliente().getEndereco().getCidade());
-                txt_uf.setText(peFi.getCliente().getEndereco().getUf());
-                txt_complemento.setText(peFi.getCliente().getEndereco().getComplemento());
-
-                try {
-                    Iterator<Telefone> iterator = peFi.getCliente().getTelefones().iterator();
-                    if (iterator.hasNext()) {
-                        String val = iterator.next().getId().getNumero();
-                         txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
-               
-                        txt_tel1.setText(val);
-                        //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                        //txt_tel1.
-                    }
-                    //txt_tel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-                    if (iterator.hasNext()) {
-                        String val = iterator.next().getId().getNumero();
-                       txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
-                      //  if (val.length() == 13) {
-                            //txt_cel1.setText(val + "0");
-                       // } else {
-                            txt_cel1.setText(val);
-                            //txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                       // }
-                    }
-
-                    if (iterator.hasNext()) {
-                        String val = iterator.next().getId().getNumero();
-                        txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
-                        //if (val.length() == 13) {
-                          //  txt_cel2.setText(val + "0");
-
-                       // } else {
-                            txt_cel2.setText(val);
-                            //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                      //  }
-
-                    }
-                } catch (Exception e) {
-                    System.out.println("___" + e);
-                }
+                setInfoPFisica(linha);
 
             }
         }
@@ -954,10 +895,13 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
         LimparCampos();
+        reformataCamposTelefone();
+        
     }//GEN-LAST:event_btn_LimparActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         LimparCampos();
+        reformataCamposTelefone();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void pequenoBug() {
@@ -965,6 +909,116 @@ public class TCliente extends javax.swing.JInternalFrame {
         int y = this.getWidth();
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
+    }
+
+    private void reformataCamposTelefone() {
+        try {
+            txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+            txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+            txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setInfoPJuridica(int linha) {
+
+        PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 10);
+        // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
+
+        pJu.setTxt_cnpj_pnl(peJu.getCnpj());
+        pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
+        pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
+        pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
+
+        txt_cep.setText(peJu.getCliente().getEndereco().getCep());
+        txt_logradouro.setText(peJu.getCliente().getEndereco().getLogradouro());
+        txt_numero.setText(peJu.getCliente().getEndereco().getNumero());
+        txt_bairro.setText(peJu.getCliente().getEndereco().getBairro());
+        txt_cidade.setText(peJu.getCliente().getEndereco().getCidade());
+        txt_uf.setText(peJu.getCliente().getEndereco().getUf());
+        txt_complemento.setText(peJu.getCliente().getEndereco().getComplemento());
+
+        try {
+            Iterator<Telefone> iterator = peJu.getCliente().getTelefones().iterator();
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                txt_tel1.setText(val);
+
+            }
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
+
+                txt_cel1.setText(val);
+
+            }
+
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+
+                txt_cel2.setText(val);
+
+            }
+        } catch (Exception e) {
+            System.out.println("___" + e);
+        }
+    }
+
+    private void setInfoPFisica(int linha) {
+        PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 9);
+
+        pFi.setTxt_nome_pnl(peFi.getNome());
+        pFi.setTxt_cpf_pnl(peFi.getCpf());
+        pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
+
+        txt_cep.setText(peFi.getCliente().getEndereco().getCep());
+        txt_logradouro.setText(peFi.getCliente().getEndereco().getLogradouro());
+        txt_numero.setText(peFi.getCliente().getEndereco().getNumero());
+        txt_bairro.setText(peFi.getCliente().getEndereco().getBairro());
+        txt_cidade.setText(peFi.getCliente().getEndereco().getCidade());
+        txt_uf.setText(peFi.getCliente().getEndereco().getUf());
+        txt_complemento.setText(peFi.getCliente().getEndereco().getComplemento());
+
+        try {
+            Iterator<Telefone> iterator = peFi.getCliente().getTelefones().iterator();
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+
+                txt_tel1.setText(val);
+                //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                //txt_tel1.
+            }
+            //txt_tel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
+                //  if (val.length() == 13) {
+                //txt_cel1.setText(val + "0");
+                // } else {
+                txt_cel1.setText(val);
+                //txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                // }
+            }
+
+            if (iterator.hasNext()) {
+                String val = iterator.next().getId().getNumero();
+                txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                        //if (val.length() == 13) {
+                //  txt_cel2.setText(val + "0");
+
+                // } else {
+                txt_cel2.setText(val);
+                //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
+                //  }
+
+            }
+        } catch (Exception e) {
+            System.out.println("___" + e);
+        }
     }
 
 //Preenche ENDEREÇO tanto de PessoaJuridica quanto de Pessoa Fisica
@@ -1182,12 +1236,12 @@ public class TCliente extends javax.swing.JInternalFrame {
         cabecalho.add("Ramo Atual");
         cabecalho.add("Data Fundação");
         //cabecalho.add("Telefone");
-//        cabecalho.add("CEP");
-//        cabecalho.add("Logradouro");
-//        cabecalho.add("Numero");
-//        cabecalho.add("Cidade");
-//        cabecalho.add("Bairro");
-//        cabecalho.add("Estado");
+        cabecalho.add("CEP");
+        cabecalho.add("Logradouro");
+        cabecalho.add("Numero");
+        cabecalho.add("Bairro");
+        cabecalho.add("Cidade");
+        cabecalho.add("Estado");
         cabecalho.add("Objeto");
 
         //Itens
@@ -1201,12 +1255,12 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(jx.getRamoAtuacao());
             item.add(jx.getDataFundacao());
             //item.add(jx.getCliente().getTelefones());
-//            item.add(jx.getCliente().getEndereco().getCep());
-//            item.add(jx.getCliente().getEndereco().getLogradouro());
-//            item.add(jx.getCliente().getEndereco().getNumero());
-//            item.add(jx.getCliente().getEndereco().getCidade());
-//            item.add(jx.getCliente().getEndereco().getBairro());
-//            item.add(jx.getCliente().getEndereco().getUf());
+            item.add(jx.getCliente().getEndereco().getCep());
+            item.add(jx.getCliente().getEndereco().getLogradouro());
+            item.add(jx.getCliente().getEndereco().getNumero());
+            item.add(jx.getCliente().getEndereco().getBairro());
+            item.add(jx.getCliente().getEndereco().getCidade());
+            item.add(jx.getCliente().getEndereco().getUf());
             item.add(jx);
 
             dados.add(item);
@@ -1216,7 +1270,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
 
-        tb_FisicaEjuridica.getColumnModel().getColumn(4).setMaxWidth(0);
+        tb_FisicaEjuridica.getColumnModel().getColumn(10).setMaxWidth(0);//     :)
 
     }
 
@@ -1372,97 +1426,4 @@ private void mouseClicadoCNPJ(MouseEvent e) {
         }
     }
 
-    /*public void ListandoTableview() {
-     ísíca", "Pessoa Jurídica" );
-     *
-     * cmb_pessoa.setItems(opcao); }
-     *
-     * @FXML private void Cadastrar(ActionEvent event) { //if
-     * (txt_nome.getText().isEmpty() || txt_cpf.getText().isEmpty()) { Alert
-     * alerta1 = new Alert(Alert.AlertType.INFORMATION);
-     * alerta1.setTitle("C.M.D"); alerta1.setHeaderText("C.M.D Informa!!!");
-     * //alerta1.setContentText("preencha todos os campos para continuar");
-     * alerta1.setContentText("Dados cadastrados com sucesso");
-     * alerta1.showAndWait(); //} else {
-     *
-     * Entidadecliente cli = new Entidadecliente(); ClienteDAO dao = new
-     * ClienteDAO(); String nome = txt_nome.getText(); //String endereço =
-     * txt_endereco.getText(); String cpf = txt_cpf.getText(); //String projeto
-     * = txt_projeto.getText(); //int numero_protocolo =
-     * Integer.parseInt(lbl_protocolo.getText()); //String telefone =
-     * txt_fone.getText(); //String email = txt_mail.getText();
-     * cli.setNome(nome); cli.setCpf(cpf); //cli.setEndereço(endereço);
-     * //cli.setProjeto(projeto); //cli.setProtocolo(numero_protocolo);
-     * //cli.setTelefone(telefone); //cli.setEmail(email);
-     *
-     * //dao.Create(cli); txt_nome.setText("");
-     *
-     * txt_cpf.setText("");
-     *
-     *
-     * //ListandoTableview();//+++++++++++++
-     *
-     * //}
-     *
-     * }
-     *
-     * @FXML private void Alterar(ActionEvent event) { if
-     * (txt_nome.getText().isEmpty() || txt_cpf.getText().isEmpty()) { Alert
-     * alerta1 = new Alert(Alert.AlertType.INFORMATION);
-     * alerta1.setTitle("C.M.D"); alerta1.setHeaderText("C.M.D Informa!!!");
-     * alerta1.setContentText("preencha todos os campos para continuar");
-     * alerta1.showAndWait();
-     *
-     * } else { /* Entidadecliente cli = new Entidadecliente(); ClienteDAO dao =
-     * new ClienteDAO();
-     * cli.setId(tb_clientes.getSelectionModel().getSelectedItem().getId());
-     * cli.setNome(txt_nome.getText()); cli.setCpf(txt_cpf.getText());
-     * //cli.setEndereço(txt_endereco.getText());
-     * //cli.setProjeto(txt_projeto.getText());
-     * //cli.setProtocolo(Integer.parseInt(lbl_protocolo.getText()));
-     * //cli.setTelefone(txt_fone.getText());
-     * //cli.setEmail(txt_mail.getText()); dao.Update(cli);
-     * txt_nome.setText(""); //txt_endereco.setText(""); txt_cpf.setText("");
-     * //txt_projeto.setText(""); //lbl_protocolo.setText("");
-     * //txt_fone.setText(""); //txt_mail.setText("");
-     *
-     *
-     * //ListandoTableview();//++++++++++++++++++++++++
-     *
-     * }
-     *
-     * }
-     *
-     * @FXML private void Sair(ActionEvent event) throws IOException { Parent
-     * cliente =
-     * FXMLLoader.load(getClass().getResource("/cmd/fxml/PrincipalFXML.fxml"));
-     * Scene scene = new Scene(cliente); Stage tela = (Stage) ((Node)
-     * event.getSource()).getScene().getWindow(); tela.setScene(scene);
-     * tela.show(); }
-     *
-     * @FXML private void Listar(MouseEvent event) { if (event.getClickCount()
-     * == 1) { //ClienteTableView view =
-     * tb_clientes.getSelectionModel().getSelectedItem(); ClienteTableView view
-     * = tb_fisica.getSelectionModel().getSelectedItem(); String nome =
-     * view.getNome(); String endereço = view.getEndereço(); String cpf =
-     * view.getCpf(); String projeto = view.getProjeto(); int protocolo =
-     * view.getProtocolo(); String telefone = view.getTelefone(); String email =
-     * view.getEmail(); txt_nome.setText(nome);
-     * //txt_endereco.setText(endereço); txt_cpf.setText(cpf);
-     * //txt_projeto.setText(projeto);
-     * //lbl_protocolo.setText(Integer.toString(protocolo));
-     * //txt_fone.setText(telefone); //txt_mail.setText(email); } }
-     *
-     * @FXML private void cbm_click(ActionEvent event) { if
-     * (cmb_pessoa.getSelectionModel().getSelectedIndex() == 0) {
-     * vBox_fisica.setVisible(true); vBox_juridica.setVisible(false);
-     *
-     * tb_fisica.setVisible(true); tb_juridica.setVisible(false);
-     *
-     * } else if (cmb_pessoa.getSelectionModel().getSelectedIndex() == 1) {
-     * vBox_fisica.setVisible(false); vBox_juridica.setVisible(true);
-     *
-     * tb_fisica.setVisible(false); tb_juridica.setVisible(true); }
-     *
-     */
 }

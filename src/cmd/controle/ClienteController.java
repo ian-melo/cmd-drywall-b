@@ -169,8 +169,10 @@ public class ClienteController {
 
     public List<PessoaJuridica> ListaPessoaJuridica() {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
-
-        return pJuDAO.listar();
+        System.out.println("------------Cliente-Controle------------");
+        List<PessoaJuridica> pj = pJuDAO.listar();
+        //pFiDAO.fecharListar();
+        return pj;
     }
 
     public List<PessoaFisica> ListaPessoaFisicas() {
