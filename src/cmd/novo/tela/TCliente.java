@@ -650,9 +650,15 @@ public class TCliente extends javax.swing.JInternalFrame {
     private void cmb_pessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_pessoaActionPerformed
 
         if (cmb_pessoa.getSelectedIndex() == 0) {//Pessoa Juridica
+            LimparCampos();
+            reformataCamposTelefone();
+            
             pJuridica();
         }
         if (cmb_pessoa.getSelectedIndex() == 1) {//Pessoa Fisica
+            LimparCampos();
+            reformataCamposTelefone();
+            
             pFisica();
         }
 
@@ -896,7 +902,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     private void btn_LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparActionPerformed
         LimparCampos();
         reformataCamposTelefone();
-        
+
     }//GEN-LAST:event_btn_LimparActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
