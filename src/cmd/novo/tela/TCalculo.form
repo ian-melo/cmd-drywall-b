@@ -709,7 +709,7 @@
                           <Component id="txt_portaMulti_2" min="-2" pref="81" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Component id="pnl_valor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
