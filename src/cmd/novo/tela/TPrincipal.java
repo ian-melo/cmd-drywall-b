@@ -55,6 +55,7 @@ public class TPrincipal extends javax.swing.JFrame {
         btn_cadConstrucao = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lb_logado = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         ImageIcon icon = new ImageIcon(getClass().getResource("/cmd/imagens/logo.jpg"));
         Image image = icon.getImage();
         jDesktopPane1 = new javax.swing.JDesktopPane(){
@@ -135,24 +136,28 @@ public class TPrincipal extends javax.swing.JFrame {
         lb_logado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lb_logado.setText("NULL");
 
+        jLabel2.setText("v1.10");
+
         javax.swing.GroupLayout pnl_botoesLayout = new javax.swing.GroupLayout(pnl_botoes);
         pnl_botoes.setLayout(pnl_botoesLayout);
         pnl_botoesLayout.setHorizontalGroup(
             pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_botoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_cadMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cadClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_calOrcamentoPrj, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cadFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_solicitacaoOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cadConstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_botoesLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lb_logado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_cadMateriais, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_cadClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_calOrcamentoPrj, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_cadFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_solicitacaoOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_cadConstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_botoesLayout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lb_logado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         pnl_botoesLayout.setVerticalGroup(
@@ -176,7 +181,8 @@ public class TPrincipal extends javax.swing.JFrame {
                 .addComponent(btn_solicitacaoOrcamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_cadFuncionarios)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -423,6 +429,7 @@ public class TPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_solicitacaoOrcamento;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lb_logado;
     private javax.swing.JPanel pnl_botoes;
     // End of variables declaration//GEN-END:variables

@@ -46,19 +46,22 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_cadMateriais" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_relatorios" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_cadClientes" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_calOrcamentoPrj" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_cadFuncionarios" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_solicitacaoOrcamento" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Component id="btn_cadConstrucao" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lb_logado" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btn_cadMateriais" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_relatorios" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_cadClientes" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_calOrcamentoPrj" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_cadFuncionarios" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_solicitacaoOrcamento" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Component id="btn_cadConstrucao" alignment="0" min="-2" pref="269" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lb_logado" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
+                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
@@ -86,7 +89,8 @@
                   <Component id="btn_solicitacaoOrcamento" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btn_cadFuncionarios" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="178" max="32767" attributes="0"/>
+                  <EmptySpace pref="164" max="32767" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -201,6 +205,11 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="NULL"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="v1.10"/>
           </Properties>
         </Component>
       </SubComponents>
