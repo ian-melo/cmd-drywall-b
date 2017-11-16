@@ -85,7 +85,7 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.beginTransaction();
             li = s.createQuery("from Construcao").list();
             s.getTransaction().commit();
-            s.close();
+            //s.close();
             return li;
         } catch(HibernateException e) {
             return null;

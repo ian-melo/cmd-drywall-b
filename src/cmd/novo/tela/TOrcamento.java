@@ -74,7 +74,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_endereco = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tb_materialConstrucaoTipologia = new javax.swing.JTable();
+        tb_itens = new javax.swing.JTable();
         btn_cadastrarOrca = new javax.swing.JButton();
         btn_cadCliente = new javax.swing.JButton();
         btn_salvar = new javax.swing.JButton();
@@ -135,21 +135,21 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Itens do orçamento são listados abaixo:");
 
-        tb_materialConstrucaoTipologia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_materialConstrucaoTipologia.setModel(new javax.swing.table.DefaultTableModel(
+        tb_itens.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_itens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo", "Descrição", "Detalhes", "Qualidade", "Valor"
+                "Cód. construção", "Tipo construção", "Altura (m)", "Largura (m)", "Área da porta (m²)", "Área da janela (m²)", "Preço total"
             }
         ));
-        jScrollPane3.setViewportView(tb_materialConstrucaoTipologia);
+        jScrollPane3.setViewportView(tb_itens);
 
         btn_cadastrarOrca.setBackground(new java.awt.Color(153, 153, 255));
         btn_cadastrarOrca.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -480,34 +480,36 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
-        // li.get(0).get
-
-        tb_materialConstrucaoTipologia.removeAll();
-
-        //List<PessoaFisica> cli = dao.ListaPessoaFisicas();
+        
         Vector tableHeaders = new Vector();
-        tableHeaders.add("Tipo");
-        tableHeaders.add("Descrição");
-        tableHeaders.add("Detalhes");
-        tableHeaders.add("Qualidade");
-        tableHeaders.add("Valor");
-        //tableHeaders.add("Data da inscrição");
+        tableHeaders.add("Cód. construção");
+        tableHeaders.add("Tipo construção");
+        tableHeaders.add("Altura (m)");
+        tableHeaders.add("Largura (m)");
+        tableHeaders.add("Área da porta (m²)");
+        tableHeaders.add("Área da janela (m²)");
+        tableHeaders.add("Preço total");
 
         Vector tableData = new Vector();
         Vector reg;
-        for (Item iTem : itens) {
+        for (Item it : itens) {
             reg = new Vector();
-
-            reg.add(iTem.getConstrucao().getDescricao());
-            reg.add(iTem.getConstrucao().getDetalhes());
-
-            reg.add(iTem.getConstrucao().getQualidade());
-
-            reg.add(iTem.getPrecoTotal());
-
+            reg.add(it.getConstrucao().getCodConstrucao());
+            if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
+                reg.add("Parede");
+            } else if (it.getConstrucao().getParede() == null && it.getConstrucao().getForro() != null) {
+                reg.add("Forro");
+            } else {
+                reg.add("Desconhecido");
+            }
+            reg.add(it.getAltura());
+            reg.add(it.getLargura());
+            reg.add(it.getAreaPorta());
+            reg.add(it.getAreaJanela());
+            reg.add(it.getPrecoTotal());
             tableData.add(reg);
         }
-        tb_materialConstrucaoTipologia.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
 
     private void colocaDataAtual() {
@@ -543,6 +545,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb_valorFinal;
     public static javax.swing.JTable tb_cli_fis;
     private javax.swing.JTable tb_endereco;
-    private javax.swing.JTable tb_materialConstrucaoTipologia;
+    private javax.swing.JTable tb_itens;
     // End of variables declaration//GEN-END:variables
 }

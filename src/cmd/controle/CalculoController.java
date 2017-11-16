@@ -36,66 +36,76 @@ public class CalculoController {
         ConstrucaoDAO cdao = new ConstrucaoDAO();
         List<Construcao> li, res = new ArrayList<>();
         li = cdao.listar();
+        //System.out.println(li.size());//Teste
         Forro f;
         Parede p;
         for(Construcao c : li) {
             //Forro
             if(c.getForro() != null && c.getParede() == null) {
+                //System.out.println("FORRO: " + c.getCodConstrucao());//Teste
                 f = c.getForro();
-                if(ehSt == true && ehRu == true && ehRf == true)
+                if(ehSt == true && ehRu == true && ehRf == true) {
                     if(f.getEhSt() == true && f.getEhRu() == true && f.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == true && ehRf == false)
+                } else if(ehSt == true && ehRu == true && ehRf == false) {
                     if(f.getEhSt() == true && f.getEhRu() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == false && ehRf == true)
+                } else if(ehSt == true && ehRu == false && ehRf == true) {
                     if(f.getEhSt() == true && f.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == false && ehRf == false)
+                } else if(ehSt == true && ehRu == false && ehRf == false) {
+                    //System.out.println("Cliente pede forro ST");//Teste
                     if(f.getEhSt() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == true && ehRf == true)
+                } else if(ehSt == false && ehRu == true && ehRf == true) {
                     if(f.getEhRu() == true && f.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == true && ehRf == false)
+                } else if(ehSt == false && ehRu == true && ehRf == false) {
                     if(f.getEhRu() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == false && ehRf == true)
+                } else if(ehSt == false && ehRu == false && ehRf == true) {
                     if(f.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == false && ehRf == false)
+                } else if(ehSt == false && ehRu == false && ehRf == false) {
                     res.add(c);
+                }
             //Parede
             } else if(c.getForro() == null && c.getParede() != null) {
+                //System.out.println("PAREDE: " + c.getCodConstrucao());//Teste
                 p = c.getParede();
                 //Restrição de altura
-                if(altura > p.getAlturaLimite().doubleValue())
+                if(altura > p.getAlturaLimite().doubleValue()) {
+                    //System.out.println(altura + " maior que " + p.getAlturaLimite().doubleValue());//Teste
                     continue;
-                if(ehSt == true && ehRu == true && ehRf == true)
+                }
+                if(ehSt == true && ehRu == true && ehRf == true) {
                     if(p.getEhSt() == true && p.getEhRu() == true && p.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == true && ehRf == false)
+                } else if(ehSt == true && ehRu == true && ehRf == false) {
                     if(p.getEhSt() == true && p.getEhRu() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == false && ehRf == true)
+                } else if(ehSt == true && ehRu == false && ehRf == true) {
                     if(p.getEhSt() == true && p.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == true && ehRu == false && ehRf == false)
+                } else if(ehSt == true && ehRu == false && ehRf == false) {
+                    //System.out.println("Cliente pede parede ST");//Teste
                     if(p.getEhSt() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == true && ehRf == true)
+                } else if(ehSt == false && ehRu == true && ehRf == true) {
                     if(p.getEhRu() == true && p.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == true && ehRf == false)
+                } else if(ehSt == false && ehRu == true && ehRf == false) {
                     if(p.getEhRu() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == false && ehRf == true)
+                } else if(ehSt == false && ehRu == false && ehRf == true) {
                     if(p.getEhRf() == true)
                         res.add(c);
-                else if(ehSt == false && ehRu == false && ehRf == false)
+                } else if(ehSt == false && ehRu == false && ehRf == false) {
                     res.add(c);
+                }
             }
         }
+        //System.out.println("Tamanho res:" + res.size());//Teste
         return res;
     }
     
@@ -123,7 +133,7 @@ public class CalculoController {
                         matItem.setMaterial(m);
                         matItem.setItem(item);
                         matItem.setPrecoUnitario(BigDecimal.valueOf(preco));
-                        matItem.setQuantidade(Integer.parseInt(Double.toString(quantidade)));
+                        matItem.setQuantidade((new Double(quantidade)).intValue());
                         matItem.setXdead(false);
                         materialItems.add(matItem);
                         break;
@@ -140,7 +150,7 @@ public class CalculoController {
                 matItem.setMaterial(m);
                 matItem.setItem(item);
                 matItem.setPrecoUnitario(BigDecimal.valueOf(preco));
-                matItem.setQuantidade(Integer.parseInt(Double.toString(quantidade)));
+                matItem.setQuantidade((new Double(quantidade)).intValue());
                 matItem.setXdead(false);
                 materialItems.add(matItem);
             }
@@ -149,8 +159,8 @@ public class CalculoController {
         item.setConstrucao(c);
         item.setAltura(BigDecimal.valueOf(altura));
         item.setLargura(BigDecimal.valueOf(largura));
-        item.setAltura(BigDecimal.valueOf(areaPorta));
-        item.setLargura(BigDecimal.valueOf(areaJanela));
+        item.setAreaPorta(BigDecimal.valueOf(areaPorta));
+        item.setAreaJanela(BigDecimal.valueOf(areaJanela));
         item.setPrecoTotal(BigDecimal.valueOf(precoTotal));
         item.setXdead(false);
         item.setMaterialItems(materialItems);

@@ -81,6 +81,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txt_porta = new javax.swing.JFormattedTextField();
         txt_janela = new javax.swing.JFormattedTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         pnl_ambiente = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -239,6 +241,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
         txt_janela.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00#"))));
         txt_janela.setToolTipText("");
 
+        jLabel28.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(54, 54, 54));
+        jLabel28.setText("(obrigatório)");
+        jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel28.setName(""); // NOI18N
+
+        jLabel29.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(54, 54, 54));
+        jLabel29.setText("(obrigatório)");
+        jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel29.setName(""); // NOI18N
+
         javax.swing.GroupLayout pnl_portaJanelaLayout = new javax.swing.GroupLayout(pnl_portaJanela);
         pnl_portaJanela.setLayout(pnl_portaJanelaLayout);
         pnl_portaJanelaLayout.setHorizontalGroup(
@@ -253,7 +269,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel29))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_portaJanelaLayout.setVerticalGroup(
@@ -263,11 +281,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_janela, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel29)
+                .addContainerGap())
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -536,7 +558,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_portaMulti_2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -666,7 +688,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel27)
@@ -752,19 +774,19 @@ public class TCalculo extends javax.swing.JInternalFrame {
 //        txt_janelaMulti_1.setText(txt_janelaMulti_1.getText().trim());
 //        txt_janelaMulti_2.setText(txt_janelaMulti_2.getText().trim());
 
-        fazMultiplicacaoPorta();
+//        fazMultiplicacaoPorta();
     }//GEN-LAST:event_txt_portaMulti_1FocusLost
 
     private void txt_portaMulti_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_portaMulti_2FocusLost
-        fazMultiplicacaoPorta();
+//        fazMultiplicacaoPorta();
     }//GEN-LAST:event_txt_portaMulti_2FocusLost
 
     private void txt_janelaMulti_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaMulti_1FocusLost
-        fazMultiplicacaoJanela();
+//        fazMultiplicacaoJanela();
     }//GEN-LAST:event_txt_janelaMulti_1FocusLost
 
     private void txt_janelaMulti_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaMulti_2FocusLost
-        fazMultiplicacaoJanela();
+//        fazMultiplicacaoJanela();
     }//GEN-LAST:event_txt_janelaMulti_2FocusLost
 
     private void fazMultiplicacaoJanela() {
@@ -839,9 +861,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (!validarCampos()) {
             return;
         }
+        
+        double altura = Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
+        
+        //JOptionPane.showMessageDialog(rootPane, altura + " " + chk_st.isSelected() + " "
+        //        + chk_ru.isSelected() + " " + chk_rf.isSelected()); //teste
 
-        listaConstrucoes = cControle.procurarTipologias(chk_st.isEnabled(), chk_ru.isEnabled(),
-                chk_rf.isEnabled(), Double.parseDouble(txt_altura.getText().replaceAll(",", ".")));
+        listaConstrucoes = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
+                chk_rf.isSelected(), altura);
+        
+        //JOptionPane.showMessageDialog(rootPane, listaConstrucoes.size()); //Teste
         if (listaConstrucoes == null || listaConstrucoes.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Construções não encontradas.");
             return;
@@ -900,7 +929,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         for (int i : linMaterial) {
             for (Object o : c.getMaterials()) {
                 if (((Material) o).getEhOpcional()
-                        && ((Material) o).getCodMaterial() == Integer.parseInt((String) tb_materiais.getModel().getValueAt(i, 0))) {
+                        && ((Material) o).getCodMaterial() == Integer.parseInt(tb_materiais.getModel().getValueAt(i, 0).toString())) {
                     mOp.add((Material) o);
                     break;
                 }
@@ -1117,6 +1146,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
