@@ -652,13 +652,13 @@ public class TCliente extends javax.swing.JInternalFrame {
         if (cmb_pessoa.getSelectedIndex() == 0) {//Pessoa Juridica
             LimparCampos();
             reformataCamposTelefone();
-            
+
             pJuridica();
         }
         if (cmb_pessoa.getSelectedIndex() == 1) {//Pessoa Fisica
             LimparCampos();
             reformataCamposTelefone();
-            
+
             pFisica();
         }
 
@@ -947,32 +947,32 @@ public class TCliente extends javax.swing.JInternalFrame {
         txt_uf.setText(peJu.getCliente().getEndereco().getUf());
         txt_complemento.setText(peJu.getCliente().getEndereco().getComplemento());
 
-        try {
-            Iterator<Telefone> iterator = peJu.getCliente().getTelefones().iterator();
-            if (iterator.hasNext()) {
-                String val = iterator.next().getId().getNumero();
-                txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
-                txt_tel1.setText(val);
+        //  try {
+        Iterator<Telefone> iterator = peJu.getCliente().getTelefones().iterator();
+        if (iterator.hasNext()) {
+            String val = iterator.next().getId().getNumero().toString();
+            txt_tel1.setFormatterFactory(new DefaultFormatterFactory());
+            txt_tel1.setText(val);
 
-            }
-            if (iterator.hasNext()) {
-                String val = iterator.next().getId().getNumero();
-                txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
-
-                txt_cel1.setText(val);
-
-            }
-
-            if (iterator.hasNext()) {
-                String val = iterator.next().getId().getNumero();
-                txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
-
-                txt_cel2.setText(val);
-
-            }
-        } catch (Exception e) {
-            System.out.println("___" + e);
         }
+        if (iterator.hasNext()) {
+            String val = iterator.next().getId().getNumero().toString();
+            txt_cel1.setFormatterFactory(new DefaultFormatterFactory());
+
+            txt_cel1.setText(val);
+
+        }
+
+        if (iterator.hasNext()) {
+            String val = iterator.next().getId().getNumero().toString();
+            txt_cel2.setFormatterFactory(new DefaultFormatterFactory());
+
+            txt_cel2.setText(val);
+
+        }
+       // } catch (Exception e) {
+        //     System.out.println("___" + e);
+        // }
     }
 
     private void setInfoPFisica(int linha) {
@@ -994,16 +994,16 @@ public class TCliente extends javax.swing.JInternalFrame {
             Iterator<Telefone> iterator = peFi.getCliente().getTelefones().iterator();
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
-                txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                txt_tel1.setFormatterFactory(new DefaultFormatterFactory());
 
                 txt_tel1.setText(val);
                 //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                //txt_tel1.
+
             }
             //txt_tel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
-                txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new java.text.DecimalFormat(""))));
+                txt_cel1.setFormatterFactory(new DefaultFormatterFactory());
                 //  if (val.length() == 13) {
                 //txt_cel1.setText(val + "0");
                 // } else {
@@ -1014,7 +1014,8 @@ public class TCliente extends javax.swing.JInternalFrame {
 
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
-                txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
+                txt_cel2.setFormatterFactory(new DefaultFormatterFactory());
                         //if (val.length() == 13) {
                 //  txt_cel2.setText(val + "0");
 
