@@ -32,6 +32,8 @@ public class TCarregamento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        barraProgresso.setValue(100);
 
     }
 
@@ -45,7 +47,7 @@ public class TCarregamento extends javax.swing.JDialog {
     private void initComponents() {
 
         pn_barraProgresso = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        barraProgresso = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,7 +60,7 @@ public class TCarregamento extends javax.swing.JDialog {
 
         pn_barraProgresso.setBackground(new java.awt.Color(255, 255, 255));
 
-        jProgressBar1.setIndeterminate(true);
+        barraProgresso.setIndeterminate(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setText("Por favor, aguarde o carregamento.....");
@@ -67,7 +69,7 @@ public class TCarregamento extends javax.swing.JDialog {
         pn_barraProgresso.setLayout(pn_barraProgressoLayout);
         pn_barraProgressoLayout.setHorizontalGroup(
             pn_barraProgressoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addComponent(barraProgresso, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_barraProgressoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -78,7 +80,7 @@ public class TCarregamento extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_barraProgressoLayout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(barraProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,8 +126,8 @@ public class TCarregamento extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barraProgresso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JPanel pn_barraProgresso;
     // End of variables declaration//GEN-END:variables
 }

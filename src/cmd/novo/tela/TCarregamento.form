@@ -53,7 +53,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jProgressBar1" alignment="0" pref="456" max="32767" attributes="0"/>
+              <Component id="barraProgresso" alignment="0" pref="456" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -66,13 +66,13 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jProgressBar1" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="barraProgresso" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+        <Component class="javax.swing.JProgressBar" name="barraProgresso">
           <Properties>
             <Property name="indeterminate" type="boolean" value="true"/>
           </Properties>
