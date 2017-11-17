@@ -9,6 +9,7 @@ import cmd.DAO.PedidosDAO;
 import java.awt.Color;
 import cmd.email.SwingEmailSender;
 import cmd.entidade.Pedidos;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -87,6 +88,7 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_orcamento = new javax.swing.JTable();
         bt_atualizar = new javax.swing.JButton();
+        btn_envioInfo = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Solicitação de Orçamentos");
@@ -108,10 +110,15 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Altura", "Largura", "Quantidade de Paredes", "Email", "Valor disponivel/desejado", "Ambiente", "Quantidade de Portas (Se houver)", "Quantidade Janelas (Se houver)", "Possui Portas", "Possui Janela", "Altura da Porta", "Largura da Porta", "Altura da Janela", "Largura da Janela", "Mao de Obra"
+                "Id", "Altura", "Largura", "Quantidade de Paredes", "Email", "Valor disponivel/desejado", "Ambiente", "Possui Portas", "Possui Janela", "Quantidade de Portas (Se houver)", "Quantidade Janelas (Se houver)", "Altura da Porta", "Largura da Porta", "Altura da Janela", "Largura da Janela", "Mao de Obra"
             }
         ));
         tb_orcamento.setPreferredSize(new java.awt.Dimension(1250, 48));
+        tb_orcamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_orcamentoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_orcamento);
 
         javax.swing.GroupLayout pn_conteudoLayout = new javax.swing.GroupLayout(pn_conteudo);
@@ -127,10 +134,21 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
         jScrollPane2.setViewportView(pn_conteudo);
 
+        bt_atualizar.setBackground(new java.awt.Color(153, 153, 255));
+        bt_atualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bt_atualizar.setText("Atualizar Tabela");
         bt_atualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_atualizarActionPerformed(evt);
+            }
+        });
+
+        btn_envioInfo.setBackground(new java.awt.Color(153, 153, 255));
+        btn_envioInfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_envioInfo.setText("<html><center>Enviar Informação <br /> selecionada <br/> para 'Novo orçamento'</html>");
+        btn_envioInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_envioInfoActionPerformed(evt);
             }
         });
 
@@ -145,7 +163,9 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
                         .addComponent(btn_enviarEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bt_atualizar)
-                        .addGap(0, 668, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addComponent(btn_envioInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 410, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -157,10 +177,15 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1, 1, 1))
-                    .addComponent(btn_enviarEmail))
-                .addGap(120, 120, 120))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bt_atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                .addGap(1, 1, 1))
+                            .addComponent(btn_enviarEmail))
+                        .addGap(120, 120, 120))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_envioInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -175,10 +200,27 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
        ReadTable();
     }//GEN-LAST:event_bt_atualizarActionPerformed
 
+    private void btn_envioInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_envioInfoActionPerformed
+       if (tb_orcamento.getSelectedRow() == -1){
+           JOptionPane.showMessageDialog(null, "Selecione uma opção");
+           return;
+       }
+    }//GEN-LAST:event_btn_envioInfoActionPerformed
+
+    private void tb_orcamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_orcamentoMouseClicked
+        int linha;
+        if (evt.getClickCount() == 1) {
+            linha = tb_orcamento.getSelectedRow();
+            
+            //Enviar info para TCalculo, enviar o cliente para TOrcamento
+        }
+    }//GEN-LAST:event_tb_orcamentoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_atualizar;
     private javax.swing.JButton btn_enviarEmail;
+    private javax.swing.JButton btn_envioInfo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pn_conteudo;
