@@ -91,8 +91,7 @@ public class ClienteDAO implements DAO<Cliente> {
             s.beginTransaction();
             li = s.createQuery("from Cliente").list();
             s.getTransaction().commit();
-            System.out.println("--------------------------------------------");
-           // s.close();//Temporario
+            // s.close();
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);

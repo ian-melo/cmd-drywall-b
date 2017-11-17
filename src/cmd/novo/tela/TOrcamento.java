@@ -8,6 +8,7 @@ package cmd.novo.tela;
 import cmd.DAO.EnderecoDAO;
 import cmd.controle.ClienteController;
 import cmd.controle.EnderecoController;
+import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.PessoaFisica;
@@ -25,37 +26,36 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
-
+    
+    private List<Cliente> clientes = null;
+    private List<Item> itens = null;
+    private List<Endereco> enderecos = null;
+    
     TCarregamento tCar = new TCarregamento(null, true);
-
-    List<Item> itens;
-
     GerenteDeJanelas gerenteDeJanelas;
     public static TOrcamento tCalculoOrcamento;
-
+    
     public static TOrcamento getInstancia() {
         if (tCalculoOrcamento == null) {
             tCalculoOrcamento = new TOrcamento();
         }
         return tCalculoOrcamento;
-
     }
-
+    
     /**
      * Creates new form TCalculoOrcamento
      */
     public TOrcamento() {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
-
         getContentPane().setBackground(Color.WHITE);
-
+        
         carregarTabelaPessoaFisica();
         carregarendereco();
-
+        
         colocaDataAtual();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +68,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_cli_fis = new javax.swing.JTable();
+        tb_pesFisica = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_endereco = new javax.swing.JTable();
@@ -95,8 +95,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Selecione o Cliente:");
 
-        tb_cli_fis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_cli_fis.setModel(new javax.swing.table.DefaultTableModel(
+        tb_pesFisica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_pesFisica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -109,12 +109,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 "CPF", "Nome", "Data", "Data de Inscrição"
             }
         ));
-        tb_cli_fis.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_pesFisica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_cli_fisMouseClicked(evt);
+                tb_pesFisicaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_cli_fis);
+        jScrollPane1.setViewportView(tb_pesFisica);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Selecione o local de entrega (Está vinculado ao Cliente selecionado):");
@@ -299,29 +299,22 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         } catch (IllegalArgumentException e) {
             gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
             //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
         }
-
-
     }//GEN-LAST:event_btn_cadClienteActionPerformed
 
     private void btn_cadastrarOrcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarOrcaActionPerformed
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
                     //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadastrarOrcaActionPerformed
@@ -335,59 +328,55 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmb_clienteActionPerformed
 
-    private void tb_cli_fisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_cli_fisMouseClicked
+    private void tb_pesFisicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_pesFisicaMouseClicked
         int linha;
         if (evt.getClickCount() == 1) {
-            linha = tb_cli_fis.getSelectedRow();
-
+            linha = tb_pesFisica.getSelectedRow();
             // String cod = (String) tb_cli_fis.getValueAt(linha, 0);
-            int cod = (Integer) tb_cli_fis.getValueAt(linha, 0);
-
+            int cod = (Integer) tb_pesFisica.getValueAt(linha, 0);
             carregarEndereco(cod);
         }
-
-
-    }//GEN-LAST:event_tb_cli_fisMouseClicked
+    }//GEN-LAST:event_tb_pesFisicaMouseClicked
+    
     private void janelaCarregamentoAbre() {
         tCar.setVisible(true);
     }
-
+    
     private void janelaCarregamentoFecha() {
         tCar.setVisible(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     private void carregarTabelaPessoaFisica() {
-        tb_cli_fis.removeAll();
-        ClienteController dao = new ClienteController();
-
-        List<PessoaFisica> cli = dao.ListaPessoaFisicas();
-
+        tb_pesFisica.removeAll();
+        
+        
+        ClienteController ccont = new ClienteController();
+        List<PessoaFisica> lisPf = ccont.ListaPessoaFisicas();
+        
         Vector tableHeaders = new Vector();
         tableHeaders.add("CodCliente");
         tableHeaders.add("CPF");
         tableHeaders.add("Nome");
         tableHeaders.add("Data de Nascimento");
-        //tableHeaders.add("Data da inscrição");
+        tableHeaders.add("Data da inscrição");
 
         Vector tableData = new Vector();
         Vector reg;
-        for (PessoaFisica c : cli) {
+        for (PessoaFisica pf : lisPf) {
             reg = new Vector();
-
-            reg.add(c.getCodCliente());
-
-            reg.add(c.getCpf());
-            reg.add(c.getNome().toString());
-            reg.add(c.getDataNascimento().toString());
-
+            reg.add(pf.getCodCliente());
+            reg.add(pf.getCpf());
+            reg.add(pf.getNome());
+            reg.add(pf.getDataNascimento().toString());
+            reg.add(pf.getCliente().getDataInscricao().toString());
             tableData.add(reg);
         }
-        tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_pesFisica.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
 
     private void carregarTabelaPessoaJuridica() {
-        tb_cli_fis.removeAll();
+        tb_pesFisica.removeAll();
         ClienteController dao = new ClienteController();
 
         List<PessoaJuridica> cli = dao.ListaPessoaJuridica();
@@ -414,7 +403,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
             tableData.add(reg);
         }
-        tb_cli_fis.setModel(new DefaultTableModel(tableData, tableHeaders));
+        tb_pesFisica.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
 
     @SuppressWarnings("unchecked")
@@ -543,8 +532,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lb_dataEhora;
     private javax.swing.JLabel lb_valorFinal;
-    public static javax.swing.JTable tb_cli_fis;
     private javax.swing.JTable tb_endereco;
     private javax.swing.JTable tb_itens;
+    public static javax.swing.JTable tb_pesFisica;
     // End of variables declaration//GEN-END:variables
 }
