@@ -936,7 +936,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 }
             }
         }
-        //Adição    
+        //Adição
         if (listaItens == null) {
             listaItens = new ArrayList<>();
         }
@@ -984,6 +984,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linConstrucao = -1;
     }
 
     private void listarMateriais() {
@@ -1012,6 +1013,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linMaterial = null;
     }
 
     private void listarItens() {
@@ -1044,6 +1046,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linItem = -1;
     }
 
     private boolean validarCampos() {

@@ -23,9 +23,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
-    private List<Cliente> clientes = null;
-    private List<Endereco> enderecos = null;
-    private List<Item> itens = null;
+    private List<Cliente> listaClientes = null;
+    private List<Endereco> listaEnderecos = null;
+    private List<Item> listaItens = null;
     private int linCliente = -1;
     private int linEndereco = -1;
     
@@ -391,9 +391,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     
     @SuppressWarnings("unchecked")
     private void carregarPessoaFisica() {
-        linCliente = -1;
-        linEndereco = -1;
-        clientes = new ArrayList<>();
+        limparTClientes();
+        limparTEnderecos();
+        listaClientes = new ArrayList<>();
         
         ClienteController ccont = new ClienteController();
         List<PessoaFisica> lisPf = ccont.listarPessoasFisicas();
@@ -408,7 +408,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         Vector tableData = new Vector();
         Vector reg;
         for (PessoaFisica pf : lisPf) {
-            clientes.add(pf.getCliente());
+            listaClientes.add(pf.getCliente());
             reg = new Vector();
             reg.add(pf.getCodCliente());
             reg.add(pf.getCpf());
@@ -422,9 +422,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     
     @SuppressWarnings("unchecked")
     private void carregarPessoaJuridica() {
-        linCliente = -1;
-        linEndereco = -1;
-        clientes = new ArrayList<>();
+        limparTClientes();
+        limparTEnderecos();
+        listaClientes = new ArrayList<>();
         
         ClienteController ccont = new ClienteController();
         List<PessoaJuridica> cli = ccont.listarPessoasJuridicas();
@@ -439,7 +439,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         Vector tableData = new Vector();
         Vector reg;
         for (PessoaJuridica pj : cli) {
-            clientes.add(pj.getCliente());
+            listaClientes.add(pj.getCliente());
             reg = new Vector();
             reg.add(pj.getCodCliente());
             reg.add(pj.getCnpj());
@@ -455,11 +455,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private void carregarEndereco() {
         if(linCliente < 0)
             return;
-        linEndereco = -1;
-        enderecos = new ArrayList<>();
         
-        Endereco en = clientes.get(linCliente).getEndereco();
-        enderecos.add(en);
+        limparTEnderecos();
+        listaEnderecos = new ArrayList<>();
+        
+        Endereco en = listaClientes.get(linCliente).getEndereco();
+        listaEnderecos.add(en);
         
         Vector tableHeaders = new Vector();
         tableHeaders.add("CEP");
@@ -482,7 +483,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
-        itens = li;
+        limparTItens();
+        listaItens = li;
         double valTotal = 0.0;
         
         Vector tableHeaders = new Vector();
@@ -496,7 +498,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         
         Vector tableData = new Vector();
         Vector reg;
-        for (Item it : itens) {
+        for (Item it : listaItens) {
             valTotal += it.getPrecoTotal().doubleValue();
             
             reg = new Vector();
@@ -521,11 +523,41 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }
     
     private void limparTabelas() {
-        tb_clientes.removeAll();
-        tb_enderecos.removeAll();
-        tb_itens.removeAll();
+        limparTClientes();
+        limparTEnderecos();
+        limparTItens();
+    }
+    
+    private void limparTClientes() {
+        tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
+                null,
+                new String[]{
+                    "CPF", "Nome", "Data", "Data de Inscrição"    
+                }
+        ));
+        listaClientes = null;
         linCliente = -1;
-        linEndereco =  -1;
+    }
+    
+    private void limparTEnderecos() {
+       tb_enderecos.setModel(new javax.swing.table.DefaultTableModel(
+                null,
+                new String[]{
+                    "Cep", "Logradouro", "Numero", "Complemento", "Bairro", "UF"
+                }
+        ));
+        listaEnderecos = null;
+        linEndereco =  -1; 
+    }
+    
+    private void limparTItens() {
+        tb_itens.setModel(new javax.swing.table.DefaultTableModel(
+                null,
+                new String[]{
+                    "Cód. construção", "Tipo construção", "Altura (m)", "Largura (m)", "Área da porta (m²)", "Área da janela (m²)", "Preço total"
+                }
+        ));
+        listaItens = null;
     }
     
     private void exibirDataAtual() {
