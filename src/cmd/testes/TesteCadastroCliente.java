@@ -37,7 +37,7 @@ public class TesteCadastroCliente {
     private static void TesteListarPessoaJuridica() {
         ClienteController cleC = new ClienteController();
 
-        for (PessoaJuridica jx : cleC.ListaPessoaJuridica()) {
+        for (PessoaJuridica jx : cleC.listarPessoasJuridicas()) {
             System.out.println("------------------------------------------------");
             System.out.println("CodCliente                 = " + jx.getCodCliente());
             System.out.println("Cnpj                       = " + jx.getCnpj());
@@ -125,7 +125,7 @@ public class TesteCadastroCliente {
         pJu.setRazaoSocial("razaoSo_2");
         pJu.setXdead(false);
 
-        JOptionPane.showMessageDialog(null, cliC.inserirClientePessoaJuridica(pJu));
+        JOptionPane.showMessageDialog(null, cliC.inserirPessoaJuridica(pJu));
         //JOptionPane.showMessageDialog(null, cliC.inserirCliente(cli));
         //JOptionPane.showMessageDialog(null, pJuDAO.inserir(pJu));
 

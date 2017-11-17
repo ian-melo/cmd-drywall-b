@@ -729,17 +729,17 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            if (!cliC.validaCNPJ(pJur)) {
+            if (!cliC.validarCnpj(pJur)) {
                 JOptionPane.showMessageDialog(null, "CNPJ, invalido");
                 return;
             }
 
-            if (!cliC.verificaCNPJemBD(pJur)) {
+            if (!cliC.verificarCnpj(pJur)) {
                 JOptionPane.showMessageDialog(null, "CNPJ, já existe");
                 return;
             }
 
-            if (cliC.inserirClientePessoaJuridica(pJur) == true) {
+            if (cliC.inserirPessoaJuridica(pJur) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
@@ -798,17 +798,17 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setTelefones(tels);
             cli.setXdead(false);
 
-            if (!cliC.validaCPF(pFis)) {
+            if (!cliC.validarCpf(pFis)) {
                 JOptionPane.showMessageDialog(null, "CPF, invalido");
                 return;
             }
 
-            if (!cliC.verificaCPFemBD(pFis)) {
+            if (!cliC.verificarCpf(pFis)) {
                 JOptionPane.showMessageDialog(null, "CPF, já existe");
                 return;
             }
 
-            if (cliC.inserirClientePessoaFisica(pFis) == true) {
+            if (cliC.inserirPessoaFisica(pFis) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
 
             }
@@ -1257,7 +1257,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         Vector dados = new Vector();
         Vector item;
 
-        for (PessoaJuridica jx : cleC.ListaPessoaJuridica()) {
+        for (PessoaJuridica jx : cleC.listarPessoasJuridicas()) {
             item = new Vector();
             item.add(jx.getCnpj());
             item.add(jx.getRazaoSocial());
@@ -1305,7 +1305,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         Vector dados = new Vector();
         Vector item;
 
-        for (PessoaFisica fx : cleC.ListaPessoaFisicas()) {
+        for (PessoaFisica fx : cleC.listarPessoasFisicas()) {
             item = new Vector();
             item.add(fx.getNome());
             item.add(fx.getCpf());

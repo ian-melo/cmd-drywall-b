@@ -25,7 +25,7 @@ public class TesteCliente {
     private static void imprimeDetlhesPeloControleModificadoPessoaJuridica() {
 
         ClienteController cliC = new ClienteController();
-        List<PessoaJuridica> pJuridicas = cliC.ListaPessoaJuridica();
+        List<PessoaJuridica> pJuridicas = cliC.listarPessoasJuridicas();
 
         for (PessoaJuridica c : pJuridicas) {
             if (c.getCnpj()!= null) {
@@ -64,7 +64,7 @@ public class TesteCliente {
     private static void imprimeDetlhesPeloControleModificado() {
 
         ClienteController cliC = new ClienteController();
-        List<PessoaFisica> pessoaFisicas = cliC.ListaPessoaFisicas();
+        List<PessoaFisica> pessoaFisicas = cliC.listarPessoasFisicas();
 
         for (PessoaFisica c : pessoaFisicas) {
             if (c.getCpf() != null) {
@@ -101,7 +101,7 @@ public class TesteCliente {
     private static void imprimeDetlhesPeloControle() {
 
         ClienteController cliC = new ClienteController();
-        List<PessoaFisica> pessoaFisicas = cliC.ListaPessoaFisicas();
+        List<PessoaFisica> pessoaFisicas = cliC.listarPessoasFisicas();
 
         for (PessoaFisica c : pessoaFisicas) {
             if (c.getCpf() != null) {
