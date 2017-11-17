@@ -22,19 +22,22 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
-    
     private List<Cliente> clientes = null;
     private List<Endereco> enderecos = null;
     private List<Item> itens = null;
+    private int linCliente = -1;
+    private int linEndereco = -1;
     
-    TCarregamento tCar = new TCarregamento(null, true);
+    TCarregamento tCarregamento = new TCarregamento(null, true);
     GerenteDeJanelas gerenteDeJanelas;
-    public static TOrcamento tCalculoOrcamento;
     
+    public static TOrcamento tCalculoOrcamento;
     public static TOrcamento getInstancia() {
         if (tCalculoOrcamento == null) {
             tCalculoOrcamento = new TOrcamento();
         }
+        tCalculoOrcamento.carregarPessoaFisica();
+        tCalculoOrcamento.exibirDataAtual();
         return tCalculoOrcamento;
     }
     
@@ -45,11 +48,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         initComponents();
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
         getContentPane().setBackground(Color.WHITE);
-        
-        carregarTabelaPessoaFisica();
-        carregarendereco();
-        
-        colocaDataAtual();
     }
     
     /**
@@ -67,7 +65,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tb_endereco = new javax.swing.JTable();
+        tb_enderecos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tb_itens = new javax.swing.JTable();
@@ -77,7 +75,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         btn_limpar = new javax.swing.JButton();
         btn_sair = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        lb_dataEhora = new javax.swing.JLabel();
+        lb_dataHora = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
         cmb_cliente = new javax.swing.JComboBox();
@@ -115,8 +113,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Selecione o local de entrega (Está vinculado ao Cliente selecionado):");
 
-        tb_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_endereco.setModel(new javax.swing.table.DefaultTableModel(
+        tb_enderecos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_enderecos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -126,7 +124,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 "Cep", "Logradouro", "Numero", "Complemento", "Bairro", "UF"
             }
         ));
-        jScrollPane2.setViewportView(tb_endereco);
+        tb_enderecos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_enderecosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tb_enderecos);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Itens do orçamento são listados abaixo:");
@@ -180,8 +183,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Data:");
 
-        lb_dataEhora.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lb_dataEhora.setText("##/##/#### - ##:##");
+        lb_dataHora.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lb_dataHora.setText("##/##/#### - ##:##");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Valor Final:");
@@ -222,7 +225,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lb_dataEhora)))
+                                        .addComponent(lb_dataHora)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
                                 .addComponent(btn_cadCliente))
                             .addGroup(layout.createSequentialGroup()
@@ -257,7 +260,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(lb_dataEhora))
+                            .addComponent(lb_dataHora))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -308,55 +311,59 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
                     //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
-                janelaCarregamentoFecha();
+                abrirJanelaCarregamentoFecha();
             }
         };
         t.start();
-        janelaCarregamentoAbre();
+        abrirJanelaCarregamento();
     }//GEN-LAST:event_btn_cadastrarOrcaActionPerformed
 
     private void cmb_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_clienteActionPerformed
         if (cmb_cliente.getSelectedIndex() == 0) {//Pessoa Fisica
-            carregarTabelaPessoaFisica();
+            carregarPessoaFisica();
         }
         if (cmb_cliente.getSelectedIndex() == 1) {//Pessoa Juridica
-            carregarTabelaPessoaJuridica();
+            carregarPessoaJuridica();
         }
     }//GEN-LAST:event_cmb_clienteActionPerformed
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
-        int linha;
         if (evt.getClickCount() == 1) {
-            linha = tb_clientes.getSelectedRow();
-            // String cod = (String) tb_cli_fis.getValueAt(linha, 0);
-            int cod = (Integer) tb_clientes.getValueAt(linha, 0);
-            carregarEndereco(cod);
+            linCliente = tb_clientes.getSelectedRow();
+            carregarEndereco();
         }
     }//GEN-LAST:event_tb_clientesMouseClicked
+
+    private void tb_enderecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_enderecosMouseClicked
+        if (evt.getClickCount() == 1) {
+            linEndereco = tb_enderecos.getSelectedRow();
+        }
+    }//GEN-LAST:event_tb_enderecosMouseClicked
     
-    private void janelaCarregamentoAbre() {
-        tCar.setVisible(true);
+    private void abrirJanelaCarregamento() {
+        tCarregamento.setVisible(true);
     }
     
-    private void janelaCarregamentoFecha() {
-        tCar.setVisible(false);
+    private void abrirJanelaCarregamentoFecha() {
+        tCarregamento.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
-    private void carregarTabelaPessoaFisica() {
-        tb_clientes.removeAll();
+    private void carregarPessoaFisica() {
+        linCliente = -1;
+        linEndereco = -1;
         clientes = new ArrayList<>();
         
         ClienteController ccont = new ClienteController();
         List<PessoaFisica> lisPf = ccont.listarPessoasFisicas();
         
         Vector tableHeaders = new Vector();
-        tableHeaders.add("CodCliente");
+        tableHeaders.add("Cód. cliente");
         tableHeaders.add("CPF");
         tableHeaders.add("Nome");
         tableHeaders.add("Data de Nascimento");
         tableHeaders.add("Data da inscrição");
-
+        
         Vector tableData = new Vector();
         Vector reg;
         for (PessoaFisica pf : lisPf) {
@@ -371,44 +378,46 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-
-    private void carregarTabelaPessoaJuridica() {
-        tb_clientes.removeAll();
-        ClienteController dao = new ClienteController();
-
-        List<PessoaJuridica> cli = dao.listarPessoasJuridicas();
-
+    
+    private void carregarPessoaJuridica() {
+        linCliente = -1;
+        linEndereco = -1;
+        clientes = new ArrayList<>();
+        
+        ClienteController ccont = new ClienteController();
+        List<PessoaJuridica> cli = ccont.listarPessoasJuridicas();
+        
         Vector tableHeaders = new Vector();
-
-        tableHeaders.add("CodCliente");
-
+        tableHeaders.add("Cód. cliente");
         tableHeaders.add("CNPJ");
-        tableHeaders.add("Razão Social");
+        tableHeaders.add("Razão social");
         tableHeaders.add("Data de fundação");
-        //tableHeaders.add("Data da inscrição");
-
+        tableHeaders.add("Data da inscrição");
+        
         Vector tableData = new Vector();
         Vector reg;
-        for (PessoaJuridica c : cli) {
+        for (PessoaJuridica pj : cli) {
+            clientes.add(pj.getCliente());
             reg = new Vector();
-
-            reg.add(c.getCodCliente());
-
-            reg.add(c.getCnpj());
-            reg.add(c.getRazaoSocial());
-            reg.add(c.getDataFundacao());
-
+            reg.add(pj.getCodCliente());
+            reg.add(pj.getCnpj());
+            reg.add(pj.getRazaoSocial());
+            reg.add(pj.getDataFundacao().toString());
+            reg.add(pj.getCliente().getDataInscricao().toString());
             tableData.add(reg);
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-
-    @SuppressWarnings("unchecked")
-    private void carregarendereco() {
-        //ClienteController dao = new ClienteController();
-        EnderecoDAO daos = new EnderecoDAO();
-        List<Endereco> endereco = daos.listar();
-
+    
+    private void carregarEndereco() {
+        if(linCliente < 0)
+            return;
+        linEndereco = -1;
+        enderecos = new ArrayList<>();
+        
+        Endereco en = clientes.get(linCliente).getEndereco();
+        enderecos.add(en);
+        
         Vector tableHeaders = new Vector();
         tableHeaders.add("CEP");
         tableHeaders.add("Logradouro");
@@ -416,53 +425,18 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tableHeaders.add("Complemento");
         tableHeaders.add("Bairro");
         tableHeaders.add("UF");
-        Vector tableData = new Vector();
-        Vector reg;
-
-        for (Endereco c : endereco) {
-            reg = new Vector();
-            reg.add(c.getCep());
-            reg.add(c.getLogradouro());
-            reg.add(c.getNumero());
-            reg.add(c.getComplemento());
-            reg.add(c.getBairro());
-            reg.add(c.getUf());
-            tableData.add(reg);
-        }
-        tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
+        
+        Vector reg = new Vector();
+        reg.add(en.getCep());
+        reg.add(en.getLogradouro());
+        reg.add(en.getNumero());
+        reg.add(en.getComplemento());
+        reg.add(en.getBairro());
+        reg.add(en.getUf());
+        
+        tb_enderecos.setModel(new DefaultTableModel(new Vector(reg), tableHeaders));
     }
-
-    private void carregarEndereco(int cli) {
-        //ClienteController dao = new ClienteController();
-        EnderecoDAO daos = new EnderecoDAO();
-
-        EnderecoController endC = new EnderecoController();
-        Endereco end = new Endereco();
-
-        end = endC.buscar(String.valueOf(cli));
-
-        Vector tableHeaders = new Vector();
-        tableHeaders.add("CEP");
-        tableHeaders.add("Logradouro");
-        tableHeaders.add("Número");
-        tableHeaders.add("Complemento");
-        tableHeaders.add("Bairro");
-        tableHeaders.add("UF");
-        Vector tableData = new Vector();
-        Vector reg;
-
-        reg = new Vector();
-        reg.add(end.getCep());
-        reg.add(end.getLogradouro());
-        reg.add(end.getNumero());
-        reg.add(end.getComplemento());
-        reg.add(end.getBairro());
-        reg.add(end.getUf());
-        tableData.add(reg);
-
-        tb_endereco.setModel(new DefaultTableModel(tableData, tableHeaders));
-    }
-
+    
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
@@ -475,7 +449,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tableHeaders.add("Área da porta (m²)");
         tableHeaders.add("Área da janela (m²)");
         tableHeaders.add("Preço total");
-
+        
         Vector tableData = new Vector();
         Vector reg;
         for (Item it : itens) {
@@ -497,20 +471,16 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-
-    private void colocaDataAtual() {
+    
+    private void exibirDataAtual() {
         try {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            lb_dataEhora.setText(sdf.format(new Date(System.currentTimeMillis())));
-
+            SimpleDateFormat fData = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            lb_dataHora.setText(fData.format(new Date(System.currentTimeMillis())));
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
-
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
@@ -527,10 +497,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lb_dataEhora;
+    private javax.swing.JLabel lb_dataHora;
     private javax.swing.JLabel lb_valorFinal;
-    public static javax.swing.JTable tb_clientes;
-    private javax.swing.JTable tb_endereco;
+    private javax.swing.JTable tb_clientes;
+    private javax.swing.JTable tb_enderecos;
     private javax.swing.JTable tb_itens;
     // End of variables declaration//GEN-END:variables
 }
