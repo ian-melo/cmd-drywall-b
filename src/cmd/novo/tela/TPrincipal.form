@@ -26,7 +26,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="pnl_botoes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -47,24 +47,20 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="pnl_gerenciamentoItens" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lb_logado" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="pnl_orcamento" max="32767" attributes="0"/>
-                              <Component id="pnl_APP" max="32767" attributes="0"/>
-                              <Component id="pnl_funcionarios" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pnl_gerenciamentoItens" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lb_logado" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnl_orcamento" max="32767" attributes="0"/>
+                          <Component id="pnl_APP" max="32767" attributes="0"/>
+                          <Component id="pnl_funcionarios" max="32767" attributes="0"/>
                       </Group>
                       <Component id="pnl_relatorios" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,8 +121,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_cadMateriais" pref="273" max="32767" attributes="0"/>
-                  <Component id="btn_cadConstrucao" pref="273" max="32767" attributes="0"/>
+                  <Component id="btn_cadMateriais" max="32767" attributes="0"/>
+                  <Component id="btn_cadConstrucao" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -199,8 +195,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_cadClientes" pref="273" max="32767" attributes="0"/>
-                  <Component id="btn_calOrcamentoPrj" pref="273" max="32767" attributes="0"/>
+                  <Component id="btn_cadClientes" max="32767" attributes="0"/>
+                  <Component id="btn_calOrcamentoPrj" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -330,7 +326,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_cadFuncionarios" pref="273" max="32767" attributes="0"/>
+                  <Component id="btn_cadFuncionarios" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -387,7 +383,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_relatorios" pref="275" max="32767" attributes="0"/>
+                  <Component id="btn_relatorios" pref="281" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -442,7 +438,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1050" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1085" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
