@@ -1,5 +1,3 @@
-//TODO: Implementar
-//TODO: Testar
 package cmd.controle;
 
 import cmd.DAO.ConstrucaoDAO;
