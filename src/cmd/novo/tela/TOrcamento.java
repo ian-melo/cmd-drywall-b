@@ -10,6 +10,7 @@ import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -425,7 +426,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tableHeaders.add("Complemento");
         tableHeaders.add("Bairro");
         tableHeaders.add("UF");
-        
         Vector reg = new Vector();
         reg.add(en.getCep());
         reg.add(en.getLogradouro());
@@ -433,13 +433,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         reg.add(en.getComplemento());
         reg.add(en.getBairro());
         reg.add(en.getUf());
-        
-        tb_enderecos.setModel(new DefaultTableModel(new Vector(reg), tableHeaders));
+        Vector tableData = new Vector();
+        tableData.add(reg);
+        tb_enderecos.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
     @SuppressWarnings("unchecked")
     public void preencherItens(List<Item> li) {
         itens = li;
+        double valTotal = 0.0;
         
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. construção");
@@ -453,6 +455,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         Vector tableData = new Vector();
         Vector reg;
         for (Item it : itens) {
+            valTotal += it.getPrecoTotal().doubleValue();
+            
             reg = new Vector();
             reg.add(it.getConstrucao().getCodConstrucao());
             if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
@@ -470,6 +474,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
+        String valTotalF = NumberFormat.getCurrencyInstance().format(valTotal);
+        lb_valorFinal.setText(valTotalF);
     }
     
     private void exibirDataAtual() {
