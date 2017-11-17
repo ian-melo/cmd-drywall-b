@@ -887,7 +887,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
 
-        TOrcamento.getInstancia().preencherItens(listaItens);
+        TOrcamento.getInstancia(false).preencherItens(listaItens);
         limparCampos();
         limparTabelas();
         dispose();

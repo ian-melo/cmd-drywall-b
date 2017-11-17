@@ -421,9 +421,9 @@ public class TPrincipal extends javax.swing.JFrame {
             public void run() {
 
                 try {
-                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
+                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
                 } catch (IllegalArgumentException e) {
-                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia());
+                    gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
                     //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
 
                 }

@@ -33,12 +33,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     GerenteDeJanelas gerenteDeJanelas;
     
     public static TOrcamento tCalculoOrcamento;
-    public static TOrcamento getInstancia() {
+    public static TOrcamento getInstancia(boolean limpo) {
         if (tCalculoOrcamento == null) {
             tCalculoOrcamento = new TOrcamento();
         }
-        tCalculoOrcamento.carregarPessoaFisica();
+        
         tCalculoOrcamento.exibirDataAtual();
+        if(limpo) {
+            tCalculoOrcamento.limpar();
+        }
         return tCalculoOrcamento;
     }
     
@@ -172,14 +175,29 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         btn_salvar.setBackground(new java.awt.Color(153, 153, 255));
         btn_salvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_salvar.setText("Salvar");
+        btn_salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salvarActionPerformed(evt);
+            }
+        });
 
         btn_limpar.setBackground(new java.awt.Color(153, 153, 255));
         btn_limpar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         btn_sair.setBackground(new java.awt.Color(153, 153, 255));
         btn_sair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_sair.setText("Sair");
+        btn_sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sairActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Data:");
@@ -312,7 +330,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
                     //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
-                abrirJanelaCarregamentoFecha();
+                fecharJanelaCarregamento();
             }
         };
         t.start();
@@ -340,12 +358,34 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             linEndereco = tb_enderecos.getSelectedRow();
         }
     }//GEN-LAST:event_tb_enderecosMouseClicked
+
+    private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        salvar();
+    }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_sairActionPerformed
+    
+    private void salvar() {
+        
+    }
+    
+    private void limpar() {
+        limparTabelas();
+        lb_valorFinal.setText("###,##");
+        cmb_cliente.setSelectedIndex(0);
+    }
     
     private void abrirJanelaCarregamento() {
         tCarregamento.setVisible(true);
     }
     
-    private void abrirJanelaCarregamentoFecha() {
+    private void fecharJanelaCarregamento() {
         tCarregamento.setVisible(false);
     }
     
@@ -380,6 +420,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
+    @SuppressWarnings("unchecked")
     private void carregarPessoaJuridica() {
         linCliente = -1;
         linEndereco = -1;
@@ -410,6 +451,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
     
+    @SuppressWarnings("unchecked")
     private void carregarEndereco() {
         if(linCliente < 0)
             return;
@@ -476,6 +518,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
         String valTotalF = NumberFormat.getCurrencyInstance().format(valTotal);
         lb_valorFinal.setText(valTotalF);
+    }
+    
+    private void limparTabelas() {
+        tb_clientes.removeAll();
+        tb_enderecos.removeAll();
+        tb_itens.removeAll();
+        linCliente = -1;
+        linEndereco =  -1;
     }
     
     private void exibirDataAtual() {
