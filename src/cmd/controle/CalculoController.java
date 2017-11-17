@@ -26,10 +26,6 @@ public class CalculoController {
      */
     private List<Construcao> itens;
     
-    public List<Item> definirItens(double altura, double largura, double areaPorta, double areaJanela) {
-        return null;
-    }
-    
     public List<Construcao> procurarTipologias(boolean ehSt, boolean ehRu, boolean ehRf, double altura) {
         ConstrucaoDAO cdao = new ConstrucaoDAO();
         List<Construcao> li, res = new ArrayList<>();

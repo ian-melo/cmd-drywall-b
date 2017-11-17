@@ -22,7 +22,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private int linConstrucao = -1;
     private int[] linMaterial = new int[0];
     private int linItem = -1;
-    
     private List<Construcao> listaConstrucoes = null;
     private List<Item> listaItens = null;
     
@@ -102,10 +101,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         btn_conRemover = new javax.swing.JButton();
         btn_conLimpar = new javax.swing.JButton();
         pnl_multiplicacao = new javax.swing.JPanel();
-        txt_portaMulti_1 = new javax.swing.JFormattedTextField();
-        txt_janelaMulti_1 = new javax.swing.JFormattedTextField();
-        txt_portaMulti_2 = new javax.swing.JFormattedTextField();
-        txt_janelaMulti_2 = new javax.swing.JFormattedTextField();
+        txt_portaVezes1 = new javax.swing.JFormattedTextField();
+        txt_janelaVezes1 = new javax.swing.JFormattedTextField();
+        txt_portaVezes2 = new javax.swing.JFormattedTextField();
+        txt_janelaVezes2 = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -458,35 +457,35 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        txt_portaMulti_1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
-        txt_portaMulti_1.setToolTipText("");
-        txt_portaMulti_1.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_portaVezes1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
+        txt_portaVezes1.setToolTipText("");
+        txt_portaVezes1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_portaMulti_1FocusLost(evt);
+                txt_portaVezes1FocusLost(evt);
             }
         });
 
-        txt_janelaMulti_1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
-        txt_janelaMulti_1.setToolTipText("");
-        txt_janelaMulti_1.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_janelaVezes1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
+        txt_janelaVezes1.setToolTipText("");
+        txt_janelaVezes1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_janelaMulti_1FocusLost(evt);
+                txt_janelaVezes1FocusLost(evt);
             }
         });
 
-        txt_portaMulti_2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
-        txt_portaMulti_2.setToolTipText("");
-        txt_portaMulti_2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_portaVezes2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
+        txt_portaVezes2.setToolTipText("");
+        txt_portaVezes2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_portaMulti_2FocusLost(evt);
+                txt_portaVezes2FocusLost(evt);
             }
         });
 
-        txt_janelaMulti_2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
-        txt_janelaMulti_2.setToolTipText("");
-        txt_janelaMulti_2.addFocusListener(new java.awt.event.FocusAdapter() {
+        txt_janelaVezes2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.###"))));
+        txt_janelaVezes2.setToolTipText("");
+        txt_janelaVezes2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_janelaMulti_2FocusLost(evt);
+                txt_janelaVezes2FocusLost(evt);
             }
         });
 
@@ -503,7 +502,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel12.setText("X");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Digite a altura e a largura (cal. auto):");
+        jLabel13.setText("Digite a altura e a largura (cálculo automático):");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Valor total do drywall: ");
@@ -537,56 +536,48 @@ public class TCalculo extends javax.swing.JInternalFrame {
             pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
                 .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel13))
-                    .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_janelaMulti_1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_portaMulti_1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_portaVezes1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_janelaMulti_2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_portaMulti_2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_portaVezes2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
+                        .addComponent(txt_janelaVezes1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_janelaVezes2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
+            .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_multiplicacaoLayout.setVerticalGroup(
             pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_multiplicacaoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel6))
-                            .addGroup(pnl_multiplicacaoLayout.createSequentialGroup()
-                                .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txt_portaMulti_1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_portaMulti_2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_janelaMulti_1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_janelaMulti_2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))))))
+                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_portaVezes1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9)
+                            .addComponent(txt_portaVezes2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(pnl_multiplicacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txt_janelaVezes1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(txt_janelaVezes2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(16, 16, 16))
         );
 
@@ -640,7 +631,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 327, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -676,19 +667,19 @@ public class TCalculo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 20, Short.MAX_VALUE)
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel27)
@@ -705,7 +696,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane_pai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -765,96 +756,62 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tb_itensMouseClicked
 
-    private void txt_portaMulti_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_portaMulti_1FocusLost
-//        txt_porta.setText(txt_porta.getText().trim());
-//        txt_janela.setText(txt_janela.getText().trim());
-//
-//        txt_portaMulti_1.setText(txt_portaMulti_1.getText().trim());
-//        txt_portaMulti_2.setText(txt_portaMulti_2.getText().trim());
-//        txt_janelaMulti_1.setText(txt_janelaMulti_1.getText().trim());
-//        txt_janelaMulti_2.setText(txt_janelaMulti_2.getText().trim());
+    private void txt_portaVezes1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_portaVezes1FocusLost
+//        txt_portaVezes1.setText(txt_portaVezes1.getText().trim());
+//        txt_portaVezes2.setText(txt_portaVezes2.getText().trim());
+//        txt_janelaVezes1.setText(txt_janelaVezes1.getText().trim());
+//        txt_janelaVezes2.setText(txt_janelaVezes2.getText().trim());
+        fazerMultiplicacaoPorta();
+    }//GEN-LAST:event_txt_portaVezes1FocusLost
 
-//        fazMultiplicacaoPorta();
-    }//GEN-LAST:event_txt_portaMulti_1FocusLost
+    private void txt_portaVezes2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_portaVezes2FocusLost
+        fazerMultiplicacaoPorta();
+    }//GEN-LAST:event_txt_portaVezes2FocusLost
 
-    private void txt_portaMulti_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_portaMulti_2FocusLost
-//        fazMultiplicacaoPorta();
-    }//GEN-LAST:event_txt_portaMulti_2FocusLost
+    private void txt_janelaVezes1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaVezes1FocusLost
+        fazerMultiplicacaoJanela();
+    }//GEN-LAST:event_txt_janelaVezes1FocusLost
 
-    private void txt_janelaMulti_1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaMulti_1FocusLost
-//        fazMultiplicacaoJanela();
-    }//GEN-LAST:event_txt_janelaMulti_1FocusLost
+    private void txt_janelaVezes2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaVezes2FocusLost
+        fazerMultiplicacaoJanela();
+    }//GEN-LAST:event_txt_janelaVezes2FocusLost
 
-    private void txt_janelaMulti_2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_janelaMulti_2FocusLost
-//        fazMultiplicacaoJanela();
-    }//GEN-LAST:event_txt_janelaMulti_2FocusLost
-
-    private void fazMultiplicacaoJanela() {
-        Float altura = null;
-        Float largura = null;
-
+    private void fazerMultiplicacaoJanela() {
+        if(txt_janelaVezes1.getText().isEmpty() || txt_janelaVezes2.getText().isEmpty())
+            return;
+        
+        double altura, largura, val;
         try {
-
-            if (!"".equals(txt_janelaMulti_1.getText()) && txt_janelaMulti_1.getText() != null) {
-                altura = Float.parseFloat(txt_janelaMulti_1.getText().replaceAll(",", "."));
-            }
-            if (!"".equals(txt_janelaMulti_2.getText()) && txt_janelaMulti_2.getText() != null) {
-                largura = Float.parseFloat(txt_janelaMulti_2.getText().replaceAll(",", "."));
-            }
-
+            altura = Double.parseDouble(txt_janelaVezes1.getText().replaceAll(",", "."));
+            largura = Double.parseDouble(txt_janelaVezes2.getText().replaceAll(",", "."));
+            val = altura*largura;
+            //System.out.println(val);//Teste
+            txt_janela.setText((String.valueOf(val)));
+            //txt_janela.setText(txt_janela.getText().replaceFirst(".", ","));
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Apenas numeros permitidos");
-            System.out.println("_1_" + e);
-            return;
-        } catch (Exception e) {
-            System.out.println("_2_" + e);
-            return;
-        }
-
-        try {
-
-            if (altura != null || altura != 0 || largura != null || largura != 0) {
-                Float mult = altura * largura;
-                txt_janela.setText(mult.toString());
-            }
+            JOptionPane.showMessageDialog(null, "Preencha corretamente os campos.");
         } catch (Exception e) {
             System.out.println("_3_" + e);
         }
-
     }
 
-    private void fazMultiplicacaoPorta() {
-        Float altura = null;
-        Float largura = null;
-
+    private void fazerMultiplicacaoPorta() {
+        if(txt_portaVezes1.getText().isEmpty() || txt_portaVezes2.getText().isEmpty())
+            return;
+        
+        double altura, largura, val;
         try {
-
-            if (!"".equals(txt_portaMulti_1.getText()) && txt_portaMulti_1.getText() != null) {
-                altura = Float.parseFloat(txt_portaMulti_1.getText().replaceAll(",", "."));
-            }
-            if (!"".equals(txt_portaMulti_2.getText()) && txt_portaMulti_2.getText() != null) {
-                largura = Float.parseFloat(txt_portaMulti_2.getText().replaceAll(",", "."));
-            }
-
+            altura = Double.parseDouble(txt_portaVezes1.getText().replaceAll(",", "."));
+            largura = Double.parseDouble(txt_portaVezes2.getText().replaceAll(",", "."));
+            val = altura*largura;
+            //System.out.println(val);//Teste
+            txt_porta.setText((String.valueOf(val)));
+            //txt_porta.setText(txt_porta.getText().replaceFirst(".", ","));
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Apenas numeros permitidos");
-            System.out.println("_1_" + e);
-            return;
-        } catch (Exception e) {
-            System.out.println("_2_" + e);
-            return;
-        }
-
-        try {
-
-            if (altura != null || altura != 0 || largura != null || largura != 0) {
-                Float mult = altura * largura;
-                txt_porta.setText(mult.toString());
-            }
+            JOptionPane.showMessageDialog(null, "Preencha corretamente os campos.");
         } catch (Exception e) {
             System.out.println("_3_" + e);
         }
-
     }
 
     private void verificar() {
@@ -863,19 +820,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
         
         double altura = Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
-        
-        //JOptionPane.showMessageDialog(rootPane, altura + " " + chk_st.isSelected() + " "
-        //        + chk_ru.isSelected() + " " + chk_rf.isSelected()); //teste
-
         listaConstrucoes = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
                 chk_rf.isSelected(), altura);
-        
         //JOptionPane.showMessageDialog(rootPane, listaConstrucoes.size()); //Teste
         if (listaConstrucoes == null || listaConstrucoes.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Construções não encontradas.");
             return;
         }
-
+        
         habilitarCampos(false);
         listarConstrucoes();
     }
@@ -1180,11 +1132,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JTable tb_materiais;
     private javax.swing.JFormattedTextField txt_altura;
     private javax.swing.JFormattedTextField txt_janela;
-    private javax.swing.JFormattedTextField txt_janelaMulti_1;
-    private javax.swing.JFormattedTextField txt_janelaMulti_2;
+    private javax.swing.JFormattedTextField txt_janelaVezes1;
+    private javax.swing.JFormattedTextField txt_janelaVezes2;
     private javax.swing.JFormattedTextField txt_largura;
     private javax.swing.JFormattedTextField txt_porta;
-    private javax.swing.JFormattedTextField txt_portaMulti_1;
-    private javax.swing.JFormattedTextField txt_portaMulti_2;
+    private javax.swing.JFormattedTextField txt_portaVezes1;
+    private javax.swing.JFormattedTextField txt_portaVezes2;
     // End of variables declaration//GEN-END:variables
 }

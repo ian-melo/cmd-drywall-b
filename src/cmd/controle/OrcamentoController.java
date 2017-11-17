@@ -2,6 +2,8 @@
 //TODO: Testar
 package cmd.controle;
 
+import cmd.DAO.DAO;
+import cmd.DAO.OrcamentoDAO;
 import cmd.entidade.*;
 import java.util.List;
 
@@ -16,8 +18,9 @@ public class OrcamentoController {
      * @param input orçamento a ser inserido
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean inserirCliente(Orcamento input) {
-        return false;
+    public boolean inserirOrcamento(Orcamento input) {
+        DAO dao = new OrcamentoDAO();
+        return dao.inserir(input);
     }
     
     /**
@@ -25,7 +28,7 @@ public class OrcamentoController {
      * @param input orçamento a ser inserido
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean alterarCliente(Orcamento input) {
+    public boolean alterarOrcamento(Orcamento input) {
         return false;
     }
     
@@ -34,7 +37,7 @@ public class OrcamentoController {
      * @param input orçamento a ser inserido
      * @return true, se realizado<br>false, caso contrário
      */
-    public boolean excluirCliente(Orcamento input) {
+    public boolean excluirOrcamento(Orcamento input) {
         return false;
     }
     
@@ -43,7 +46,7 @@ public class OrcamentoController {
      * @param codigo Código do orçamento
      * @return orçamento, se encontrado<br>null, caso contrário
      */
-    public Cliente buscarCliente(String codigo) {
+    public Orcamento buscarOrcamento(String codigo) {
         return null;
     }
     
@@ -51,7 +54,7 @@ public class OrcamentoController {
      * Realiza a listagem de orçamentos
      * @return lista Lista de orçamentos
      */
-    public List<Cliente> listarOrcamento() {
+    public List<Orcamento> listarOrcamento() {
         return null;
     }
 }

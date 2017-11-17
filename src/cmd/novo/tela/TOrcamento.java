@@ -1,11 +1,11 @@
 package cmd.novo.tela;
 
-import cmd.DAO.EnderecoDAO;
 import cmd.controle.ClienteController;
-import cmd.controle.EnderecoController;
+import cmd.controle.OrcamentoController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
+import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.novo.GerenteDeJanelas;
@@ -14,8 +14,11 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,11 +26,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
+    private int linCliente = -1;
+    private int linEndereco = -1;
     private List<Cliente> listaClientes = null;
     private List<Endereco> listaEnderecos = null;
     private List<Item> listaItens = null;
-    private int linCliente = -1;
-    private int linEndereco = -1;
+    
+    OrcamentoController oControle = new OrcamentoController();
     
     TCarregamento tCarregamento = new TCarregamento(null, true);
     GerenteDeJanelas gerenteDeJanelas;
@@ -38,10 +43,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tCalculoOrcamento = new TOrcamento();
         }
         
-        tCalculoOrcamento.exibirDataAtual();
         if(limpo) {
             tCalculoOrcamento.limpar();
         }
+        tCalculoOrcamento.exibirDataAtual();
         return tCalculoOrcamento;
     }
     
@@ -372,13 +377,47 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
     
     private void salvar() {
+        if(!validar())
+            return;
         
+        Set<Item> setItens = new LinkedHashSet<>();
+        Orcamento o = new Orcamento();
+        o.setCliente(listaClientes.get(linCliente));
+        o.setEndereco(listaEnderecos.get(linEndereco));
+        o.setDataHora(new Date());
+        o.setXdead(false);
+        for(Item i : listaItens) {
+            i.setOrcamento(o);
+            setItens.add(i);
+        }
+        o.setItems(setItens);
+        
+        if(oControle.inserirOrcamento(o))
+            JOptionPane.showMessageDialog(null, "Orçamento realizado com sucesso.");
+        else
+            JOptionPane.showMessageDialog(null, "Não foi possível realizar o orçamento.");
     }
     
     private void limpar() {
         limparTabelas();
         lb_valorFinal.setText("###,##");
         cmb_cliente.setSelectedIndex(0);
+    }
+    
+    private boolean validar() {
+        if(linCliente < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione o cliente.");
+            return false;
+        }
+        if(linEndereco < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione o endereço.");
+            return false;
+        }
+        if(listaItens == null || listaItens.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Defina os itens do orçamento.");
+            return false;
+        }
+        return true;
     }
     
     @SuppressWarnings("unchecked")
