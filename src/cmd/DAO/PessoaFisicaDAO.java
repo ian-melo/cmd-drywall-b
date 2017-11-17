@@ -25,7 +25,10 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.close();
             return true;
         } catch (HibernateException e) {
-            System.out.println("__ " + e);
+           System.out.println("_" + e);
+            return false;
+        } catch (Exception ex) {
+            System.out.println("__" + ex);
             return false;
         }
     }
@@ -40,9 +43,10 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.close();
             return true;
         } catch (HibernateException e) {
+            System.out.println("_" + e);
             return false;
         } catch (Exception ex) {
-            System.out.println("_" + ex);
+            System.out.println("__" + ex);
             return false;
         }
     }
@@ -57,6 +61,10 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.close();
             return true;
         } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        } catch (Exception ex) {
+            System.out.println("__" + ex);
             return false;
         }
     }

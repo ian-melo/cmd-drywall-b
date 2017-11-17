@@ -139,6 +139,19 @@ public class ClienteController {
         return ValidaCPFeCNPJ.isCNPJ(cnpj);
     }
     
+    
+    public boolean alterarPessoaFisica(PessoaFisica pF){
+        PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        
+        return pFiDAO.alterar(pF);
+    }
+    
+     public boolean alterarPessoaJuridica(PessoaJuridica pJ){
+        PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        
+        return pJuDAO.alterar(pJ);
+    }
+    
     public List<PessoaJuridica> listarPessoasJuridicas() {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
         //System.out.println("------------Cliente-Controle-----pJuridica-------");//Teste

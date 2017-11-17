@@ -412,6 +412,11 @@ public class TCliente extends javax.swing.JInternalFrame {
         btn_Alterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Alterar.setText("Alterar");
         btn_Alterar.setEnabled(false);
+        btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AlterarActionPerformed(evt);
+            }
+        });
 
         btn_Sair.setBackground(new java.awt.Color(153, 153, 255));
         btn_Sair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -912,11 +917,131 @@ public class TCliente extends javax.swing.JInternalFrame {
         reformataCamposTelefone();
     }//GEN-LAST:event_formInternalFrameClosed
 
+    private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
+        if (cmb_pessoa.getSelectedIndex() == 0) {//P Juridica
+            if (verificaPessoaJuridica() == false) {//verifica os campos
+                return;
+            }
+            alteraPessoaJuridica();
+        }
+        if (cmb_pessoa.getSelectedIndex() == 1) {//P Fisica
+            if (verificaPessoaFisica() == false) {//verifica os campos
+                return;
+            }
+            alteraPessoaFisica();
+        }
+    }//GEN-LAST:event_btn_AlterarActionPerformed
+
     private void pequenoBug() {
         int x = this.getHeight();
         int y = this.getWidth();
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
+    }
+
+    private void alteraPessoaJuridica() {
+        cliC = new ClienteController();
+
+        Cliente cli = null;
+        Endereco end = null;
+        PessoaJuridica pJur = null;
+
+        cli = new Cliente();
+        end = new Endereco();
+        pJur = new PessoaJuridica();
+
+        HashSet<Telefone> tels = new HashSet<>();
+//===============================ENDERECO=======================================
+        end = preencheEnderecoVAL(end);//Preenche endereco
+        //end.setCodEndereco(25);//ERRO!!!!!!!!!
+//==============================================================================
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataDate = null;
+        try {
+            dataDate = formato.parse(lb_dataInscricao.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        pJur.setCliente(cli);
+        pJur.setCnpj(pJu.getTxt_cnpj_pnl());
+        pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
+        pJur.setRamoAtuacao(pJu.getTxt_ramoAtuacao_pnl());
+        pJur.setRazaoSocial(pJu.getTxt_razaoSocial_pnl());
+        pJur.setXdead(false);
+
+//===============================TELEFONE=======================================
+        tels = preencheTelefoneVAL(tels, cli);
+//==============================================================================
+
+        cli.setCodCliente(null);
+        cli.setOrcamentos(null);
+        cli.setDataInscricao(dataDate);
+        cli.setEndereco(end);
+        cli.setPessoaJuridica(pJur);
+        cli.setTelefones(tels);
+        cli.setXdead(false);
+
+        if (cliC.alterarPessoaJuridica(pJur) == false) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar");
+        } else {
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+        }
+
+    }
+
+    private void alteraPessoaFisica() {
+
+        cliC = new ClienteController();
+
+        Cliente cli = null;
+        Endereco end = null;
+        PessoaFisica pFis = null;
+
+        cli = new Cliente();
+        end = new Endereco();
+        pFis = new PessoaFisica();
+
+        HashSet<Telefone> tels = new HashSet<>();
+//===============================ENDERECO=======================================
+        end = preencheEnderecoVAL(end);//Preenche endereco
+//==============================================================================
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataDate = null;
+        try {
+            dataDate = formato.parse(lb_dataInscricao.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        pFis.setCliente(cli);
+        pFis.setCpf(pFi.getTxt_cpf_pnl());
+        pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
+        pFis.setNome(pFi.getTxt_nome_pnl());
+        pFis.setXdead(false);
+
+//===============================TELEFONE=======================================
+        tels = preencheTelefoneVAL(tels, cli);
+//==============================================================================
+
+        cli.setCodCliente(null);
+        cli.setOrcamentos(null);
+        cli.setDataInscricao(dataDate);
+        cli.setEndereco(end);
+        cli.setPessoaFisica(pFis);
+        cli.setTelefones(tels);
+        cli.setXdead(false);
+
+        if (cliC.alterarPessoaFisica(pFis) == false) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar");
+        } else {
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+        }
+
     }
 
     private void reformataCamposTelefone() {
@@ -970,7 +1095,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             txt_cel2.setText(val);
 
         }
-       // } catch (Exception e) {
+        // } catch (Exception e) {
         //     System.out.println("___" + e);
         // }
     }

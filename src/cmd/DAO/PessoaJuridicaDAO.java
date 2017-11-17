@@ -25,6 +25,9 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
         } catch(HibernateException e) {
             System.out.println("_pJuDAO_ " + e);
             return false;
+        }catch(Exception e) {
+            System.out.println("__" + e);
+            return false;
         }
     }
 
@@ -38,9 +41,14 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        }catch(Exception e) {
+            System.out.println("__" + e);
             return false;
         }
     }
+    
 
     @Override
     public boolean excluir(PessoaJuridica item) {
@@ -52,9 +60,14 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        }catch(Exception e) {
+            System.out.println("_" + e);
             return false;
         }
     }
+    
 
     @Override
     public PessoaJuridica buscar(String consulta) {
@@ -71,7 +84,7 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             System.out.println("_" + e);
             return null;
         }catch(Exception e) {
-            System.out.println("_" + e);
+            System.out.println("__" + e);
             return null;
         }
     }
