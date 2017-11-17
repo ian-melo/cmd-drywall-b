@@ -23,6 +23,7 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             s.close();
             return true;
         } catch(HibernateException e) {
+            System.out.println("_3_: " + e);
             return false;
         }
     }

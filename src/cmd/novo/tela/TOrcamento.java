@@ -393,9 +393,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         o.setItems(setItens);
         
         if(oControle.inserirOrcamento(o))
-            JOptionPane.showMessageDialog(null, "Orçamento realizado com sucesso.");
+            JOptionPane.showMessageDialog(rootPane, "Orçamento realizado com sucesso.");
         else
-            JOptionPane.showMessageDialog(null, "Não foi possível realizar o orçamento.");
+            JOptionPane.showMessageDialog(rootPane, "Não foi possível realizar o orçamento.");
     }
     
     private void limpar() {

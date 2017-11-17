@@ -3,6 +3,8 @@
 package cmd.controle;
 
 import cmd.DAO.DAO;
+import cmd.DAO.ItemDAO;
+import cmd.DAO.MaterialItemDAO;
 import cmd.DAO.OrcamentoDAO;
 import cmd.entidade.*;
 import java.util.List;
@@ -19,8 +21,21 @@ public class OrcamentoController {
      * @return true, se realizado<br>false, caso contrário
      */
     public boolean inserirOrcamento(Orcamento input) {
-        DAO dao = new OrcamentoDAO();
-        return dao.inserir(input);
+        DAO oDao = new OrcamentoDAO();
+        DAO iDao = new ItemDAO();
+        DAO miDao = new MaterialItemDAO();
+        
+        if(!oDao.inserir(input))
+            return false;
+        for(Object o : input.getItems()) {
+            if(!iDao.inserir((Item) o))
+                return false;
+//            for(Object o2 : ((Item) o).getMaterialItems()) {
+//                if(!miDao.inserir((MaterialItem) o2))
+//                return false;
+//            }
+        }
+        return true;
     }
     
     /**
