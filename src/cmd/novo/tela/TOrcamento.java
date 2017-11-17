@@ -339,17 +339,17 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
     private void cmb_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_clienteActionPerformed
         if (cmb_cliente.getSelectedIndex() == 0) {//Pessoa Fisica
-            carregarPessoaFisica();
+            listarPessoasFisicas();
         }
         if (cmb_cliente.getSelectedIndex() == 1) {//Pessoa Juridica
-            carregarPessoaJuridica();
+            listarPessoasJuridicas();
         }
     }//GEN-LAST:event_cmb_clienteActionPerformed
 
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
         if (evt.getClickCount() == 1) {
             linCliente = tb_clientes.getSelectedRow();
-            carregarEndereco();
+            listarEnderecos();
         }
     }//GEN-LAST:event_tb_clientesMouseClicked
 
@@ -381,16 +381,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         cmb_cliente.setSelectedIndex(0);
     }
     
-    private void abrirJanelaCarregamento() {
-        tCarregamento.setVisible(true);
-    }
-    
-    private void fecharJanelaCarregamento() {
-        tCarregamento.setVisible(false);
-    }
-    
     @SuppressWarnings("unchecked")
-    private void carregarPessoaFisica() {
+    private void listarPessoasFisicas() {
         limparTClientes();
         limparTEnderecos();
         listaClientes = new ArrayList<>();
@@ -418,10 +410,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linCliente = -1;
     }
     
     @SuppressWarnings("unchecked")
-    private void carregarPessoaJuridica() {
+    private void listarPessoasJuridicas() {
         limparTClientes();
         limparTEnderecos();
         listaClientes = new ArrayList<>();
@@ -449,10 +442,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linCliente = -1;
     }
     
     @SuppressWarnings("unchecked")
-    private void carregarEndereco() {
+    private void listarEnderecos() {
         if(linCliente < 0)
             return;
         
@@ -479,10 +473,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         Vector tableData = new Vector();
         tableData.add(reg);
         tb_enderecos.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linEndereco = -1;
     }
     
     @SuppressWarnings("unchecked")
-    public void preencherItens(List<Item> li) {
+    public void listarItens(List<Item> li) {
         limparTItens();
         listaItens = li;
         double valTotal = 0.0;
@@ -567,6 +562,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    
+    private void abrirJanelaCarregamento() {
+        tCarregamento.setVisible(true);
+    }
+    
+    private void fecharJanelaCarregamento() {
+        tCarregamento.setVisible(false);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

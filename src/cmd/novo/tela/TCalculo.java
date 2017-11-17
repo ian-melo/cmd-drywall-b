@@ -19,22 +19,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario, ian-melo
  */
 public class TCalculo extends javax.swing.JInternalFrame {
-
     private int linConstrucao = -1;
-    private int[] linMaterial = null;
+    private int[] linMaterial = new int[0];
     private int linItem = -1;
-
+    
     private List<Construcao> listaConstrucoes = null;
     private List<Item> listaItens = null;
-
+    
     private final CalculoController cControle = new CalculoController();
-
+    
     public static TCalculo calculoT;
-
     public static TCalculo getInstancia() {
         if (calculoT == null) {
             calculoT = new TCalculo();
         }
+        calculoT.limparTudo();
         return calculoT;
     }
 
@@ -52,7 +51,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_multiplicacao.setBackground(Color.WHITE);
 
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -887,31 +886,24 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
 
-        TOrcamento.getInstancia(false).preencherItens(listaItens);
-        limparCampos();
-        limparTabelas();
+        TOrcamento.getInstancia(false).listarItens(listaItens);
+        limparTudo();
         dispose();
     }
 
     private void cancelar() {
-        limparCampos();
-        limparTabelas();
+        limparTudo();
         dispose();
     }
 
     private void redefinir() {
-        limparCampos();
-        limparTabelas();
-    }
-
-    private void limpar() {
-        limparTItens();
+        limparTudo();
     }
 
     private void novo() {
+        limparCampos();
         limparTConstrucoes();
         limparTMateriais();
-        limparCampos();
     }
 
     private void adicionar() {
@@ -958,6 +950,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         listarItens();
     }
 
+    private void limpar() {
+        limparTItens();
+    }
+    
     private void listarConstrucoes() {
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. constr.");
@@ -1013,7 +1009,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
-        linMaterial = null;
+        linMaterial = new int[0];
     }
 
     private void listarItens() {
@@ -1067,6 +1063,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
     }
 
+    private void limparTudo() {
+        limparCampos();
+        limparTabelas();
+    }
+    
     private void limparCampos() {
         txt_altura.setText("");
         txt_largura.setText("");
@@ -1113,7 +1114,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     "Cód material", "Tipo", "Descrição", "Const. metro", "Preço unit.", "Qtde. min."
                 }
         ));
-        linMaterial = null;
+        linMaterial = new int[0];
     }
 
     private void limparTItens() {
