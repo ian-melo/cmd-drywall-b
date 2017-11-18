@@ -9,7 +9,20 @@ import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
 import cmd.novo.GerenteDeJanelas;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +31,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -88,6 +103,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
         cmb_cliente = new javax.swing.JComboBox();
+        bt_folha = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Calculo do Orçamento");
@@ -224,6 +240,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         });
 
+        bt_folha.setText("Gerar Folha de Orçamento");
+        bt_folha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_folhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,6 +292,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_folha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_cadastrarOrca)
                         .addContainerGap())))
         );
@@ -290,15 +315,17 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(bt_folha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -375,6 +402,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
         dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
+
+    private void bt_folhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhaActionPerformed
+       gerarelatoriopessoafisica();
+    }//GEN-LAST:event_bt_folhaActionPerformed
     
     private void salvar() {
         if(!validar())
@@ -611,7 +642,76 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tCarregamento.setVisible(false);
     }
     
+    public void gerarelatoriopessoafisica()
+    {
+        int linha = tb_clientes.getSelectedRow();
+        int linha2 = tb_enderecos.getSelectedRow();
+        
+        if(linha != -1 && linha2 != -1)
+        {
+            String cpf = tb_clientes.getValueAt(linha, 1).toString();
+            String nome = tb_clientes.getValueAt(linha, 2).toString();
+            String cep = tb_enderecos.getValueAt(linha2, 0).toString();
+            String logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
+            String numero = tb_enderecos.getValueAt(linha2, 2).toString();
+            String complemento = tb_enderecos.getValueAt(linha2, 3).toString();
+            String bairro = tb_enderecos.getValueAt(linha2, 4).toString();
+            String uf = tb_enderecos.getValueAt(linha2, 5).toString(); 
+            
+            Document doc = new Document();
+            String arquivoPdf = "Folhagenerica.pdf";
+            Font font;
+            font = new Font(FontFamily.TIMES_ROMAN,32, Font.BOLD, BaseColor.BLACK);
+            
+           try
+           {
+               
+              PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
+              doc.open();
+              Paragraph paragrafo = new Paragraph("Folha de orçamento Sistema C.M.D", font);
+              paragrafo.setAlignment(Element.ALIGN_CENTER);
+              Paragraph mensagem = new Paragraph("Boa Tarde Sr: \t" + nome + ", \n" + "Por favor leia atentamente todos os itens desta folha de orçamento \n");
+              mensagem.setAlignment(Element.ALIGN_LEFT);
+              doc.add(paragrafo);
+              paragrafo = new Paragraph(" ");
+              doc.add(paragrafo);
+              doc.add(mensagem);
+              mensagem = new Paragraph(" ");
+              doc.add(mensagem);
+              Paragraph CPF = new Paragraph("CPF: \t" + cpf);
+              doc.add(CPF);
+              Paragraph Nome = new Paragraph("Nome: \t" + nome);
+              doc.add(Nome);
+              Paragraph Cep = new Paragraph("CEP: \t" + cep);
+              doc.add(Cep);
+              Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
+              doc.add(Logradouro);
+              Paragraph Numero = new Paragraph("Numero: \t" + numero);
+              doc.add(Numero);
+              Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
+              doc.add(Complemento);
+              Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
+              doc.add(Bairro);
+              Paragraph Uf = new Paragraph("Uf: \t" + uf);
+              doc.add(Uf);
+              doc.close();
+              Desktop.getDesktop().open(new File(arquivoPdf));
+           }
+           catch(DocumentException e)
+           {
+               
+           } catch (FileNotFoundException ex) {
+                Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_folha;
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
     private javax.swing.JButton btn_limpar;
