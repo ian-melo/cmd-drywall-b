@@ -23,14 +23,13 @@ public class TPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form PrincipalT
-     * @param nomeL
-     * Utiliza para passar a pessoa q esta logada
+     *
+     * @param nomeL Utiliza para passar a pessoa q esta logada
      */
     public TPrincipal(String nomeL) {
         initComponents();
         getContentPane().setBackground(Color.BLUE);
-        
-        
+
         pnl_botoes.setBackground(new Color(153, 153, 255));
         pnl_APP.setBackground(new Color(153, 153, 255));
         pnl_funcionarios.setBackground(new Color(153, 153, 255));
@@ -92,7 +91,7 @@ public class TPrincipal extends javax.swing.JFrame {
         lb_logado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lb_logado.setText("NULL");
 
-        jLabel2.setText("v0.15");
+        jLabel2.setText("v0.16");
 
         pnl_gerenciamentoItens.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 51, 51)));
 

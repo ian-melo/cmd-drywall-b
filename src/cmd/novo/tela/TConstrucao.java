@@ -572,71 +572,106 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_procurarActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
-
-        boolean res; //Resultado da ação
-        String info; //Texto informativo
-        //Retorna, caso os campos estejam inválidos
-        if (!validarCampos()) {
-            return;
-        }
-        //Criação dos objetos
-        Construcao co;
-        Forro fo;
-        Parede pa;
-        //Construção
-        co = new Construcao();
-        co.setDescricao(txt_descricao.getText());
-        co.setDetalhes(txt_detalhes.getText());
-        co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
-        co.setXdead(Boolean.FALSE);
-// co.setItems(null);//Retirado da erro em relação as atualizações das classes de entidade
-        co.setMaterials(null);
-        //Caso forro
-        if (op_forro.isSelected()) {
-            fo = new Forro();
-            fo.setEhRf(chk_rf.isSelected());
-            fo.setEhRu(chk_ru.isSelected());
-            fo.setEhSt(chk_st.isSelected());
-            fo.setXdead(Boolean.FALSE);
-            fo.setConstrucao(co);
-            co.setForro(fo);
-            co.setParede(null);
-            //Inserção de forro
-            res = controle.inserirForro(fo);
-            //Caso parede
-        } else {
-            pa = new Parede();
-            pa.setMontante(BigDecimal.valueOf(Double.parseDouble(txt_montante.getText())));
-            pa.setAlturaLimite(BigDecimal.valueOf(Double.parseDouble(txt_alturaLim.getText())));
-            pa.setEhRf(chk_rf.isSelected());
-            pa.setEhRu(chk_ru.isSelected());
-            pa.setEhSt(chk_st.isSelected());
-            pa.setXdead(Boolean.FALSE);
-            pa.setConstrucao(co);
-            co.setParede(pa);
-            co.setForro(null);
-            //Inserção de parede
-            res = controle.inserirParede(pa);
-        }
-        //Resultado
-        if (res) {
-            info = "Construção salva com sucesso";
-        } else {
-            info = "Não foi possível salvar construção";
-        }
-        exibirAlerta(info);
-        //Volta ao estado inicial
-        if (res) {
-            resetarCampos();
-        }
+        alterar();
     }//GEN-LAST:event_btn_alterarActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
         resetarCampos();
-
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
+        cadastrar();
+    }//GEN-LAST:event_btn_salvarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        janelaAviso();
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        janelaAviso();
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        janelaAviso();
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        janelaAviso();
+    }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        janelaAviso();
+    }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void op_paredeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_paredeActionPerformed
+        txt_montante.setEnabled(true);
+        txt_alturaLim.setEnabled(true);
+    }//GEN-LAST:event_op_paredeActionPerformed
+
+    private void op_forroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_forroActionPerformed
+        txt_montante.setEnabled(false);
+        txt_alturaLim.setEnabled(false);
+    }//GEN-LAST:event_op_forroActionPerformed
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        //Retorna, caso o campo esteja inválido ou não foi encontrado construção
+        if (!validarCodigo()) {
+            return;
+        }
+        //Criação dos objetos
+        Construcao co = null;
+        Forro fo;
+        Parede pa;
+
+        //Busca da construção
+        controle = new ConstrucaoController();
+        pa = controle.buscarParede(txt_id.getText());
+
+        controle = new ConstrucaoController();
+        fo = controle.buscarForro(txt_id.getText());
+        //Caso forro
+        if (fo != null) {
+            op_forro.setSelected(true);
+            habilitarParede(false);
+            chk_rf.setSelected(fo.getEhRf());
+            chk_ru.setSelected(fo.getEhRu());
+            chk_st.setSelected(fo.getEhSt());
+            co = fo.getConstrucao();
+            //Caso parede
+        } else if (pa != null) {
+            op_parede.setSelected(true);
+            habilitarParede(true);
+            txt_montante.setText(pa.getMontante().toString());
+            txt_alturaLim.setText(pa.getAlturaLimite().toString());
+            chk_rf.setSelected(pa.getEhRf());
+            chk_ru.setSelected(pa.getEhRu());
+            chk_st.setSelected(pa.getEhSt());
+            co = pa.getConstrucao();
+        }
+        //Construção
+        if (co != null) {
+            co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
+            txt_descricao.setText(co.getDescricao());
+            txt_detalhes.setText(co.getDetalhes());
+            cmb_qualidade.setSelectedItem(co.getQualidade());
+        }
+        //Habilita exclusão e alteração
+        habilitarAlteravel(false);
+        txt_id.setEditable(false);
+        txt_descricao.setEditable(false);
+        txt_detalhes.setEditable(false);
+        MudaBotao(true);
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void cmb_qualidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_qualidadeActionPerformed
+
+    }//GEN-LAST:event_cmb_qualidadeActionPerformed
+
+    private void cadastrar() {
 
         boolean res = false; //Resultado da ação
         String info; //Texto informativo
@@ -733,10 +768,69 @@ public class TConstrucao extends javax.swing.JInternalFrame {
 //        System.out.println("Parede        = " + co.getParede());
 //        System.out.println("Qualidade     = " + co.getQualidade());
 //        System.out.println("===========================================");
+    }
 
-    }//GEN-LAST:event_btn_salvarActionPerformed
+    private void alterar() {
 
-    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        boolean res; //Resultado da ação
+        String info; //Texto informativo
+        //Retorna, caso os campos estejam inválidos
+        if (!validarCampos()) {
+            return;
+        }
+        //Criação dos objetos
+        Construcao co;
+        Forro fo;
+        Parede pa;
+        //Construção
+        co = new Construcao();
+        co.setDescricao(txt_descricao.getText());
+        co.setDetalhes(txt_detalhes.getText());
+        co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
+        co.setXdead(Boolean.FALSE);
+// co.setItems(null);//Retirado da erro em relação as atualizações das classes de entidade
+        co.setMaterials(null);
+        //Caso forro
+        if (op_forro.isSelected()) {
+            fo = new Forro();
+            fo.setEhRf(chk_rf.isSelected());
+            fo.setEhRu(chk_ru.isSelected());
+            fo.setEhSt(chk_st.isSelected());
+            fo.setXdead(Boolean.FALSE);
+            fo.setConstrucao(co);
+            co.setForro(fo);
+            co.setParede(null);
+            //Inserção de forro
+            res = controle.inserirForro(fo);
+            //Caso parede
+        } else {
+            pa = new Parede();
+            pa.setMontante(BigDecimal.valueOf(Double.parseDouble(txt_montante.getText())));
+            pa.setAlturaLimite(BigDecimal.valueOf(Double.parseDouble(txt_alturaLim.getText())));
+            pa.setEhRf(chk_rf.isSelected());
+            pa.setEhRu(chk_ru.isSelected());
+            pa.setEhSt(chk_st.isSelected());
+            pa.setXdead(Boolean.FALSE);
+            pa.setConstrucao(co);
+            co.setParede(pa);
+            co.setForro(null);
+            //Inserção de parede
+            res = controle.inserirParede(pa);
+        }
+        //Resultado
+        if (res) {
+            info = "Construção salva com sucesso";
+        } else {
+            info = "Não foi possível salvar construção";
+        }
+        exibirAlerta(info);
+        //Volta ao estado inicial
+        if (res) {
+            resetarCampos();
+        }
+    }
+
+    private void excluir() {
         boolean res; //Resultado da ação
         String info; //Texto informativo
         //Retorna, caso os campos estejam inválidos
@@ -796,91 +890,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         if (res) {
             resetarCampos();
         }
-    }//GEN-LAST:event_btn_excluirActionPerformed
-
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel13MouseClicked
-
-    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel14MouseClicked
-
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel15MouseClicked
-
-    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel16MouseClicked
-
-    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel17MouseClicked
-
-    private void op_paredeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_paredeActionPerformed
-        txt_montante.setEnabled(true);
-        txt_alturaLim.setEnabled(true);
-    }//GEN-LAST:event_op_paredeActionPerformed
-
-    private void op_forroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_op_forroActionPerformed
-        txt_montante.setEnabled(false);
-        txt_alturaLim.setEnabled(false);
-    }//GEN-LAST:event_op_forroActionPerformed
-
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        //Retorna, caso o campo esteja inválido ou não foi encontrado construção
-        if (!validarCodigo()) {
-            return;
-        }
-        //Criação dos objetos
-        Construcao co = null;
-        Forro fo;
-        Parede pa;
-
-        //Busca da construção
-        controle = new ConstrucaoController();
-        pa = controle.buscarParede(txt_id.getText());
-
-        controle = new ConstrucaoController();
-        fo = controle.buscarForro(txt_id.getText());
-        //Caso forro
-        if (fo != null) {
-            op_forro.setSelected(true);
-            habilitarParede(false);
-            chk_rf.setSelected(fo.getEhRf());
-            chk_ru.setSelected(fo.getEhRu());
-            chk_st.setSelected(fo.getEhSt());
-            co = fo.getConstrucao();
-            //Caso parede
-        } else if (pa != null) {
-            op_parede.setSelected(true);
-            habilitarParede(true);
-            txt_montante.setText(pa.getMontante().toString());
-            txt_alturaLim.setText(pa.getAlturaLimite().toString());
-            chk_rf.setSelected(pa.getEhRf());
-            chk_ru.setSelected(pa.getEhRu());
-            chk_st.setSelected(pa.getEhSt());
-            co = pa.getConstrucao();
-        }
-        //Construção
-        if (co != null) {
-            co.setCodConstrucao(Integer.parseInt(txt_id.getText()));
-            txt_descricao.setText(co.getDescricao());
-            txt_detalhes.setText(co.getDetalhes());
-            cmb_qualidade.setSelectedItem(co.getQualidade());
-        }
-        //Habilita exclusão e alteração
-        habilitarAlteravel(false);
-        txt_id.setEditable(false);
-        txt_descricao.setEditable(false);
-        txt_detalhes.setEditable(false);
-        MudaBotao(true);
-    }//GEN-LAST:event_btn_buscarActionPerformed
-
-    private void cmb_qualidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_qualidadeActionPerformed
-
-    }//GEN-LAST:event_cmb_qualidadeActionPerformed
+    }
 
     private void janelaCarregamentoAbre() {
         tCar.setVisible(true);
@@ -1058,7 +1068,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private void exibirAlerta(String txt) {
         JOptionPane.showMessageDialog(null, txt);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroup_tipoConstrucao;
     private javax.swing.JButton btn_alterar;

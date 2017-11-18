@@ -41,30 +41,32 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
+
     private int linCliente = -1;
     private int linEndereco = -1;
     private List<Cliente> listaClientes = null;
     private List<Endereco> listaEnderecos = null;
     private List<Item> listaItens = null;
-    
+
     OrcamentoController oControle = new OrcamentoController();
-    
+
     TCarregamento tCarregamento = new TCarregamento(null, true);
     GerenteDeJanelas gerenteDeJanelas;
-    
+
     public static TOrcamento tCalculoOrcamento;
+
     public static TOrcamento getInstancia(boolean limpo) {
         if (tCalculoOrcamento == null) {
             tCalculoOrcamento = new TOrcamento();
         }
-        
-        if(limpo) {
+
+        if (limpo) {
             tCalculoOrcamento.limpar();
         }
         tCalculoOrcamento.exibirDataAtual();
         return tCalculoOrcamento;
     }
-    
+
     /**
      * Creates new form TCalculoOrcamento
      */
@@ -73,7 +75,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
         getContentPane().setBackground(Color.WHITE);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,6 +242,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         });
 
+        bt_folha.setBackground(new java.awt.Color(153, 153, 255));
+        bt_folha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bt_folha.setText("Gerar Folha de Orçamento");
         bt_folha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,69 +408,71 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void bt_folhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhaActionPerformed
-       gerarelatoriopessoafisica();
+        gerarelatoriopessoafisica();
     }//GEN-LAST:event_bt_folhaActionPerformed
-    
+
     private void salvar() {
-        if(!validar())
+        if (!validar()) {
             return;
-        
+        }
+
         Set<Item> setItens = new LinkedHashSet<>();
         Orcamento o = new Orcamento();
         o.setCliente(listaClientes.get(linCliente));
         o.setEndereco(listaEnderecos.get(linEndereco));
         o.setDataHora(new Date());
         o.setXdead(false);
-        for(Item i : listaItens) {
+        for (Item i : listaItens) {
             i.setOrcamento(o);
             setItens.add(i);
         }
         o.setItems(setItens);
-        
-        if(oControle.inserirOrcamento(o))
+
+        if (oControle.inserirOrcamento(o)) {
             JOptionPane.showMessageDialog(rootPane, "Orçamento realizado com sucesso.");
-        else
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Não foi possível realizar o orçamento.");
+        }
     }
-    
+
     private void limpar() {
         limparTabelas();
         lb_valorFinal.setText("###,##");
         cmb_cliente.setSelectedIndex(0);
     }
-    
+
     private boolean validar() {
-        if(linCliente < 0) {
+        if (linCliente < 0) {
             JOptionPane.showMessageDialog(rootPane, "Selecione o cliente.");
             return false;
         }
-        if(linEndereco < 0) {
+        if (linEndereco < 0) {
             JOptionPane.showMessageDialog(rootPane, "Selecione o endereço.");
             return false;
         }
-        if(listaItens == null || listaItens.isEmpty()) {
+        if (listaItens == null || listaItens.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Defina os itens do orçamento.");
             return false;
         }
         return true;
     }
-    
+
     @SuppressWarnings("unchecked")
     private void listarPessoasFisicas() {
         limparTClientes();
         limparTEnderecos();
         listaClientes = new ArrayList<>();
-        
+
         ClienteController ccont = new ClienteController();
         List<PessoaFisica> lisPf = ccont.listarPessoasFisicas();
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. cliente");
         tableHeaders.add("CPF");
         tableHeaders.add("Nome");
         tableHeaders.add("Data de Nascimento");
         tableHeaders.add("Data da inscrição");
-        
+
         Vector tableData = new Vector();
         Vector reg;
         for (PessoaFisica pf : lisPf) {
@@ -482,23 +488,23 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
         linCliente = -1;
     }
-    
+
     @SuppressWarnings("unchecked")
     private void listarPessoasJuridicas() {
         limparTClientes();
         limparTEnderecos();
         listaClientes = new ArrayList<>();
-        
+
         ClienteController ccont = new ClienteController();
         List<PessoaJuridica> cli = ccont.listarPessoasJuridicas();
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. cliente");
         tableHeaders.add("CNPJ");
         tableHeaders.add("Razão social");
         tableHeaders.add("Data de fundação");
         tableHeaders.add("Data da inscrição");
-        
+
         Vector tableData = new Vector();
         Vector reg;
         for (PessoaJuridica pj : cli) {
@@ -514,18 +520,19 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
         linCliente = -1;
     }
-    
+
     @SuppressWarnings("unchecked")
     private void listarEnderecos() {
-        if(linCliente < 0)
+        if (linCliente < 0) {
             return;
-        
+        }
+
         limparTEnderecos();
         listaEnderecos = new ArrayList<>();
-        
+
         Endereco en = listaClientes.get(linCliente).getEndereco();
         listaEnderecos.add(en);
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("CEP");
         tableHeaders.add("Logradouro");
@@ -545,13 +552,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_enderecos.setModel(new DefaultTableModel(tableData, tableHeaders));
         linEndereco = -1;
     }
-    
+
     @SuppressWarnings("unchecked")
     public void listarItens(List<Item> li) {
         limparTItens();
         listaItens = li;
         double valTotal = 0.0;
-        
+
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. construção");
         tableHeaders.add("Tipo construção");
@@ -560,12 +567,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tableHeaders.add("Área da porta (m²)");
         tableHeaders.add("Área da janela (m²)");
         tableHeaders.add("Preço total");
-        
+
         Vector tableData = new Vector();
         Vector reg;
         for (Item it : listaItens) {
             valTotal += it.getPrecoTotal().doubleValue();
-            
+
             reg = new Vector();
             reg.add(it.getConstrucao().getCodConstrucao());
             if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
@@ -586,35 +593,35 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         String valTotalF = NumberFormat.getCurrencyInstance().format(valTotal);
         lb_valorFinal.setText(valTotalF);
     }
-    
+
     private void limparTabelas() {
         limparTClientes();
         limparTEnderecos();
         limparTItens();
     }
-    
+
     private void limparTClientes() {
         tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String[]{
-                    "CPF", "Nome", "Data", "Data de Inscrição"    
+                    "CPF", "Nome", "Data", "Data de Inscrição"
                 }
         ));
         listaClientes = null;
         linCliente = -1;
     }
-    
+
     private void limparTEnderecos() {
-       tb_enderecos.setModel(new javax.swing.table.DefaultTableModel(
+        tb_enderecos.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String[]{
                     "Cep", "Logradouro", "Numero", "Complemento", "Bairro", "UF"
                 }
         ));
         listaEnderecos = null;
-        linEndereco =  -1; 
+        linEndereco = -1;
     }
-    
+
     private void limparTItens() {
         tb_itens.setModel(new javax.swing.table.DefaultTableModel(
                 null,
@@ -624,7 +631,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         ));
         listaItens = null;
     }
-    
+
     private void exibirDataAtual() {
         try {
             SimpleDateFormat fData = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -633,22 +640,20 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    
+
     private void abrirJanelaCarregamento() {
         tCarregamento.setVisible(true);
     }
-    
+
     private void fecharJanelaCarregamento() {
         tCarregamento.setVisible(false);
     }
-    
-    public void gerarelatoriopessoafisica()
-    {
+
+    public void gerarelatoriopessoafisica() {
         int linha = tb_clientes.getSelectedRow();
         int linha2 = tb_enderecos.getSelectedRow();
-        
-        if(linha != -1 && linha2 != -1)
-        {
+
+        if (linha != -1 && linha2 != -1) {
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
             String nome = tb_clientes.getValueAt(linha, 2).toString();
             String cep = tb_enderecos.getValueAt(linha2, 0).toString();
@@ -656,60 +661,56 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             String numero = tb_enderecos.getValueAt(linha2, 2).toString();
             String complemento = tb_enderecos.getValueAt(linha2, 3).toString();
             String bairro = tb_enderecos.getValueAt(linha2, 4).toString();
-            String uf = tb_enderecos.getValueAt(linha2, 5).toString(); 
-            
+            String uf = tb_enderecos.getValueAt(linha2, 5).toString();
+
             Document doc = new Document();
             String arquivoPdf = "Folhagenerica.pdf";
             Font font;
-            font = new Font(FontFamily.TIMES_ROMAN,32, Font.BOLD, BaseColor.BLACK);
-            
-           try
-           {
-               
-              PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
-              doc.open();
-              Paragraph paragrafo = new Paragraph("Folha de orçamento Sistema C.M.D", font);
-              paragrafo.setAlignment(Element.ALIGN_CENTER);
-              Paragraph mensagem = new Paragraph("Boa Tarde Sr: \t" + nome + ", \n" + "Por favor leia atentamente todos os itens desta folha de orçamento \n");
-              mensagem.setAlignment(Element.ALIGN_LEFT);
-              doc.add(paragrafo);
-              paragrafo = new Paragraph(" ");
-              doc.add(paragrafo);
-              doc.add(mensagem);
-              mensagem = new Paragraph(" ");
-              doc.add(mensagem);
-              Paragraph CPF = new Paragraph("CPF: \t" + cpf);
-              doc.add(CPF);
-              Paragraph Nome = new Paragraph("Nome: \t" + nome);
-              doc.add(Nome);
-              Paragraph Cep = new Paragraph("CEP: \t" + cep);
-              doc.add(Cep);
-              Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
-              doc.add(Logradouro);
-              Paragraph Numero = new Paragraph("Numero: \t" + numero);
-              doc.add(Numero);
-              Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
-              doc.add(Complemento);
-              Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
-              doc.add(Bairro);
-              Paragraph Uf = new Paragraph("Uf: \t" + uf);
-              doc.add(Uf);
-              doc.close();
-              Desktop.getDesktop().open(new File(arquivoPdf));
-           }
-           catch(DocumentException e)
-           {
-               
-           } catch (FileNotFoundException ex) {
+            font = new Font(FontFamily.TIMES_ROMAN, 32, Font.BOLD, BaseColor.BLACK);
+
+            try {
+
+                PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
+                doc.open();
+                Paragraph paragrafo = new Paragraph("Folha de orçamento Sistema C.M.D", font);
+                paragrafo.setAlignment(Element.ALIGN_CENTER);
+                Paragraph mensagem = new Paragraph("Boa Tarde Sr: \t" + nome + ", \n" + "Por favor leia atentamente todos os itens desta folha de orçamento \n");
+                mensagem.setAlignment(Element.ALIGN_LEFT);
+                doc.add(paragrafo);
+                paragrafo = new Paragraph(" ");
+                doc.add(paragrafo);
+                doc.add(mensagem);
+                mensagem = new Paragraph(" ");
+                doc.add(mensagem);
+                Paragraph CPF = new Paragraph("CPF: \t" + cpf);
+                doc.add(CPF);
+                Paragraph Nome = new Paragraph("Nome: \t" + nome);
+                doc.add(Nome);
+                Paragraph Cep = new Paragraph("CEP: \t" + cep);
+                doc.add(Cep);
+                Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
+                doc.add(Logradouro);
+                Paragraph Numero = new Paragraph("Numero: \t" + numero);
+                doc.add(Numero);
+                Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
+                doc.add(Complemento);
+                Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
+                doc.add(Bairro);
+                Paragraph Uf = new Paragraph("Uf: \t" + uf);
+                doc.add(Uf);
+                doc.close();
+                Desktop.getDesktop().open(new File(arquivoPdf));
+            } catch (DocumentException e) {
+
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_folha;
     private javax.swing.JButton btn_cadCliente;
