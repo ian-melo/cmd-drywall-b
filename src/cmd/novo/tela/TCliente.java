@@ -703,7 +703,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             HashSet<Telefone> tels = new HashSet<>();
 //===============================ENDERECO=======================================
             end = preencheEnderecoVAL(end);//Preenche endereco
-            //end.setCodEndereco(25);//ERRO!!!!!!!!!
 //==============================================================================
 
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -894,6 +893,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 reformataCamposTelefone();
                 LimparCampos();
                 setInfoPJuridica(linha);
+                habilitaBotoes(true);
 
             }
 
@@ -901,6 +901,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 reformataCamposTelefone();
                 LimparCampos();
                 setInfoPFisica(linha);
+                habilitaBotoes(true);
 
             }
         }
@@ -923,12 +924,15 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
             alteraPessoaJuridica();
+             habilitaBotoes(false);
         }
+
         if (cmb_pessoa.getSelectedIndex() == 1) {//P Fisica
             if (verificaPessoaFisica() == false) {//verifica os campos
                 return;
             }
             alteraPessoaFisica();
+            habilitaBotoes(false);
         }
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
@@ -1044,7 +1048,12 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     }
 
-    private void reformataCamposTelefone() {
+    private void habilitaBotoes(boolean val) {
+        btn_Alterar.setEnabled(val);
+        btn_Cadastrar.setEnabled(!val);
+    }
+
+    private void reformataCamposTelefone() {//Corrige erro - parcialmente
         try {
             txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
             txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)#####-####")));
@@ -1485,6 +1494,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pFi.setTxt_nome_pnl("");
 
         habilitaCEP(true);
+        habilitaBotoes(false);
     }
 
     private boolean verificaCamposEndereco() {
