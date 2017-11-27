@@ -43,13 +43,13 @@ import javax.swing.text.NumberFormatter;
  * @author Usuario
  */
 public class TCliente extends javax.swing.JInternalFrame {
-
+    
     public static TCliente clienteT;
     PnlFisica pFi = new PnlFisica();
     PnlJuridica pJu = new PnlJuridica();
     private Timer timer;
     ClienteController cliC;
-
+    
     Thread tTempog = new Thread() {
         @Override
         public void run() {
@@ -62,11 +62,11 @@ public class TCliente extends javax.swing.JInternalFrame {
                 Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception e) {
                 System.out.println("_" + e);
-
+                
             }
         }
     };
-
+    
     private String Cep;
     Thread tCEPg = new Thread() {
         @Override
@@ -96,9 +96,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             }
             habilitaCEP(true);
             try {
-
+                
                 tTempog.interrupt();
-
+                
             } catch (Exception e) {
                 System.out.println("_" + e);
             }
@@ -128,7 +128,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pnl_cliente_pai.setBackground(Color.WHITE);
         pnl_metade.setBackground(Color.WHITE);
         pnl_baixo.setBackground(Color.WHITE);
-
+        
         pJuridica();//Inicai com Pessoa Juridica Selecionado
         colocaDataAtual();
 
@@ -653,17 +653,17 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_SairActionPerformed
 
     private void cmb_pessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_pessoaActionPerformed
-
+        
         if (cmb_pessoa.getSelectedIndex() == 0) {//Pessoa Juridica
             LimparCampos();
             reformataCamposTelefone();
-
+            
             pJuridica();
         }
         if (cmb_pessoa.getSelectedIndex() == 1) {//Pessoa Fisica
             LimparCampos();
             reformataCamposTelefone();
-
+            
             pFisica();
         }
 
@@ -689,17 +689,17 @@ public class TCliente extends javax.swing.JInternalFrame {
             if (verificaPessoaJuridica() == false) {//verifica os campos
                 return;
             }
-
+            
             cliC = new ClienteController();
-
+            
             Cliente cli = null;
             Endereco end = null;
             PessoaJuridica pJur = null;
-
+            
             cli = new Cliente();
             end = new Endereco();
             pJur = new PessoaJuridica();
-
+            
             HashSet<Telefone> tels = new HashSet<>();
 //===============================ENDERECO=======================================
             end = preencheEnderecoVAL(end);//Preenche endereco
@@ -711,9 +711,9 @@ public class TCliente extends javax.swing.JInternalFrame {
                 dataDate = formato.parse(lb_dataInscricao.getText());
             } catch (ParseException ex) {
                 Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
-
+                
             }
-
+            
             pJur.setCliente(cli);
             pJur.setCnpj(pJu.getTxt_cnpj_pnl());
             pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
@@ -732,20 +732,20 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setPessoaJuridica(pJur);
             cli.setTelefones(tels);
             cli.setXdead(false);
-
+            
             if (!cliC.validarCnpj(pJur)) {
                 JOptionPane.showMessageDialog(null, "CNPJ, invalido");
                 return;
             }
-
+            
             if (!cliC.verificarCnpj(pJur)) {
                 JOptionPane.showMessageDialog(null, "CNPJ, já existe");
                 return;
             }
-
+            
             if (cliC.inserirPessoaJuridica(pJur) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
-
+                
             }
             preencheTabelaJuridico();//apenas atualiza atabela
         }
@@ -757,17 +757,17 @@ public class TCliente extends javax.swing.JInternalFrame {
             if (verificaPessoaFisica() == false) {//verifica os campos
                 return;
             }
-
+            
             cliC = new ClienteController();
-
+            
             Cliente cli = null;
             Endereco end = null;
             PessoaFisica pFis = null;
-
+            
             cli = new Cliente();
             end = new Endereco();
             pFis = new PessoaFisica();
-
+            
             HashSet<Telefone> tels = new HashSet<>();
 
 //===============================ENDERECO=======================================
@@ -781,9 +781,9 @@ public class TCliente extends javax.swing.JInternalFrame {
                 dataDate = formato.parse(lb_dataInscricao.getText());
             } catch (ParseException ex) {
                 Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
-
+                
             }
-
+            
             pFis.setCliente(cli);
             pFis.setCpf(pFi.getTxt_cpf_pnl());
             pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
@@ -801,22 +801,22 @@ public class TCliente extends javax.swing.JInternalFrame {
             cli.setPessoaFisica(pFis);
             cli.setTelefones(tels);
             cli.setXdead(false);
-
+            
             if (!cliC.validarCpf(pFis)) {
                 JOptionPane.showMessageDialog(null, "CPF, invalido");
                 return;
             }
-
+            
             if (!cliC.verificarCpf(pFis)) {
                 JOptionPane.showMessageDialog(null, "CPF, já existe");
                 return;
             }
-
+            
             if (cliC.inserirPessoaFisica(pFis) == true) {
                 JOptionPane.showMessageDialog(null, "Cadastrado");
-
+                
             }
-
+            
             preencheTabelaFisica();//Apenas atualiza a tabela
         }
         LimparCampos();
@@ -837,9 +837,9 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void txt_cepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cepFocusLost
         Validar vali = new Validar();
-
+        
         if (vali.validarCep(txt_cep.getText())) {
-
+            
             buscaCep(txt_cep.getText());
         } else {
             JOptionPane.showMessageDialog(pnl_telefone, "Verifique o Cep");
@@ -852,7 +852,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         if (vali.validarNumero(txt_numero.getText())) {
             return;
         }
-
+        
         JOptionPane.showMessageDialog(pnl_telefone, "Verifique o numero");
     }//GEN-LAST:event_txt_numeroFocusLost
 
@@ -888,21 +888,21 @@ public class TCliente extends javax.swing.JInternalFrame {
         int linha;
         if (evt.getClickCount() == 1) {
             linha = tb_FisicaEjuridica.getSelectedRow();
-
+            
             if (cmb_pessoa.getSelectedIndex() == 0) {
                 reformataCamposTelefone();
                 LimparCampos();
                 setInfoPJuridica(linha);
                 habilitaBotoes(true);
-
+                
             }
-
+            
             if (cmb_pessoa.getSelectedIndex() == 1) {
                 reformataCamposTelefone();
                 LimparCampos();
                 setInfoPFisica(linha);
                 habilitaBotoes(true);
-
+                
             }
         }
     }//GEN-LAST:event_tb_FisicaEjuridicaMouseClicked
@@ -924,36 +924,45 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
             alteraPessoaJuridica();
-             habilitaBotoes(false);
+            habilitaBotoes(false);
+            
+            LimparCampos();
+            reformataCamposTelefone();
+            pJuridica();
+            
         }
-
+        
         if (cmb_pessoa.getSelectedIndex() == 1) {//P Fisica
             if (verificaPessoaFisica() == false) {//verifica os campos
                 return;
             }
             alteraPessoaFisica();
             habilitaBotoes(false);
+            
+            LimparCampos();
+            reformataCamposTelefone();
+            pFisica();
         }
     }//GEN-LAST:event_btn_AlterarActionPerformed
-
+    
     private void pequenoBug() {
         int x = this.getHeight();
         int y = this.getWidth();
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
     }
-
+    
     private void alteraPessoaJuridica() {
         cliC = new ClienteController();
-
+        
         Cliente cli = null;
         Endereco end = null;
         PessoaJuridica pJur = null;
-
+        
         cli = new Cliente();
         end = new Endereco();
         pJur = new PessoaJuridica();
-
+        
         HashSet<Telefone> tels = new HashSet<>();
 //===============================ENDERECO=======================================
         end = preencheEnderecoVAL(end);//Preenche endereco
@@ -966,9 +975,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             dataDate = formato.parse(lb_dataInscricao.getText());
         } catch (ParseException ex) {
             Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
-
+        
         pJur.setCliente(cli);
         pJur.setCnpj(pJu.getTxt_cnpj_pnl());
         pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
@@ -987,27 +996,26 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setPessoaJuridica(pJur);
         cli.setTelefones(tels);
         cli.setXdead(false);
-
         if (cliC.alterarPessoaJuridica(pJur) == false) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar");
         } else {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso");
         }
-
+        
     }
-
+    
     private void alteraPessoaFisica() {
-
+        
         cliC = new ClienteController();
-
+        
         Cliente cli = null;
         Endereco end = null;
         PessoaFisica pFis = null;
-
+        
         cli = new Cliente();
         end = new Endereco();
         pFis = new PessoaFisica();
-
+        
         HashSet<Telefone> tels = new HashSet<>();
 //===============================ENDERECO=======================================
         end = preencheEnderecoVAL(end);//Preenche endereco
@@ -1019,9 +1027,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             dataDate = formato.parse(lb_dataInscricao.getText());
         } catch (ParseException ex) {
             Logger.getLogger(Validar.class.getName()).log(Level.SEVERE, null, ex);
-
+            
         }
-
+        
         pFis.setCliente(cli);
         pFis.setCpf(pFi.getTxt_cpf_pnl());
         pFis.setDataNascimento(pFi.getTxt_dataNasc_pnl());
@@ -1039,20 +1047,22 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setPessoaFisica(pFis);
         cli.setTelefones(tels);
         cli.setXdead(false);
-
+        
         if (cliC.alterarPessoaFisica(pFis) == false) {
             JOptionPane.showMessageDialog(null, "Erro ao alterar");
         } else {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso");
         }
-
+        
     }
-
+    
     private void habilitaBotoes(boolean val) {
         btn_Alterar.setEnabled(val);
         btn_Cadastrar.setEnabled(!val);
+        pJu.setEnabled_cnpj_pnl(!val);
+        pFi.setEnabled_cnpj_pnl(!val);
     }
-
+    
     private void reformataCamposTelefone() {//Corrige erro - parcialmente
         try {
             txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
@@ -1062,9 +1072,9 @@ public class TCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void setInfoPJuridica(int linha) {
-
+        
         PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 10);
         // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
 
@@ -1072,7 +1082,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
         pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
         pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
-
+        
         txt_cep.setText(peJu.getCliente().getEndereco().getCep());
         txt_logradouro.setText(peJu.getCliente().getEndereco().getLogradouro());
         txt_numero.setText(peJu.getCliente().getEndereco().getNumero());
@@ -1087,35 +1097,35 @@ public class TCliente extends javax.swing.JInternalFrame {
             String val = iterator.next().getId().getNumero().toString();
             txt_tel1.setFormatterFactory(new DefaultFormatterFactory());
             txt_tel1.setText(val);
-
+            
         }
         if (iterator.hasNext()) {
             String val = iterator.next().getId().getNumero().toString();
             txt_cel1.setFormatterFactory(new DefaultFormatterFactory());
-
+            
             txt_cel1.setText(val);
-
+            
         }
-
+        
         if (iterator.hasNext()) {
             String val = iterator.next().getId().getNumero().toString();
             txt_cel2.setFormatterFactory(new DefaultFormatterFactory());
-
+            
             txt_cel2.setText(val);
-
+            
         }
         // } catch (Exception e) {
         //     System.out.println("___" + e);
         // }
     }
-
+    
     private void setInfoPFisica(int linha) {
         PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 9);
-
+        
         pFi.setTxt_nome_pnl(peFi.getNome());
         pFi.setTxt_cpf_pnl(peFi.getCpf());
         pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
-
+        
         txt_cep.setText(peFi.getCliente().getEndereco().getCep());
         txt_logradouro.setText(peFi.getCliente().getEndereco().getLogradouro());
         txt_numero.setText(peFi.getCliente().getEndereco().getNumero());
@@ -1123,13 +1133,13 @@ public class TCliente extends javax.swing.JInternalFrame {
         txt_cidade.setText(peFi.getCliente().getEndereco().getCidade());
         txt_uf.setText(peFi.getCliente().getEndereco().getUf());
         txt_complemento.setText(peFi.getCliente().getEndereco().getComplemento());
-
+        
         try {
             Iterator<Telefone> iterator = peFi.getCliente().getTelefones().iterator();
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
                 txt_tel1.setFormatterFactory(new DefaultFormatterFactory());
-
+                
                 txt_tel1.setText(val);
                 //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
 
@@ -1145,7 +1155,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 //txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
                 // }
             }
-
+            
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
                 //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
@@ -1174,7 +1184,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         en.setNumero(txt_numero.getText());
         en.setUf(txt_uf.getText());
         en.setXdead(false);
-
+        
         return en;
     }
 
@@ -1182,44 +1192,44 @@ public class TCliente extends javax.swing.JInternalFrame {
     private HashSet<Telefone> preencheTelefoneVAL(HashSet<Telefone> tes, Cliente cli) {
         Telefone tel = new Telefone();
         TelefoneId telId = new TelefoneId();
-
+        
         telId.setNumero(txt_tel1.getText());
         //telId.setCodCliente(cli.getCodCliente());
         telId.setCodCliente(80);//Temporario
         tel.setId(telId);
         tel.setCliente(cli);
         tel.setXdead(false);
-
+        
         tes.add(tel);
-
+        
         if (!"(  )     -    ".equals(txt_cel1.getText())) {//só entra se estiver preenchido
             tel = new Telefone();
             telId = new TelefoneId();
-
+            
             telId.setNumero(txt_cel1.getText());
             //telId.setCodCliente(cli.getCodCliente());
             telId.setCodCliente(1);//Temporario
             tel.setId(telId);
             tel.setCliente(null);
             tel.setXdead(false);
-
+            
             tes.add(tel);
         }
-
+        
         if (!"(  )     -    ".equals(txt_cel2.getText())) {//só entra se estiver preenchido
             tel = new Telefone();
             telId = new TelefoneId();
-
+            
             telId.setNumero(txt_cel2.getText());
             //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
             telId.setCodCliente(1);//Temporario
             tel.setId(telId);
             tel.setCliente(null);
             tel.setXdead(false);
-
+            
             tes.add(tel);
         }
-
+        
         return tes;
     }
 
@@ -1244,7 +1254,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 //        }
         return true;
     }
-
+    
     public boolean verificaPessoaFisica() {
         if ("".equals(pFi.getTxt_cpf_pnl().trim()) || "   .   .   -  ".equals(pFi.getTxt_cpf_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha o CPF");
@@ -1258,10 +1268,10 @@ public class TCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha a Data");
             return false;
         }
-
+        
         return true;
     }
-
+    
     public void buscaCep(String cep) {
         habilitaCEP(false);
         Cep = cep;
@@ -1323,31 +1333,31 @@ public class TCliente extends javax.swing.JInternalFrame {
         //tTempo.start();
         tCEPg.start();
         tTempog.start();
-
+        
     }
-
+    
     private void habilitaCEP(boolean val) {
         txt_logradouro.setEnabled(val);
         txt_cidade.setEnabled(val);
         txt_bairro.setEnabled(val);
         txt_uf.setEnabled(val);
     }
-
+    
     private void pJuridica() {
         preencheTabelaJuridico();
-
+        
         pnl_cliente_pai.removeAll();//remove cliente anterior
 
         FlowLayout gerente = new FlowLayout(1);
-
+        
         pnl_cliente_pai.setLayout(gerente);//apenas um ajuste
 
         pnl_cliente_pai.add(pJu);
     }
-
+    
     private void pFisica() {
         preencheTabelaFisica();
-
+        
         pnl_cliente_pai.removeAll();//remove cliente anterior
 
         FlowLayout gerente = new FlowLayout(1);
@@ -1355,22 +1365,22 @@ public class TCliente extends javax.swing.JInternalFrame {
 
         pnl_cliente_pai.add(pFi);
     }
-
+    
     private void colocaDataAtual() {
         try {
-
+            
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             lb_dataInscricao.setText(sdf.format(new Date(System.currentTimeMillis())));
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        
     }
-
+    
     private void preencheTabelaJuridico() {
         tb_FisicaEjuridica.removeAll();
-
+        
         ClienteController cleC = new ClienteController();
         //Titulo
         Vector cabecalho = new Vector();
@@ -1390,7 +1400,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         //Itens
         Vector dados = new Vector();
         Vector item;
-
+        
         for (PessoaJuridica jx : cleC.listarPessoasJuridicas()) {
             item = new Vector();
             item.add(jx.getCnpj());
@@ -1405,21 +1415,21 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(jx.getCliente().getEndereco().getCidade());
             item.add(jx.getCliente().getEndereco().getUf());
             item.add(jx);
-
+            
             dados.add(item);
         }
-
+        
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
-
+        
         tb_FisicaEjuridica.getColumnModel().getColumn(10).setMaxWidth(0);//     :)
 
     }
-
+    
     private void preencheTabelaFisica() {
         tb_FisicaEjuridica.removeAll();
-
+        
         ClienteController cleC = new ClienteController();
         //Titulo
         Vector cabecalho = new Vector();
@@ -1438,7 +1448,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         //Itens
         Vector dados = new Vector();
         Vector item;
-
+        
         for (PessoaFisica fx : cleC.listarPessoasFisicas()) {
             item = new Vector();
             item.add(fx.getNome());
@@ -1451,20 +1461,20 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(fx.getCliente().getEndereco().getBairro());
             item.add(fx.getCliente().getEndereco().getCidade());
             item.add(fx.getCliente().getEndereco().getUf());
-
+            
             item.add(fx);//seta o objeto
 
             dados.add(item);
         }
-
+        
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
-
+        
         tb_FisicaEjuridica.getColumnModel().getColumn(9).setMaxWidth(0);
-
+        
     }
-
+    
     private void LimparCampos() {
 
         //Limpa tudo dentro de endereço
@@ -1475,7 +1485,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                 ((JTextField) componentsEnd[i]).setText("");
             }
         }
-
+        
         Component componentsTel[] = pnl_telefone.getComponents();
         int j;
         for (j = 0; j < componentsTel.length; j++) {
@@ -1483,20 +1493,20 @@ public class TCliente extends javax.swing.JInternalFrame {
                 ((JTextField) componentsTel[j]).setText("");
             }
         }
-
+        
         pJu.setTxt_cnpj_pnl("");
         pJu.setTxt_datafundacao_pnl(null);
         pJu.setTxt_ramoAtuacao_pnl("");
         pJu.setTxt_razaoSocial_pnl("");
-
+        
         pFi.setTxt_cpf_pnl("");
         pFi.setTxt_dataNasc_pnl(null);
         pFi.setTxt_nome_pnl("");
-
+        
         habilitaCEP(true);
         habilitaBotoes(false);
     }
-
+    
     private boolean verificaCamposEndereco() {
 //Verifica se todos os campos JTetField q estão dentro do pnl_endereco
 //estão sem nada exceto o campo txt_complemento q pode ficar sem nada
@@ -1564,10 +1574,10 @@ private void mouseClicadoCNPJ(MouseEvent e) {
         if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
             txt_cep.requestFocus();
             txt_cep.setText("04344-020");
-
+            
             txt_numero.requestFocus();
             txt_numero.setText("99");
         }
     }
-
+    
 }

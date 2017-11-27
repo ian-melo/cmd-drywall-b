@@ -30,6 +30,10 @@ public class PnlFisica extends javax.swing.JPanel {
 
     
     
+    public void setEnabled_cnpj_pnl(boolean val) {
+        txt_cpf_pnl.setEnabled(val);
+    }
+
     public void setTxt_nome_pnl(String nome_pnl) {
         this.txt_nome_pnl.setText(nome_pnl);
     }
