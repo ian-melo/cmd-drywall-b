@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-11-28T11:31:18 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pessoa_fisica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="cGVzc29hZmlzaWNhICwxNSwxNSw4ZWJiMDc5ZC0yY2YzLTQ2M2EtYTI3OC04YTdlNDI3YmFiZDY7"/>
+<!-- 2017-11-29T10:55:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Endereco" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\DataAdapter.xml"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="26" isBold="false"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
 	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
@@ -15,45 +15,15 @@
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[SELECT *
-FROM pessoafisica]]>
+		<![CDATA[select * from endereco]]>
 	</queryString>
-	<field name="Cpf" class="java.lang.String"/>
-	<field name="Nome" class="java.lang.String"/>
-	<field name="DataNascimento" class="java.sql.Date"/>
-	<group name="Group1">
-		<groupExpression><![CDATA[$F{Cpf}]]></groupExpression>
-		<groupHeader>
-			<band height="27">
-				<frame>
-					<reportElement mode="Opaque" x="0" y="3" width="721" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement style="SubTitle" x="101" y="-2" width="620" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
-						<textElement>
-							<font isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{Cpf}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="2" y="0" width="88" height="22" forecolor="#3C2DC4" uuid="76919f48-8d86-4f45-a5f5-d290cf2814a2"/>
-						<textElement>
-							<font size="14"/>
-						</textElement>
-						<text><![CDATA[CPF]]></text>
-					</staticText>
-				</frame>
-				<rectangle>
-					<reportElement x="725" y="3" width="77" height="24" backcolor="#666666" uuid="70e1e931-2edd-4f3d-b09b-b9da04709f25"/>
-					<graphicElement>
-						<pen lineWidth="0.0"/>
-					</graphicElement>
-				</rectangle>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
-	</group>
+	<field name="Logradouro" class="java.lang.String"/>
+	<field name="Numero" class="java.lang.String"/>
+	<field name="Complemento" class="java.lang.String"/>
+	<field name="Cep" class="java.lang.String"/>
+	<field name="Bairro" class="java.lang.String"/>
+	<field name="Cidade" class="java.lang.String"/>
+	<field name="Uf" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -69,16 +39,16 @@ FROM pessoafisica]]>
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
 					<textElement verticalAlignment="Bottom">
-						<font isBold="false"/>
+						<font size="30" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Jessoa Física]]></text>
+					<text><![CDATA[Relatorio de Endereços]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
 					<textElement textAlignment="Right">
 						<font size="22" isBold="false"/>
 					</textElement>
-					<text><![CDATA[C.M.D System]]></text>
+					<text><![CDATA[Cherry SubTitle]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -99,18 +69,53 @@ FROM pessoafisica]]>
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="398" height="18" forecolor="#000000" uuid="a9ff74d2-c2d3-4bfc-adba-4a976e04da92"/>
+				<reportElement style="Column header" x="0" y="0" width="113" height="18" forecolor="#000000" uuid="6174bf10-2735-4dc4-9c4e-73d8ffcf9d3e"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[Logradouro]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="398" y="0" width="398" height="18" forecolor="#000000" uuid="53b824b4-71e8-4003-ab44-48f3b8646c5f"/>
+				<reportElement style="Column header" x="113" y="0" width="113" height="18" forecolor="#000000" uuid="af513f3e-d6d3-4ebc-bf8a-80be0f96fc1e"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[DataNascimento]]></text>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="226" y="0" width="113" height="18" forecolor="#000000" uuid="2ad45de7-0a04-4b5c-b1e8-cd0ec5379ab5"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Complemento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="339" y="0" width="113" height="18" forecolor="#000000" uuid="6986d066-8610-4de3-a956-a4ca7984b1c2"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cep]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="452" y="0" width="113" height="18" forecolor="#000000" uuid="39b52e4f-4967-444d-9597-ce091edc4527"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="565" y="0" width="113" height="18" forecolor="#000000" uuid="f9257400-9410-45fd-bfdd-b6fa6b817a57"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="678" y="0" width="113" height="18" forecolor="#000000" uuid="090da4f5-4888-41e0-8ae1-1b5999a52f65"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Uf]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -119,18 +124,53 @@ FROM pessoafisica]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="398" height="18" uuid="db9bc78a-9d0d-42ff-abdc-bd5c90c30e42"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="113" height="18" uuid="ae9330e8-5d5a-49a7-8631-7e3869f7eaea"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{Logradouro}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="398" y="0" width="398" height="18" uuid="9682d2d0-02bf-4334-a3e9-88007c970cec"/>
+					<reportElement style="Detail" positionType="Float" x="113" y="0" width="113" height="18" uuid="d5600f78-44a3-4dd9-b78e-2a5f7cd8d16e"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DataNascimento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{Numero}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="226" y="0" width="113" height="18" uuid="95a41551-eeba-4219-9b9c-c58cf7553077"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Complemento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="339" y="0" width="113" height="18" uuid="16cb026d-555b-46eb-9d1a-691737147261"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Cep}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="452" y="0" width="113" height="18" uuid="28d76980-4bc0-484e-9b67-4c79a887da1a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Bairro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="565" y="0" width="113" height="18" uuid="77506773-ef24-4b3b-b6f4-8371d40ad047"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Cidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="678" y="0" width="113" height="18" uuid="ab583143-fd19-4385-a8f8-da32794246de"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Uf}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

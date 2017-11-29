@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-11-28T11:31:18 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pessoa_fisica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="cGVzc29hZmlzaWNhICwxNSwxNSw4ZWJiMDc5ZC0yY2YzLTQ2M2EtYTI3OC04YTdlNDI3YmFiZDY7"/>
+<!-- 2017-11-29T10:39:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pessoa_juridica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\DataAdapter.xml"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="26" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
@@ -15,31 +15,28 @@
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[SELECT *
-FROM pessoafisica]]>
+		<![CDATA[select * from pessoajuridica]]>
 	</queryString>
-	<field name="Cpf" class="java.lang.String"/>
-	<field name="Nome" class="java.lang.String"/>
-	<field name="DataNascimento" class="java.sql.Date"/>
+	<field name="Cnpj" class="java.lang.String"/>
+	<field name="RazaoSocial" class="java.lang.String"/>
+	<field name="RamoAtuacao" class="java.lang.String"/>
+	<field name="DataFundacao" class="java.sql.Date"/>
 	<group name="Group1">
-		<groupExpression><![CDATA[$F{Cpf}]]></groupExpression>
+		<groupExpression><![CDATA[$F{Cnpj}]]></groupExpression>
 		<groupHeader>
 			<band height="27">
 				<frame>
 					<reportElement mode="Opaque" x="0" y="3" width="721" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
 					<textField isStretchWithOverflow="true">
-						<reportElement style="SubTitle" x="101" y="-2" width="620" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
+						<reportElement style="SubTitle" x="90" y="0" width="631" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
 						<textElement>
 							<font isBold="false"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{Cpf}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{Cnpj}]]></textFieldExpression>
 					</textField>
 					<staticText>
-						<reportElement x="2" y="0" width="88" height="22" forecolor="#3C2DC4" uuid="76919f48-8d86-4f45-a5f5-d290cf2814a2"/>
-						<textElement>
-							<font size="14"/>
-						</textElement>
-						<text><![CDATA[CPF]]></text>
+						<reportElement x="2" y="0" width="78" height="24" forecolor="#D8EAF9" uuid="198b42b1-7e3b-45e0-b935-f824d50b0ea4"/>
+						<text><![CDATA[CNPJ]]></text>
 					</staticText>
 				</frame>
 				<rectangle>
@@ -71,7 +68,7 @@ FROM pessoafisica]]>
 					<textElement verticalAlignment="Bottom">
 						<font isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Jessoa Física]]></text>
+					<text><![CDATA[Relatorio de Pessoa Jurídica]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
@@ -99,18 +96,25 @@ FROM pessoafisica]]>
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="398" height="18" forecolor="#000000" uuid="a9ff74d2-c2d3-4bfc-adba-4a976e04da92"/>
+				<reportElement style="Column header" x="0" y="0" width="265" height="18" forecolor="#000000" uuid="79e8f2fe-7131-436a-89f7-1f5f979a2c52"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[RazaoSocial]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="398" y="0" width="398" height="18" forecolor="#000000" uuid="53b824b4-71e8-4003-ab44-48f3b8646c5f"/>
+				<reportElement style="Column header" x="265" y="0" width="265" height="18" forecolor="#000000" uuid="65e75405-9649-4668-9f0a-4623e14c78f2"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[DataNascimento]]></text>
+				<text><![CDATA[RamoAtuacao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="530" y="0" width="265" height="18" forecolor="#000000" uuid="ac3ae5d1-1d9a-44c8-8abf-c4604a80b852"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[DataFundacao]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -119,18 +123,25 @@ FROM pessoafisica]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="398" height="18" uuid="db9bc78a-9d0d-42ff-abdc-bd5c90c30e42"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="265" height="18" uuid="d5664078-e67b-4add-b513-a6072a2cf4be"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{RazaoSocial}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="398" y="0" width="398" height="18" uuid="9682d2d0-02bf-4334-a3e9-88007c970cec"/>
+					<reportElement style="Detail" positionType="Float" x="265" y="0" width="265" height="18" uuid="998d3322-6e09-455a-ba62-c16e70d4e686"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DataNascimento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{RamoAtuacao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="530" y="0" width="265" height="18" uuid="aeedabea-e63d-4806-843e-97c90572b954"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DataFundacao}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

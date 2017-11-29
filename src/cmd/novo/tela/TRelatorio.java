@@ -79,7 +79,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
         bt_rel2.setBackground(new java.awt.Color(153, 153, 255));
         bt_rel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel2.setText("Relatório de Pessoa FÍSICA");
+        bt_rel2.setText("Relatório de Pessoa Física");
         bt_rel2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_rel2ActionPerformed(evt);
@@ -88,7 +88,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
         bt_rel3.setBackground(new java.awt.Color(153, 153, 255));
         bt_rel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel3.setText("Relatórios 03");
+        bt_rel3.setText("Relatório de Pessoa Jurídica");
         bt_rel3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_rel3ActionPerformed(evt);
@@ -97,7 +97,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
         bt_rel4.setBackground(new java.awt.Color(153, 153, 255));
         bt_rel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel4.setText("Relatórios 04");
+        bt_rel4.setText("Relatório de Pedidos");
         bt_rel4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_rel4ActionPerformed(evt);
@@ -106,7 +106,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
         bt_rel5.setBackground(new java.awt.Color(153, 153, 255));
         bt_rel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel5.setText("Relatórios 05");
+        bt_rel5.setText("Relatório de Endereços");
         bt_rel5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_rel5ActionPerformed(evt);
@@ -131,25 +131,30 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_rel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_rel5)
-                            .addComponent(bt_rel4)
-                            .addComponent(bt_rel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(bt_rel1))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bt_rel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(btn_sair)))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(bt_rel1))
+                                    .addComponent(jLabel1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bt_rel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(bt_rel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(bt_rel5)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(btn_sair)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,9 +172,9 @@ public class TRelatorio extends javax.swing.JInternalFrame {
                 .addComponent(bt_rel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_rel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btn_sair)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -184,7 +189,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             stat = con.prepareStatement("SELECT * from material");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Material_cherry.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Material_cherry.jasper", new HashMap(), relatresult);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
@@ -231,28 +236,30 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_rel2ActionPerformed
 
     private void bt_rel3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel3ActionPerformed
-        Connection con = ConnectionFactory.getConexao();
+                Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
 
-//        try
-//        { 
-//            stat = con.prepareStatement("SELECT * from material");
-//            rs = stat.executeQuery();
-//            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-//            JasperPrint print = JasperFillManager.fillReport("caminho a ser colocado", new HashMap(), relatresult);
-//            JasperViewer view = new JasperViewer(print,false);
-//            view.setVisible(true);
-//            view.toFront();
-//        }
-//        catch(JRException e)
-//        {
-//            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
-//        }
-//        finally
-//        {
-//            ConnectionFactory.fecharConexao(con,stat);
-//        }
+        try
+        { 
+            stat = con.prepareStatement("SELECT * from pessoajuridica");
+            rs = stat.executeQuery();
+            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pessoa_juridica.jasper", new HashMap(), relatresult);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+            view.toFront();
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
+        } catch (SQLException ex) {
+            Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            ConnectionFactory.fechaConexão(con,stat);
+        }
     }//GEN-LAST:event_bt_rel3ActionPerformed
 
     private void bt_rel4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel4ActionPerformed
@@ -260,24 +267,26 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         PreparedStatement stat = null;
         ResultSet rs = null;
 
-//        try
-//        { 
-//            stat = con.prepareStatement("SELECT * from material");
-//            rs = stat.executeQuery();
-//            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-//            JasperPrint print = JasperFillManager.fillReport("caminho a ser colocado", new HashMap(), relatresult);
-//            JasperViewer view = new JasperViewer(print,false);
-//            view.setVisible(true);
-//            view.toFront();
-//        }
-//        catch(JRException e)
-//        {
-//            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
-//        }
-//        finally
-//        {
-//            ConnectionFactory.fecharConexao(con,stat);
-//        }
+        try
+        { 
+            stat = con.prepareStatement("SELECT * from pedido_orcamento");
+            rs = stat.executeQuery();
+            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pedidos_orcamento.jasper", new HashMap(), relatresult);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+            view.toFront();
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
+        } catch (SQLException ex) {
+            Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            ConnectionFactory.fechaConexão(con,stat);
+        }
     }//GEN-LAST:event_bt_rel4ActionPerformed
 
     private void bt_rel5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel5ActionPerformed
@@ -285,24 +294,26 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         PreparedStatement stat = null;
         ResultSet rs = null;
 
-//        try
-//        { 
-//            stat = con.prepareStatement("SELECT * from material");
-//            rs = stat.executeQuery();
-//            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-//            JasperPrint print = JasperFillManager.fillReport("caminho a ser colocado", new HashMap(), relatresult);
-//            JasperViewer view = new JasperViewer(print,false);
-//            view.setVisible(true);
-//            view.toFront();
-//        }
-//        catch(JRException e)
-//        {
-//            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
-//        }
-//        finally
-//        {
-//            ConnectionFactory.fecharConexao(con,stat);
-//        }
+        try
+        { 
+            stat = con.prepareStatement("SELECT * from endereco");
+            rs = stat.executeQuery();
+            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Endereco.jasper", new HashMap(), relatresult);
+            JasperViewer view = new JasperViewer(print,false);
+            view.setVisible(true);
+            view.toFront();
+        }
+        catch(JRException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
+        } catch (SQLException ex) {
+            Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            ConnectionFactory.fechaConexão(con,stat);
+        }
     }//GEN-LAST:event_bt_rel5ActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
