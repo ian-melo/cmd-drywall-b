@@ -180,30 +180,25 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         PreparedStatement stat = null;
         ResultSet rs = null;
 
-        try
-        { 
+        try {
             stat = con.prepareStatement("SELECT * from material");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
             JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Material_cherry.jasper", new HashMap(), relatresult);
-            JasperViewer view = new JasperViewer(print,false);
+            JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
-        }
-        catch(JRException e)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e );
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e);
         } catch (SQLException ex) {
             Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
-            ConnectionFactory.fechaConexão(con,stat);
+        } finally {
+            ConnectionFactory.fechaConexão(con, stat);
         }
     }//GEN-LAST:event_bt_rel1ActionPerformed
 
     private void bt_rel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel2ActionPerformed
-        
+
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
@@ -215,7 +210,10 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
 
-            JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
+            //Funciona executa assim
+            //Fico bom
+            //JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
 
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);

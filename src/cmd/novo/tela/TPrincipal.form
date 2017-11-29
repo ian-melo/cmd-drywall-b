@@ -48,18 +48,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="pnl_relatorios" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="pnl_gerenciamentoItens" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lb_logado" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pnl_orcamento" max="32767" attributes="0"/>
-                          <Component id="pnl_APP" max="32767" attributes="0"/>
-                          <Component id="pnl_funcionarios" max="32767" attributes="0"/>
+                      <Component id="pnl_gerenciamentoItens" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lb_logado" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnl_orcamento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnl_APP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnl_funcionarios" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -105,7 +103,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="v0.17"/>
+            <Property name="text" type="java.lang.String" value="v0.18"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="pnl_gerenciamentoItens">
