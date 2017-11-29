@@ -188,7 +188,8 @@ public class TFuncionario extends javax.swing.JInternalFrame {
             return;
         }
 
-        if (txt_senha.getText().trim() != txt_senha_confirma.getText().trim()) {
+        if (!(new String(txt_senha.getPassword()).equals(new String(txt_senha_confirma.getPassword())))) {
+
             JOptionPane.showMessageDialog(null, "A senha é diferente");
             txt_senha_confirma.requestFocus();
             txt_senha_confirma.setText("");
@@ -196,7 +197,7 @@ public class TFuncionario extends javax.swing.JInternalFrame {
         }
         Validar vali = new Validar();
         if (vali.validarSenha(txt_senha.getText()) == false) {
-            JOptionPane.showMessageDialog(null, "Sua senha deve estar entre 6 e 16");
+            JOptionPane.showMessageDialog(null, "Sua senha deve ter entre 6 e 16 caracteres");
             return;
         }
 
@@ -216,7 +217,7 @@ public class TFuncionario extends javax.swing.JInternalFrame {
         txt_senha.setText("");
         txt_senha_confirma.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cadastro_func;
     private javax.swing.JButton bt_sair_func;
