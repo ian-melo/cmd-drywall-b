@@ -244,6 +244,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         btn_sair.setBackground(new java.awt.Color(153, 153, 255));
         btn_sair.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_sair.setText("Sair");
+        btn_sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sairActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Tipo de construção:*");
@@ -670,6 +675,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     private void cmb_qualidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_qualidadeActionPerformed
 
     }//GEN-LAST:event_cmb_qualidadeActionPerformed
+
+    private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
+       dispose();
+    }//GEN-LAST:event_btn_sairActionPerformed
 
     private void cadastrar() {
 
