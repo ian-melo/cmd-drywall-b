@@ -109,8 +109,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
         cmb_cliente = new javax.swing.JComboBox();
-        bt_folhapjuridica = new javax.swing.JButton();
-        bt_folhapfisica = new javax.swing.JButton();
+        bt_folhajuridica = new javax.swing.JButton();
+        bt_folhafisica = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Calculo do Orçamento");
@@ -247,21 +247,21 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         });
 
-        bt_folhapjuridica.setBackground(new java.awt.Color(153, 153, 255));
-        bt_folhapjuridica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folhapjuridica.setText("Gerar Folha de Orçamento Pessoa Jurídica");
-        bt_folhapjuridica.addActionListener(new java.awt.event.ActionListener() {
+        bt_folhajuridica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_folhajuridica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_folhajuridica.setText("Gerar Folha de Orçamento Pessoa Jurídica");
+        bt_folhajuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_folhapjuridicaActionPerformed(evt);
+                bt_folhajuridicaActionPerformed(evt);
             }
         });
 
-        bt_folhapfisica.setBackground(new java.awt.Color(153, 153, 255));
-        bt_folhapfisica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folhapfisica.setText("Gerar Folha de Orçamento Pessoa Física");
-        bt_folhapfisica.addActionListener(new java.awt.event.ActionListener() {
+        bt_folhafisica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_folhafisica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_folhafisica.setText("Gerar Folha de Orçamento Pessoa Física");
+        bt_folhafisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_folhapfisicaActionPerformed(evt);
+                bt_folhafisicaActionPerformed(evt);
             }
         });
 
@@ -305,10 +305,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
-                                .addComponent(bt_folhapfisica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(bt_folhafisica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(bt_folhapjuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bt_folhajuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29)
                         .addComponent(btn_cadastrarOrca)
                         .addGap(37, 37, 37))
@@ -347,9 +347,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_folhapjuridica)
+                        .addComponent(bt_folhajuridica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_folhapfisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(bt_folhafisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -427,13 +427,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
-    private void bt_folhapjuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhapjuridicaActionPerformed
+    private void bt_folhajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhajuridicaActionPerformed
         gerarrelatoriopessoajuridica();
-    }//GEN-LAST:event_bt_folhapjuridicaActionPerformed
+    }//GEN-LAST:event_bt_folhajuridicaActionPerformed
 
-    private void bt_folhapfisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhapfisicaActionPerformed
+    private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
         gerarelatoriopessoafisica();
-    }//GEN-LAST:event_bt_folhapfisicaActionPerformed
+    }//GEN-LAST:event_bt_folhafisicaActionPerformed
 
     private void salvar() {
         if (!validar()) {
@@ -936,8 +936,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_folhapfisica;
-    private javax.swing.JButton bt_folhapjuridica;
+    private javax.swing.JButton bt_folhafisica;
+    private javax.swing.JButton bt_folhajuridica;
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
     private javax.swing.JButton btn_limpar;
