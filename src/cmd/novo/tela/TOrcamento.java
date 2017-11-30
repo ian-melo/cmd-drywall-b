@@ -109,8 +109,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
         cmb_cliente = new javax.swing.JComboBox();
-        bt_folha = new javax.swing.JButton();
-        bt_folha1 = new javax.swing.JButton();
+        bt_folhapjuridica = new javax.swing.JButton();
+        bt_folhapfisica = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Calculo do Orçamento");
@@ -247,21 +247,21 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         });
 
-        bt_folha.setBackground(new java.awt.Color(153, 153, 255));
-        bt_folha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folha.setText("Gerar Folha de Orçamento Pessoa Jurídica");
-        bt_folha.addActionListener(new java.awt.event.ActionListener() {
+        bt_folhapjuridica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_folhapjuridica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_folhapjuridica.setText("Gerar Folha de Orçamento Pessoa Jurídica");
+        bt_folhapjuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_folhaActionPerformed(evt);
+                bt_folhapjuridicaActionPerformed(evt);
             }
         });
 
-        bt_folha1.setBackground(new java.awt.Color(153, 153, 255));
-        bt_folha1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folha1.setText("Gerar Folha de Orçamento Pessoa Física");
-        bt_folha1.addActionListener(new java.awt.event.ActionListener() {
+        bt_folhapfisica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_folhapfisica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_folhapfisica.setText("Gerar Folha de Orçamento Pessoa Física");
+        bt_folhapfisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_folha1ActionPerformed(evt);
+                bt_folhapfisicaActionPerformed(evt);
             }
         });
 
@@ -305,10 +305,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
-                                .addComponent(bt_folha1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(bt_folhapfisica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(bt_folha, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bt_folhapjuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29)
                         .addComponent(btn_cadastrarOrca)
                         .addGap(37, 37, 37))
@@ -337,7 +337,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_cadCliente))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
@@ -348,9 +347,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_folha)
+                        .addComponent(bt_folhapjuridica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_folha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(bt_folhapfisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -428,13 +427,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
-    private void bt_folhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhaActionPerformed
-        gerarelatoriopessoafisica();
-    }//GEN-LAST:event_bt_folhaActionPerformed
+    private void bt_folhapjuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhapjuridicaActionPerformed
+        gerarrelatoriopessoajuridica();
+    }//GEN-LAST:event_bt_folhapjuridicaActionPerformed
 
-    private void bt_folha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folha1ActionPerformed
-        
-    }//GEN-LAST:event_bt_folha1ActionPerformed
+    private void bt_folhapfisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhapfisicaActionPerformed
+        gerarelatoriopessoafisica();
+    }//GEN-LAST:event_bt_folhapfisicaActionPerformed
 
     private void salvar() {
         if (!validar()) {
@@ -681,6 +680,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         List<Item> listaItens = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
+        
         if (linha != -1 && linha2 != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
@@ -693,7 +693,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             String uf = tb_enderecos.getValueAt(linha2, 5).toString();
             String valor_final = lb_valorFinal.getText();
             Document doc = new Document();
-            String arquivoPdf = "Folhagenerica.pdf";
+            String arquivoPdf = "Folhapessoafisica.pdf";
             Font font;
 
             font = new Font(FontFamily.TIMES_ROMAN, 32, Font.BOLD, BaseColor.BLACK);
@@ -731,10 +731,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
 
-                PdfPTable table = new PdfPTable(8);
-                PdfPCell cel0 = new PdfPCell(new Paragraph("Lista de Itens comprados"));
-                cel0.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel0.setColspan(8);
+                PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
                 cel1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel1.setColspan(2);
@@ -756,8 +753,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
                 cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cel7.setColspan(2);
-
-                table.addCell(cel0);
+                
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -765,7 +761,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel5);
                 table.addCell(cel6);
                 table.addCell(cel7);
-
+                
+                
                 for (Item it : listaItens) {
                     cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
                     cel2 = new PdfPCell(new Paragraph(it.getConstrucao().toString()));
@@ -784,6 +781,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel7);
                 }
                 doc.add(table);
+                
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
@@ -795,26 +793,151 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
+                
                 doc.close();
                 Desktop.getDesktop().open(new File(arquivoPdf));
-            } 
-            catch (DocumentException e) 
-            {
-               System.err.println("Erro ao criar docmuento: \n" + e);
-            } catch (IOException ex) 
-            {
+            } catch (DocumentException e) {
+                System.err.println("Erro ao criar docmuento: \n" + e);
+            } catch (IOException ex) {
                 Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    public void gerarrelatoriopessoajuridica()
-    {
-        // ainda a fazer...
+
+    public void gerarrelatoriopessoajuridica() {
+        
+     int linha = tb_clientes.getSelectedRow();
+        int linha2 = tb_enderecos.getSelectedRow();
+        int linha3 = tb_itens.getSelectedRow();
+        List<Item> listaItens = null;
+        ItemDAO dao = new ItemDAO();
+        listaItens = dao.listar();
+        
+        if (linha != -1 && linha2 != -1) {
+
+            String cpf = tb_clientes.getValueAt(linha, 1).toString();
+            String nome = tb_clientes.getValueAt(linha, 2).toString();
+            String cep = tb_enderecos.getValueAt(linha2, 0).toString();
+            String logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
+            String numero = tb_enderecos.getValueAt(linha2, 2).toString();
+            String complemento = tb_enderecos.getValueAt(linha2, 3).toString();
+            String bairro = tb_enderecos.getValueAt(linha2, 4).toString();
+            String uf = tb_enderecos.getValueAt(linha2, 5).toString();
+            String valor_final = lb_valorFinal.getText();
+            Document doc = new Document();
+            String arquivoPdf = "Folhapessoajuridica.pdf";
+            Font font;
+
+            font = new Font(FontFamily.TIMES_ROMAN, 32, Font.BOLD, BaseColor.BLACK);
+
+            try {
+
+                PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
+                doc.open();
+                Paragraph paragrafo = new Paragraph("Folha de orçamento Sistema C.M.D", font);
+                paragrafo.setAlignment(Element.ALIGN_CENTER);
+                Paragraph mensagem = new Paragraph("Boa Tarde Sr: \t" + nome + ", \n" + "Por favor leia atentamente todos os itens desta folha de orçamento \n");
+                mensagem.setAlignment(Element.ALIGN_LEFT);
+                doc.add(paragrafo);
+                paragrafo = new Paragraph(" ");
+                doc.add(paragrafo);
+                doc.add(mensagem);
+                mensagem = new Paragraph(" ");
+                doc.add(mensagem);
+                Paragraph CPF = new Paragraph("CNPJ: \t" + cpf);
+                doc.add(CPF);
+                Paragraph Nome = new Paragraph("Razão Social: \t" + nome);
+                doc.add(Nome);
+                Paragraph Cep = new Paragraph("CEP: \t" + cep);
+                doc.add(Cep);
+                Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
+                doc.add(Logradouro);
+                Paragraph Numero = new Paragraph("Numero: \t" + numero);
+                doc.add(Numero);
+                Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
+                doc.add(Complemento);
+                Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
+                doc.add(Bairro);
+                Paragraph Uf = new Paragraph("Uf: \t" + uf);
+                doc.add(Uf);
+                Uf = new Paragraph(" ");
+                doc.add(Uf);
+
+                PdfPTable table = new PdfPTable(7);
+                PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
+                cel1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel1.setColspan(2);
+                PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
+                cel2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel2.setColspan(2);
+                PdfPCell cel3 = new PdfPCell(new Paragraph("Altura"));
+                cel3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel3.setColspan(2);
+                PdfPCell cel4 = new PdfPCell(new Paragraph("Largura"));
+                cel4.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel4.setColspan(2);
+                PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
+                cel5.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel5.setColspan(2);
+                PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
+                cel6.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel6.setColspan(2);
+                PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
+                cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cel7.setColspan(2);
+                
+                table.addCell(cel1);
+                table.addCell(cel2);
+                table.addCell(cel3);
+                table.addCell(cel4);
+                table.addCell(cel5);
+                table.addCell(cel6);
+                table.addCell(cel7);
+               
+                for (Item it : listaItens) {
+                    cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
+                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().toString()));
+                    cel3 = new PdfPCell(new Paragraph(it.getAltura().floatValue()));
+                    cel4 = new PdfPCell(new Paragraph(it.getLargura().floatValue()));
+                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().floatValue()));
+                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().floatValue()));
+                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().floatValue()));
+
+                    table.addCell(cel1);
+                    table.addCell(cel2);
+                    table.addCell(cel3);
+                    table.addCell(cel4);
+                    table.addCell(cel5);
+                    table.addCell(cel6);
+                    table.addCell(cel7);
+                }
+                 doc.add(table);
+                Paragraph corpo = new Paragraph("Eu: ");
+                Chunk underline = new Chunk(nome + ",");
+                underline.setUnderline(0.1f, -2f);
+                corpo.add(underline);
+                doc.add(corpo);
+                Paragraph corpo2 = new Paragraph("declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
+                        + valor_final);
+                doc.add(corpo2);
+                Date data = new Date();
+                Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
+                doc.add(datas);
+                
+                doc.close();
+                Desktop.getDesktop().open(new File(arquivoPdf));
+            } catch (DocumentException e) {
+                System.err.println("Erro ao criar docmuento: \n" + e);
+            } catch (IOException ex) {
+                Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_folha;
-    private javax.swing.JButton bt_folha1;
+    private javax.swing.JButton bt_folhapfisica;
+    private javax.swing.JButton bt_folhapjuridica;
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
     private javax.swing.JButton btn_limpar;
