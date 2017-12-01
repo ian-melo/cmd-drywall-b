@@ -17,11 +17,12 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Usuario
  */
-
 public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
-    //Controla a quantidade de Janelas abertas
+    //public static Pedidos ped = new Pedidos();
+    public Pedidos ped = new Pedidos();
 
+    //Controla a quantidade de Janelas abertas
     public static TSolicaoOrcamento solicaoOrcamento;
 
     public static TSolicaoOrcamento getInstancia() {
@@ -34,42 +35,40 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
     /**
      * Creates new form SolicaoOrcamento
      */
-    public TSolicaoOrcamento() 
-    {
+    public TSolicaoOrcamento() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
         pn_conteudo.setBackground(Color.WHITE);
         DefaultTableModel modelo = (DefaultTableModel) tb_orcamento.getModel();
         tb_orcamento.setRowSorter(new TableRowSorter(modelo));
         ReadTable();
-       
+
     }
-    public void ReadTable()
-    {
+
+    public void ReadTable() {
         DefaultTableModel modelo = (DefaultTableModel) tb_orcamento.getModel();
         PedidosDAO p = new PedidosDAO();
         modelo.setNumRows(0);
-        
-        for(Pedidos pe : p.Read())
-        {
-             modelo.addRow(new Object[]{
-               pe.getId(),
-               pe.getAltura(),
-               pe.getLargura(),
-               pe.getQtd_paredes(),
-               pe.getEmail(),
-               pe.getValor(),
-               pe.getAmbiente(),
-               pe.getPossui_porta(),
-               pe.getPossui_janela(),
-               pe.getQtd_porta(),
-               pe.getQtd_janela(),
-               pe.getAltura_porta(),
-               pe.getLargura_porta(),
-               pe.getAltura_janela(),
-               pe.getLargura_janela(),
-               pe.getMao_obra()
-           });
+
+        for (Pedidos pe : p.Read()) {
+            modelo.addRow(new Object[]{
+                pe.getId(),
+                pe.getAltura(),
+                pe.getLargura(),
+                pe.getQtd_paredes(),
+                pe.getEmail(),
+                pe.getValor(),
+                pe.getAmbiente(),
+                pe.getPossui_porta(),
+                pe.getPossui_janela(),
+                pe.getQtd_porta(),
+                pe.getQtd_janela(),
+                pe.getAltura_porta(),
+                pe.getLargura_porta(),
+                pe.getAltura_janela(),
+                pe.getLargura_janela(),
+                pe.getMao_obra()
+            });
         }
     }
 
@@ -120,6 +119,24 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tb_orcamento);
+        if (tb_orcamento.getColumnModel().getColumnCount() > 0) {
+            tb_orcamento.getColumnModel().getColumn(0).setHeaderValue("Id");
+            tb_orcamento.getColumnModel().getColumn(1).setHeaderValue("Altura");
+            tb_orcamento.getColumnModel().getColumn(2).setHeaderValue("Largura");
+            tb_orcamento.getColumnModel().getColumn(3).setHeaderValue("Quantidade de Paredes");
+            tb_orcamento.getColumnModel().getColumn(4).setHeaderValue("Email");
+            tb_orcamento.getColumnModel().getColumn(5).setHeaderValue("Valor disponivel/desejado");
+            tb_orcamento.getColumnModel().getColumn(6).setHeaderValue("Ambiente");
+            tb_orcamento.getColumnModel().getColumn(7).setHeaderValue("Possui Portas");
+            tb_orcamento.getColumnModel().getColumn(8).setHeaderValue("Possui Janela");
+            tb_orcamento.getColumnModel().getColumn(9).setHeaderValue("Quantidade de Portas (Se houver)");
+            tb_orcamento.getColumnModel().getColumn(10).setHeaderValue("Quantidade Janelas (Se houver)");
+            tb_orcamento.getColumnModel().getColumn(11).setHeaderValue("Altura da Porta");
+            tb_orcamento.getColumnModel().getColumn(12).setHeaderValue("Largura da Porta");
+            tb_orcamento.getColumnModel().getColumn(13).setHeaderValue("Altura da Janela");
+            tb_orcamento.getColumnModel().getColumn(14).setHeaderValue("Largura da Janela");
+            tb_orcamento.getColumnModel().getColumn(15).setHeaderValue("Mao de Obra");
+        }
 
         javax.swing.GroupLayout pn_conteudoLayout = new javax.swing.GroupLayout(pn_conteudo);
         pn_conteudo.setLayout(pn_conteudoLayout);
@@ -197,21 +214,42 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_enviarEmailActionPerformed
 
     private void bt_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_atualizarActionPerformed
-       ReadTable();
+        ReadTable();
     }//GEN-LAST:event_bt_atualizarActionPerformed
 
     private void btn_envioInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_envioInfoActionPerformed
-       if (tb_orcamento.getSelectedRow() == -1){
-           JOptionPane.showMessageDialog(null, "Selecione uma opção");
-           return;
-       }
+        if (tb_orcamento.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma opção");
+            return;
+        }
+        int linha = tb_orcamento.getSelectedRow();
+
+        //ped = new Pedidos();
+    
+        ped.setAltura((float) tb_orcamento.getValueAt(linha, 1));
+        ped.setLargura((float) tb_orcamento.getValueAt(linha, 2));
+        ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
+        ped.setEmail((String) tb_orcamento.getValueAt(linha, 4));
+        ped.setValor((float) tb_orcamento.getValueAt(linha, 5));
+        ped.setAmbiente((String) tb_orcamento.getValueAt(linha, 6));
+        ped.setPossui_porta((String) tb_orcamento.getValueAt(linha, 7));
+        ped.setPossui_janela((String) tb_orcamento.getValueAt(linha, 8));
+        ped.setQtd_porta((int) tb_orcamento.getValueAt(linha, 9));
+        ped.setQtd_janela((int) tb_orcamento.getValueAt(linha, 10));
+        ped.setAltura_porta((float) tb_orcamento.getValueAt(linha, 11));
+        ped.setLargura_porta((float) tb_orcamento.getValueAt(linha, 12));
+        ped.setAltura_janela((float) tb_orcamento.getValueAt(linha, 13));
+        ped.setLargura_janela((float) tb_orcamento.getValueAt(linha, 14));
+        ped.setMao_obra((String) tb_orcamento.getValueAt(linha, 15));
+
+
     }//GEN-LAST:event_btn_envioInfoActionPerformed
 
     private void tb_orcamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_orcamentoMouseClicked
         int linha;
         if (evt.getClickCount() == 1) {
             linha = tb_orcamento.getSelectedRow();
-            
+
             //Enviar info para TCalculo, enviar o cliente para TOrcamento
         }
     }//GEN-LAST:event_tb_orcamentoMouseClicked
