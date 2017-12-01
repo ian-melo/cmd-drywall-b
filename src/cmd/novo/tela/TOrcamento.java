@@ -733,27 +733,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
-                cel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel1.setColspan(2);
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
-                cel2.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel2.setColspan(2);
                 PdfPCell cel3 = new PdfPCell(new Paragraph("Altura"));
-                cel3.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel3.setColspan(2);
                 PdfPCell cel4 = new PdfPCell(new Paragraph("Largura"));
-                cel4.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel4.setColspan(2);
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
-                cel5.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel5.setColspan(2);
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
-                cel6.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel6.setColspan(2);
-                PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
-                cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel7.setColspan(2);
-                
+                PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));                
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -763,7 +748,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel7);
                 
                 
-                for (Item it : listaItens) {
+                for (Item it : listaItens) 
+                {
                     cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
                     cel2 = new PdfPCell(new Paragraph(it.getConstrucao().toString()));
                     cel3 = new PdfPCell(new Paragraph(it.getAltura().floatValue()));
@@ -792,8 +778,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo2);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
-                doc.add(datas);
-                
+                doc.add(datas);                
                 doc.close();
                 Desktop.getDesktop().open(new File(arquivoPdf));
             } catch (DocumentException e) {
@@ -865,27 +850,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
-                cel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel1.setColspan(2);
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
-                cel2.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel2.setColspan(2);
                 PdfPCell cel3 = new PdfPCell(new Paragraph("Altura"));
-                cel3.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel3.setColspan(2);
                 PdfPCell cel4 = new PdfPCell(new Paragraph("Largura"));
-                cel4.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel4.setColspan(2);
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
-                cel5.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel5.setColspan(2);
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
-                cel6.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel6.setColspan(2);
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
-                cel7.setHorizontalAlignment(Element.ALIGN_CENTER);
-                cel7.setColspan(2);
-                
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
