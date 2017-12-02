@@ -9,6 +9,7 @@ import cmd.DAO.PedidosDAO;
 import java.awt.Color;
 import cmd.email.SwingEmailSender;
 import cmd.entidade.Pedidos;
+import cmd.novo.GerenteDeJanelas;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -21,6 +22,8 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
     //public static Pedidos ped = new Pedidos();
     public Pedidos ped = new Pedidos();
+
+    GerenteDeJanelas gerenteDeJanelas;
 
     //Controla a quantidade de Janelas abertas
     public static TSolicaoOrcamento solicaoOrcamento;
@@ -37,6 +40,8 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
      */
     public TSolicaoOrcamento() {
         initComponents();
+        gerenteDeJanelas = new GerenteDeJanelas(TPrincipal.jDesktopPane1);
+
         getContentPane().setBackground(Color.WHITE);
         pn_conteudo.setBackground(Color.WHITE);
         DefaultTableModel modelo = (DefaultTableModel) tb_orcamento.getModel();
@@ -225,7 +230,6 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         int linha = tb_orcamento.getSelectedRow();
 
         //ped = new Pedidos();
-    
         ped.setAltura((float) tb_orcamento.getValueAt(linha, 1));
         ped.setLargura((float) tb_orcamento.getValueAt(linha, 2));
         ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
@@ -241,6 +245,13 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         ped.setAltura_janela((float) tb_orcamento.getValueAt(linha, 13));
         ped.setLargura_janela((float) tb_orcamento.getValueAt(linha, 14));
         ped.setMao_obra((String) tb_orcamento.getValueAt(linha, 15));
+
+        try {
+            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
+        } catch (IllegalArgumentException e) {
+            gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
+            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        }
 
 
     }//GEN-LAST:event_btn_envioInfoActionPerformed

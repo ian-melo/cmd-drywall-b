@@ -91,6 +91,7 @@ public class TPrincipal extends javax.swing.JFrame {
         lb_logado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lb_logado.setText("NULL");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("v0.18");
 
         pnl_gerenciamentoItens.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 51, 51)));
