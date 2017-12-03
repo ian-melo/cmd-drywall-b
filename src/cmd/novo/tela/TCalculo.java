@@ -823,9 +823,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
 
-        calculoT.limparTudo();
-        setValoresOutroForm(pp);
+        if (pp != null) {
+            calculoT.limparTudo();
+            setValoresOutroForm(pp);
 
+        }
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void fazerMultiplicacaoJanela() {

@@ -304,10 +304,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bt_folhafisica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 319, Short.MAX_VALUE)
                                 .addComponent(bt_folhajuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29)
                         .addComponent(btn_cadastrarOrca)
@@ -342,7 +342,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -428,10 +428,18 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void bt_folhajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhajuridicaActionPerformed
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente e um Endereço");
+            return;
+        }
         gerarrelatoriopessoajuridica();
     }//GEN-LAST:event_bt_folhajuridicaActionPerformed
 
     private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente e um Endereço");
+            return;
+        }
         gerarelatoriopessoafisica();
     }//GEN-LAST:event_bt_folhafisicaActionPerformed
 
@@ -680,7 +688,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         List<Item> listaItens = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
-        
+
         if (linha != -1 && linha2 != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
@@ -738,7 +746,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel4 = new PdfPCell(new Paragraph("Largura"));
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
-                PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));                
+                PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -746,17 +754,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel5);
                 table.addCell(cel6);
                 table.addCell(cel7);
-                
-                
-                for (Item it : listaItens) 
-                {
+
+                for (Item it : listaItens) {
                     cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
-                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().toString()));
-                    cel3 = new PdfPCell(new Paragraph(it.getAltura().floatValue()));
-                    cel4 = new PdfPCell(new Paragraph(it.getLargura().floatValue()));
-                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().floatValue()));
-                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().floatValue()));
-                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().floatValue()));
+                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().getDescricao()));
+                    cel3 = new PdfPCell(new Paragraph(it.getAltura().toString()));
+                    cel4 = new PdfPCell(new Paragraph(it.getLargura().toString()));
+                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().toString()));
+                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().toString()));
+                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().toString()));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
@@ -767,7 +773,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel7);
                 }
                 doc.add(table);
-                
+
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
@@ -778,7 +784,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo2);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
-                doc.add(datas);                
+                doc.add(datas);
                 doc.close();
                 Desktop.getDesktop().open(new File(arquivoPdf));
             } catch (DocumentException e) {
@@ -790,14 +796,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }
 
     public void gerarrelatoriopessoajuridica() {
-        
-     int linha = tb_clientes.getSelectedRow();
+
+        int linha = tb_clientes.getSelectedRow();
         int linha2 = tb_enderecos.getSelectedRow();
         int linha3 = tb_itens.getSelectedRow();
         List<Item> listaItens = null;
+
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
-        
+
         if (linha != -1 && linha2 != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
@@ -863,15 +870,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel5);
                 table.addCell(cel6);
                 table.addCell(cel7);
-               
+
                 for (Item it : listaItens) {
                     cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
-                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().toString()));
-                    cel3 = new PdfPCell(new Paragraph(it.getAltura().floatValue()));
-                    cel4 = new PdfPCell(new Paragraph(it.getLargura().floatValue()));
-                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().floatValue()));
-                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().floatValue()));
-                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().floatValue()));
+                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().getDescricao()));
+                    cel3 = new PdfPCell(new Paragraph(it.getAltura().toString()));
+                    cel4 = new PdfPCell(new Paragraph(it.getLargura().toString()));
+                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().toString()));
+                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().toString()));
+                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().toString()));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
@@ -881,7 +888,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel6);
                     table.addCell(cel7);
                 }
-                 doc.add(table);
+                doc.add(table);
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
@@ -893,7 +900,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
-                
+
                 doc.close();
                 Desktop.getDesktop().open(new File(arquivoPdf));
             } catch (DocumentException e) {
@@ -901,8 +908,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             } catch (IOException ex) {
                 Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
-        
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

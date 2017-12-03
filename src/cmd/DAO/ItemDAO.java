@@ -79,7 +79,7 @@ public class ItemDAO implements DAO<Item> {
             s.beginTransaction();
             li = s.createQuery("from Item").list();
             s.getTransaction().commit();
-            s.close();
+            //s.close();
             return li;
         } catch(HibernateException e) {
             return null;
