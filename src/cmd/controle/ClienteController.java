@@ -141,19 +141,43 @@ public class ClienteController {
 
     public boolean alterarPessoaFisica(PessoaFisica pF) {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        EnderecoDAO endDAO = new EnderecoDAO();
 
-         pF.setCodCliente(pFiDAO.buscarCPF(pF.getCpf()).getCodCliente());//Necessaro quebrarb em 2 linhas - Busca pelo CNPJ para recuperar o Cod
+        pF.setCodCliente(pFiDAO.buscarCPF(pF.getCpf()).getCodCliente());//Necessaro quebrarb em 2 linhas - Busca pelo CNPJ para recuperar o Cod
+
+        //esta linha vai gerar erro se algo for alterado
+        pF.getCliente().getEndereco().setCodEndereco(pF.getCodCliente());
         
-        return pFiDAO.alterar(pF);
+        if (pFiDAO.alterar(pF)) {
+            if (endDAO.alterar(pF.getCliente().getEndereco())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean alterarPessoaJuridica(PessoaJuridica pJ) {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
+        EnderecoDAO endDAO = new EnderecoDAO();
         //int cod = 0;
 
         pJ.setCodCliente(pJuDAO.buscarCNPJ(pJ.getCnpj()).getCodCliente());//Necessaro quebrarb em 2 linhas - Busca pelo CNPJ para recuperar o Cod
 
-        return pJuDAO.alterar(pJ);
+        //esta linha vai gerar erro se algo for alterado
+        pJ.getCliente().getEndereco().setCodEndereco(pJ.getCodCliente());
+//        System.out.println("------------------");
+//        System.out.println(pJ.getCodCliente());
+//        System.out.println(pJ.getCliente().getEndereco().getCep());
+//        System.out.println(pJ.getCliente().getEndereco().getCodEndereco());
+//        System.out.println("------------------");
+
+        //Contem 1 erro ele pode alterar a pessoaJuridoca mas não o endereço
+        if (pJuDAO.alterar(pJ)) {
+            if (endDAO.alterar(pJ.getCliente().getEndereco())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<PessoaJuridica> listarPessoasJuridicas() {

@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Endereço
+ *
  * @author ian-melo
  */
 public class EnderecoDAO implements DAO<Endereco> {
@@ -22,21 +23,25 @@ public class EnderecoDAO implements DAO<Endereco> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
 
     @Override
     public boolean alterar(Endereco item) {
-        try {
+        try {  
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             s.update(item);
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.err.println("_" + e);
+            return false;
+        } catch (Exception e) {
+            System.err.println("__" + e);
             return false;
         }
     }
@@ -50,7 +55,11 @@ public class EnderecoDAO implements DAO<Endereco> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return false;
+        } catch (Exception e) {
+            System.out.println("__" + e);
             return false;
         }
     }
@@ -62,11 +71,15 @@ public class EnderecoDAO implements DAO<Endereco> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             en = (Endereco) (s.createQuery("from Endereco where CodEndereco = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return en;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
+            System.out.println("_" + e);
+            return null;
+        } catch (Exception e) {
+            System.out.println("__" + e);
             return null;
         }
     }
@@ -81,9 +94,9 @@ public class EnderecoDAO implements DAO<Endereco> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

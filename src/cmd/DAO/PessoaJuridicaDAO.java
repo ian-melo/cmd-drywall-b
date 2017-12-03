@@ -38,7 +38,7 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.beginTransaction();
             s.update(item);
             s.getTransaction().commit();
-            s.close();
+            //s.close();
             return true;
         } catch(HibernateException e) {
             System.out.println("_" + e);
