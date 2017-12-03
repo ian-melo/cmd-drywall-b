@@ -1,6 +1,7 @@
 package cmd.novo.tela;
 
 import cmd.DAO.ItemDAO;
+import cmd.DAO.PessoaFisicaDAO;
 import cmd.controle.ClienteController;
 import cmd.controle.OrcamentoController;
 import cmd.entidade.Cliente;
@@ -124,15 +125,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_clientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "CPF", "Nome", "Data", "Data de Inscrição"
+                "Cod Cliente", "CPF", "Nome", "Data", "Data de Inscrição"
             }
         ));
         tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -688,7 +689,12 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         List<Item> listaItens = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
-
+        
+        //PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
+        //int cod = pFiDAO.buscarCPF(tb_clientes.getValueAt(linha, 1).toString()).getCodCliente();
+        //listaItens = dao.listarFisica(String.valueOf(cod));
+       // JOptionPane.showMessageDialog(rootPane, listaItens.size());
+        
         if (linha != -1 && linha2 != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
