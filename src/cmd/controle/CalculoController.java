@@ -128,6 +128,7 @@ public class CalculoController {
                         matItem.setItem(item);
                         matItem.setPrecoUnitario(BigDecimal.valueOf(preco));
                         matItem.setQuantidade((new Double(quantidade)).intValue());
+                        matItem.setId(new MaterialItemId());
                         matItem.setXdead(false);
                         materialItems.add(matItem);
                         break;
@@ -145,6 +146,7 @@ public class CalculoController {
                 matItem.setItem(item);
                 matItem.setPrecoUnitario(BigDecimal.valueOf(preco));
                 matItem.setQuantidade((new Double(quantidade)).intValue());
+                matItem.setId(new MaterialItemId());
                 matItem.setXdead(false);
                 materialItems.add(matItem);
             }

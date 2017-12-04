@@ -24,16 +24,22 @@ public class OrcamentoController {
         DAO oDao = new OrcamentoDAO();
         DAO iDao = new ItemDAO();
         DAO miDao = new MaterialItemDAO();
+        Item it;
+        MaterialItem mi;
         
         if(!oDao.inserir(input))
             return false;
         for(Object o : input.getItems()) {
-            if(!iDao.inserir((Item) o))
+            it = (Item) o;
+            if(!iDao.inserir(it))
                 return false;
-//            for(Object o2 : ((Item) o).getMaterialItems()) {
-//                if(!miDao.inserir((MaterialItem) o2))
-//                return false;
-//            }
+            for(Object o2 : it.getMaterialItems()) {
+                mi = (MaterialItem) o2;
+                mi.getId().setCodMaterial(mi.getMaterial().getCodMaterial());
+                mi.getId().setCodItem(it.getCodItem());
+                if(!miDao.inserir(mi))
+                    return false;
+            }
         }
         return true;
     }

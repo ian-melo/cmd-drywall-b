@@ -7,6 +7,8 @@ import cmd.controle.OrcamentoController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
+import cmd.entidade.Material;
+import cmd.entidade.MaterialItem;
 import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
@@ -460,7 +462,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             setItens.add(i);
         }
         o.setItems(setItens);
-
+        
         if (oControle.inserirOrcamento(o)) {
             JOptionPane.showMessageDialog(rootPane, "Orçamento realizado com sucesso.");
         } else {
