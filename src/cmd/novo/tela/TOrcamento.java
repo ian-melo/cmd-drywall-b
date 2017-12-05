@@ -432,7 +432,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
     private void bt_folhajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhajuridicaActionPerformed
         if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRows().length == -1) {
-            JOptionPane.showMessageDialog(null, "Escolha um Cliente e um Endereço");
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
             return;
         }
         gerarrelatoriopessoajuridica();
@@ -440,7 +440,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
     private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
         if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRows().length == -1) {
-            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e seus itens");
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
             return;
         }
         gerarelatoriopessoafisica();
@@ -797,10 +797,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo);
                 Paragraph corpo2 = new Paragraph("declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
                         + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
+                doc.add(Uf);
                 doc.add(corpo2);
                 doc.add(Uf);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
+                doc.add(Uf);
 	        Chunk vazio = new Chunk("                  " + "                  ");
+                 doc.add(Uf);
 		vazio.setUnderline(0.1f, -2f);
 	        Assinatura.add(vazio);
 		doc.add(Assinatura);
@@ -928,10 +931,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo);
                 Paragraph corpo2 = new Paragraph("Declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
                         + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
+                doc.add(Uf);
                 doc.add(corpo2);
                 doc.add(Uf);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
+                doc.add(Uf);
 	        Chunk vazio = new Chunk("                " + "                 ");
+                 doc.add(Uf);
 		vazio.setUnderline(0.1f, -2f);
 	        Assinatura.add(vazio);
 		doc.add(Assinatura);
