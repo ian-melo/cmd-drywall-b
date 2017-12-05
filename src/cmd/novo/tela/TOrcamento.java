@@ -431,7 +431,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void bt_folhajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhajuridicaActionPerformed
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1) {
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRows().length == -1) {
             JOptionPane.showMessageDialog(null, "Escolha um Cliente e um Endereço");
             return;
         }
@@ -439,8 +439,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_folhajuridicaActionPerformed
 
     private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Escolha um Cliente e um Endereço");
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRows().length == -1) {
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e seus itens");
             return;
         }
         gerarelatoriopessoafisica();
@@ -462,7 +462,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             setItens.add(i);
         }
         o.setItems(setItens);
-        
+
         if (oControle.inserirOrcamento(o)) {
             JOptionPane.showMessageDialog(rootPane, "Orçamento realizado com sucesso.");
         } else {
@@ -687,17 +687,16 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     public void gerarelatoriopessoafisica() {
         int linha = tb_clientes.getSelectedRow();
         int linha2 = tb_enderecos.getSelectedRow();
-        int linha3 = tb_itens.getSelectedRow();
+        int[] linha3 = tb_itens.getSelectedRows();
         List<Item> listaItens = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
-        
+
         //PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         //int cod = pFiDAO.buscarCPF(tb_clientes.getValueAt(linha, 1).toString()).getCodCliente();
         //listaItens = dao.listarFisica(String.valueOf(cod));
-       // JOptionPane.showMessageDialog(rootPane, listaItens.size());
-        
-        if (linha != -1 && linha2 != -1) {
+        // JOptionPane.showMessageDialog(rootPane, listaItens.size());
+        if (linha != -1 && linha2 != -1 && linha3.length != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
             String nome = tb_clientes.getValueAt(linha, 2).toString();
@@ -746,7 +745,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
-
+                
+                Paragraph infor = new Paragraph("Lista de Itens de orçamento");
+                infor.setAlignment(Element.ALIGN_CENTER);
+                doc.add(infor);
+                infor = new Paragraph(" ");
+                doc.add(infor);
+                
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
@@ -755,6 +760,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
+                
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -762,15 +768,16 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel5);
                 table.addCell(cel6);
                 table.addCell(cel7);
-
-                for (Item it : listaItens) {
-                    cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
-                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().getDescricao()));
-                    cel3 = new PdfPCell(new Paragraph(it.getAltura().toString()));
-                    cel4 = new PdfPCell(new Paragraph(it.getLargura().toString()));
-                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().toString()));
-                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().toString()));
-                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().toString()));
+                
+                for (int i = 0; i < linha3.length; i++) {
+                    
+                    cel1 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 0).toString()));
+                    cel2 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 1).toString()));
+                    cel3 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 2).toString()));
+                    cel4 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 3).toString()));
+                    cel5 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 4).toString()));
+                    cel6 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 5).toString()));
+                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString()));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
@@ -779,17 +786,25 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel5);
                     table.addCell(cel6);
                     table.addCell(cel7);
+
                 }
                 doc.add(table);
-
+                doc.add(Uf);
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
                 corpo.add(underline);
                 doc.add(corpo);
                 Paragraph corpo2 = new Paragraph("declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
-                        + valor_final);
+                        + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
                 doc.add(corpo2);
+                doc.add(Uf);
+                Paragraph Assinatura = new Paragraph("Assinatura: \n");
+	        Chunk vazio = new Chunk("                  " + "                  ");
+		vazio.setUnderline(0.1f, -2f);
+	        Assinatura.add(vazio);
+		doc.add(Assinatura);
+                doc.add(Uf);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
@@ -807,13 +822,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         int linha = tb_clientes.getSelectedRow();
         int linha2 = tb_enderecos.getSelectedRow();
-        int linha3 = tb_itens.getSelectedRow();
+        int[] linha3 = tb_itens.getSelectedRows();
         List<Item> listaItens = null;
 
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
 
-        if (linha != -1 && linha2 != -1) {
+        if (linha != -1 && linha2 != -1 && linha3.length != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
             String nome = tb_clientes.getValueAt(linha, 2).toString();
@@ -862,7 +877,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
-
+                
+                Paragraph infor = new Paragraph("Lista de Itens de orçamento");
+                infor.setAlignment(Element.ALIGN_CENTER);
+                doc.add(infor);
+                infor = new Paragraph(" ");
+                doc.add(infor);
+                
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
@@ -871,6 +892,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
+               
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -879,14 +901,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel6);
                 table.addCell(cel7);
 
-                for (Item it : listaItens) {
-                    cel1 = new PdfPCell(new Paragraph(it.getCodItem().toString()));
-                    cel2 = new PdfPCell(new Paragraph(it.getConstrucao().getDescricao()));
-                    cel3 = new PdfPCell(new Paragraph(it.getAltura().toString()));
-                    cel4 = new PdfPCell(new Paragraph(it.getLargura().toString()));
-                    cel5 = new PdfPCell(new Paragraph(it.getAreaPorta().toString()));
-                    cel6 = new PdfPCell(new Paragraph(it.getAreaJanela().toString()));
-                    cel7 = new PdfPCell(new Paragraph(it.getPrecoTotal().toString()));
+                for (int i = 0; i < linha3.length; i++) {
+                    
+                    cel1 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 0).toString()));
+                    cel2 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 1).toString()));
+                    cel3 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 2).toString()));
+                    cel4 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 3).toString()));
+                    cel5 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 4).toString()));
+                    cel6 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 5).toString()));
+                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString()));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
@@ -897,14 +920,22 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel7);
                 }
                 doc.add(table);
+                doc.add(Uf);
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
                 corpo.add(underline);
                 doc.add(corpo);
-                Paragraph corpo2 = new Paragraph("declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
-                        + valor_final);
+                Paragraph corpo2 = new Paragraph("Declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
+                        + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
                 doc.add(corpo2);
+                doc.add(Uf);
+                Paragraph Assinatura = new Paragraph("Assinatura: \n");
+	        Chunk vazio = new Chunk("                " + "                 ");
+		vazio.setUnderline(0.1f, -2f);
+	        Assinatura.add(vazio);
+		doc.add(Assinatura);
+                doc.add(Uf);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
