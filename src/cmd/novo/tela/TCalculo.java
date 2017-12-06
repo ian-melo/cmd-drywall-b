@@ -9,6 +9,7 @@ import cmd.entidade.Item;
 import cmd.entidade.Material;
 import cmd.entidade.Pedidos;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -26,6 +27,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private int linItem = -1;
     private List<Construcao> listaConstrucoes = null;
     private List<Item> listaItens = null;
+
+    private float totalParcial = 0;
 
     private static Pedidos pp = null;
 
@@ -64,6 +67,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_valor.setBackground(Color.WHITE);
         pnl_portaJanela.setBackground(Color.WHITE);
         pnl_multiplicacao.setBackground(Color.WHITE);
+        pnl_valorPlaca.setBackground(Color.WHITE);
 
     }
 
@@ -316,11 +320,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(txt_janela, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_portaJanelaLayout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_porta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel28)
                     .addComponent(jLabel29))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pnl_portaJanelaLayout.setVerticalGroup(
             pnl_portaJanelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,7 +639,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jScrollPane_pai.setViewportView(pnl_filho);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setText("Valor total do drywall: ");
+        jLabel15.setText("Valor parcial do drywall: ");
 
         lbl_valTotal.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -701,7 +705,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
@@ -947,6 +951,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
 
     private void adicionar() {
+        if(txt_valorPlaca.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Adicione o valor da Placa de gesso");
+            return;
+        }
+        
         if (linConstrucao < 0) {
             return;
         }
@@ -977,6 +986,26 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
+
+        //Continuar
+        
+//        Double dd = Double.valueOf(txt_valorPlaca.getText());
+//        BigDecimal bbb = BigDecimal.valueOf(dd);
+
+        BigDecimal bbb = new BigDecimal(txt_valorPlaca.getText());
+        
+        
+//        BigDecimal qqq = it.getPrecoTotal().multiply(bbb);
+//        //String 
+//        it.setPrecoTotal(new BigDecimal(qqq.toString()));
+
+        totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
+        //it.setPrecoTotal(new BigDecimal("0"));
+
+        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+
+        //Continuar
+        
         listaItens.add(it);
         listarItens();
     }
@@ -1116,7 +1145,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         txt_portaVezes1.setText("");
         txt_portaVezes2.setText("");
         txt_janelaVezes1.setText("");
-        txt_janelaVezes1.setText("");
+        txt_janelaVezes2.setText("");
         chk_st.setSelected(false);
         chk_rf.setSelected(false);
         chk_ru.setSelected(false);
@@ -1131,7 +1160,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         txt_portaVezes1.setEnabled(val);
         txt_portaVezes2.setEnabled(val);
         txt_janelaVezes1.setEnabled(val);
-        txt_janelaVezes1.setEnabled(val);
+        txt_janelaVezes2.setEnabled(val);
         txt_janela.setEnabled(val);
         chk_st.setEnabled(val);
         chk_ru.setEnabled(val);
