@@ -965,6 +965,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         List<Material> mOp = new ArrayList<>();
         Construcao c;
         Item it;
+        
+        double fatorMultParede = 0;
         //Construção
         c = listaConstrucoes.get(linConstrucao);
         //Materiais adicionais
@@ -985,7 +987,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
-                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
+                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp, fatorMultParede);
 
         //Continuar
         

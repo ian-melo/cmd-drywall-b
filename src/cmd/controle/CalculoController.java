@@ -103,7 +103,7 @@ public class CalculoController {
         return res;
     }
     
-    public Item definirItem(double altura, double largura, double areaPorta, double areaJanela, Construcao c, List<Material> mOp) {
+    public Item definirItem(double altura, double largura, double areaPorta, double areaJanela, Construcao c, List<Material> mOp, double fatorMultiplicacao) {
         //Vars
         double precoTotal = 0.0, preco, quantidade;
         Set<MaterialItem> materialItems = new LinkedHashSet<>();
