@@ -1015,6 +1015,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
 
+        
+        Double val = Double.valueOf(tb_itens.getModel().getValueAt(linItem, 6).toString());
+        totalParcial -= val;
+        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+        
         listaItens.remove(linItem);
         listarItens();
     }
@@ -1203,6 +1208,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linItem = -1;
         listaItens = null;
+        
+        totalParcial = 0;
+        lbl_valTotal.setText("");
     }
 
     private void setValoresOutroForm(Pedidos ped) {
