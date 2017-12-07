@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -100,8 +101,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tb_construcoes = new javax.swing.JTable();
         pnl_botoes = new javax.swing.JPanel();
         btn_verificar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
@@ -151,6 +150,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_valor = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lbl_valTotal = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_construcoes = new javax.swing.JTable();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -181,25 +184,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Escolha o material (adicional):");
-
-        tb_construcoes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Cód.", "Tipo constr.", "Descrição", "Q"
-            }
-        ));
-        tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_construcoesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tb_construcoes);
 
         btn_verificar.setBackground(new java.awt.Color(153, 153, 255));
         btn_verificar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -661,6 +645,42 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        tb_construcoes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cód.", "Tipo constr.", "Descrição", "Q"
+            }
+        ));
+        tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_construcoesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_construcoes);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+        );
+
+        jScrollPane4.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -686,21 +706,19 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel27)
-                                    .addGap(215, 215, 215))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel27))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_conAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_conRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_conLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(212, 212, 212)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_conLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -713,39 +731,42 @@ public class TCalculo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel11))
+                        .addGap(7, 7, 7))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel11))
-                .addGap(7, 7, 7)
+                        .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_conAdicionar)
                             .addComponent(btn_conRemover)
                             .addComponent(btn_conLimpar)))
                     .addComponent(jScrollPane_pai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -789,12 +810,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
             linConstrucao = tb_construcoes.getSelectedRow();
             listarMateriais();
         }
-        
+
         int linha = tb_construcoes.getSelectedRow();
         int coluna = tb_construcoes.getSelectedColumn();
-        
-        JOptionPane.showMessageDialog(null, tb_construcoes.getValueAt(linha, coluna).toString());
-        
+
+        if (coluna == 2 || coluna == 3) {
+            JOptionPane.showMessageDialog(null, tb_construcoes.getValueAt(linha, coluna).toString());
+        }
+
+
     }//GEN-LAST:event_tb_construcoesMouseClicked
 
     private void tb_materiaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_materiaisMouseClicked
@@ -802,11 +826,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 && tb_materiais.getModel().getValueAt(tb_materiais.getSelectedRow(), 0) != null) {
             linMaterial = tb_materiais.getSelectedRows();
         }
-        
+
         int linha = tb_materiais.getSelectedRow();
         int coluna = tb_materiais.getSelectedColumn();
-        
-        JOptionPane.showMessageDialog(null, tb_materiais.getValueAt(linha, coluna).toString());
+
+        if (coluna == 3) {
+            JOptionPane.showMessageDialog(null, tb_materiais.getValueAt(linha, coluna).toString());
+        }
+
+
     }//GEN-LAST:event_tb_materiaisMouseClicked
 
     private void tb_itensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_itensMouseClicked
@@ -934,7 +962,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 //            JOptionPane.showMessageDialog(null, "Adicione o valor da Placa de gesso");
 //            return;
 //        }
-        
+
         if (linConstrucao < 0) {
             return;
         }
@@ -944,7 +972,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         List<Material> mOp = new ArrayList<>();
         Construcao c;
         Item it;
-        
+
         double fatorMultParede = 0;
         //Construção
         c = listaConstrucoes.get(linConstrucao);
@@ -969,24 +997,18 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp, fatorMultParede);
 
         //Continuar
-        
 //        Double dd = Double.valueOf(txt_valorPlaca.getText());
 //        BigDecimal bbb = BigDecimal.valueOf(dd);
-
 //        BigDecimal bbb = new BigDecimal(txt_valorPlaca.getText());
-        
-        
 //        BigDecimal qqq = it.getPrecoTotal().multiply(bbb);
 //        //String 
 //        it.setPrecoTotal(new BigDecimal(qqq.toString()));
-
         totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
         //it.setPrecoTotal(new BigDecimal("0"));
 
         lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
 
         //Continuar
-        
         listaItens.add(it);
         listarItens();
     }
@@ -996,11 +1018,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
 
-        
         Double val = Double.valueOf(tb_itens.getModel().getValueAt(linItem, 6).toString());
         totalParcial -= val;
         lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
-        
+
         listaItens.remove(linItem);
         listarItens();
     }
@@ -1030,12 +1051,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
             } else {
                 reg.add("Desconhecido");
             }
+
             reg.add(c.getDescricao());
             reg.add(c.getDetalhes());
             reg.add(c.getQualidade().toString());
             tableData.add(reg);
         }
         tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
+
+        tb_construcoes.getColumnModel().getColumn(0).setMaxWidth(40);
+        tb_construcoes.getColumnModel().getColumn(1).setMaxWidth(80);
+//      tb_construcoes.getColumnModel().getColumn(1).setMaxWidth(70);
+//     //tb_construcoes.getColumnModel().getColumn(0).setPreferredWidth(20);
+        //tb_construcoes.getColumnModel().getColumn(0).setResizable(true);
+//       tb_construcoes.getColumnModel().getColumn(2).setMaxWidth(90);
+        tb_construcoes.getColumnModel().getColumn(4).setMaxWidth(40);
+
         linConstrucao = -1;
     }
 
@@ -1065,6 +1096,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+
+        tb_materiais.getColumnModel().getColumn(0).setMaxWidth(100);
+        tb_materiais.getColumnModel().getColumn(1).setMaxWidth(100);
+
+        tb_materiais.getColumnModel().getColumn(3).setMaxWidth(100);
+        tb_materiais.getColumnModel().getColumn(4).setMaxWidth(80);
+        tb_materiais.getColumnModel().getColumn(5).setMaxWidth(70);
+
         linMaterial = new int[0];
     }
 
@@ -1164,7 +1203,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         tb_construcoes.setModel(new javax.swing.table.DefaultTableModel(
                 null,
                 new String[]{
-                    "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+                    "Cód.", "Tipo constr.", "Descrição", "Qualidade"
                 }
         ));
         linConstrucao = -1;
@@ -1190,7 +1229,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linItem = -1;
         listaItens = null;
-        
+
         totalParcial = 0;
         lbl_valTotal.setText("");
     }
@@ -1214,12 +1253,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         txt_porta.setText(String.valueOf(totalPorta));
         txt_janela.setText(String.valueOf(totalJanela));
-        
-        if("Seco".equals(ped.getAmbiente())){
+
+        if ("Seco".equals(ped.getAmbiente())) {
             chk_st.setSelected(true);
         }
-        
-        if("Umido".equals(ped.getAmbiente())){
+
+        if ("Umido".equals(ped.getAmbiente())) {
             chk_ru.setSelected(true);
         }
         JOptionPane.showMessageDialog(null, ped.getAmbiente());
@@ -1266,9 +1305,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane_pai;
     private javax.swing.JLabel lbl_valTotal;
     private javax.swing.JPanel pnl_alturaLargura;

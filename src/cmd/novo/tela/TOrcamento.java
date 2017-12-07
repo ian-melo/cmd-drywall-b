@@ -112,7 +112,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         lb_valorFinal = new javax.swing.JLabel();
         cmb_cliente = new javax.swing.JComboBox();
-        bt_folhajuridica = new javax.swing.JButton();
         bt_folhafisica = new javax.swing.JButton();
 
         setClosable(true);
@@ -250,18 +249,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         });
 
-        bt_folhajuridica.setBackground(new java.awt.Color(153, 153, 255));
-        bt_folhajuridica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folhajuridica.setText("Gerar Folha de Orçamento Pessoa Jurídica");
-        bt_folhajuridica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_folhajuridicaActionPerformed(evt);
-            }
-        });
-
         bt_folhafisica.setBackground(new java.awt.Color(153, 153, 255));
         bt_folhafisica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_folhafisica.setText("Gerar Folha de Orçamento Pessoa Física");
+        bt_folhafisica.setText("Gerar Folha de Orçamento");
         bt_folhafisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_folhafisicaActionPerformed(evt);
@@ -304,14 +294,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bt_folhafisica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 319, Short.MAX_VALUE)
-                                .addComponent(bt_folhajuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_folhafisica, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(btn_cadastrarOrca)
                         .addGap(37, 37, 37))
@@ -319,7 +304,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 420, Short.MAX_VALUE)
                         .addComponent(btn_cadCliente)
                         .addGap(29, 29, 29))))
         );
@@ -340,19 +325,20 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(cmb_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_cadCliente))))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_folhajuridica)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_folhafisica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(bt_folhafisica))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_cadastrarOrca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -430,21 +416,43 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
-    private void bt_folhajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhajuridicaActionPerformed
+    private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
+
+        //Pessoa fisica
+        if (cmb_cliente.getSelectedIndex() == 0) {
+            if (verificaFisica() == true) {
+                gerarelatoriopessoafisica();
+            }
+
+        }
+
+        //Pessoa juridica
+        if (cmb_cliente.getSelectedIndex() == 1) {
+            if (verificaJuridica() == true) {
+                gerarrelatoriopessoajuridica();
+            }
+        }
+
+
+    }//GEN-LAST:event_bt_folhafisicaActionPerformed
+
+    private boolean verificaJuridica() {
         if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRows().length == -1) {
             JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
-            return;
+            return false;
         }
-        gerarrelatoriopessoajuridica();
-    }//GEN-LAST:event_bt_folhajuridicaActionPerformed
+        return true;
 
-    private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
+    }
+
+    private boolean verificaFisica() {
         if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRows().length == -1) {
             JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
-            return;
+            return false;
         }
-        gerarelatoriopessoafisica();
-    }//GEN-LAST:event_bt_folhafisicaActionPerformed
+        return true;
+
+    }
 
     private void salvar() {
         if (!validar()) {
@@ -745,13 +753,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
-                
+
                 Paragraph infor = new Paragraph("Lista de Itens de orçamento");
                 infor.setAlignment(Element.ALIGN_CENTER);
                 doc.add(infor);
                 infor = new Paragraph(" ");
                 doc.add(infor);
-                
+
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
@@ -760,7 +768,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
-                
+
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -768,9 +776,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel5);
                 table.addCell(cel6);
                 table.addCell(cel7);
-                
+
                 for (int i = 0; i < linha3.length; i++) {
-                    
+
                     cel1 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 0).toString()));
                     cel2 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 1).toString()));
                     cel3 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 2).toString()));
@@ -802,11 +810,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
                 doc.add(Uf);
-	        Chunk vazio = new Chunk("                  " + "                  ");
-                 doc.add(Uf);
-		vazio.setUnderline(0.1f, -2f);
-	        Assinatura.add(vazio);
-		doc.add(Assinatura);
+                Chunk vazio = new Chunk("                  " + "                  ");
+                doc.add(Uf);
+                vazio.setUnderline(0.1f, -2f);
+                Assinatura.add(vazio);
+                doc.add(Assinatura);
                 doc.add(Uf);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
@@ -880,13 +888,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
-                
+
                 Paragraph infor = new Paragraph("Lista de Itens de orçamento");
                 infor.setAlignment(Element.ALIGN_CENTER);
                 doc.add(infor);
                 infor = new Paragraph(" ");
                 doc.add(infor);
-                
+
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell cel1 = new PdfPCell(new Paragraph("Codigo da construção"));
                 PdfPCell cel2 = new PdfPCell(new Paragraph("Tipo da construção"));
@@ -895,7 +903,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 PdfPCell cel5 = new PdfPCell(new Paragraph("Área da porta"));
                 PdfPCell cel6 = new PdfPCell(new Paragraph("Área da Janela"));
                 PdfPCell cel7 = new PdfPCell(new Paragraph("Preço"));
-               
+
                 table.addCell(cel1);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -905,7 +913,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 table.addCell(cel7);
 
                 for (int i = 0; i < linha3.length; i++) {
-                    
+
                     cel1 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 0).toString()));
                     cel2 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 1).toString()));
                     cel3 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 2).toString()));
@@ -936,11 +944,11 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(Uf);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
                 doc.add(Uf);
-	        Chunk vazio = new Chunk("                " + "                 ");
-                 doc.add(Uf);
-		vazio.setUnderline(0.1f, -2f);
-	        Assinatura.add(vazio);
-		doc.add(Assinatura);
+                Chunk vazio = new Chunk("                " + "                 ");
+                doc.add(Uf);
+                vazio.setUnderline(0.1f, -2f);
+                Assinatura.add(vazio);
+                doc.add(Assinatura);
                 doc.add(Uf);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
@@ -959,7 +967,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_folhafisica;
-    private javax.swing.JButton bt_folhajuridica;
     private javax.swing.JButton btn_cadCliente;
     private javax.swing.JButton btn_cadastrarOrca;
     private javax.swing.JButton btn_limpar;
