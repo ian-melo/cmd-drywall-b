@@ -124,24 +124,6 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tb_orcamento);
-        if (tb_orcamento.getColumnModel().getColumnCount() > 0) {
-            tb_orcamento.getColumnModel().getColumn(0).setHeaderValue("Id");
-            tb_orcamento.getColumnModel().getColumn(1).setHeaderValue("Altura");
-            tb_orcamento.getColumnModel().getColumn(2).setHeaderValue("Largura");
-            tb_orcamento.getColumnModel().getColumn(3).setHeaderValue("Quantidade de Paredes");
-            tb_orcamento.getColumnModel().getColumn(4).setHeaderValue("Email");
-            tb_orcamento.getColumnModel().getColumn(5).setHeaderValue("Valor disponivel/desejado");
-            tb_orcamento.getColumnModel().getColumn(6).setHeaderValue("Ambiente");
-            tb_orcamento.getColumnModel().getColumn(7).setHeaderValue("Possui Portas");
-            tb_orcamento.getColumnModel().getColumn(8).setHeaderValue("Possui Janela");
-            tb_orcamento.getColumnModel().getColumn(9).setHeaderValue("Quantidade de Portas (Se houver)");
-            tb_orcamento.getColumnModel().getColumn(10).setHeaderValue("Quantidade Janelas (Se houver)");
-            tb_orcamento.getColumnModel().getColumn(11).setHeaderValue("Altura da Porta");
-            tb_orcamento.getColumnModel().getColumn(12).setHeaderValue("Largura da Porta");
-            tb_orcamento.getColumnModel().getColumn(13).setHeaderValue("Altura da Janela");
-            tb_orcamento.getColumnModel().getColumn(14).setHeaderValue("Largura da Janela");
-            tb_orcamento.getColumnModel().getColumn(15).setHeaderValue("Mao de Obra");
-        }
 
         javax.swing.GroupLayout pn_conteudoLayout = new javax.swing.GroupLayout(pn_conteudo);
         pn_conteudo.setLayout(pn_conteudoLayout);
@@ -229,23 +211,45 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         }
         int linha = tb_orcamento.getSelectedRow();
 
-        //ped = new Pedidos();
-        ped.setAltura((float) tb_orcamento.getValueAt(linha, 1));
-        ped.setLargura((float) tb_orcamento.getValueAt(linha, 2));
-        ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
-        ped.setEmail((String) tb_orcamento.getValueAt(linha, 4));
-        ped.setValor((float) tb_orcamento.getValueAt(linha, 5));
-        ped.setAmbiente((String) tb_orcamento.getValueAt(linha, 6));
-        ped.setPossui_porta((String) tb_orcamento.getValueAt(linha, 7));
-        ped.setPossui_janela((String) tb_orcamento.getValueAt(linha, 8));
-        ped.setQtd_porta((int) tb_orcamento.getValueAt(linha, 9));
-        ped.setQtd_janela((int) tb_orcamento.getValueAt(linha, 10));
-        ped.setAltura_porta((float) tb_orcamento.getValueAt(linha, 11));
-        ped.setLargura_porta((float) tb_orcamento.getValueAt(linha, 12));
-        ped.setAltura_janela((float) tb_orcamento.getValueAt(linha, 13));
-        ped.setLargura_janela((float) tb_orcamento.getValueAt(linha, 14));
-        ped.setMao_obra((String) tb_orcamento.getValueAt(linha, 15));
+        try {
 
+            //ped = new Pedidos();
+            ped.setAltura((float) tb_orcamento.getValueAt(linha, 1));
+            ped.setLargura((float) tb_orcamento.getValueAt(linha, 2));
+            ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
+            ped.setEmail((String) tb_orcamento.getValueAt(linha, 4));
+            ped.setValor((float) tb_orcamento.getValueAt(linha, 5));
+            ped.setAmbiente((String) tb_orcamento.getValueAt(linha, 6));
+            ped.setPossui_porta((String) tb_orcamento.getValueAt(linha, 7));
+            ped.setPossui_janela((String) tb_orcamento.getValueAt(linha, 8));
+            ped.setQtd_porta((int) tb_orcamento.getValueAt(linha, 9));
+            ped.setQtd_janela((int) tb_orcamento.getValueAt(linha, 10));
+
+            if ((float) tb_orcamento.getValueAt(linha, 11) <= 0) {
+                ped.setAltura_porta((float) tb_orcamento.getValueAt(linha, 11));
+            } else {
+                ped.setAltura_porta((float) tb_orcamento.getValueAt(linha, 11) / 100);
+            }
+            if ((float) tb_orcamento.getValueAt(linha, 12) <= 0) {
+                ped.setLargura_porta((float) tb_orcamento.getValueAt(linha, 12));
+            } else {
+                ped.setLargura_porta((float) tb_orcamento.getValueAt(linha, 12) / 100);
+            }
+            if ((float) tb_orcamento.getValueAt(linha, 13) <= 0) {
+                ped.setAltura_janela((float) tb_orcamento.getValueAt(linha, 13));
+            } else {
+                ped.setAltura_janela((float) tb_orcamento.getValueAt(linha, 13) / 100);
+            }
+            if ((float) tb_orcamento.getValueAt(linha, 14) <= 0) {
+                ped.setLargura_janela((float) tb_orcamento.getValueAt(linha, 14));
+            } else {
+                ped.setLargura_janela((float) tb_orcamento.getValueAt(linha, 14) / 100);
+            }
+
+            ped.setMao_obra((String) tb_orcamento.getValueAt(linha, 15));
+        } catch (Exception e) {
+            System.err.println(e);
+        }
         try {
             gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
         } catch (IllegalArgumentException e) {

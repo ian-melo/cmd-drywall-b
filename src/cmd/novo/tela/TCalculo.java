@@ -191,7 +191,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Cód. constr.", "Tipo constr.", "Descrição", "Qualidade"
+                "Cód.", "Tipo constr.", "Descrição", "Q"
             }
         ));
         tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1214,6 +1214,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         txt_porta.setText(String.valueOf(totalPorta));
         txt_janela.setText(String.valueOf(totalJanela));
+        
+        if("Seco".equals(ped.getAmbiente())){
+            chk_st.setSelected(true);
+        }
+        
+        if("Umido".equals(ped.getAmbiente())){
+            chk_ru.setSelected(true);
+        }
+        JOptionPane.showMessageDialog(null, ped.getAmbiente());
 
 //        ped.getAmbiente();
 //        ped.getEmail();
