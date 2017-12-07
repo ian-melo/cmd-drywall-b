@@ -1,14 +1,11 @@
 package cmd.novo.tela;
 
 import cmd.DAO.ItemDAO;
-import cmd.DAO.PessoaFisicaDAO;
 import cmd.controle.ClienteController;
 import cmd.controle.OrcamentoController;
 import cmd.entidade.Cliente;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
-import cmd.entidade.Material;
-import cmd.entidade.MaterialItem;
 import cmd.entidade.Orcamento;
 import cmd.entidade.PessoaFisica;
 import cmd.entidade.PessoaJuridica;
@@ -27,7 +24,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -595,7 +591,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_enderecos.setModel(new DefaultTableModel(tableData, tableHeaders));
         linEndereco = -1;
     }
-
+    
     @SuppressWarnings("unchecked")
     public void listarItens(List<Item> li) {
         limparTItens();
