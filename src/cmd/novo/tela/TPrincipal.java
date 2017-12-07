@@ -92,7 +92,7 @@ public class TPrincipal extends javax.swing.JFrame {
         lb_logado.setText("NULL");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("v0.18");
+        jLabel2.setText("v0.19");
 
         pnl_gerenciamentoItens.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 51, 51)));
 
@@ -226,7 +226,7 @@ public class TPrincipal extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Funcionarios");
+        jLabel7.setText("Gerência Funcionários");
 
         javax.swing.GroupLayout pnl_funcionariosLayout = new javax.swing.GroupLayout(pnl_funcionarios);
         pnl_funcionarios.setLayout(pnl_funcionariosLayout);
