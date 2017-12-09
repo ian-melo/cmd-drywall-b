@@ -36,7 +36,7 @@ public class TesteOrcamentoMax {
     private static float totalParcial = 0;
     private static Pedidos pp = null;
 
-    private static int maximo = 100;
+    private static int maximo = 40;
     private static String altura1 = "2,5";
     private static String perimetro = "5";
 
@@ -79,11 +79,8 @@ public class TesteOrcamentoMax {
             c = listaConstrucoesMax.get(i);
 
             //listaConstrucoesMaxAux.add(c);//ERRO <<---------------------------------------------------------------------------------
-            JOptionPane.showMessageDialog(null, "++++++++++++++++++++++++++");
-
-            JOptionPane.showMessageDialog(null, "ADD");
             //Materiais adicionais
-            JOptionPane.showMessageDialog(null, "_4_listaConstrucoesMax= " + listaConstrucoesMax.size());
+            //JOptionPane.showMessageDialog(null, "_4_listaConstrucoesMax= " + listaConstrucoesMax.size());
             for (Object o : c.getMaterials()) {//Deve fazer q add todos
                 mOp.add((Material) o);
                 break;
@@ -94,7 +91,7 @@ public class TesteOrcamentoMax {
             if (listaItensMax == null) {
                 listaItensMax = new ArrayList<>();
             }
-            JOptionPane.showMessageDialog(null, "_5_listaConstrucoesMax= " + listaConstrucoesMax.size());
+            //JOptionPane.showMessageDialog(null, "_5_listaConstrucoesMax= " + listaConstrucoesMax.size());
             it = cControle.definirItem(
                     Double.parseDouble(altura1.replaceAll(",", ".")),
                     Double.parseDouble(perimetro.replaceAll(",", ".")),
@@ -104,19 +101,23 @@ public class TesteOrcamentoMax {
             totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
             //it.setPrecoTotal(new BigDecimal("0"));
 
-            System.err.println("___________________________________________________Total Parcial= " + String.valueOf(totalParcial));//substituido
+            System.err.println("_______Total Parcial= " + String.valueOf(totalParcial));//substituido
+            System.err.println("cod= " + c.getCodConstrucao());
 
             JOptionPane.showMessageDialog(null, c.getCodConstrucao());
             JOptionPane.showMessageDialog(null, c.getDetalhes());
 
-            if (totalParcial <= maximo) {
-                JOptionPane.showMessageDialog(null, "totalParcial "
-                        + totalParcial + " <= " + "maximo " + maximo);
+            if (it.getPrecoTotal().doubleValue() <= maximo) {
+//                JOptionPane.showMessageDialog(null, "totalParcial "
+//                        + totalParcial + " <= " + "maximo " + maximo);
+
+                JOptionPane.showMessageDialog(null, "it.getPrecoTotal().doubleValue() "
+                        + it.getPrecoTotal().doubleValue() + " <= " + "maximo " + maximo);
 
                 listaConMaxAux.add(c);
 
             }
-
+            System.err.println("it.getPrecoTotal().doubleValue()= " + it.getPrecoTotal().doubleValue());
         }
 
     }
