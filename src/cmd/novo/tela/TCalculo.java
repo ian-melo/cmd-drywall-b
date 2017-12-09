@@ -27,7 +27,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private int[] linMaterial = new int[0];
     private int linItem = -1;
     private List<Construcao> listaConstrucoes = null;
+    private List<Construcao> listaConstrucoesMax = null;
+    private List<Construcao> listaConstrucoesMaxAux = null;
     private List<Item> listaItens = null;
+    private List<Item> listaItensMax = null;
 
     private float totalParcial = 0;
 
@@ -610,7 +613,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             pnl_filhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_filhoLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
         pnl_filhoLayout.setVerticalGroup(
             pnl_filhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,12 +700,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -746,7 +749,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                             .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel27)
@@ -763,7 +766,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane_pai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -771,6 +774,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void btn_verificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verificarActionPerformed
         verificar();
+        //verificaValorMax();
     }//GEN-LAST:event_btn_verificarActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
@@ -783,6 +787,18 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         cancelar();
+//        JOptionPane.showMessageDialog(pnl_ambiente, tb_materiais.getSelectedRows().length);
+//
+//        int[] linMa = new int[0];
+//        linMa = tb_materiais.getSelectedRows();
+//
+//        JOptionPane.showMessageDialog(pnl_ambiente, linMa);
+//
+//        for (int i : linMa) {
+//            JOptionPane.showMessageDialog(pnl_ambiente, "i= " + i);
+//        }
+
+
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_conAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conAdicionarActionPerformed
@@ -902,7 +918,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             val = altura * largura;
             //System.out.println(val);//Teste
             txt_porta.setText((String.valueOf(val)).replaceAll(".", ","));
-            
+
             //txt_porta.setText(txt_porta.getText().replaceFirst(".", ","));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Preencha corretamente os campos.");
@@ -927,6 +943,24 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         habilitarCampos(false);
         listarConstrucoes();
+    }
+
+    private void verificaValorMax() {
+        if (!validarCampos()) {
+            return;
+        }
+
+        double altura = Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
+        listaConstrucoesMax = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
+                chk_rf.isSelected(), altura);
+        //JOptionPane.showMessageDialog(rootPane, listaConstrucoes.size()); //Teste
+        if (listaConstrucoesMax == null || listaConstrucoesMax.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Construções não encontradas.");
+            return;
+        }
+        adicionarMax();
+        habilitarCampos(false);
+        listarConstrucoesMax();
     }
 
     private void finalizar() {
@@ -977,8 +1011,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         //Materiais adicionais
         for (int i : linMaterial) {
             for (Object o : c.getMaterials()) {
-                if (((Material) o).getEhOpcional()
-                        && ((Material) o).getCodMaterial() == Integer.parseInt(tb_materiais.getModel().getValueAt(i, 0).toString())) {
+                if (((Material) o).getEhOpcional() && ((Material) o).getCodMaterial() == Integer.parseInt(tb_materiais.getModel().getValueAt(i, 0).toString())) {
                     mOp.add((Material) o);
                     break;
                 }
@@ -992,7 +1025,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
                 Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
-                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp, fatorMultParede);
+                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
 
         //Continuar
 //        Double dd = Double.valueOf(txt_valorPlaca.getText());
@@ -1009,6 +1042,69 @@ public class TCalculo extends javax.swing.JInternalFrame {
         //Continuar
         listaItens.add(it);
         listarItens();
+    }
+
+    private void adicionarMax() {
+//        if(txt_valorPlaca.getText().isEmpty()){
+//            JOptionPane.showMessageDialog(null, "Adicione o valor da Placa de gesso");
+//            return;
+//        }
+        listaConstrucoesMaxAux = new ArrayList<>();
+        //Vars
+        ConstrucaoController contc = new ConstrucaoController();
+        MaterialController contm = new MaterialController();
+        List<Material> mOp = new ArrayList<>();
+        Construcao c = null;
+        Item it;
+
+        //listaConstrucoesMaxAux.add(c);
+        //Construção
+        for (int i = 0; i < listaConstrucoesMax.size(); i++) {
+
+            c = listaConstrucoesMax.get(i);
+            JOptionPane.showMessageDialog(pnl_ambiente, c.getCodConstrucao());
+            JOptionPane.showMessageDialog(pnl_ambiente, c.getDescricao());
+            JOptionPane.showMessageDialog(pnl_ambiente, c.getDetalhes());
+
+            //Materiais adicionais
+            for (Object o : c.getMaterials()) {//Deve fazer q add todos
+                mOp.add((Material) o);
+                break;
+
+            }
+
+            //Adição
+            if (listaItensMax == null) {
+                listaItensMax = new ArrayList<>();
+            }
+            it = cControle.definirItem(
+                    Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
+                    Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
+                    Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
+                    Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
+
+            totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
+            //it.setPrecoTotal(new BigDecimal("0"));
+
+            lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+
+            JOptionPane.showMessageDialog(null, c.getCodConstrucao());
+            //if (totalParcial <= Double.valueOf(txt_max.getText())) {
+            if (totalParcial <= Double.valueOf("100")) {
+                JOptionPane.showMessageDialog(pnl_ambiente, "totalParcial "
+                        //+ totalParcial + " <= " + "txt_max.getText() " + Double.valueOf(txt_max.getText()));
+                        + totalParcial + " <= " + "txt_max.getText() " + Double.valueOf("100"));
+
+                JOptionPane.showMessageDialog(pnl_ambiente, listaConstrucoesMaxAux.size());
+
+                listaConstrucoesMaxAux.add(c);
+
+                //listaItensMax.add(it);
+            }
+
+            //listarItensMax();
+        }
+
     }
 
     private void remover() {
@@ -1068,6 +1164,42 @@ public class TCalculo extends javax.swing.JInternalFrame {
         linConstrucao = -1;
     }
 
+    private void listarConstrucoesMax() {
+        Vector tableHeaders = new Vector();
+        //tableHeaders.add("Cód. constr.");
+        tableHeaders.add("Cód.");
+        tableHeaders.add("Tipo constr.");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Detalhes");
+        tableHeaders.add("Q");
+
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Construcao c : listaConstrucoesMaxAux) {
+            reg = new Vector();
+            reg.add(c.getCodConstrucao().toString());
+            if (c.getParede() != null && c.getForro() == null) {
+                reg.add("Parede");
+            } else if (c.getParede() == null && c.getForro() != null) {
+                reg.add("Forro");
+            } else {
+                reg.add("Desconhecido");
+            }
+
+            reg.add(c.getDescricao());
+            reg.add(c.getDetalhes());
+            reg.add(c.getQualidade().toString());
+            tableData.add(reg);
+        }
+        tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
+
+        tb_construcoes.getColumnModel().getColumn(0).setMaxWidth(40);
+        tb_construcoes.getColumnModel().getColumn(1).setMaxWidth(80);
+        tb_construcoes.getColumnModel().getColumn(4).setMaxWidth(40);
+
+        linConstrucao = -1;
+    }
+
     private void listarMateriais() {
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. material");
@@ -1118,6 +1250,39 @@ public class TCalculo extends javax.swing.JInternalFrame {
         Vector tableData = new Vector();
         Vector reg;
         for (Item it : listaItens) {
+            reg = new Vector();
+            reg.add(it.getConstrucao().getCodConstrucao());
+            if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
+                reg.add("Parede");
+            } else if (it.getConstrucao().getParede() == null && it.getConstrucao().getForro() != null) {
+                reg.add("Forro");
+            } else {
+                reg.add("Desconhecido");
+            }
+            reg.add(it.getAltura());
+            reg.add(it.getLargura());
+            reg.add(it.getAreaPorta());
+            reg.add(it.getAreaJanela());
+            reg.add(it.getPrecoTotal());
+            tableData.add(reg);
+        }
+        tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
+        linItem = -1;
+    }
+
+    private void listarItensMax() {
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. construção");
+        tableHeaders.add("Tipo construção");
+        tableHeaders.add("Altura (m)");
+        tableHeaders.add("Largura (m)");
+        tableHeaders.add("Área da porta (m²)");
+        tableHeaders.add("Área da janela (m²)");
+        tableHeaders.add("Preço total");
+
+        Vector tableData = new Vector();
+        Vector reg;
+        for (Item it : listaItensMax) {
             reg = new Vector();
             reg.add(it.getConstrucao().getCodConstrucao());
             if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
