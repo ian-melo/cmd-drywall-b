@@ -67,7 +67,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         grupRadioOpc = new javax.swing.ButtonGroup();
         txt_constanteMetro = new javax.swing.JTextField();
         txt_precoUnitario = new javax.swing.JTextField();
-        txt_qtdMinima = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_descricao = new javax.swing.JTextArea();
         cmb_nomeUnidade = new javax.swing.JComboBox();
@@ -83,21 +82,15 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -110,7 +103,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_materiais = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
-        cmb_tipo = new javax.swing.JComboBox();
 
         setClosable(true);
         setTitle("Registro de Materiais");
@@ -118,8 +110,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         txt_constanteMetro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txt_precoUnitario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txt_qtdMinima.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txt_descricao.setColumns(20);
         txt_descricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -129,11 +119,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         cmb_nomeUnidade.setBackground(new java.awt.Color(153, 153, 255));
         cmb_nomeUnidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_nomeUnidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CH", "PÇ", "RL", "CX", "BD" }));
-        cmb_nomeUnidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_nomeUnidadeActionPerformed(evt);
-            }
-        });
 
         cmb_qualidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_qualidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -227,14 +212,8 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Preço Unitario:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Tipo:");
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Descrição:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Qtde. Mínima:");
 
         jLabel9.setBackground(new java.awt.Color(255, 0, 0));
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -260,18 +239,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel11.setText("...");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel11.setName(""); // NOI18N
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Qualidade:");
 
@@ -285,18 +252,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
-            }
-        });
-
-        jLabel15.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel15.setText("...");
-        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel15.setName(""); // NOI18N
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel15MouseClicked(evt);
             }
         });
 
@@ -332,20 +287,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
         jLabel19.setText("(obrigatório)");
         jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel19.setName(""); // NOI18N
-
-        jLabel20.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(54, 54, 54));
-        jLabel20.setText("(obrigatório)");
-        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel20.setName(""); // NOI18N
-
-        jLabel21.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(54, 54, 54));
-        jLabel21.setText("(obrigatório)");
-        jLabel21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel21.setName(""); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("É opcional?");
@@ -401,7 +342,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cód. constr.", "Tipo constr.", "Descrição", "Destalhes", "Qualidade"
+                "Ind. constr.", "Tipo constr.", "Descrição", "Detalhes", "Qualidade"
             }
         ));
         tb_construcoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -416,15 +357,15 @@ public class TMaterial extends javax.swing.JInternalFrame {
         tb_materiais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_materiais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cód. constr.", "Cód. material", "Tipo", "Descrição", "Un. medida", "Qualidade", "Opcional?", "Const. metro", "Preço unit.", "Qtde. min."
+                "Ind. constr.", "Ind. material", "Descrição", "Un. medida", "Qualidade", "Opcional?", "Const. metro", "Preço unit."
             }
         ));
         tb_materiais.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -436,15 +377,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Procure pelo material:");
-
-        cmb_tipo.setBackground(new java.awt.Color(153, 153, 255));
-        cmb_tipo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chapa", "Peça", "Rolo", "Caixa", "Balde" }));
-        cmb_tipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_tipoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -458,66 +390,48 @@ public class TMaterial extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel18))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cmb_nomeUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel13))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel17))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel19))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txt_constanteMetro, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel9))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel20))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txt_qtdMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel11)))
-                                        .addGap(23, 23, 23)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel16))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel21))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cmb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel15))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel22))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(pnl_opcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel23))))
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmb_nomeUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel13))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel17))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel19))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txt_constanteMetro, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txt_precoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)
-                                        .addGap(121, 121, 121)
+                                        .addComponent(jLabel10)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel16))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel22))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnl_opcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel23))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel24)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,14 +493,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel10)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel21))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel15)
-                                    .addComponent(cmb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel22))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -596,21 +502,11 @@ public class TMaterial extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
-                                    .addComponent(jLabel24))))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
+                                    .addComponent(jLabel24))
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel20))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txt_qtdMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel16))))
+                                    .addComponent(cmb_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,7 +523,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -650,25 +546,19 @@ public class TMaterial extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void bt_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_sairActionPerformed
-        //this.disable
+        limparCampos();
+        listarMateriais();
+        listarConstrucoes();
         this.hide();
     }//GEN-LAST:event_bt_sairActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        janelaAviso();
+        janelaAvisoPreco();
     }//GEN-LAST:event_jLabel10MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         janelaAviso();
     }//GEN-LAST:event_jLabel13MouseClicked
-
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        janelaAviso();
-    }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         janelaAviso();
@@ -691,62 +581,23 @@ public class TMaterial extends javax.swing.JInternalFrame {
             linConstrucao = tb_construcoes.getSelectedRow();
         }
     }//GEN-LAST:event_tb_construcoesMouseClicked
-
-    private void cmb_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipoActionPerformed
-
-        if (cmb_tipo.getSelectedIndex() == 0) {
-            cmb_nomeUnidade.setSelectedIndex(0);
-        }
-        if (cmb_tipo.getSelectedIndex() == 1) {
-            cmb_nomeUnidade.setSelectedIndex(1);
-        }
-        if (cmb_tipo.getSelectedIndex() == 2) {
-            cmb_nomeUnidade.setSelectedIndex(2);
-        }
-        if (cmb_tipo.getSelectedIndex() == 3) {
-            cmb_nomeUnidade.setSelectedIndex(3);
-        }
-        if (cmb_tipo.getSelectedIndex() == 4) {
-            cmb_nomeUnidade.setSelectedIndex(4);
-        }
-    }//GEN-LAST:event_cmb_tipoActionPerformed
-
-    private void cmb_nomeUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_nomeUnidadeActionPerformed
-        if (cmb_nomeUnidade.getSelectedIndex() == 0) {
-            cmb_tipo.setSelectedIndex(0);
-        }
-        if (cmb_nomeUnidade.getSelectedIndex() == 1) {
-            cmb_tipo.setSelectedIndex(1);
-        }
-        if (cmb_nomeUnidade.getSelectedIndex() == 2) {
-            cmb_tipo.setSelectedIndex(2);
-        }
-        if (cmb_nomeUnidade.getSelectedIndex() == 3) {
-            cmb_tipo.setSelectedIndex(3);
-        }
-        if (cmb_nomeUnidade.getSelectedIndex() == 4) {
-            cmb_tipo.setSelectedIndex(4);
-        }
-    }//GEN-LAST:event_cmb_nomeUnidadeActionPerformed
-
+    
     private void carregarCampos() {
         if (linMaterial < 0) {
             return;
         }
-
-        cmb_tipo.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 2).toString());
-        txt_descricao.setText(tb_materiais.getModel().getValueAt(linMaterial, 3).toString());
-        cmb_nomeUnidade.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 4).toString());
-        cmb_qualidade.setSelectedItem((tb_materiais.getModel().getValueAt(linMaterial, 5).toString()));
-        if (tb_materiais.getModel().getValueAt(linMaterial, 6).toString().equals("Sim")) {
+        
+        txt_descricao.setText(tb_materiais.getModel().getValueAt(linMaterial, 2).toString());
+        cmb_nomeUnidade.setSelectedItem(tb_materiais.getModel().getValueAt(linMaterial, 3).toString());
+        cmb_qualidade.setSelectedItem((tb_materiais.getModel().getValueAt(linMaterial, 4).toString()));
+        if (tb_materiais.getModel().getValueAt(linMaterial, 5).toString().equals("Sim")) {
             rd_sim.setSelected(true);
         } else {
-            rd_nao.setSelected(false);
+            rd_nao.setSelected(true);
         }
-        txt_constanteMetro.setText(tb_materiais.getModel().getValueAt(linMaterial, 7).toString());
-        txt_precoUnitario.setText(tb_materiais.getModel().getValueAt(linMaterial, 8).toString());
-        txt_qtdMinima.setText(tb_materiais.getModel().getValueAt(linMaterial, 9).toString());
-
+        txt_constanteMetro.setText(tb_materiais.getModel().getValueAt(linMaterial, 6).toString());
+        txt_precoUnitario.setText(tb_materiais.getModel().getValueAt(linMaterial, 7).toString());
+        //Construção
         for (int i = 0; i < tb_construcoes.getModel().getRowCount(); i++) {
             if (Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 0).toString())
                     == Integer.parseInt(tb_construcoes.getModel().getValueAt(i, 0).toString())) {
@@ -756,36 +607,43 @@ public class TMaterial extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void alterar() {
         if (!camposValidados()) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para alterar.");
             return;
         }
         if (linMaterial < 0) {
-            JOptionPane.showMessageDialog(rootPane, "Selecione o item da tabela para alterar.");
+            JOptionPane.showMessageDialog(rootPane, "Selecione o material listado para alterar.");
             return;
         }
-
+        if (linConstrucao < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione a construção listada para alterar.");
+            return;
+        }
+        
         Material m = new Material();
         Construcao c = new Construcao();
         try {
             m.setCodMaterial(Integer.parseInt(tb_materiais.getModel().getValueAt(linMaterial, 1).toString()));
-            m.setTipo((String) cmb_tipo.getSelectedItem());
-            //m.setTipo(txt_tipo.getText());
+            m.setTipo(cmb_nomeUnidade.getSelectedItem().toString());
             m.setDescricao(txt_descricao.getText());
             m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
             m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
             m.setEhOpcional((rd_sim.isSelected()));
             m.setConstanteMetro(BigDecimal.valueOf(Double.parseDouble(txt_constanteMetro.getText())));
             m.setPrecoUnitario(BigDecimal.valueOf(Double.parseDouble(txt_precoUnitario.getText())));
-            m.setQuantidadeMinima(Integer.parseInt(txt_qtdMinima.getText()));
+            m.setQuantidadeMinima(1);
             m.setConstrucao(c);
             m.getConstrucao().setCodConstrucao(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 0).toString()));
             m.getConstrucao().setDescricao(tb_construcoes.getModel().getValueAt(linConstrucao, 2).toString());
             m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
             m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
-            mControle.alterarMaterial(m);
+            //Inserção
+            if(mControle.alterarMaterial(m))
+                JOptionPane.showMessageDialog(rootPane, "Registro de material alterado com sucesso.");
+            else
+                JOptionPane.showMessageDialog(rootPane, "Não foi possível alterar o registro do material.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
             return;
@@ -795,48 +653,51 @@ public class TMaterial extends javax.swing.JInternalFrame {
         listarMateriais();
         listarConstrucoes();
     }
-
+    
     private void cadastrar() {
         if (!camposValidados()) {
             JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos para cadastrar.");
             return;
         }
-
+        
         Material m = new Material();
         Construcao c = new Construcao();
         try {
-            m.setTipo((String) cmb_tipo.getSelectedItem());
-            //m.setTipo(txt_tipo.getText());
+            m.setTipo(cmb_nomeUnidade.getSelectedItem().toString());
             m.setDescricao(txt_descricao.getText());
             m.setNomeUnidade(cmb_nomeUnidade.getSelectedItem().toString());
             m.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
             m.setEhOpcional((rd_sim.isSelected()));
             m.setConstanteMetro(BigDecimal.valueOf(Double.parseDouble(txt_constanteMetro.getText())));
             m.setPrecoUnitario(BigDecimal.valueOf(Double.parseDouble(txt_precoUnitario.getText())));
-            m.setQuantidadeMinima(Integer.parseInt(txt_qtdMinima.getText()));
+            m.setQuantidadeMinima(1);
             m.setConstrucao(c);
             m.getConstrucao().setCodConstrucao(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 0).toString()));
             m.getConstrucao().setDescricao(tb_construcoes.getModel().getValueAt(linConstrucao, 2).toString());
             m.getConstrucao().setDetalhes(tb_construcoes.getModel().getValueAt(linConstrucao, 3).toString());
             m.getConstrucao().setQualidade(Integer.parseInt(tb_construcoes.getModel().getValueAt(linConstrucao, 4).toString()));
-            mControle.inserirMaterial(m);
+            //Inserção
+            if(mControle.inserirMaterial(m))
+                JOptionPane.showMessageDialog(rootPane, "Registro de material cadastrado com sucesso.");
+            else
+                JOptionPane.showMessageDialog(rootPane, "Não foi possível cadastrar o registro do material.");
         } catch (Exception e) {
             System.out.println("_" + e);
             JOptionPane.showMessageDialog(rootPane, "Preencha corretamente todos os dados.");
             return;
         }
-
+        
         limparCampos();
         listarMateriais();
         listarConstrucoes();
     }
-
+    
     @SuppressWarnings("unchecked")
     private void listarConstrucoes() {
         listaConstrucoes = cControle.listarConstrucoes();
-
+        
         Vector tableHeaders = new Vector();
-        tableHeaders.add("Cód. constr.");
+        tableHeaders.add("Ind. constr.");
         tableHeaders.add("Tipo constr.");
         tableHeaders.add("Descrição");
         tableHeaders.add("Detalhes");
@@ -861,48 +722,44 @@ public class TMaterial extends javax.swing.JInternalFrame {
         }
         tb_construcoes.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-
+    
     @SuppressWarnings("unchecked")
     private void listarMateriais() {
         listaMateriais = mControle.listarMateriais();
-
+        
         Vector tableHeaders = new Vector();
-        tableHeaders.add("Cód. constr.");
-        tableHeaders.add("Cód. material");
-        tableHeaders.add("Tipo");
+        tableHeaders.add("Ind. constr.");
+        tableHeaders.add("Ind. material");
         tableHeaders.add("Descrição");
         tableHeaders.add("Un. medida");
         tableHeaders.add("Qualidade");
         tableHeaders.add("Opcional?");
         tableHeaders.add("Const. metro");
         tableHeaders.add("Preço unit.");
-        tableHeaders.add("Qtde. min.");
-
+        
         Vector tableData = new Vector();
         Vector reg;
         for (Material m : listaMateriais) {
             reg = new Vector();
             reg.add(m.getConstrucao().getCodConstrucao().toString());
             reg.add(m.getCodMaterial().toString());
-            reg.add(m.getTipo());
             reg.add(m.getDescricao());
             reg.add(m.getNomeUnidade());
             reg.add(m.getQualidade().toString());
             reg.add((m.getEhOpcional() ? "Sim" : "Não"));
             reg.add(m.getConstanteMetro().toString());
             reg.add(m.getPrecoUnitario().toString());
-            reg.add(m.getQuantidadeMinima().toString());
             tableData.add(reg);
         }
         tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
     }
-
+    
     private boolean camposValidados() {
-        return (!(txt_qtdMinima.getText().isEmpty() || txt_precoUnitario.getText().isEmpty()
+        return (!(txt_precoUnitario.getText().isEmpty()
                 || txt_constanteMetro.getText().isEmpty() || txt_descricao.getText().isEmpty()
                 || linConstrucao < 0));
     }
-
+    
     private void limparCampos() {
         tb_materiais.clearSelection();
         tb_construcoes.clearSelection();
@@ -913,44 +770,41 @@ public class TMaterial extends javax.swing.JInternalFrame {
         rd_nao.setSelected(true);
         txt_descricao.setText("");
         txt_precoUnitario.setText("");
-        txt_qtdMinima.setText("");
         txt_constanteMetro.setText("");
-        cmb_tipo.setSelectedIndex(0);
-        //txt_tipo.setText("");
         habilitarBotoes(false);
     }
-
+    
     private void habilitarBotoes(boolean val) {
         bt_alterar.setEnabled(val);
     }
-
+    
     private void janelaAviso() {
         TAviso tAvi = new TAviso(null, true);
         tAvi.setVisible(true);
     }
-
+    
+    private void janelaAvisoPreco() {
+        TAviso2 tAvi = new TAviso2(null, true);
+        tAvi.setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_alterar;
     private javax.swing.JButton bt_cadastrar;
     private javax.swing.JButton bt_sair;
     private javax.swing.JComboBox cmb_nomeUnidade;
     private javax.swing.JComboBox cmb_qualidade;
-    private javax.swing.JComboBox cmb_tipo;
     private javax.swing.ButtonGroup grupRadioOpc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -959,9 +813,7 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -976,7 +828,6 @@ public class TMaterial extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_constanteMetro;
     private javax.swing.JTextArea txt_descricao;
     private javax.swing.JTextField txt_precoUnitario;
-    private javax.swing.JTextField txt_qtdMinima;
     // End of variables declaration//GEN-END:variables
 
 }
