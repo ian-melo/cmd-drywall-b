@@ -36,7 +36,7 @@ public class TesteOrcamentoMax {
     private static float totalParcial = 0;
     private static Pedidos pp = null;
 
-    private static int maximo = 40;
+    private static int maximo = 50;
     private static String altura1 = "2,5";
     private static String perimetro = "5";
 
@@ -107,7 +107,7 @@ public class TesteOrcamentoMax {
             JOptionPane.showMessageDialog(null, c.getCodConstrucao());
             JOptionPane.showMessageDialog(null, c.getDetalhes());
 
-            if (it.getPrecoTotal().doubleValue() <= maximo) {
+            if (it.getPrecoTotal().doubleValue() <= maximo && it.getPrecoTotal().doubleValue() >= 40) {
 //                JOptionPane.showMessageDialog(null, "totalParcial "
 //                        + totalParcial + " <= " + "maximo " + maximo);
 
