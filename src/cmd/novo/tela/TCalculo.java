@@ -25,7 +25,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private int[] linMaterial = new int[0];
     private int linItem = -1;
     private List<Construcao> listaConstrucoes = null;
-    private List<Construcao> listaConstrucoesMax = null;
+    // private List<Construcao> listaConstrucoesMax = null;
     private List<Construcao> listaConstrucoesMaxAux = null;
     private List<Item> listaItens = null;
     //private List<Item> listaItensMax = null;
@@ -882,7 +882,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 //        if (chk_habilita.isSelected()) {
 //            finalizarMax();
 //        } else {
-            finalizar();
+        finalizar();
 //        }
     }//GEN-LAST:event_btn_OkActionPerformed
 
@@ -929,11 +929,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 && tb_construcoes.getModel().getValueAt(tb_construcoes.getSelectedRow(), 0) != null) {
             linConstrucao = tb_construcoes.getSelectedRow();
 
-            if (chk_habilita.isSelected()) {
-                listarMateriaisMax();
-            } else {
-                listarMateriais();
-            }
+            //if (chk_habilita.isSelected()) {
+            //listarMateriaisMax();
+            // } else {
+            listarMateriais();
+            //}
 
         }
 
@@ -1001,18 +1001,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void chk_habilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_habilitaActionPerformed
         if (chk_habilita.isSelected()) {
-            sld_max.setEnabled(false);
-            sld_min.setEnabled(false);
-            lb_max.setText("0");
-            sld_max.setValue(0);
-            lb_min.setText("0");
-            sld_min.setValue(0);
+            sldVariacao(true);
+            limparSld();
 
         } else {
-            sld_max.setEnabled(true);
-            sld_min.setEnabled(true);
+            sldVariacao(false);
         }
     }//GEN-LAST:event_chk_habilitaActionPerformed
+
 
     private void sld_maxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_maxStateChanged
         lb_max.setText(String.valueOf(sld_max.getValue()));
@@ -1094,13 +1090,14 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
         double altura = Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
-        listaConstrucoesMax = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
+        listaConstrucoes = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
                 chk_rf.isSelected(), altura);
         //JOptionPane.showMessageDialog(rootPane, listaConstrucoes.size()); //Teste
-        if (listaConstrucoesMax == null || listaConstrucoesMax.isEmpty()) {
+        if (listaConstrucoes == null || listaConstrucoes.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Construções não encontradas.");
             return;
         }
+        habilitarCampos(false);
         adicionarMax();
         listarConstrucoesMax();
     }
@@ -1235,8 +1232,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void adicionarMax() {
         listaConstrucoesMaxAux = new ArrayList<>();
-        int valor = listaConstrucoesMax.size();
+        int valor = listaConstrucoes.size();
         //Vars
+        boolean encontrado = false;
         List<Material> mOp = new ArrayList<>();
         Construcao c = null;
         Item it;
@@ -1245,7 +1243,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         //Construção
         for (int i = 0; i < valor; i++) {
 
-            c = listaConstrucoesMax.get(i);
+            c = listaConstrucoes.get(i);
 
 //            JOptionPane.showMessageDialog(pnl_ambiente, c.getCodConstrucao());
 //            JOptionPane.showMessageDialog(pnl_ambiente, c.getDescricao());
@@ -1276,7 +1274,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             int minimo = sld_min.getValue();
 
             if (it.getPrecoTotal().doubleValue() <= maximo && it.getPrecoTotal().doubleValue() >= minimo) {
-
+                encontrado = true;
 //                JOptionPane.showMessageDialog(pnl_ambiente, "totalParcial "
 //                        //+ totalParcial + " <= " + "txt_max.getText() " + Double.valueOf(txt_max.getText()));
 //                        + totalParcial + " <= " + "txt_max.getText() " + Double.valueOf("100"));
@@ -1287,6 +1285,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
 
             //listarItensMax();
+        }
+        if (encontrado == false) {
+            JOptionPane.showMessageDialog(null, "Não foi encontrada nenhuma tipologia nesta faixa de preço");
         }
 
     }
@@ -1421,43 +1422,42 @@ public class TCalculo extends javax.swing.JInternalFrame {
         linMaterial = new int[0];
     }
 
-    private void listarMateriaisMax() {
-        Vector tableHeaders = new Vector();
-        tableHeaders.add("Cód. material");
-        tableHeaders.add("Tipo");
-        tableHeaders.add("Descrição");
-        tableHeaders.add("Const. metro");
-        tableHeaders.add("Preço unit.");
-        tableHeaders.add("Qtde. min.");
-
-        Vector tableData = new Vector();
-        Vector reg;
-        Material m;
-        for (Object o : listaConstrucoesMax.get(linConstrucao).getMaterials()) {
-            m = (Material) o;
-            if (m.getEhOpcional()) {
-                reg = new Vector();
-                reg.add(m.getCodMaterial());
-                reg.add(m.getTipo());
-                reg.add(m.getDescricao());
-                reg.add(m.getConstanteMetro());
-                reg.add(m.getPrecoUnitario());
-                reg.add(m.getQuantidadeMinima());
-                tableData.add(reg);
-            }
-        }
-        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
-
-        tb_materiais.getColumnModel().getColumn(0).setMaxWidth(100);
-        tb_materiais.getColumnModel().getColumn(1).setMaxWidth(100);
-
-        tb_materiais.getColumnModel().getColumn(3).setMaxWidth(100);
-        tb_materiais.getColumnModel().getColumn(4).setMaxWidth(80);
-        tb_materiais.getColumnModel().getColumn(5).setMaxWidth(70);
-
-        linMaterial = new int[0];
-    }
-
+//    private void listarMateriaisMax() {
+//        Vector tableHeaders = new Vector();
+//        tableHeaders.add("Cód. material");
+//        tableHeaders.add("Tipo");
+//        tableHeaders.add("Descrição");
+//        tableHeaders.add("Const. metro");
+//        tableHeaders.add("Preço unit.");
+//        tableHeaders.add("Qtde. min.");
+//
+//        Vector tableData = new Vector();
+//        Vector reg;
+//        Material m;
+//        for (Object o : listaConstrucoesMax.get(linConstrucao).getMaterials()) {
+//            m = (Material) o;
+//            if (m.getEhOpcional()) {
+//                reg = new Vector();
+//                reg.add(m.getCodMaterial());
+//                reg.add(m.getTipo());
+//                reg.add(m.getDescricao());
+//                reg.add(m.getConstanteMetro());
+//                reg.add(m.getPrecoUnitario());
+//                reg.add(m.getQuantidadeMinima());
+//                tableData.add(reg);
+//            }
+//        }
+//        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+//
+//        tb_materiais.getColumnModel().getColumn(0).setMaxWidth(100);
+//        tb_materiais.getColumnModel().getColumn(1).setMaxWidth(100);
+//
+//        tb_materiais.getColumnModel().getColumn(3).setMaxWidth(100);
+//        tb_materiais.getColumnModel().getColumn(4).setMaxWidth(80);
+//        tb_materiais.getColumnModel().getColumn(5).setMaxWidth(70);
+//
+//        linMaterial = new int[0];
+//    }
     private void listarItens() {
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. construção");
@@ -1560,6 +1560,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
         chk_ru.setSelected(false);
         lbl_valTotal.setText("");
         habilitarCampos(true);
+        limparSld();
+        sldVariacao(true);
+        chk_habilita.setSelected(true);
+
+    }
+
+    private void limparSld() {
+        lb_max.setText("10000");
+        sld_max.setValue(10000);
+        lb_min.setText("0");
+        sld_min.setValue(0);
+    }
+
+    private void sldVariacao(boolean val) {
+        sld_max.setEnabled(val);
+        sld_min.setEnabled(val);
     }
 
     private void habilitarCampos(boolean val) {
@@ -1574,6 +1590,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
         chk_st.setEnabled(val);
         chk_ru.setEnabled(val);
         chk_rf.setEnabled(val);
+        chk_habilita.setEnabled(val);
+        sldVariacao(val);
+
     }
 
     private void limparTabelas() {
@@ -1591,8 +1610,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linConstrucao = -1;
         listaConstrucoes = null;
-      
-        listaConstrucoesMax = null;
+
+        listaConstrucoes = null;
         listaConstrucoesMaxAux = null;
     }
 
@@ -1615,7 +1634,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linItem = -1;
         listaItens = null;
-        
 
         totalParcial = 0;
         lbl_valTotal.setText("");
