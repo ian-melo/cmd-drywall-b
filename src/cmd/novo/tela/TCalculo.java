@@ -71,7 +71,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_valor.setBackground(Color.WHITE);
         pnl_portaJanela.setBackground(Color.WHITE);
         pnl_multiplicacao.setBackground(Color.WHITE);
-//        pnl_valorPlaca.setBackground(Color.WHITE);
+        pnl_maxMin.setBackground(Color.WHITE);
 
     }
 
@@ -157,6 +157,15 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_construcoes = new javax.swing.JTable();
+        pnl_maxMin = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        sld_max = new javax.swing.JSlider();
+        sld_min = new javax.swing.JSlider();
+        chk_habilita = new javax.swing.JCheckBox();
+        lb_max = new javax.swing.JLabel();
+        lb_min = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -684,6 +693,86 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         jScrollPane4.setViewportView(jPanel1);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Variação de Preço:");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Valor Maximo:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Valor Minimo: ");
+
+        sld_max.setMaximum(10000);
+        sld_max.setValue(10000);
+        sld_max.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sld_maxStateChanged(evt);
+            }
+        });
+
+        sld_min.setMaximum(10000);
+        sld_min.setValue(0);
+        sld_min.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sld_minStateChanged(evt);
+            }
+        });
+
+        chk_habilita.setSelected(true);
+        chk_habilita.setText("Habilitar");
+        chk_habilita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_habilitaActionPerformed(evt);
+            }
+        });
+
+        lb_max.setText("10000");
+
+        lb_min.setText("0");
+
+        javax.swing.GroupLayout pnl_maxMinLayout = new javax.swing.GroupLayout(pnl_maxMin);
+        pnl_maxMin.setLayout(pnl_maxMinLayout);
+        pnl_maxMinLayout.setHorizontalGroup(
+            pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_maxMinLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_maxMinLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chk_habilita))
+                    .addGroup(pnl_maxMinLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_max))
+                    .addGroup(pnl_maxMinLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_min))
+                    .addComponent(sld_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sld_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        pnl_maxMinLayout.setVerticalGroup(
+            pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_maxMinLayout.createSequentialGroup()
+                .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(chk_habilita))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(lb_max))
+                .addGap(5, 5, 5)
+                .addComponent(sld_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(lb_min))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sld_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -700,11 +789,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnl_maxMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -740,7 +831,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
                             .addComponent(pnl_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnl_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
-                        .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnl_multiplicacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnl_maxMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
@@ -749,7 +842,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                             .addComponent(pnl_alturaLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(pnl_portaJanela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel27)
@@ -766,15 +859,21 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane_pai, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_verificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verificarActionPerformed
-        verificar();
-        //verificaValorMax();
+        //verificar();
+//Necessario testar
+        if (chk_habilita.isSelected()) {
+            verificaValorMax();
+        } else {
+            verificar();
+        }
+
     }//GEN-LAST:event_btn_verificarActionPerformed
 
     private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
@@ -782,7 +881,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OkActionPerformed
-        finalizar();
+        if (chk_habilita.isSelected()) {
+            finalizarMax();
+        } else {
+            finalizar();
+        }
     }//GEN-LAST:event_btn_OkActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -802,7 +905,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_conAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conAdicionarActionPerformed
-        adicionar();
+
+        if (chk_habilita.isSelected()) {
+            adicionarMaxBotao();
+        } else {
+            adicionar();
+        }
+
     }//GEN-LAST:event_btn_conAdicionarActionPerformed
 
     private void btn_conRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_conRemoverActionPerformed
@@ -821,7 +930,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 1
                 && tb_construcoes.getModel().getValueAt(tb_construcoes.getSelectedRow(), 0) != null) {
             linConstrucao = tb_construcoes.getSelectedRow();
-            listarMateriais();
+
+            if (chk_habilita.isSelected()) {
+                listarMateriaisMax();
+            } else {
+                listarMateriais();
+            }
+
         }
 
         int linha = tb_construcoes.getSelectedRow();
@@ -886,6 +1001,37 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameActivated
 
+    private void chk_habilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_habilitaActionPerformed
+        if (chk_habilita.isSelected()) {
+            sld_max.setEnabled(false);
+            sld_min.setEnabled(false);
+            lb_max.setText("0");
+            sld_max.setValue(0);
+            lb_min.setText("0");
+            sld_min.setValue(0);
+
+        } else {
+            sld_max.setEnabled(true);
+            sld_min.setEnabled(true);
+        }
+    }//GEN-LAST:event_chk_habilitaActionPerformed
+
+    private void sld_maxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_maxStateChanged
+        lb_max.setText(String.valueOf(sld_max.getValue()));
+
+        if (sld_min.getValue() > sld_max.getValue()) {
+            sld_min.setValue(sld_max.getValue());
+        }
+    }//GEN-LAST:event_sld_maxStateChanged
+
+    private void sld_minStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_minStateChanged
+        lb_min.setText(String.valueOf(sld_min.getValue()));
+
+        if (sld_min.getValue() > sld_max.getValue()) {
+            sld_max.setValue(sld_min.getValue());
+        }
+    }//GEN-LAST:event_sld_minStateChanged
+
     private void fazerMultiplicacaoJanela() {
         if (txt_janelaVezes1.getText().isEmpty() || txt_janelaVezes2.getText().isEmpty()) {
             return;
@@ -949,7 +1095,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (!validarCampos()) {
             return;
         }
-
         double altura = Double.parseDouble(txt_altura.getText().replaceAll(",", "."));
         listaConstrucoesMax = cControle.procurarTipologias(chk_st.isSelected(), chk_ru.isSelected(),
                 chk_rf.isSelected(), altura);
@@ -959,7 +1104,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
         adicionarMax();
-        habilitarCampos(false);
         listarConstrucoesMax();
     }
 
@@ -970,6 +1114,17 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
 
         TOrcamento.getInstancia(false).listarItens(listaItens);
+        limparTudo();
+        dispose();
+    }
+
+    private void finalizarMax() {
+        if (listaItensMax == null) {
+            JOptionPane.showMessageDialog(null, "Não há nenhum item formado!");
+            return;
+        }
+
+        TOrcamento.getInstancia(false).listarItens(listaItensMax);
         limparTudo();
         dispose();
     }
@@ -990,10 +1145,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
 
     private void adicionar() {
-//        if(txt_valorPlaca.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(null, "Adicione o valor da Placa de gesso");
-//            return;
-//        }
 
         if (linConstrucao < 0) {
             return;
@@ -1044,28 +1195,65 @@ public class TCalculo extends javax.swing.JInternalFrame {
         listarItens();
     }
 
-    private void adicionarMax() {
-//        if(txt_valorPlaca.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(null, "Adicione o valor da Placa de gesso");
-//            return;
-//        }
-        listaConstrucoesMaxAux = new ArrayList<>();
+    private void adicionarMaxBotao() {
+
+        if (linConstrucao < 0) {
+            return;
+        }
         //Vars
-        ConstrucaoController contc = new ConstrucaoController();
-        MaterialController contm = new MaterialController();
+
+        List<Material> mOp = new ArrayList<>();
+        Construcao c;
+        Item it;
+
+        double fatorMultParede = 0;
+        //Construção
+        c = listaConstrucoesMaxAux.get(linConstrucao);
+        //Materiais adicionais
+        for (int i : linMaterial) {
+            for (Object o : c.getMaterials()) {
+                if (((Material) o).getEhOpcional() && ((Material) o).getCodMaterial() == Integer.parseInt(tb_materiais.getModel().getValueAt(i, 0).toString())) {
+                    mOp.add((Material) o);
+                    break;
+                }
+            }
+        }
+        //Adição
+        if (listaItens == null) {
+            listaItens = new ArrayList<>();
+        }
+        it = cControle.definirItem(
+                Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_largura.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
+                Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
+
+        totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
+
+        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+
+        //Continuar
+        listaItensMax.add(it);
+        listarItensMax();
+    }
+
+    private void adicionarMax() {
+        listaConstrucoesMaxAux = new ArrayList<>();
+        int valor = listaConstrucoesMax.size();
+        //Vars
         List<Material> mOp = new ArrayList<>();
         Construcao c = null;
         Item it;
 
         //listaConstrucoesMaxAux.add(c);
         //Construção
-        for (int i = 0; i < listaConstrucoesMax.size(); i++) {
+        for (int i = 0; i < valor; i++) {
 
             c = listaConstrucoesMax.get(i);
-            JOptionPane.showMessageDialog(pnl_ambiente, c.getCodConstrucao());
-            JOptionPane.showMessageDialog(pnl_ambiente, c.getDescricao());
-            JOptionPane.showMessageDialog(pnl_ambiente, c.getDetalhes());
 
+//            JOptionPane.showMessageDialog(pnl_ambiente, c.getCodConstrucao());
+//            JOptionPane.showMessageDialog(pnl_ambiente, c.getDescricao());
+//            JOptionPane.showMessageDialog(pnl_ambiente, c.getDetalhes());
             //Materiais adicionais
             for (Object o : c.getMaterials()) {//Deve fazer q add todos
                 mOp.add((Material) o);
@@ -1083,20 +1271,21 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     Double.parseDouble(txt_porta.getText().replaceAll(",", ".")),
                     Double.parseDouble(txt_janela.getText().replaceAll(",", ".")), c, mOp);
 
-            totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
+            //totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
             //it.setPrecoTotal(new BigDecimal("0"));
-
-            lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
-
-            JOptionPane.showMessageDialog(null, c.getCodConstrucao());
+            //lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+            //JOptionPane.showMessageDialog(null, c.getCodConstrucao());
             //if (totalParcial <= Double.valueOf(txt_max.getText())) {
-            if (totalParcial <= Double.valueOf("100")) {
-                JOptionPane.showMessageDialog(pnl_ambiente, "totalParcial "
-                        //+ totalParcial + " <= " + "txt_max.getText() " + Double.valueOf(txt_max.getText()));
-                        + totalParcial + " <= " + "txt_max.getText() " + Double.valueOf("100"));
 
-                JOptionPane.showMessageDialog(pnl_ambiente, listaConstrucoesMaxAux.size());
+            int maximo = sld_max.getValue();
+            int minimo = sld_min.getValue();
 
+            if (it.getPrecoTotal().doubleValue() <= maximo && it.getPrecoTotal().doubleValue() >= minimo) {
+
+//                JOptionPane.showMessageDialog(pnl_ambiente, "totalParcial "
+//                        //+ totalParcial + " <= " + "txt_max.getText() " + Double.valueOf(txt_max.getText()));
+//                        + totalParcial + " <= " + "txt_max.getText() " + Double.valueOf("100"));
+                //JOptionPane.showMessageDialog(pnl_ambiente, listaConstrucoesMaxAux.size());
                 listaConstrucoesMaxAux.add(c);
 
                 //listaItensMax.add(it);
@@ -1213,6 +1402,43 @@ public class TCalculo extends javax.swing.JInternalFrame {
         Vector reg;
         Material m;
         for (Object o : listaConstrucoes.get(linConstrucao).getMaterials()) {
+            m = (Material) o;
+            if (m.getEhOpcional()) {
+                reg = new Vector();
+                reg.add(m.getCodMaterial());
+                reg.add(m.getTipo());
+                reg.add(m.getDescricao());
+                reg.add(m.getConstanteMetro());
+                reg.add(m.getPrecoUnitario());
+                reg.add(m.getQuantidadeMinima());
+                tableData.add(reg);
+            }
+        }
+        tb_materiais.setModel(new DefaultTableModel(tableData, tableHeaders));
+
+        tb_materiais.getColumnModel().getColumn(0).setMaxWidth(100);
+        tb_materiais.getColumnModel().getColumn(1).setMaxWidth(100);
+
+        tb_materiais.getColumnModel().getColumn(3).setMaxWidth(100);
+        tb_materiais.getColumnModel().getColumn(4).setMaxWidth(80);
+        tb_materiais.getColumnModel().getColumn(5).setMaxWidth(70);
+
+        linMaterial = new int[0];
+    }
+
+    private void listarMateriaisMax() {
+        Vector tableHeaders = new Vector();
+        tableHeaders.add("Cód. material");
+        tableHeaders.add("Tipo");
+        tableHeaders.add("Descrição");
+        tableHeaders.add("Const. metro");
+        tableHeaders.add("Preço unit.");
+        tableHeaders.add("Qtde. min.");
+
+        Vector tableData = new Vector();
+        Vector reg;
+        Material m;
+        for (Object o : listaConstrucoesMax.get(linConstrucao).getMaterials()) {
             m = (Material) o;
             if (m.getEhOpcional()) {
                 reg = new Vector();
@@ -1445,6 +1671,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_nova;
     private javax.swing.JButton btn_verificar;
+    private javax.swing.JCheckBox chk_habilita;
     private javax.swing.JCheckBox chk_rf;
     private javax.swing.JCheckBox chk_ru;
     private javax.swing.JCheckBox chk_st;
@@ -1453,7 +1680,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel25;
@@ -1467,6 +1696,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1474,17 +1704,22 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane_pai;
+    private javax.swing.JLabel lb_max;
+    private javax.swing.JLabel lb_min;
     private javax.swing.JLabel lbl_valTotal;
     private javax.swing.JPanel pnl_alturaLargura;
     private javax.swing.JPanel pnl_ambiente;
     private javax.swing.JPanel pnl_botoes;
     private javax.swing.JPanel pnl_filho;
+    private javax.swing.JPanel pnl_maxMin;
     private javax.swing.JPanel pnl_multiplicacao;
     private javax.swing.JPanel pnl_portaJanela;
     private javax.swing.JPanel pnl_valor;
     private javax.swing.ButtonGroup rdGrup_janelas;
     private javax.swing.ButtonGroup rdGrup_maoDeObra;
     private javax.swing.ButtonGroup rdGrup_portas;
+    private javax.swing.JSlider sld_max;
+    private javax.swing.JSlider sld_min;
     private javax.swing.JTable tb_construcoes;
     private javax.swing.JTable tb_itens;
     private javax.swing.JTable tb_materiais;

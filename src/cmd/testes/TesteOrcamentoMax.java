@@ -40,8 +40,6 @@ public class TesteOrcamentoMax {
     private static String altura1 = "2,5";
     private static String perimetro = "5";
 
-    private static Construcao c = null;
-
     private static final CalculoController cControle = new CalculoController();
 
     public static void main(String[] args) {
@@ -51,7 +49,7 @@ public class TesteOrcamentoMax {
     }
 
     private static void verificaValorMax() {
-
+        //listaConstrucoesMax = new ArrayList<>();
         double altura = Double.parseDouble(altura1.replaceAll(",", "."));
         listaConstrucoesMax = cControle.procurarTipologias(true, false, false, altura);
         //JOptionPane.showMessageDialog(rootPane, listaConstrucoes.size()); //Teste
@@ -70,11 +68,11 @@ public class TesteOrcamentoMax {
         int valor = listaConstrucoesMax.size();
         //Vars
         List<Material> mOp = new ArrayList<>();
-
+        Construcao c = null;
         Item it;
 
 //Construção        
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < valor; i++) {
 
             c = listaConstrucoesMax.get(i);
 
@@ -123,7 +121,7 @@ public class TesteOrcamentoMax {
     }
 
     private static void adicionarMax() {
-
+Construcao c = null;
         int valor = listaConstrucoesMax.size();
         //Vars
         ConstrucaoController contc = new ConstrucaoController();
