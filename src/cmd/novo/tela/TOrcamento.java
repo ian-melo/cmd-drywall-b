@@ -2,8 +2,10 @@ package cmd.novo.tela;
 
 import cmd.DAO.ItemDAO;
 import cmd.controle.ClienteController;
+import cmd.controle.ConstrucaoController;
 import cmd.controle.OrcamentoController;
 import cmd.entidade.Cliente;
+import cmd.entidade.Construcao;
 import cmd.entidade.Endereco;
 import cmd.entidade.Item;
 import cmd.entidade.Orcamento;
@@ -413,7 +415,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
-
+//        if (tb_itens.getSelectedRow() == -1) {
+//            JOptionPane.showMessageDialog(null, "Selecione um item");
+//            return;
+//        }
         //Pessoa fisica
         if (cmb_cliente.getSelectedIndex() == 0) {
             if (verificaFisica() == true) {
@@ -433,7 +438,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_folhafisicaActionPerformed
 
     private boolean verificaJuridica() {
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRows().length == -1) {
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
             return false;
         }
@@ -442,7 +447,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }
 
     private boolean verificaFisica() {
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRows().length == -1) {
+        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
             return false;
         }
@@ -591,7 +596,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tb_enderecos.setModel(new DefaultTableModel(tableData, tableHeaders));
         linEndereco = -1;
     }
-    
+
     @SuppressWarnings("unchecked")
     public void listarItens(List<Item> li) {
         limparTItens();
@@ -731,26 +736,28 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(mensagem);
                 mensagem = new Paragraph(" ");
                 doc.add(mensagem);
+
                 Paragraph CPF = new Paragraph("CPF: \t" + cpf);
-                doc.add(CPF);
                 Paragraph Nome = new Paragraph("Nome: \t" + nome);
-                doc.add(Nome);
                 Paragraph Cep = new Paragraph("CEP: \t" + cep);
-                doc.add(Cep);
                 Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
-                doc.add(Logradouro);
                 Paragraph Numero = new Paragraph("Numero: \t" + numero);
-                doc.add(Numero);
                 Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
-                doc.add(Complemento);
                 Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
-                doc.add(Bairro);
                 Paragraph Uf = new Paragraph("Uf: \t" + uf);
+                doc.add(CPF);
+                doc.add(Nome);
+                doc.add(Cep);
+                doc.add(Logradouro);
+                doc.add(Numero);
+                doc.add(Complemento);
+                doc.add(Bairro);
                 doc.add(Uf);
+
                 Uf = new Paragraph(" ");
                 doc.add(Uf);
 
-                Paragraph infor = new Paragraph("Lista de Itens de orçamento");
+                Paragraph infor = new Paragraph("Lista de Itens do orçamento");
                 infor.setAlignment(Element.ALIGN_CENTER);
                 doc.add(infor);
                 infor = new Paragraph(" ");
@@ -794,6 +801,34 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 }
                 doc.add(table);
                 doc.add(Uf);
+
+                paragrafo = new Paragraph(" ");
+                doc.add(paragrafo);
+
+                ConstrucaoController cCont = new ConstrucaoController();
+                Construcao c = cCont.buscarConstrucao(tb_itens.getValueAt(linha3[0], 0).toString());
+                
+                PdfPTable tableConstrucao = new PdfPTable(3);
+                PdfPCell cel1Cons = new PdfPCell(new Paragraph("Cod. Construção"));
+                PdfPCell cel2Cons = new PdfPCell(new Paragraph("Descrição"));
+                PdfPCell cel3Cons = new PdfPCell(new Paragraph("Detalhes"));
+
+                tableConstrucao.addCell(cel1Cons);
+                tableConstrucao.addCell(cel2Cons);
+                tableConstrucao.addCell(cel3Cons);
+                for (int i = 0; i < linha3.length; i++) {
+                    cel1 = new PdfPCell(new Paragraph(c.getCodConstrucao().toString()));
+                    cel2 = new PdfPCell(new Paragraph(c.getDescricao()));
+                    cel3 = new PdfPCell(new Paragraph(c.getDetalhes()));
+
+                    tableConstrucao.addCell(cel1);
+                    tableConstrucao.addCell(cel2);
+                    tableConstrucao.addCell(cel3);
+
+                }
+                doc.add(tableConstrucao);
+                doc.add(Uf);
+
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);

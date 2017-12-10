@@ -200,6 +200,29 @@ public class ConstrucaoController {
         return p;
     }
     
+    
+    public Construcao buscarConstrucao(String codigo) {
+        //Verifica se o dado existe
+        if(codigo.equals(""))
+            return null;
+        try {
+            Integer.parseInt(codigo);
+        } catch(NumberFormatException ex) {
+            System.out.println("_" + ex);
+            return null;
+        }
+        
+        //Processo de execução das DAOs
+        Construcao c;
+        ConstrucaoDAO cDao = new ConstrucaoDAO();
+        c = cDao.buscar(codigo);
+        if(c == null)
+            return null;
+        return c;
+    }
+    
+    
+    
     /**
      * Realiza a listagem das construções existentes
      * @return Lista de construções

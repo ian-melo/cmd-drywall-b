@@ -67,7 +67,7 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             c = (Construcao) (s.createQuery("from Construcao where CodConstrucao = :cod")
                 .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
-            s.close();
+            //s.close();
             return c;
         } catch(HibernateException e) {
             return null;
