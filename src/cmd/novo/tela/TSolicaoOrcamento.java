@@ -214,8 +214,15 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         try {
 
             //ped = new Pedidos();
-            ped.setAltura((float) tb_orcamento.getValueAt(linha, 1));
-            ped.setLargura((float) tb_orcamento.getValueAt(linha, 2));
+            
+             if ((float) tb_orcamento.getValueAt(linha, 1) > 0) {
+                  ped.setAltura((float) tb_orcamento.getValueAt(linha, 1) / 100);
+             }
+             
+              if ((float) tb_orcamento.getValueAt(linha, 2) > 0) {
+                  ped.setLargura((float) tb_orcamento.getValueAt(linha, 2)  / 100);
+              }
+            
             ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
             ped.setEmail((String) tb_orcamento.getValueAt(linha, 4));
             ped.setValor((float) tb_orcamento.getValueAt(linha, 5));
@@ -248,6 +255,7 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
             ped.setMao_obra((String) tb_orcamento.getValueAt(linha, 15));
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Houve um erro: " + e);
             System.err.println(e);
         }
         try {
