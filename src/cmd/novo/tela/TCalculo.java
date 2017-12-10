@@ -9,11 +9,9 @@ import cmd.entidade.Item;
 import cmd.entidade.Material;
 import cmd.entidade.Pedidos;
 import java.awt.Color;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +28,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private List<Construcao> listaConstrucoesMax = null;
     private List<Construcao> listaConstrucoesMaxAux = null;
     private List<Item> listaItens = null;
-    private List<Item> listaItensMax = null;
+    //private List<Item> listaItensMax = null;
 
     private float totalParcial = 0;
 
@@ -881,11 +879,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_limparActionPerformed
 
     private void btn_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OkActionPerformed
-        if (chk_habilita.isSelected()) {
-            finalizarMax();
-        } else {
+//        if (chk_habilita.isSelected()) {
+//            finalizarMax();
+//        } else {
             finalizar();
-        }
+//        }
     }//GEN-LAST:event_btn_OkActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -1118,17 +1116,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
         dispose();
     }
 
-    private void finalizarMax() {
-        if (listaItensMax == null) {
-            JOptionPane.showMessageDialog(null, "Não há nenhum item formado!");
-            return;
-        }
-
-        TOrcamento.getInstancia(false).listarItens(listaItensMax);
-        limparTudo();
-        dispose();
-    }
-
+//    private void finalizarMax() {
+//        if (listaItensMax == null) {
+//            JOptionPane.showMessageDialog(null, "Não há nenhum item formado!");
+//            return;
+//        }
+//
+//        TOrcamento.getInstancia(false).listarItens(listaItensMax);
+//        limparTudo();
+//        dispose();
+//    }
     private void cancelar() {
         limparTudo();
         dispose();
@@ -1156,7 +1153,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         Construcao c;
         Item it;
 
-        double fatorMultParede = 0;
         //Construção
         c = listaConstrucoes.get(linConstrucao);
         //Materiais adicionais
@@ -1233,8 +1229,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
 
         //Continuar
-        listaItensMax.add(it);
-        listarItensMax();
+        listaItens.add(it);
+        listarItens();
     }
 
     private void adicionarMax() {
@@ -1262,8 +1258,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
 
             //Adição
-            if (listaItensMax == null) {
-                listaItensMax = new ArrayList<>();
+            if (listaConstrucoesMaxAux == null) {
+                listaConstrucoesMaxAux = new ArrayList<>();
             }
             it = cControle.definirItem(
                     Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
@@ -1276,7 +1272,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
             //lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
             //JOptionPane.showMessageDialog(null, c.getCodConstrucao());
             //if (totalParcial <= Double.valueOf(txt_max.getText())) {
-
             int maximo = sld_max.getValue();
             int minimo = sld_min.getValue();
 
@@ -1496,39 +1491,38 @@ public class TCalculo extends javax.swing.JInternalFrame {
         linItem = -1;
     }
 
-    private void listarItensMax() {
-        Vector tableHeaders = new Vector();
-        tableHeaders.add("Cód. construção");
-        tableHeaders.add("Tipo construção");
-        tableHeaders.add("Altura (m)");
-        tableHeaders.add("Largura (m)");
-        tableHeaders.add("Área da porta (m²)");
-        tableHeaders.add("Área da janela (m²)");
-        tableHeaders.add("Preço total");
-
-        Vector tableData = new Vector();
-        Vector reg;
-        for (Item it : listaItensMax) {
-            reg = new Vector();
-            reg.add(it.getConstrucao().getCodConstrucao());
-            if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
-                reg.add("Parede");
-            } else if (it.getConstrucao().getParede() == null && it.getConstrucao().getForro() != null) {
-                reg.add("Forro");
-            } else {
-                reg.add("Desconhecido");
-            }
-            reg.add(it.getAltura());
-            reg.add(it.getLargura());
-            reg.add(it.getAreaPorta());
-            reg.add(it.getAreaJanela());
-            reg.add(it.getPrecoTotal());
-            tableData.add(reg);
-        }
-        tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
-        linItem = -1;
-    }
-
+//    private void listarItensMax() {
+//        Vector tableHeaders = new Vector();
+//        tableHeaders.add("Cód. construção");
+//        tableHeaders.add("Tipo construção");
+//        tableHeaders.add("Altura (m)");
+//        tableHeaders.add("Largura (m)");
+//        tableHeaders.add("Área da porta (m²)");
+//        tableHeaders.add("Área da janela (m²)");
+//        tableHeaders.add("Preço total");
+//
+//        Vector tableData = new Vector();
+//        Vector reg;
+//        for (Item it : listaItensMax) {
+//            reg = new Vector();
+//            reg.add(it.getConstrucao().getCodConstrucao());
+//            if (it.getConstrucao().getParede() != null && it.getConstrucao().getForro() == null) {
+//                reg.add("Parede");
+//            } else if (it.getConstrucao().getParede() == null && it.getConstrucao().getForro() != null) {
+//                reg.add("Forro");
+//            } else {
+//                reg.add("Desconhecido");
+//            }
+//            reg.add(it.getAltura());
+//            reg.add(it.getLargura());
+//            reg.add(it.getAreaPorta());
+//            reg.add(it.getAreaJanela());
+//            reg.add(it.getPrecoTotal());
+//            tableData.add(reg);
+//        }
+//        tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
+//        linItem = -1;
+//    }
     private boolean validarCampos() {
         if (txt_altura.getText().isEmpty() || txt_largura.getText().isEmpty()
                 || !(chk_st.isSelected() || chk_rf.isSelected() || chk_ru.isSelected())) {
@@ -1597,6 +1591,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linConstrucao = -1;
         listaConstrucoes = null;
+      
+        listaConstrucoesMax = null;
+        listaConstrucoesMaxAux = null;
     }
 
     private void limparTMateriais() {
@@ -1618,6 +1615,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         ));
         linItem = -1;
         listaItens = null;
+        
 
         totalParcial = 0;
         lbl_valTotal.setText("");
