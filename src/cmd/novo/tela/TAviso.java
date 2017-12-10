@@ -44,7 +44,7 @@ public class TAviso extends javax.swing.JDialog {
         pn_aviso.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_info.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lb_info.setText("<html><center>CONSULTE O GUIA <br> PARA MAIS DETALHES</center></html>");
+        lb_info.setText("<html><center>CONSULTE O GUIA DA PLACO <br> PARA MAIS DETALHES</center></html>");
 
         btn_OK.setBackground(new java.awt.Color(153, 153, 255));
         btn_OK.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -65,22 +65,23 @@ public class TAviso extends javax.swing.JDialog {
         pn_avisoLayout.setHorizontalGroup(
             pn_avisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_avisoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pn_avisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_avisoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lb_info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_avisoLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btn_OK)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_avisoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_OK)
-                .addGap(80, 80, 80))
         );
         pn_avisoLayout.setVerticalGroup(
             pn_avisoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_avisoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lb_info, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_OK)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

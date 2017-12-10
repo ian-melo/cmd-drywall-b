@@ -970,6 +970,42 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 }
                 doc.add(table);
                 doc.add(Uf);
+                
+                paragrafo = new Paragraph(" ");
+                doc.add(paragrafo);
+
+                Paragraph tituloTab = new Paragraph("Significado do Codigo da construção");
+                tituloTab.setAlignment(Element.ALIGN_CENTER);
+                doc.add(tituloTab);
+
+                paragrafo = new Paragraph(" ");
+                doc.add(paragrafo);
+
+                ConstrucaoController cCont = new ConstrucaoController();
+                Construcao c = cCont.buscarConstrucao(tb_itens.getValueAt(linha3[0], 0).toString());
+
+                PdfPTable tableConstrucao = new PdfPTable(3);
+                PdfPCell cel1Cons = new PdfPCell(new Paragraph("Cod. Construção"));
+                PdfPCell cel2Cons = new PdfPCell(new Paragraph("Descrição"));
+                PdfPCell cel3Cons = new PdfPCell(new Paragraph("Detalhes"));
+
+                tableConstrucao.addCell(cel1Cons);
+                tableConstrucao.addCell(cel2Cons);
+                tableConstrucao.addCell(cel3Cons);
+                
+                for (int i = 0; i < linha3.length; i++) {
+                    cel1 = new PdfPCell(new Paragraph(c.getCodConstrucao().toString()));
+                    cel2 = new PdfPCell(new Paragraph(c.getDescricao()));
+                    cel3 = new PdfPCell(new Paragraph(c.getDetalhes()));
+
+                    tableConstrucao.addCell(cel1);
+                    tableConstrucao.addCell(cel2);
+                    tableConstrucao.addCell(cel3);
+
+                }
+                doc.add(tableConstrucao);
+                doc.add(Uf);
+                
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
