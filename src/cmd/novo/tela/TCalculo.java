@@ -28,8 +28,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private int[] linMaterial = new int[0];
     private int linItem = -1;
     private List<Construcao> listaConstrucoes = null;
-    // private List<Construcao> listaConstrucoesMax = null;
-    private List<Construcao> listaConstrucoesMaxAux = null;
+    private List<Construcao> listaConstrucoesMax = null;
+    private List<Construcao> listaConstrucoesMaxOrd = null;
+    private List<Double> guardaValor = null;//é utilizada para guardar o valor de listaConstrucoesMax
+    private List<Double> guardaValorAux = null;
     private List<Item> listaItens = null;
     //private List<Item> listaItensMax = null;
 
@@ -1101,6 +1103,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             return;
         }
         habilitarCampos(false);
+        sldVariacao(true);//Permite alterar o preço, apenas (vl max e min)
         adicionarMax();
         listarConstrucoesMax();
     }
@@ -1204,7 +1207,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         double fatorMultParede = 0;
         //Construção
-        c = listaConstrucoesMaxAux.get(linConstrucao);
+        c = listaConstrucoesMax.get(linConstrucao);
         //Materiais adicionais
         for (int i : linMaterial) {
             for (Object o : c.getMaterials()) {
@@ -1234,7 +1237,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
 
     private void adicionarMax() {
-        listaConstrucoesMaxAux = new ArrayList<>();
+        listaConstrucoesMax = new ArrayList<>();
         int valor = listaConstrucoes.size();
         //Vars
         boolean encontrado = false;
@@ -1259,8 +1262,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
 
             //Adição
-            if (listaConstrucoesMaxAux == null) {
-                listaConstrucoesMaxAux = new ArrayList<>();
+            if (listaConstrucoesMax == null) {
+                listaConstrucoesMax = new ArrayList<>();
             }
             it = cControle.definirItem(
                     Double.parseDouble(txt_altura.getText().replaceAll(",", ".")),
@@ -1278,12 +1281,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
             if (it.getPrecoTotal().doubleValue() <= maximo && it.getPrecoTotal().doubleValue() >= minimo) {
                 encontrado = true;
-//                JOptionPane.showMessageDialog(pnl_ambiente, "totalParcial "
-//                        //+ totalParcial + " <= " + "txt_max.getText() " + Double.valueOf(txt_max.getText()));
-//                        + totalParcial + " <= " + "txt_max.getText() " + Double.valueOf("100"));
                 //JOptionPane.showMessageDialog(pnl_ambiente, listaConstrucoesMaxAux.size());
-                listaConstrucoesMaxAux.add(c);
-
+                listaConstrucoesMax.add(c);
+                guardaValor.add(it.getPrecoTotal().doubleValue());//Mesmo index de listaConstrucoesMax
                 //listaItensMax.add(it);
             }
 
@@ -1292,7 +1292,28 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (encontrado == false) {
             JOptionPane.showMessageDialog(null, "Não foi encontrada nenhuma tipologia nesta faixa de preço");
         }
+        construcoesMaxOrdenado();
 
+    }
+
+    private void construcoesMaxOrdenado() {
+        int i = 0;
+        double maior = 0;
+        double menor = 0;
+        
+        for (Double d : guardaValor) {
+            if (i == 0) {
+                maior = d;
+                menor = d;
+            }
+
+            
+          
+
+            i++;
+        }
+        //listaConstrucoesMaxOrd
+    
     }
 
     private void remover() {
@@ -1363,7 +1384,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         Vector tableData = new Vector();
         Vector reg;
-        for (Construcao c : listaConstrucoesMaxAux) {
+        for (Construcao c : listaConstrucoesMax) {
             reg = new Vector();
             reg.add(c.getCodConstrucao().toString());
             if (c.getParede() != null && c.getForro() == null) {
@@ -1615,7 +1636,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         listaConstrucoes = null;
 
         listaConstrucoes = null;
-        listaConstrucoesMaxAux = null;
+        listaConstrucoesMax = null;
     }
 
     private void limparTMateriais() {
@@ -1669,7 +1690,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if ("Úmido".equals(ped.getAmbiente())) {
             chk_ru.setSelected(true);
         }
-        
+
         if ("Resistente a fogo".equals(ped.getAmbiente())) {
             chk_rf.setSelected(true);
         }
