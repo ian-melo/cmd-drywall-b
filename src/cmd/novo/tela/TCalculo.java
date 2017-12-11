@@ -1312,21 +1312,40 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private void construcoesMaxOrdenado() {
         int i = 0;
         double maior = 0;
-        double menor = 0;
-        
-        for (Double d : guardaValor) {
-            if (i == 0) {
-                maior = d;
-                menor = d;
+        int indexMaior = 0;
+        boolean alterado = false;
+        listaConstrucoesMaxOrd = new ArrayList<>();
+        for (int j = 0; j < guardaValor.size(); j++) {
+            //for (int j = 0; j < 5; j++) {
+
+            for (Double d : guardaValor) {
+                if (i == 0) {
+                    maior = d;
+                    indexMaior = i;
+                }
+
+                if (maior < d) {
+                    maior = d;//Seleciona o maior
+                    indexMaior = i;
+                    alterado = true;
+                }
+                //System.out.println("_i_______" + i);
+                i++;
             }
-
-            
-          
-
-            i++;
+            i = 0;
+            maior = 0;
+            //System.out.println("_j_f_" + j);
+            if (alterado) {
+                //System.out.println("_j__" + j);
+                guardaValor.remove(indexMaior);//Retira o maior
+                listaConstrucoesMaxOrd.add(listaConstrucoesMax.get(indexMaior));//Seta o maior como primeiro valor
+                alterado = false;
+                j = 0;
+            }
         }
-        //listaConstrucoesMaxOrd
-    
+
+        listaConstrucoesMax = listaConstrucoesMaxOrd;
+
     }
 
     private void remover() {
