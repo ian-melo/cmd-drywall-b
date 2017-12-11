@@ -8,6 +8,7 @@ import cmd.entidade.Construcao;
 import cmd.entidade.Item;
 import cmd.entidade.Material;
 import cmd.entidade.Pedidos;
+import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Usuario, ian-melo
  */
 public class TCalculo extends javax.swing.JInternalFrame {
+
+    GerenteDeJanelas gerenteDeJanelas;
 
     private int linConstrucao = -1;
     private int[] linMaterial = new int[0];
@@ -1663,10 +1666,19 @@ public class TCalculo extends javax.swing.JInternalFrame {
             chk_st.setSelected(true);
         }
 
-        if ("Umido".equals(ped.getAmbiente())) {
+        if ("Úmido".equals(ped.getAmbiente())) {
             chk_ru.setSelected(true);
         }
+        
+        if ("Resistente a fogo".equals(ped.getAmbiente())) {
+            chk_rf.setSelected(true);
+        }
         JOptionPane.showMessageDialog(null, ped.getAmbiente());
+        try {
+            sld_max.setValue((int) ped.getValor());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao adicionar o valor, adicionar manualmente: " + ped.getValor());
+        }
 
 //        ped.getAmbiente();
 //        ped.getEmail();

@@ -71,6 +71,18 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tCalculoOrcamento.exibirDataAtual();
         return tCalculoOrcamento;
     }
+    
+    
+
+
+    public static TOrcamento getInstancia() {
+        if (tCalculoOrcamento == null) {
+            tCalculoOrcamento = new TOrcamento();
+        }
+        return tCalculoOrcamento;
+    }
+    
+    
 
     /**
      * Creates new form TCalculoOrcamento
@@ -813,7 +825,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(paragrafo);
 
                 ConstrucaoController cCont = new ConstrucaoController();
-                Construcao c = cCont.buscarConstrucao(tb_itens.getValueAt(linha3[0], 0).toString());
+                
 
                 PdfPTable tableConstrucao = new PdfPTable(3);
                 PdfPCell cel1Cons = new PdfPCell(new Paragraph("Cod. Construção"));
@@ -824,6 +836,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 tableConstrucao.addCell(cel2Cons);
                 tableConstrucao.addCell(cel3Cons);
                 for (int i = 0; i < linha3.length; i++) {
+                    Construcao c = cCont.buscarConstrucao(tb_itens.getValueAt(linha3[i], 0).toString());
+                    
                     cel1 = new PdfPCell(new Paragraph(c.getCodConstrucao().toString()));
                     cel2 = new PdfPCell(new Paragraph(c.getDescricao()));
                     cel3 = new PdfPCell(new Paragraph(c.getDetalhes()));

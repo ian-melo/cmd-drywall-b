@@ -214,15 +214,14 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         try {
 
             //ped = new Pedidos();
-            
-             if ((float) tb_orcamento.getValueAt(linha, 1) > 0) {
-                  ped.setAltura((float) tb_orcamento.getValueAt(linha, 1) / 100);
-             }
-             
-              if ((float) tb_orcamento.getValueAt(linha, 2) > 0) {
-                  ped.setLargura((float) tb_orcamento.getValueAt(linha, 2)  / 100);
-              }
-            
+            if ((float) tb_orcamento.getValueAt(linha, 1) > 0) {
+                ped.setAltura((float) tb_orcamento.getValueAt(linha, 1) / 100);
+            }
+
+            if ((float) tb_orcamento.getValueAt(linha, 2) > 0) {
+                ped.setLargura((float) tb_orcamento.getValueAt(linha, 2) / 100);
+            }
+
             ped.setQtd_paredes((int) tb_orcamento.getValueAt(linha, 3));
             ped.setEmail((String) tb_orcamento.getValueAt(linha, 4));
             ped.setValor((float) tb_orcamento.getValueAt(linha, 5));
@@ -258,6 +257,14 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Houve um erro: " + e);
             System.err.println(e);
         }
+
+        try {
+            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
+        } catch (IllegalArgumentException e) {
+            gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
+            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
+        }
+
         try {
             gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
         } catch (IllegalArgumentException e) {
