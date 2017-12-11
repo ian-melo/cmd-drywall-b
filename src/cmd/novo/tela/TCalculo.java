@@ -1339,11 +1339,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 //System.out.println("_j__" + j);
                 guardaValor.remove(indexMaior);//Retira o maior
                 listaConstrucoesMaxOrd.add(listaConstrucoesMax.get(indexMaior));//Seta o maior como primeiro valor
+                listaConstrucoesMax.remove(indexMaior);
                 alterado = false;
                 j = 0;
             }
         }
-
+        listaConstrucoesMax = new ArrayList<>();
+        //listaConstrucoesMax.clear();
         listaConstrucoesMax = listaConstrucoesMaxOrd;
 
     }
