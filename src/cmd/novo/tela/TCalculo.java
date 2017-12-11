@@ -1311,12 +1311,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void construcoesMaxOrdenado() {
         int i = 0;
-        double maior = 0;
         int indexMaior = 0;
+        double maior = 0;
         boolean alterado = false;
         listaConstrucoesMaxOrd = new ArrayList<>();
+        
         for (int j = 0; j < guardaValor.size(); j++) {
-            //for (int j = 0; j < 5; j++) {
 
             for (Double d : guardaValor) {
                 if (i == 0) {
@@ -1330,7 +1330,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                     alterado = true;
                 }
                 //System.out.println("_i_______" + i);
-                i++;
+                i++;//index
             }
             i = 0;
             maior = 0;
@@ -1341,7 +1341,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 listaConstrucoesMaxOrd.add(listaConstrucoesMax.get(indexMaior));//Seta o maior como primeiro valor
                 listaConstrucoesMax.remove(indexMaior);
                 alterado = false;
-                j = 0;
+                j = 0;//Continua o loop
             }
         }
         listaConstrucoesMax = new ArrayList<>();
