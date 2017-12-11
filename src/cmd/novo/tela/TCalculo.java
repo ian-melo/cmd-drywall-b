@@ -700,10 +700,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
         jLabel8.setText("Variação de Preço:");
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Valor Maximo:");
+        jLabel14.setText("Valor Máximo:");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Valor Minimo: ");
+        jLabel16.setText("Valor Mínimo: ");
 
         sld_max.setMaximum(10000);
         sld_max.setValue(10000);
