@@ -36,6 +36,8 @@ public class TPrincipal extends javax.swing.JFrame {
         pnl_gerenciamentoItens.setBackground(new Color(153, 153, 255));
         pnl_orcamento.setBackground(new Color(153, 153, 255));
         pnl_relatorios.setBackground(new Color(153, 153, 255));
+        
+        pnl_funcionarios.setVisible(false);
 
         this.gerenteDeJanelas = new GerenteDeJanelas(jDesktopPane1);
 
@@ -92,7 +94,7 @@ public class TPrincipal extends javax.swing.JFrame {
         lb_logado.setText("NULL");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("v0.21");
+        jLabel2.setText("v0.22");
 
         pnl_gerenciamentoItens.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 51, 51)));
 

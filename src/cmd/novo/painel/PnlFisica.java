@@ -85,10 +85,10 @@ public class PnlFisica extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("CPF:*");
+        jLabel2.setText("CPF:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Data de Nascimento:*");
+        jLabel3.setText("Data de Nascimento:");
 
         try {
             txt_cpf_pnl.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));

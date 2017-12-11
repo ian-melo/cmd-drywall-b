@@ -156,6 +156,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         pnl_valor = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         lbl_valTotal = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -639,16 +640,25 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         lbl_valTotal.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("R$");
+
         javax.swing.GroupLayout pnl_valorLayout = new javax.swing.GroupLayout(pnl_valor);
         pnl_valor.setLayout(pnl_valorLayout);
         pnl_valorLayout.setHorizontalGroup(
             pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_valorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lbl_valTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_valorLayout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_valTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_valorLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnl_valorLayout.setVerticalGroup(
             pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,8 +666,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_valTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGroup(pnl_valorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_valTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1187,7 +1199,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
         //it.setPrecoTotal(new BigDecimal("0"));
 
-        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1229,7 +1241,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
 
-        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1238,6 +1250,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
     private void adicionarMax() {
         listaConstrucoesMax = new ArrayList<>();
+        guardaValor = new ArrayList<>();
         int valor = listaConstrucoes.size();
         //Vars
         boolean encontrado = false;
@@ -1323,7 +1336,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         Double val = Double.valueOf(tb_itens.getModel().getValueAt(linItem, 6).toString());
         totalParcial -= val;
-        lbl_valTotal.setText(String.valueOf(totalParcial));//Mostra
+        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
 
         listaItens.remove(linItem);
         listarItens();
@@ -1429,7 +1442,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 reg.add(m.getTipo());
                 reg.add(m.getDescricao());
                 reg.add(m.getConstanteMetro());
-                reg.add(m.getPrecoUnitario());
+                reg.add("R$ " + String.valueOf(m.getPrecoUnitario()).replace(".", ","));
                 reg.add(m.getQuantidadeMinima());
                 tableData.add(reg);
             }
@@ -1508,7 +1521,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             reg.add(it.getLargura());
             reg.add(it.getAreaPorta());
             reg.add(it.getAreaJanela());
-            reg.add(it.getPrecoTotal());
+            reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
@@ -1732,6 +1745,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel25;

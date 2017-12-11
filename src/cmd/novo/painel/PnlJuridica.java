@@ -83,7 +83,7 @@ public class PnlJuridica extends javax.swing.JPanel {
         txt_datafundacao_pnl = new com.toedter.calendar.JDateChooser();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("CNPJ:*");
+        jLabel7.setText("CNPJ:");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
@@ -106,7 +106,7 @@ public class PnlJuridica extends javax.swing.JPanel {
         txt_ramoAtuacao_pnl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Data de fundação:*");
+        jLabel10.setText("Data de fundação:");
 
         try {
             txt_cnpj_pnl.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));

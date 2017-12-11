@@ -68,13 +68,20 @@ public class Validar {
         return Pattern.matches("^[0-9]*\\d+[0-9]*$", numero);
     }
 
+    public boolean validarEmail(String email) {
+        if (email == null) {
+            email = "";
+        }
+        return Pattern.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", email);
+    }
+
 //    public boolean validarData(String data) {
 //        if (data == null || validarVazio(data) == true) {
 //            data = "";
 //        }
 //        return Pattern.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$", data);
 //    }
-    
     //Retorna NULL se não for data
     public Date validarData(String dataString) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

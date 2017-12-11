@@ -188,6 +188,9 @@ public class TCliente extends javax.swing.JInternalFrame {
         txt_tel1 = new javax.swing.JFormattedTextField();
         txt_cel1 = new javax.swing.JFormattedTextField();
         txt_cel2 = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_email = new javax.swing.JTextField();
 
         setClosable(true);
         setResizable(true);
@@ -269,7 +272,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         );
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("CEP:*");
+        jLabel14.setText("CEP:");
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel14MouseClicked(evt);
@@ -277,12 +280,12 @@ public class TCliente extends javax.swing.JInternalFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Logradouro:*");
+        jLabel15.setText("Logradouro:");
 
         txt_logradouro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Numero:*");
+        jLabel16.setText("Numero:");
 
         txt_numero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_numero.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -294,15 +297,15 @@ public class TCliente extends javax.swing.JInternalFrame {
         txt_bairro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Bairro:*");
+        jLabel17.setText("Bairro:");
 
         txt_cidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Cidade:*");
+        jLabel18.setText("Cidade:");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("UF:*");
+        jLabel19.setText("UF:");
 
         txt_uf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -602,6 +605,37 @@ public class TCliente extends javax.swing.JInternalFrame {
                     .addComponent(pnl_cliente_pai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("E-mail:*");
+
+        txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_emailFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_email, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(91, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 60, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -614,7 +648,11 @@ public class TCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnl_metade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnl_metade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnl_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -632,11 +670,14 @@ public class TCliente extends javax.swing.JInternalFrame {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnl_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(pnl_baixo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -669,11 +710,20 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmb_pessoaActionPerformed
 
     private void btn_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CadastrarActionPerformed
-        if (verificaCamposEndereco() == false) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os canpos referentes ao Endereço");
-        }
+//        if (verificaCamposEndereco() == false) {
+//            JOptionPane.showMessageDialog(null, "Preencha todos os canpos referentes ao Endereço");
+//        }
         if ("".equals(txt_tel1.getText().trim()) || "(  )     -    ".equals(txt_tel1.getText().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha o Telefone");
+            return;
+        }
+
+        if ("".equals(txt_email.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "Preencha o E-mail");
+            return;
+        }
+
+        if(validaEmail() == false){
             return;
         }
 //----> A VERIFICAÇÃO ACIMA DEVE SER FEITO PARA AMBAS AS PESSOAS(CLIENTES)
@@ -960,11 +1010,24 @@ public class TCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
+    private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
+        validaEmail();
+    }//GEN-LAST:event_txt_emailFocusLost
+
     private void pequenoBug() {
         int x = this.getHeight();
         int y = this.getWidth();
         this.setSize(y - 1, x - 1);
         this.setSize(y, x);
+    }
+
+    private boolean validaEmail() {
+        Validar vali = new Validar();
+        if (vali.validarEmail(txt_email.getText()) == false) {
+            JOptionPane.showMessageDialog(null, "Insira um e-mail valido");
+            return false;
+        }
+        return true;
     }
 
     private void alteraPessoaJuridica() {
@@ -1250,18 +1313,18 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     //Verifica se o campo foi preenchido
     public boolean verificaPessoaJuridica() {
-        if ("".equals(pJu.getTxt_cnpj_pnl().trim()) || "  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl().trim())) {
-            JOptionPane.showMessageDialog(null, "Preencha o CNPJ");
-            return false;
-        }
+//        if ("".equals(pJu.getTxt_cnpj_pnl().trim()) || "  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl().trim())) {
+//            JOptionPane.showMessageDialog(null, "Preencha o CNPJ");
+//            return false;
+//        }
         if ("".equals(pJu.getTxt_razaoSocial_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha a Razão Social");
             return false;
         }
-        if (pJu.getTxt_datafundacao_pnl() == null) {
-            JOptionPane.showMessageDialog(null, "Preencha o <<<<<<<<<<<<<<<<");
-            return false;
-        }
+//        if (pJu.getTxt_datafundacao_pnl() == null) {
+//            JOptionPane.showMessageDialog(null, "Preencha o <<<<<<<<<<<<<<<<");
+//            return false;
+//        }
 //        Não obrigatorio?
 //        if ("".equals(pJu.getTxt_ramoAtuacao_pnl().trim())) {
 //            JOptionPane.showMessageDialog(null, "Preencha o Ramo de Atuação");
@@ -1271,18 +1334,18 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
     public boolean verificaPessoaFisica() {
-        if ("".equals(pFi.getTxt_cpf_pnl().trim()) || "   .   .   -  ".equals(pFi.getTxt_cpf_pnl().trim())) {
-            JOptionPane.showMessageDialog(null, "Preencha o CPF");
-            return false;
-        }
+//        if ("".equals(pFi.getTxt_cpf_pnl().trim()) || "   .   .   -  ".equals(pFi.getTxt_cpf_pnl().trim())) {
+//            JOptionPane.showMessageDialog(null, "Preencha o CPF");
+//            return false;
+//        }
         if ("".equals(pFi.getTxt_nome_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha o Nome");
             return false;
         }
-        if (pFi.getTxt_dataNasc_pnl() == null) {
-            JOptionPane.showMessageDialog(null, "Preencha a Data");
-            return false;
-        }
+//        if (pFi.getTxt_dataNasc_pnl() == null) {
+//            JOptionPane.showMessageDialog(null, "Preencha a Data");
+//            return false;
+//        }
 
         return true;
     }
@@ -1571,6 +1634,8 @@ public class TCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_dataInscricao;
     private javax.swing.JPanel pnl_baixo;
@@ -1587,6 +1652,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txt_cep;
     private javax.swing.JTextField txt_cidade;
     private javax.swing.JTextField txt_complemento;
+    private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_logradouro;
     private javax.swing.JTextField txt_numero;
     private javax.swing.JFormattedTextField txt_tel1;

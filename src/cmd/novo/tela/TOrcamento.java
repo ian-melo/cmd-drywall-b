@@ -642,7 +642,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             reg.add(it.getLargura());
             reg.add(it.getAreaPorta());
             reg.add(it.getAreaJanela());
-            reg.add(it.getPrecoTotal());
+            reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
@@ -800,7 +800,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     cel4 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 3).toString()));
                     cel5 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 4).toString()));
                     cel6 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 5).toString()));
-                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString()));
+                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString().replace(".", ",")));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
@@ -972,7 +972,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     cel4 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 3).toString()));
                     cel5 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 4).toString()));
                     cel6 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 5).toString()));
-                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString()));
+                    cel7 = new PdfPCell(new Paragraph(tb_itens.getValueAt(linha3[i], 6).toString().replace(".", ",")));
 
                     table.addCell(cel1);
                     table.addCell(cel2);
