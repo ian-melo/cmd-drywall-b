@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cmd.novo.painel;
 
 import cmd.Validacao.Validar;
@@ -21,35 +16,35 @@ public class PnlJuridica extends javax.swing.JPanel {
     public String getTxt_cnpj_pnl() {//Fornece acesso a outras classes
         return txt_cnpj_pnl.getText();
     }
-
     public String getTxt_razaoSocial_pnl() {//Fornece acesso a outras classes
         return txt_razaoSocial_pnl.getText();
     }
-
+    public String getTxt_nomeReferencia_pnl() {//Fornece acesso a outras classes
+        return txt_nomeReferencia_pnl.getText();
+    }
     public String getTxt_ramoAtuacao_pnl() {//Fornece acesso a outras classes
         return txt_ramoAtuacao_pnl.getText();
     }
-
     public Date getTxt_datafundacao_pnl() {//Fornece acesso a outras classes
         return txt_datafundacao_pnl.getDate();
     }
-
+    
     public void setTxt_cnpj_pnl(String cnpj) {//Fornece acesso a outras classes
         this.txt_cnpj_pnl.setText(cnpj);
     }
-
     public void setTxt_razaoSocial_pnl(String razao) {//Fornece acesso a outras classes
         this.txt_razaoSocial_pnl.setText(razao);
     }
-
+    public void setTxt_nomeReferencia_pnl(String nome) {//Fornece acesso a outras classes
+        this.txt_nomeReferencia_pnl.setText(nome);
+    }
     public void setTxt_ramoAtuacao_pnl(String ramo) {//Fornece acesso a outras classes
         this.txt_ramoAtuacao_pnl.setText(ramo);
     }
-
     public void setTxt_datafundacao_pnl(Date dat) {//Fornece acesso a outras classes
         this.txt_datafundacao_pnl.setDate(dat);
     }
-
+    
     public void setEnabled_cnpj_pnl(boolean val) {
         txt_cnpj_pnl.setEnabled(val);
     }
@@ -82,23 +77,13 @@ public class PnlJuridica extends javax.swing.JPanel {
         txt_cnpj_pnl = new javax.swing.JFormattedTextField();
         txt_datafundacao_pnl = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
-        txt_razaoSocial_pnl1 = new javax.swing.JTextField();
+        txt_nomeReferencia_pnl = new javax.swing.JTextField();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("CNPJ:");
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Razão social:*");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
 
         txt_razaoSocial_pnl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -125,13 +110,8 @@ public class PnlJuridica extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Nome p/ contato:*");
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
 
-        txt_razaoSocial_pnl1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nomeReferencia_pnl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnl_empresaLayout = new javax.swing.GroupLayout(pnl_empresa);
         pnl_empresa.setLayout(pnl_empresaLayout);
@@ -153,7 +133,7 @@ public class PnlJuridica extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnl_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_razaoSocial_pnl1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nomeReferencia_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         pnl_empresaLayout.setVerticalGroup(
@@ -170,7 +150,7 @@ public class PnlJuridica extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_razaoSocial_pnl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_nomeReferencia_pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -202,20 +182,7 @@ public class PnlJuridica extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Verificar o CNPJ");
         }
     }//GEN-LAST:event_txt_cnpj_pnlFocusLost
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        mouseClicado(evt);
-    }//GEN-LAST:event_jLabel8MouseClicked
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        mouseClicadoCNPJ(evt);
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -225,37 +192,10 @@ public class PnlJuridica extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_empresa;
     private javax.swing.JFormattedTextField txt_cnpj_pnl;
     private com.toedter.calendar.JDateChooser txt_datafundacao_pnl;
+    private javax.swing.JTextField txt_nomeReferencia_pnl;
     private javax.swing.JTextField txt_ramoAtuacao_pnl;
     private javax.swing.JTextField txt_razaoSocial_pnl;
-    private javax.swing.JTextField txt_razaoSocial_pnl1;
     // End of variables declaration//GEN-END:variables
-
-    private void mouseClicado(MouseEvent e) {
-        if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
-
-            txt_razaoSocial_pnl.setText("Razao");
-
-//        } else if (e.getModifiersEx() == InputEvent.SHIFT_DOWN_MASK) {
-//            System.out.println("O shift estava pressionado "
-//                    + "enquanto clicou com o mouse");
-//        } else if (e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
-//            System.out.println("O alt estava pressionado "
-//                    + "enquanto clicou com o mouse");
-        } else {
-            //System.out.println("Nenhum modificador...");
-        }
-
-    }
-
-    private void mouseClicadoCNPJ(MouseEvent e) {
-        if (e.getModifiersEx() == InputEvent.CTRL_DOWN_MASK) {
-            //31.061.861/0001-03
-            txt_cnpj_pnl.setText("31.061.861/0001-03");
-            txt_razaoSocial_pnl.setText("Razao");
-            txt_ramoAtuacao_pnl.setText("Ramo");
-
-        }
-
-    }
-
+    
+    //CNPJ válido: 31.061.861/0001-03
 }
