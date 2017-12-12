@@ -21,6 +21,7 @@ CREATE TABLE Cliente(
 	CodCliente INT(11) AUTO_INCREMENT,
 	DataInscricao DATE,
 	CodEndereco INT(11),
+        Email VARCHAR(50),
 	XDEAD BOOLEAN DEFAULT FALSE,
 /*FK*/
 	FOREIGN KEY(CodEndereco) REFERENCES Endereco(CodEndereco),
@@ -44,6 +45,7 @@ CREATE TABLE PessoaJuridica(
 	RazaoSocial VARCHAR(50),
 	RamoAtuacao VARCHAR(30),
 	DataFundacao DATE,
+        NomeReferencia VARCHAR(50),
 	XDEAD BOOLEAN DEFAULT FALSE,
 /*FK*/
 	FOREIGN KEY(CodCliente) REFERENCES Cliente(CodCliente),
@@ -218,15 +220,14 @@ INSERT INTO `Endereco` (`CodEndereco`, `Logradouro`, `Numero`, `Complemento`, `C
 (7, 'Rua Aurora - até 334 - lado par', '35', '', '01209-000', 'Santa Efigênia', 'São Paulo', 'SP', 0);
 
 
-
-INSERT INTO `Cliente` (`CodCliente`, `DataInscricao`, `CodEndereco`, `XDEAD`) VALUES
-(1, '2017-10-04', 1, 0),
-(2, '2017-10-25', 2, 0),
-(3, '2017-10-11', 3, 0),
-(4, '2017-10-12', 4, 0),
-(5, '2017-10-21', 5, 0),
-(6, '2017-10-28', 6, 0),
-(7, '2017-10-08', 7, 0);
+INSERT INTO `Cliente` (`CodCliente`, `DataInscricao`, `CodEndereco`, `Email`, `XDEAD`) VALUES
+(1, '2017-10-04', 1, 'joaojoao@yahoo.com', 0),
+(2, '2017-10-25', 2, 'valdir2017@hotmail.com', 0),
+(3, '2017-10-11', 3, 'mario_silveira@gmail.com', 0),
+(4, '2017-10-12', 4, 'joana.graciosa@gmail.com', 0),
+(5, '2017-10-21', 5, 'pedro_vieira91@outlook.com', 0),
+(6, '2017-10-28', 6, 'contato@novorumo.com', 0),
+(7, '2017-10-08', 7, 'planejamento@sortejoao.com', 0);
 
 INSERT INTO `Construcao` (`CodConstrucao`, `Descricao`, `Detalhes`, `Qualidade`, `XDEAD`) VALUES
 (1, 'PAREDE SIMPLES - 1 CHAPA EM CADA LADO', '73/48/600 - MONTANTE SIMPLES\r\nST12,5+ST12,5 ou RU 12,5 + RU 12,5', 1, 0),
@@ -969,9 +970,9 @@ INSERT INTO `PessoaFisica` (`CodCliente`, `Cpf`, `Nome`, `DataNascimento`, `XDEA
 (4, '123.141.131-11', 'Joana', '1980-04-18', 0),
 (5, '123.141.131-11', 'Pedro', '1975-11-20', 0);
 
-INSERT INTO `PessoaJuridica` (`CodCliente`, `Cnpj`, `RazaoSocial`, `RamoAtuacao`, `DataFundacao`, `XDEAD`) VALUES
-(6, '45.131.323/3333-22', 'Novo rumo', 'Transportes', '2010-10-11', 0),
-(7, '75.181.353/3344-24', 'Sorte João', 'Alimentos', '2010-10-11', 0);
+INSERT INTO `PessoaJuridica` (`CodCliente`, `Cnpj`, `RazaoSocial`, `RamoAtuacao`, `DataFundacao`, `NomeReferencia`, `XDEAD`) VALUES
+(6, '45.131.323/3333-22', 'Novo rumo', 'Transportes', '2010-10-11', 'Fernanda Alves', 0),
+(7, '75.181.353/3344-24', 'Sorte João', 'Seguros', '2010-10-11', 'João Augusto Vieira', 0);
 
 INSERT INTO `Telefone` (`CodCliente`, `Numero`, `XDEAD`) VALUES
 (1, '(12)1000-1000', 0),
