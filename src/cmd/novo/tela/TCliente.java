@@ -560,11 +560,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                 txt_emailFocusLost(evt);
             }
         });
-        txt_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_emailActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnl_emailLayout = new javax.swing.GroupLayout(pnl_email);
         pnl_email.setLayout(pnl_emailLayout);
@@ -675,9 +670,7 @@ public class TCliente extends javax.swing.JInternalFrame {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnl_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7))))
+                            .addComponent(pnl_metade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(pnl_botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -727,9 +720,11 @@ public class TCliente extends javax.swing.JInternalFrame {
             return;
         }
 
-        if(validaEmail() == false){
+        if(validaEmail(txt_email.getText()) == false){
+            JOptionPane.showMessageDialog(null, "Insira um e-mail valido, ex: e-mail@email.com");
             return;
         }
+   
 //----> A VERIFICAÇÃO ACIMA DEVE SER FEITO PARA AMBAS AS PESSOAS(CLIENTES)
 
 //==============================================================================
@@ -802,6 +797,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pJur.setCnpj(pJu.getTxt_cnpj_pnl());
         pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
         pJur.setRamoAtuacao(pJu.getTxt_ramoAtuacao_pnl());
+        pJur.setNomeReferencia(pJu.getTxt_nomeReferencia_pnl());
         pJur.setRazaoSocial(pJu.getTxt_razaoSocial_pnl());
         pJur.setXdead(false);
 
@@ -814,10 +810,11 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setDataInscricao(dataDate);
         cli.setEndereco(end);
         cli.setPessoaJuridica(pJur);
+        cli.setEmail(txt_email.getText());
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if (!cliC.validarCnpj(pJur)) {
+        if ((!cliC.validarCnpj(pJur)) || (!"  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl()))) {
             JOptionPane.showMessageDialog(null, "CNPJ, invalido");
             return false;
         }
@@ -877,10 +874,11 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setDataInscricao(dataDate);
         cli.setEndereco(end);
         cli.setPessoaFisica(pFis);
+        cli.setEmail(txt_email.getText());
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if (!cliC.validarCpf(pFis)) {
+        if ((!cliC.validarCpf(pFis)) || (!"   .   .   -  ".equals(pFi.getTxt_cpf_pnl()))) {
             JOptionPane.showMessageDialog(null, "CPF, invalido");
             return false;
         }
@@ -1015,12 +1013,10 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
     private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
-        validaEmail();
+        if(validaEmail(txt_email.getText()) == false){
+            JOptionPane.showMessageDialog(null, "Insira um e-mail valido, ex: e-mail@email.com");
+        }
     }//GEN-LAST:event_txt_emailFocusLost
-
-    private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_emailActionPerformed
 
     private void pequenoBug() {
         int x = this.getHeight();
@@ -1029,10 +1025,9 @@ public class TCliente extends javax.swing.JInternalFrame {
         this.setSize(y, x);
     }
 
-    private boolean validaEmail() {
+    private boolean validaEmail(String email) {
         Validar vali = new Validar();
-        if (vali.validarEmail(txt_email.getText()) == false) {
-            JOptionPane.showMessageDialog(null, "Insira um e-mail valido");
+        if (vali.validarEmail(email) == false) {
             return false;
         }
         return true;
@@ -1068,6 +1063,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pJur.setCnpj(pJu.getTxt_cnpj_pnl());
         pJur.setDataFundacao(pJu.getTxt_datafundacao_pnl());
         pJur.setRamoAtuacao(pJu.getTxt_ramoAtuacao_pnl());
+        pJur.setNomeReferencia(pJu.getTxt_nomeReferencia_pnl());
         pJur.setRazaoSocial(pJu.getTxt_razaoSocial_pnl());
         pJur.setXdead(false);
 
@@ -1080,6 +1076,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setDataInscricao(dataDate);
         cli.setEndereco(end);
         cli.setPessoaJuridica(pJur);
+        cli.setEmail(txt_email.getText());
         cli.setTelefones(tels);
         cli.setXdead(false);
         if (cliC.alterarPessoaJuridica(pJur) == false) {
@@ -1131,6 +1128,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setDataInscricao(dataDate);
         cli.setEndereco(end);
         cli.setPessoaFisica(pFis);
+        cli.setEmail(txt_email.getText());
         cli.setTelefones(tels);
         cli.setXdead(false);
 
@@ -1327,6 +1325,11 @@ public class TCliente extends javax.swing.JInternalFrame {
 //        }
         if ("".equals(pJu.getTxt_razaoSocial_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha a Razão Social");
+            return false;
+        }
+        
+               if ("".equals(pJu.getTxt_nomeReferencia_pnl().trim())) {
+            JOptionPane.showMessageDialog(null, "Preencha o nome para contato");
             return false;
         }
 //        if (pJu.getTxt_datafundacao_pnl() == null) {
@@ -1583,11 +1586,14 @@ public class TCliente extends javax.swing.JInternalFrame {
         pJu.setTxt_cnpj_pnl("");
         pJu.setTxt_datafundacao_pnl(null);
         pJu.setTxt_ramoAtuacao_pnl("");
+        pJu.setTxt_nomeReferencia_pnl("");
         pJu.setTxt_razaoSocial_pnl("");
 
         pFi.setTxt_cpf_pnl("");
         pFi.setTxt_dataNasc_pnl(null);
         pFi.setTxt_nome_pnl("");
+        
+        txt_email.setText("");
 
         habilitaCEP(true);
         habilitaBotoes(false);
