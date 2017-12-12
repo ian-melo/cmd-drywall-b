@@ -10,6 +10,8 @@ import cmd.entidade.Material;
 import cmd.entidade.Pedidos;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -741,6 +743,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
+        txt_max.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        txt_max.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_maxFocusLost(evt);
+            }
+        });
+
+        txt_min.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        txt_min.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_minFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_maxMinLayout = new javax.swing.GroupLayout(pnl_maxMin);
         pnl_maxMin.setLayout(pnl_maxMinLayout);
         pnl_maxMinLayout.setHorizontalGroup(
@@ -1040,6 +1056,26 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_sld_minStateChanged
 
+    private void txt_maxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maxFocusLost
+        try {
+            sld_max.setValue(Integer.parseInt(txt_max.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Houve um erro na conversão, digite um numero inteiro");
+            txt_max.setText("10000");
+            sld_max.setValue(10000);
+        }
+    }//GEN-LAST:event_txt_maxFocusLost
+
+    private void txt_minFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_minFocusLost
+        try {
+            sld_min.setValue(Integer.parseInt(txt_min.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Houve um erro na conversão, digite um numero inteiro");
+            txt_min.setText("0");
+            sld_min.setValue(0);
+        }
+    }//GEN-LAST:event_txt_minFocusLost
+
     private void fazerMultiplicacaoJanela() {
         if (txt_janelaVezes1.getText().isEmpty() || txt_janelaVezes2.getText().isEmpty()) {
             return;
@@ -1312,7 +1348,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         double maior = 0;
         boolean alterado = false;
         listaConstrucoesMaxOrd = new ArrayList<>();
-        
+
         for (int j = 0; j < guardaValor.size(); j++) {
 
             for (Double d : guardaValor) {
@@ -1539,6 +1575,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
             reg.add(it.getLargura());
             reg.add(it.getAreaPorta());
             reg.add(it.getAreaJanela());
+
+//            BigDecimal numero = new BigDecimal("10.00");
+//            DecimalFormat formato = new DecimalFormat("#.##");
+//            numero = BigDecimal.valueOf(formato.format(numero));
             reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
             tableData.add(reg);
         }
