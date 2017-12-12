@@ -168,8 +168,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
         sld_max = new javax.swing.JSlider();
         sld_min = new javax.swing.JSlider();
         chk_habilita = new javax.swing.JCheckBox();
-        lb_max = new javax.swing.JLabel();
-        lb_min = new javax.swing.JLabel();
+        txt_max = new javax.swing.JFormattedTextField();
+        txt_min = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -741,10 +741,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        lb_max.setText("10000");
-
-        lb_min.setText("0");
-
         javax.swing.GroupLayout pnl_maxMinLayout = new javax.swing.GroupLayout(pnl_maxMin);
         pnl_maxMin.setLayout(pnl_maxMinLayout);
         pnl_maxMinLayout.setHorizontalGroup(
@@ -753,19 +749,20 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_maxMinLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chk_habilita))
-                    .addGroup(pnl_maxMinLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lb_max))
-                    .addGroup(pnl_maxMinLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lb_min))
+                        .addComponent(txt_min, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(sld_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sld_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sld_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_maxMinLayout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txt_max))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_maxMinLayout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(chk_habilita))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         pnl_maxMinLayout.setVerticalGroup(
@@ -777,13 +774,13 @@ public class TCalculo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(lb_max))
-                .addGap(5, 5, 5)
+                    .addComponent(txt_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
                 .addComponent(sld_max, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_maxMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(lb_min))
+                    .addComponent(txt_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sld_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1028,7 +1025,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
 
     private void sld_maxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_maxStateChanged
-        lb_max.setText(String.valueOf(sld_max.getValue()));
+        txt_max.setText(String.valueOf(sld_max.getValue()));
 
         if (sld_min.getValue() > sld_max.getValue()) {
             sld_min.setValue(sld_max.getValue());
@@ -1036,7 +1033,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sld_maxStateChanged
 
     private void sld_minStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sld_minStateChanged
-        lb_min.setText(String.valueOf(sld_min.getValue()));
+        txt_min.setText(String.valueOf(sld_min.getValue()));
 
         if (sld_min.getValue() > sld_max.getValue()) {
             sld_max.setValue(sld_min.getValue());
@@ -1625,9 +1622,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }
 
     private void limparSld() {
-        lb_max.setText("10000");
+        txt_max.setText("10000");
         sld_max.setValue(10000);
-        lb_min.setText("0");
+        txt_min.setText("0");
         sld_min.setValue(0);
     }
 
@@ -1788,8 +1785,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane_pai;
-    private javax.swing.JLabel lb_max;
-    private javax.swing.JLabel lb_min;
     private javax.swing.JLabel lbl_valTotal;
     private javax.swing.JPanel pnl_alturaLargura;
     private javax.swing.JPanel pnl_ambiente;
@@ -1812,6 +1807,8 @@ public class TCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txt_janelaVezes1;
     private javax.swing.JFormattedTextField txt_janelaVezes2;
     private javax.swing.JFormattedTextField txt_largura;
+    private javax.swing.JFormattedTextField txt_max;
+    private javax.swing.JFormattedTextField txt_min;
     private javax.swing.JFormattedTextField txt_porta;
     private javax.swing.JFormattedTextField txt_portaVezes1;
     private javax.swing.JFormattedTextField txt_portaVezes2;
