@@ -23,6 +23,9 @@
         <property name="dataFundacao" type="date">
             <column name="DataFundacao" length="10" />
         </property>
+        <property name="nomeReferencia" type="string">
+            <column name="NomeReferencia" length="50" />
+        </property>
         <property name="xdead" type="java.lang.Boolean">
             <column name="XDEAD" />
         </property>

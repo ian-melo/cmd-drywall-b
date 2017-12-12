@@ -15,6 +15,7 @@ public class Cliente  implements java.io.Serializable {
      private Integer codCliente;
      private Endereco endereco;
      private Date dataInscricao;
+     private String email;
      private Boolean xdead;
      private PessoaFisica pessoaFisica;
      private Set telefones = new HashSet(0);
@@ -24,9 +25,10 @@ public class Cliente  implements java.io.Serializable {
     public Cliente() {
     }
 
-    public Cliente(Endereco endereco, Date dataInscricao, Boolean xdead, PessoaFisica pessoaFisica, Set telefones, PessoaJuridica pessoaJuridica, Set orcamentos) {
+    public Cliente(Endereco endereco, Date dataInscricao, String email, Boolean xdead, PessoaFisica pessoaFisica, Set telefones, PessoaJuridica pessoaJuridica, Set orcamentos) {
        this.endereco = endereco;
        this.dataInscricao = dataInscricao;
+       this.email = email;
        this.xdead = xdead;
        this.pessoaFisica = pessoaFisica;
        this.telefones = telefones;
@@ -54,6 +56,13 @@ public class Cliente  implements java.io.Serializable {
     
     public void setDataInscricao(Date dataInscricao) {
         this.dataInscricao = dataInscricao;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
     public Boolean getXdead() {
         return this.xdead;

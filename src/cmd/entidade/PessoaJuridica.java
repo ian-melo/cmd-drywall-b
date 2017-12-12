@@ -16,6 +16,7 @@ public class PessoaJuridica  implements java.io.Serializable {
      private String razaoSocial;
      private String ramoAtuacao;
      private Date dataFundacao;
+     private String nomeReferencia;
      private Boolean xdead;
 
     public PessoaJuridica() {
@@ -25,12 +26,13 @@ public class PessoaJuridica  implements java.io.Serializable {
     public PessoaJuridica(Cliente cliente) {
         this.cliente = cliente;
     }
-    public PessoaJuridica(Cliente cliente, String cnpj, String razaoSocial, String ramoAtuacao, Date dataFundacao, Boolean xdead) {
+    public PessoaJuridica(Cliente cliente, String cnpj, String razaoSocial, String ramoAtuacao, Date dataFundacao, String nomeReferencia, Boolean xdead) {
        this.cliente = cliente;
        this.cnpj = cnpj;
        this.razaoSocial = razaoSocial;
        this.ramoAtuacao = ramoAtuacao;
        this.dataFundacao = dataFundacao;
+       this.nomeReferencia = nomeReferencia;
        this.xdead = xdead;
     }
    
@@ -75,6 +77,13 @@ public class PessoaJuridica  implements java.io.Serializable {
     
     public void setDataFundacao(Date dataFundacao) {
         this.dataFundacao = dataFundacao;
+    }
+    public String getNomeReferencia() {
+        return this.nomeReferencia;
+    }
+    
+    public void setNomeReferencia(String nomeReferencia) {
+        this.nomeReferencia = nomeReferencia;
     }
     public Boolean getXdead() {
         return this.xdead;
