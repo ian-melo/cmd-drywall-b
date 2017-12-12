@@ -12,6 +12,7 @@ import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -1057,19 +1058,32 @@ public class TCalculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sld_minStateChanged
 
     private void txt_maxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_maxFocusLost
-        try {
-            sld_max.setValue(Integer.parseInt(txt_max.getText()));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Houve um erro na conversão, digite um numero inteiro");
-            txt_max.setText("10000");
-            sld_max.setValue(10000);
-        }
+       // try {
+
+        //NumberFormat nf = NumberFormat.getCurrencyInstance();
+        NumberFormat nf = NumberFormat.getIntegerInstance();
+
+        float num = Float.parseFloat(txt_max.getText());
+        //String s = nf.format(num);
+
+        
+        int val = (int) num;
+
+        sld_max.setValue(val);
+
+//        } catch (Exception e) {
+//            System.err.println(e);
+//            JOptionPane.showMessageDialog(null, "Houve um erro na conversão, digite um numero inteiro");
+//            txt_max.setText("10.000");
+//            sld_max.setValue(10000);
+//        }
     }//GEN-LAST:event_txt_maxFocusLost
 
     private void txt_minFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_minFocusLost
         try {
             sld_min.setValue(Integer.parseInt(txt_min.getText()));
         } catch (Exception e) {
+            System.out.println(e);
             JOptionPane.showMessageDialog(null, "Houve um erro na conversão, digite um numero inteiro");
             txt_min.setText("0");
             sld_min.setValue(0);
@@ -1232,7 +1246,11 @@ public class TCalculo extends javax.swing.JInternalFrame {
         totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
         //it.setPrecoTotal(new BigDecimal("0"));
 
-        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        String s = nf.format(totalParcial);
+
+        //lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
+        lbl_valTotal.setText(s);//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1274,7 +1292,10 @@ public class TCalculo extends javax.swing.JInternalFrame {
 
         totalParcial += it.getPrecoTotal().doubleValue();//Mostra na Label
 
-        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        String s = nf.format(totalParcial);
+
+        lbl_valTotal.setText(s);//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1576,10 +1597,12 @@ public class TCalculo extends javax.swing.JInternalFrame {
             reg.add(it.getAreaPorta());
             reg.add(it.getAreaJanela());
 
-//            BigDecimal numero = new BigDecimal("10.00");
-//            DecimalFormat formato = new DecimalFormat("#.##");
-//            numero = BigDecimal.valueOf(formato.format(numero));
-            reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
+            BigDecimal bd = new BigDecimal(it.getPrecoTotal().toString());
+            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            String s = nf.format(bd);
+
+            //reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
+            reg.add("R$ " + s);
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
