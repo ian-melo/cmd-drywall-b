@@ -1066,7 +1066,6 @@ public class TCalculo extends javax.swing.JInternalFrame {
         float num = Float.parseFloat(txt_max.getText());
         //String s = nf.format(num);
 
-        
         int val = (int) num;
 
         sld_max.setValue(val);
@@ -1400,8 +1399,16 @@ public class TCalculo extends javax.swing.JInternalFrame {
         }
         listaConstrucoesMax = new ArrayList<>();
         //listaConstrucoesMax.clear();
-        listaConstrucoesMax = listaConstrucoesMaxOrd;
+        try {
+            for (int k = listaConstrucoesMaxOrd.size(); k > 0; k--) {
+                listaConstrucoesMax.add(listaConstrucoesMaxOrd.get(k - 1));//inverte
 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + e);
+        }
+
+        //listaConstrucoesMax = listaConstrucoesMaxOrd;
     }
 
     private void remover() {
