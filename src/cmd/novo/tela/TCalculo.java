@@ -1414,13 +1414,23 @@ public class TCalculo extends javax.swing.JInternalFrame {
         if (linItem < 0) {
             return;
         }
+        try {
+            Double val0 = listaItens.get(linItem).getPrecoTotal().doubleValue();
+            //Double val = Double.valueOf(tb_itens.getModel().getValueAt(linItem, 6).toString().replace("R$ ", "").replace(".", ","));
+            totalParcial -= val0;
 
-        Double val = Double.valueOf(tb_itens.getModel().getValueAt(linItem, 6).toString());
-        totalParcial -= val;
-        lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
+            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            String s = nf.format(totalParcial);
 
-        listaItens.remove(linItem);
-        listarItens();
+            //lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
+            lbl_valTotal.setText(s.replace("R$ ", ""));//Mostra
+
+            listaItens.remove(linItem);
+            listarItens();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + e);
+        }
+
     }
 
     private void limpar() {

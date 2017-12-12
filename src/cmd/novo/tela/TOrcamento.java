@@ -71,9 +71,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         tCalculoOrcamento.exibirDataAtual();
         return tCalculoOrcamento;
     }
-    
-    
-
 
     public static TOrcamento getInstancia() {
         if (tCalculoOrcamento == null) {
@@ -81,8 +78,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         }
         return tCalculoOrcamento;
     }
-    
-    
 
     /**
      * Creates new form TCalculoOrcamento
@@ -642,7 +637,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             reg.add(it.getLargura());
             reg.add(it.getAreaPorta());
             reg.add(it.getAreaJanela());
-            reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
+
+            float num = it.getPrecoTotal().floatValue();
+            NumberFormat nf = NumberFormat.getCurrencyInstance();
+            String s = nf.format(num);
+
+            //reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
+            reg.add(s);
+
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
@@ -825,7 +827,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(paragrafo);
 
                 ConstrucaoController cCont = new ConstrucaoController();
-                
 
                 PdfPTable tableConstrucao = new PdfPTable(3);
                 PdfPCell cel1Cons = new PdfPCell(new Paragraph("Cod. Construção"));
@@ -837,7 +838,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 tableConstrucao.addCell(cel3Cons);
                 for (int i = 0; i < linha3.length; i++) {
                     Construcao c = cCont.buscarConstrucao(tb_itens.getValueAt(linha3[i], 0).toString());
-                    
+
                     cel1 = new PdfPCell(new Paragraph(c.getCodConstrucao().toString()));
                     cel2 = new PdfPCell(new Paragraph(c.getDescricao()));
                     cel3 = new PdfPCell(new Paragraph(c.getDetalhes()));
@@ -984,7 +985,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 }
                 doc.add(table);
                 doc.add(Uf);
-                
+
                 paragrafo = new Paragraph(" ");
                 doc.add(paragrafo);
 
@@ -1006,7 +1007,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 tableConstrucao.addCell(cel1Cons);
                 tableConstrucao.addCell(cel2Cons);
                 tableConstrucao.addCell(cel3Cons);
-                
+
                 for (int i = 0; i < linha3.length; i++) {
                     cel1 = new PdfPCell(new Paragraph(c.getCodConstrucao().toString()));
                     cel2 = new PdfPCell(new Paragraph(c.getDescricao()));
@@ -1019,7 +1020,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 }
                 doc.add(tableConstrucao);
                 doc.add(Uf);
-                
+
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
                 underline.setUnderline(0.1f, -2f);
