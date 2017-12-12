@@ -11,7 +11,6 @@ import cmd.entidade.Pedidos;
 import cmd.novo.GerenteDeJanelas;
 import java.awt.Color;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -1249,7 +1248,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         String s = nf.format(totalParcial);
 
         //lbl_valTotal.setText(String.valueOf(totalParcial).replace(".", ","));//Mostra
-        lbl_valTotal.setText(s);//Mostra
+        lbl_valTotal.setText(s.replace("R$ ", ""));//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1294,7 +1293,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         String s = nf.format(totalParcial);
 
-        lbl_valTotal.setText(s);//Mostra
+        lbl_valTotal.setText(s.replace("R$ ", ""));//Mostra
 
         //Continuar
         listaItens.add(it);
@@ -1609,7 +1608,7 @@ public class TCalculo extends javax.swing.JInternalFrame {
             String s = nf.format(bd);
 
             //reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
-            reg.add("R$ " + s);
+            reg.add(s);
             tableData.add(reg);
         }
         tb_itens.setModel(new DefaultTableModel(tableData, tableHeaders));
