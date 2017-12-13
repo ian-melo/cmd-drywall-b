@@ -818,13 +818,12 @@ public class TCliente extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "CNPJ, invalido");
                 return false;
             }
-        }
 
-        if (!cliC.verificarCnpj(pJur)) {
-            JOptionPane.showMessageDialog(null, "CNPJ, já existe");
-            return false;
+            if (!cliC.verificarCnpj(pJur)) {
+                JOptionPane.showMessageDialog(null, "CNPJ, já existe");
+                return false;
+            }
         }
-
         if (cliC.inserirPessoaJuridica(pJur) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado");
 
@@ -879,18 +878,17 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if (!"   .   .   -  ".equals(pFi.getTxt_cpf_pnl())) {
+        if (!"   .   .   -  ".equals(pFi.getTxt_cpf_pnl()) || !"   .   .   -  ".trim().equals(pFi.getTxt_cpf_pnl())) {
             if (!cliC.validarCpf(pFis)) {
                 JOptionPane.showMessageDialog(null, "CPF, invalido");
                 return false;
             }
-        }
 
-        if (!cliC.verificarCpf(pFis)) {
-            JOptionPane.showMessageDialog(null, "CPF, já existe");
-            return false;
+            if (!cliC.verificarCpf(pFis)) {
+                JOptionPane.showMessageDialog(null, "CPF, já existe");
+                return false;
+            }
         }
-
         if (cliC.inserirPessoaFisica(pFis) == true) {
             JOptionPane.showMessageDialog(null, "Cadastrado");
 

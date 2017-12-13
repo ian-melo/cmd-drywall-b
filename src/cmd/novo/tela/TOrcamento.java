@@ -526,14 +526,25 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         Vector tableData = new Vector();
         Vector reg;
+
         for (PessoaFisica pf : lisPf) {
             listaClientes.add(pf.getCliente());
             reg = new Vector();
-            reg.add(pf.getCodCliente());
-            reg.add(pf.getCpf());
-            reg.add(pf.getNome());
-            reg.add(pf.getDataNascimento().toString());
-            reg.add(pf.getCliente().getDataInscricao().toString());
+            try {
+                reg.add(pf.getCodCliente());
+                reg.add(pf.getCpf());
+                reg.add(pf.getNome());
+                if (pf.getDataNascimento() != null) {
+                    reg.add(pf.getDataNascimento().toString());
+                } else {
+                    reg.add("    -  -");
+                }
+                reg.add(pf.getCliente().getDataInscricao().toString());
+
+            } catch (Exception e) {
+                Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "ERRO: " + e);
+            }
             tableData.add(reg);
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
@@ -561,12 +572,23 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         for (PessoaJuridica pj : cli) {
             listaClientes.add(pj.getCliente());
             reg = new Vector();
-            reg.add(pj.getCodCliente());
-            reg.add(pj.getCnpj());
-            reg.add(pj.getRazaoSocial());
-            reg.add(pj.getDataFundacao().toString());
-            reg.add(pj.getCliente().getDataInscricao().toString());
-            tableData.add(reg);
+            try {
+                reg.add(pj.getCodCliente());
+                reg.add(pj.getCnpj());
+                reg.add(pj.getRazaoSocial());
+                if (pj.getDataFundacao() == null) {
+                    reg.add("    -  -");
+                } else {
+                    reg.add(pj.getDataFundacao().toString());
+                }
+
+                reg.add(pj.getCliente().getDataInscricao().toString());
+                tableData.add(reg);
+
+            } catch (Exception e) {
+                Logger.getLogger(TOrcamento.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(null, "ERRO: " + e);
+            }
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
         linCliente = -1;
@@ -715,20 +737,31 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
 
+        String cep = null;
+        String logradouro = null;
+        String numero = null;
+        String complemento = null;
+        String bairro = null;
+        String uf = null;
+
         //PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         //int cod = pFiDAO.buscarCPF(tb_clientes.getValueAt(linha, 1).toString()).getCodCliente();
         //listaItens = dao.listarFisica(String.valueOf(cod));
         // JOptionPane.showMessageDialog(rootPane, listaItens.size());
-        if (linha != -1 && linha2 != -1 && linha3.length != -1) {
+        if (linha != -1 && linha3.length != -1) {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
             String nome = tb_clientes.getValueAt(linha, 2).toString();
-            String cep = tb_enderecos.getValueAt(linha2, 0).toString();
-            String logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
-            String numero = tb_enderecos.getValueAt(linha2, 2).toString();
-            String complemento = tb_enderecos.getValueAt(linha2, 3).toString();
-            String bairro = tb_enderecos.getValueAt(linha2, 4).toString();
-            String uf = tb_enderecos.getValueAt(linha2, 5).toString();
+
+            if (linha2 != -1) {
+                cep = tb_enderecos.getValueAt(linha2, 0).toString();
+                logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
+                numero = tb_enderecos.getValueAt(linha2, 2).toString();
+                complemento = tb_enderecos.getValueAt(linha2, 3).toString();
+                bairro = tb_enderecos.getValueAt(linha2, 4).toString();
+                uf = tb_enderecos.getValueAt(linha2, 5).toString();
+            }
+
             String valor_final = lb_valorFinal.getText();
             Document doc = new Document();
             String arquivoPdf = "Folhapessoafisica.pdf";
@@ -753,23 +786,27 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 Paragraph CPF = new Paragraph("CPF: \t" + cpf);
                 Paragraph Nome = new Paragraph("Nome: \t" + nome);
-                Paragraph Cep = new Paragraph("CEP: \t" + cep);
-                Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
-                Paragraph Numero = new Paragraph("Numero: \t" + numero);
-                Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
-                Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
-                Paragraph Uf = new Paragraph("Uf: \t" + uf);
+
                 doc.add(CPF);
                 doc.add(Nome);
-                doc.add(Cep);
-                doc.add(Logradouro);
-                doc.add(Numero);
-                doc.add(Complemento);
-                doc.add(Bairro);
-                doc.add(Uf);
+                if (linha2 != -1) {
+                    Paragraph Cep = new Paragraph("CEP: \t" + cep);
+                    Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
+                    Paragraph Numero = new Paragraph("Numero: \t" + numero);
+                    Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
+                    Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
+                    Paragraph Uf = new Paragraph("Uf: \t" + uf);
 
-                Uf = new Paragraph(" ");
-                doc.add(Uf);
+                    doc.add(Cep);
+                    doc.add(Logradouro);
+                    doc.add(Numero);
+                    doc.add(Complemento);
+                    doc.add(Bairro);
+                    doc.add(Uf);
+                }
+
+                Nome = new Paragraph(" ");
+                doc.add(Nome);
 
                 Paragraph infor = new Paragraph("Lista de Itens do orçamento");
                 infor.setAlignment(Element.ALIGN_CENTER);
@@ -814,7 +851,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 }
                 doc.add(table);
-                doc.add(Uf);
+                doc.add(Nome);
 
                 paragrafo = new Paragraph(" ");
                 doc.add(paragrafo);
@@ -849,7 +886,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 }
                 doc.add(tableConstrucao);
-                doc.add(Uf);
+                doc.add(Nome);
 
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
@@ -858,17 +895,17 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo);
                 Paragraph corpo2 = new Paragraph("declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
                         + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
-                doc.add(Uf);
+                doc.add(Nome);
                 doc.add(corpo2);
-                doc.add(Uf);
+                doc.add(Nome);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
-                doc.add(Uf);
+                doc.add(Nome);
                 Chunk vazio = new Chunk("                  " + "                  ");
-                doc.add(Uf);
+                doc.add(Nome);
                 vazio.setUnderline(0.1f, -2f);
                 Assinatura.add(vazio);
                 doc.add(Assinatura);
-                doc.add(Uf);
+                doc.add(Nome);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
@@ -889,6 +926,13 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         int[] linha3 = tb_itens.getSelectedRows();
         List<Item> listaItens = null;
 
+        String cep = null;
+        String logradouro = null;
+        String numero = null;
+        String complemento = null;
+        String bairro = null;
+        String uf = null;
+
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
 
@@ -896,12 +940,15 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
             String cpf = tb_clientes.getValueAt(linha, 1).toString();
             String nome = tb_clientes.getValueAt(linha, 2).toString();
-            String cep = tb_enderecos.getValueAt(linha2, 0).toString();
-            String logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
-            String numero = tb_enderecos.getValueAt(linha2, 2).toString();
-            String complemento = tb_enderecos.getValueAt(linha2, 3).toString();
-            String bairro = tb_enderecos.getValueAt(linha2, 4).toString();
-            String uf = tb_enderecos.getValueAt(linha2, 5).toString();
+
+            if (linha2 != -1) {
+                cep = tb_enderecos.getValueAt(linha2, 0).toString();
+                logradouro = tb_enderecos.getValueAt(linha2, 1).toString();
+                numero = tb_enderecos.getValueAt(linha2, 2).toString();
+                complemento = tb_enderecos.getValueAt(linha2, 3).toString();
+                bairro = tb_enderecos.getValueAt(linha2, 4).toString();
+                uf = tb_enderecos.getValueAt(linha2, 5).toString();
+            }
             String valor_final = lb_valorFinal.getText();
             Document doc = new Document();
             String arquivoPdf = "Folhapessoajuridica.pdf";
@@ -923,24 +970,27 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(mensagem);
                 mensagem = new Paragraph(" ");
                 doc.add(mensagem);
+
                 Paragraph CPF = new Paragraph("CNPJ: \t" + cpf);
-                doc.add(CPF);
                 Paragraph Nome = new Paragraph("Razão Social: \t" + nome);
+                doc.add(CPF);
                 doc.add(Nome);
-                Paragraph Cep = new Paragraph("CEP: \t" + cep);
-                doc.add(Cep);
-                Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
-                doc.add(Logradouro);
-                Paragraph Numero = new Paragraph("Numero: \t" + numero);
-                doc.add(Numero);
-                Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
-                doc.add(Complemento);
-                Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
-                doc.add(Bairro);
-                Paragraph Uf = new Paragraph("Uf: \t" + uf);
-                doc.add(Uf);
-                Uf = new Paragraph(" ");
-                doc.add(Uf);
+                if (linha2 != -1) {
+                    Paragraph Cep = new Paragraph("CEP: \t" + cep);
+                    doc.add(Cep);
+                    Paragraph Logradouro = new Paragraph("Logradouro: \t" + logradouro);
+                    doc.add(Logradouro);
+                    Paragraph Numero = new Paragraph("Numero: \t" + numero);
+                    doc.add(Numero);
+                    Paragraph Complemento = new Paragraph("Complemento: \t" + complemento);
+                    doc.add(Complemento);
+                    Paragraph Bairro = new Paragraph("Bairro: \t" + bairro);
+                    doc.add(Bairro);
+                    Paragraph Uf = new Paragraph("Uf: \t" + uf);
+                    doc.add(Uf);
+                }
+                mensagem = new Paragraph(" ");
+                doc.add(mensagem);
 
                 Paragraph infor = new Paragraph("Lista de Itens de orçamento");
                 infor.setAlignment(Element.ALIGN_CENTER);
@@ -984,7 +1034,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     table.addCell(cel7);
                 }
                 doc.add(table);
-                doc.add(Uf);
+                doc.add(mensagem);
 
                 paragrafo = new Paragraph(" ");
                 doc.add(paragrafo);
@@ -1019,7 +1069,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
                 }
                 doc.add(tableConstrucao);
-                doc.add(Uf);
+                doc.add(mensagem);
 
                 Paragraph corpo = new Paragraph("Eu: ");
                 Chunk underline = new Chunk(nome + ",");
@@ -1028,17 +1078,17 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(corpo);
                 Paragraph corpo2 = new Paragraph("Declaro estar ciente de todos os dados apresentados nesta folha de orçamento e concordo com o valor de "
                         + valor_final + " a ser cobrado de acordo com os termos de serviço escolhidos em comum acordo com a empresa. \n");
-                doc.add(Uf);
+                doc.add(paragrafo);
                 doc.add(corpo2);
-                doc.add(Uf);
+                doc.add(paragrafo);
                 Paragraph Assinatura = new Paragraph("Assinatura: \n");
-                doc.add(Uf);
+                doc.add(paragrafo);
                 Chunk vazio = new Chunk("                " + "                 ");
-                doc.add(Uf);
+                doc.add(paragrafo);
                 vazio.setUnderline(0.1f, -2f);
                 Assinatura.add(vazio);
                 doc.add(Assinatura);
-                doc.add(Uf);
+                doc.add(paragrafo);
                 Date data = new Date();
                 Paragraph datas = new Paragraph("São Caetano do Sul: \t" + data);
                 doc.add(datas);
