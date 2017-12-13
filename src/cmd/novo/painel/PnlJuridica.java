@@ -112,6 +112,11 @@ public class PnlJuridica extends javax.swing.JPanel {
         jLabel11.setText("Nome p/ contato:*");
 
         txt_nomeReferencia_pnl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nomeReferencia_pnl.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_nomeReferencia_pnlFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_empresaLayout = new javax.swing.GroupLayout(pnl_empresa);
         pnl_empresa.setLayout(pnl_empresaLayout);
@@ -177,11 +182,18 @@ public class PnlJuridica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cnpj_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cnpj_pnlFocusLost
-        Validar vali = new Validar();
-        if (vali.validarCnpj(txt_cnpj_pnl.getText()) == false) {
-            JOptionPane.showMessageDialog(null, "Verificar o CNPJ");
-        }
+//        Validar vali = new Validar();
+//        if (vali.validarCnpj(txt_cnpj_pnl.getText()) == false) {
+//            JOptionPane.showMessageDialog(null, "Verificar o CNPJ");
+//        }
     }//GEN-LAST:event_txt_cnpj_pnlFocusLost
+
+    private void txt_nomeReferencia_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nomeReferencia_pnlFocusLost
+              Validar vali = new Validar();
+        if (vali.validarVazio(txt_nomeReferencia_pnl.getText()) == true) {
+            JOptionPane.showMessageDialog(null, "Verificar o nome para contato");
+        }
+    }//GEN-LAST:event_txt_nomeReferencia_pnlFocusLost
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;

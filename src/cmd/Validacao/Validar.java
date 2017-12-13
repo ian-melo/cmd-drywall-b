@@ -67,6 +67,10 @@ public class Validar {
         }
         return Pattern.matches("^[0-9]*\\d+[0-9]*$", numero);
     }
+    
+    public boolean validarNumeroSendoVazio(String numero) {
+        return Pattern.matches("^[0-9]*\\d+[0-9]*$", numero);
+    }
 
     public boolean validarEmail(String email) {
         if (email == null) {
