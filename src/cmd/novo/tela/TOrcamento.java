@@ -445,8 +445,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_folhafisicaActionPerformed
 
     private boolean verificaJuridica() {
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 && tb_itens.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
+        if (tb_clientes.getSelectedRow() == -1 || tb_itens.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente e os itens de orçamento");
             return false;
         }
         return true;
@@ -454,8 +454,8 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }
 
     private boolean verificaFisica() {
-        if (tb_clientes.getSelectedRow() == -1 || tb_enderecos.getSelectedRow() == -1 || tb_itens.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Escolha um Cliente, um Endereço e os itens de orçamento");
+        if (tb_clientes.getSelectedRow() == -1 || tb_itens.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Escolha um Cliente e os itens de orçamento");
             return false;
         }
         return true;
