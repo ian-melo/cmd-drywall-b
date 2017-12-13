@@ -878,7 +878,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if ((!cliC.validarCpf(pFis)) || (!"   .   .   -  ".equals(pFi.getTxt_cpf_pnl()))) {
+        if (!cliC.validarCpf(pFis)) {
             JOptionPane.showMessageDialog(null, "CPF, invalido");
             return false;
         }
