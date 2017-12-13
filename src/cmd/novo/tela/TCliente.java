@@ -710,7 +710,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 //        if (verificaCamposEndereco() == false) {
 //            JOptionPane.showMessageDialog(null, "Preencha todos os canpos referentes ao Endereço");
 //        }
-        if ("".equals(txt_tel1.getText().trim()) || "(  )     -    ".equals(txt_tel1.getText().trim())) {
+        if ("".equals(txt_tel1.getText().trim()) || "(  )    -    ".equals(txt_tel1.getText())) {
             JOptionPane.showMessageDialog(null, "Preencha o Telefone");
             return;
         }
