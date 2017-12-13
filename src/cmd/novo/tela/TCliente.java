@@ -197,20 +197,20 @@ public class TCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Cadastro de Clientes");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -243,9 +243,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                     .addGroup(pnl_escolhaLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel1))
-                    .addGroup(pnl_escolhaLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(cmb_pessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_escolhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(pnl_escolhaLayout.createSequentialGroup()
                             .addGap(33, 33, 33)
@@ -254,7 +251,10 @@ public class TCliente extends javax.swing.JInternalFrame {
                             .addComponent(lb_dataInscricao, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_escolhaLayout.createSequentialGroup()
                             .addGap(45, 45, 45)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)))
+                    .addGroup(pnl_escolhaLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(cmb_pessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_escolhaLayout.setVerticalGroup(
@@ -590,14 +590,14 @@ public class TCliente extends javax.swing.JInternalFrame {
                         .addGroup(pnl_telefoneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(txt_tel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txt_cel1)
                     .addComponent(txt_cel2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_telefoneLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pnl_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnl_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_tel1))
                 .addContainerGap())
         );
         pnl_telefoneLayout.setVerticalGroup(
@@ -1150,6 +1150,9 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void reformataCamposTelefone() {//Corrige erro - parcialmente
         try {
+            txt_tel1.setValue("");
+            txt_cel1.setValue("");
+            txt_cel2.setValue("");
             txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
             txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)#####-####")));
             txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)#####-####")));

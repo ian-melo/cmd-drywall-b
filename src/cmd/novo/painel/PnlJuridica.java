@@ -56,6 +56,8 @@ public class PnlJuridica extends javax.swing.JPanel {
         initComponents();
         pnl_empresa.setBackground(Color.WHITE);
         txt_datafundacao_pnl.setBackground(Color.WHITE);
+        jLabel10.setVisible(false);//Data de fundação
+        txt_datafundacao_pnl.setVisible(false);
     }
 
     /**
