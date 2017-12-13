@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-11-28T11:31:18 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pessoa_fisica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="cGVzc29hZmlzaWNhICwxNSwxNSw4ZWJiMDc5ZC0yY2YzLTQ2M2EtYTI3OC04YTdlNDI3YmFiZDY7"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\DataAdapter.xml"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="26" isBold="false"/>
+<!-- 2017-12-12T21:47:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PessoasJuridicas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\Adaptador_rel.xml"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
 	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
@@ -15,45 +15,16 @@
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[SELECT *
-FROM pessoafisica]]>
+		<![CDATA[SELECT c.CodCliente, pj.NomeReferencia, t.Numero, c.Email
+FROM Cliente AS c
+INNER JOIN PessoaJuridica AS pj ON pj.CodCliente = c.CodCliente
+INNER JOIN Telefone AS t ON t.CodCliente = c.CodCliente
+ORDER BY pj.NomeReferencia]]>
 	</queryString>
-	<field name="Cpf" class="java.lang.String"/>
-	<field name="Nome" class="java.lang.String"/>
-	<field name="DataNascimento" class="java.sql.Date"/>
-	<group name="Group1">
-		<groupExpression><![CDATA[$F{Cpf}]]></groupExpression>
-		<groupHeader>
-			<band height="27">
-				<frame>
-					<reportElement mode="Opaque" x="0" y="3" width="721" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement style="SubTitle" x="101" y="-2" width="620" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
-						<textElement>
-							<font isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{Cpf}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="2" y="0" width="88" height="22" forecolor="#3C2DC4" uuid="76919f48-8d86-4f45-a5f5-d290cf2814a2"/>
-						<textElement>
-							<font size="14"/>
-						</textElement>
-						<text><![CDATA[CPF]]></text>
-					</staticText>
-				</frame>
-				<rectangle>
-					<reportElement x="725" y="3" width="77" height="24" backcolor="#666666" uuid="70e1e931-2edd-4f3d-b09b-b9da04709f25"/>
-					<graphicElement>
-						<pen lineWidth="0.0"/>
-					</graphicElement>
-				</rectangle>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
-	</group>
+	<field name="CodCliente" class="java.lang.Integer"/>
+	<field name="NomeReferencia" class="java.lang.String"/>
+	<field name="Numero" class="java.lang.String"/>
+	<field name="Email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -69,9 +40,9 @@ FROM pessoafisica]]>
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
 					<textElement verticalAlignment="Bottom">
-						<font isBold="false"/>
+						<font size="27" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Jessoa Física]]></text>
+					<text><![CDATA[Relatório de Pessoa Jurídica]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
@@ -99,18 +70,32 @@ FROM pessoafisica]]>
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="398" height="18" forecolor="#000000" uuid="a9ff74d2-c2d3-4bfc-adba-4a976e04da92"/>
+				<reportElement style="Column header" x="0" y="0" width="199" height="18" forecolor="#000000" uuid="f8e1fefa-675b-4b96-8876-b8e52772eede"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[CodCliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="398" y="0" width="398" height="18" forecolor="#000000" uuid="53b824b4-71e8-4003-ab44-48f3b8646c5f"/>
+				<reportElement style="Column header" x="199" y="0" width="199" height="18" forecolor="#000000" uuid="6da12933-8f96-45d7-8781-c44ad2e7573b"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[DataNascimento]]></text>
+				<text><![CDATA[NomeReferencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="398" y="0" width="199" height="18" forecolor="#000000" uuid="27b3b5a9-27d9-4087-925c-3caded6ea046"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="597" y="0" width="124" height="18" forecolor="#000000" uuid="64fd9bed-e00b-4d01-922a-83839b38b377"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -119,18 +104,32 @@ FROM pessoafisica]]>
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="398" height="18" uuid="db9bc78a-9d0d-42ff-abdc-bd5c90c30e42"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="199" height="18" uuid="f5a2ee19-c22b-4e6b-ba5c-d53e3ac2cc6c"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{CodCliente}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="398" y="0" width="398" height="18" uuid="9682d2d0-02bf-4334-a3e9-88007c970cec"/>
+					<reportElement style="Detail" positionType="Float" x="199" y="0" width="199" height="18" uuid="5bf164e8-54b6-4d14-be5a-b4210508bc22"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DataNascimento}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{NomeReferencia}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="398" y="0" width="199" height="18" uuid="4d18bd1b-f4dd-41ec-98a0-a694eb980e81"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Numero}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="597" y="0" width="128" height="18" uuid="fac1da73-3377-4609-aa40-be9156a56789"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

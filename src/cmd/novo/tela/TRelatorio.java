@@ -58,8 +58,8 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         bt_rel1 = new javax.swing.JButton();
-        bt_rel2 = new javax.swing.JButton();
-        bt_rel3 = new javax.swing.JButton();
+        bt_pessoafisica = new javax.swing.JButton();
+        bt_pessoajuridica = new javax.swing.JButton();
         bt_rel4 = new javax.swing.JButton();
         bt_rel5 = new javax.swing.JButton();
         btn_sair = new javax.swing.JButton();
@@ -71,28 +71,28 @@ public class TRelatorio extends javax.swing.JInternalFrame {
 
         bt_rel1.setBackground(new java.awt.Color(153, 153, 255));
         bt_rel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel1.setText("Relatorio de Materiais");
+        bt_rel1.setText("Relatório de Materiais");
         bt_rel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_rel1ActionPerformed(evt);
             }
         });
 
-        bt_rel2.setBackground(new java.awt.Color(153, 153, 255));
-        bt_rel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel2.setText("Relatório de Pessoa Física");
-        bt_rel2.addActionListener(new java.awt.event.ActionListener() {
+        bt_pessoafisica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_pessoafisica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_pessoafisica.setText("Relatório de Pessoa Física");
+        bt_pessoafisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_rel2ActionPerformed(evt);
+                bt_pessoafisicaActionPerformed(evt);
             }
         });
 
-        bt_rel3.setBackground(new java.awt.Color(153, 153, 255));
-        bt_rel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bt_rel3.setText("Relatório de Pessoa Jurídica");
-        bt_rel3.addActionListener(new java.awt.event.ActionListener() {
+        bt_pessoajuridica.setBackground(new java.awt.Color(153, 153, 255));
+        bt_pessoajuridica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bt_pessoajuridica.setText("Relatório de Pessoa Jurídica");
+        bt_pessoajuridica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_rel3ActionPerformed(evt);
+                bt_pessoajuridicaActionPerformed(evt);
             }
         });
 
@@ -124,7 +124,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Bem-Vindo a Área de Relaórios");
+        jLabel1.setText("Bem-Vindo a Área de Relatórios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +132,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_rel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_pessoafisica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -144,7 +144,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel1)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(bt_rel3))
+                                .addComponent(bt_pessoajuridica))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(bt_rel4))
@@ -166,9 +166,9 @@ public class TRelatorio extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_rel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_rel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bt_pessoafisica, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_rel3)
+                .addComponent(bt_pessoajuridica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_rel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -190,7 +190,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             stat = con.prepareStatement("SELECT * from material");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Material_cherry.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Materiais.jasper", new HashMap(), relatresult);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
@@ -203,7 +203,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bt_rel1ActionPerformed
 
-    private void bt_rel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel2ActionPerformed
+    private void bt_pessoafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pessoafisicaActionPerformed
         
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
@@ -211,7 +211,11 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         
         try {
             
-            stat = con.prepareStatement("SELECT * from pessoafisica");
+            stat = con.prepareStatement("SELECT c.CodCliente, pf.Nome, t.Numero, c.Email \n" +
+            "FROM Cliente AS c\n" +
+            "INNER JOIN PessoaFisica AS pf on pf.CodCliente = c.CodCliente\n" +
+            "INNER JOIN Telefone AS t on t.CodCliente = c.CodCliente\n" +
+            "ORDER BY pf.Nome");
             rs = stat.executeQuery();
             
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
@@ -219,7 +223,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             //Funciona executa assim
             //Fico bom
             //JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\PessoasFisicas.jasper", new HashMap(), relatresult);
             
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
@@ -234,18 +238,22 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         } finally {
             ConnectionFactory.fechaConexão(con, stat);
         }
-    }//GEN-LAST:event_bt_rel2ActionPerformed
+    }//GEN-LAST:event_bt_pessoafisicaActionPerformed
 
-    private void bt_rel3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel3ActionPerformed
+    private void bt_pessoajuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pessoajuridicaActionPerformed
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
         
         try {            
-            stat = con.prepareStatement("SELECT * from pessoajuridica");
+            stat = con.prepareStatement("SELECT c.CodCliente, pj.NomeReferencia, t.Numero, c.Email\n" +
+            "FROM Cliente AS c\n" +
+            "INNER JOIN PessoaJuridica AS pj ON pj.CodCliente = c.CodCliente\n" +
+            "INNER JOIN Telefone AS t ON t.CodCliente = c.CodCliente\n" +
+            "ORDER BY pj.NomeReferencia");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pessoa_juridica.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\PessoasJuridicas.jasper", new HashMap(), relatresult);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
@@ -256,7 +264,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         } finally {
             ConnectionFactory.fechaConexão(con, stat);
         }
-    }//GEN-LAST:event_bt_rel3ActionPerformed
+    }//GEN-LAST:event_bt_pessoajuridicaActionPerformed
 
     private void bt_rel4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel4ActionPerformed
         Connection con = ConnectionFactory.getConexao();
@@ -267,7 +275,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             stat = con.prepareStatement("SELECT * from pedido_orcamento");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pedidos_orcamento.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pedidos.jasper", new HashMap(), relatresult);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
@@ -281,25 +289,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_rel4ActionPerformed
 
     private void bt_rel5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_rel5ActionPerformed
-        Connection con = ConnectionFactory.getConexao();
-        PreparedStatement stat = null;
-        ResultSet rs = null;
-        
-        try {            
-            stat = con.prepareStatement("SELECT * from endereco");
-            rs = stat.executeQuery();
-            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Endereco.jasper", new HashMap(), relatresult);
-            JasperViewer view = new JasperViewer(print, false);
-            view.setVisible(true);
-            view.toFront();
-        } catch (JRException e) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e);
-        } catch (SQLException ex) {
-            Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.fechaConexão(con, stat);
-        }
+
     }//GEN-LAST:event_bt_rel5ActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
@@ -307,9 +297,9 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_pessoafisica;
+    private javax.swing.JButton bt_pessoajuridica;
     private javax.swing.JButton bt_rel1;
-    private javax.swing.JButton bt_rel2;
-    private javax.swing.JButton bt_rel3;
     private javax.swing.JButton bt_rel4;
     private javax.swing.JButton bt_rel5;
     private javax.swing.JButton btn_sair;

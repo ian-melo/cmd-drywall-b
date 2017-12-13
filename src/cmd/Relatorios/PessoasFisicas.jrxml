@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-11-29T10:39:07 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pessoa_juridica" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+<!-- 2017-12-12T21:40:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PessoasFisicas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\DataAdapter.xml"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="26" isBold="false"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Relatorios\Adaptador_rel.xml"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
 	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
@@ -15,42 +15,16 @@
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[select * from pessoajuridica]]>
+		<![CDATA[SELECT c.CodCliente, pf.Nome, t.Numero, c.Email 
+FROM Cliente AS c
+INNER JOIN PessoaFisica AS pf on pf.CodCliente = c.CodCliente
+INNER JOIN Telefone AS t on t.CodCliente = c.CodCliente
+ORDER BY pf.Nome]]>
 	</queryString>
-	<field name="Cnpj" class="java.lang.String"/>
-	<field name="RazaoSocial" class="java.lang.String"/>
-	<field name="RamoAtuacao" class="java.lang.String"/>
-	<field name="DataFundacao" class="java.sql.Date"/>
-	<group name="Group1">
-		<groupExpression><![CDATA[$F{Cnpj}]]></groupExpression>
-		<groupHeader>
-			<band height="27">
-				<frame>
-					<reportElement mode="Opaque" x="0" y="3" width="721" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="f24569ed-2518-465a-a480-0c195aacd180"/>
-					<textField isStretchWithOverflow="true">
-						<reportElement style="SubTitle" x="90" y="0" width="631" height="24" forecolor="#FFFFFF" uuid="5b7282d2-5169-4db4-b85a-e2391d4d4e66"/>
-						<textElement>
-							<font isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{Cnpj}]]></textFieldExpression>
-					</textField>
-					<staticText>
-						<reportElement x="2" y="0" width="78" height="24" forecolor="#D8EAF9" uuid="198b42b1-7e3b-45e0-b935-f824d50b0ea4"/>
-						<text><![CDATA[CNPJ]]></text>
-					</staticText>
-				</frame>
-				<rectangle>
-					<reportElement x="725" y="3" width="77" height="24" backcolor="#666666" uuid="70e1e931-2edd-4f3d-b09b-b9da04709f25"/>
-					<graphicElement>
-						<pen lineWidth="0.0"/>
-					</graphicElement>
-				</rectangle>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
-	</group>
+	<field name="CodCliente" class="java.lang.Integer"/>
+	<field name="Nome" class="java.lang.String"/>
+	<field name="Numero" class="java.lang.String"/>
+	<field name="Email" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -66,9 +40,9 @@
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
 					<textElement verticalAlignment="Bottom">
-						<font isBold="false"/>
+						<font size="27" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Pessoa Jurídica]]></text>
+					<text><![CDATA[Relatório de Pessoa Física]]></text>
 				</staticText>
 				<staticText>
 					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
@@ -96,25 +70,32 @@
 	<columnHeader>
 		<band height="18" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="265" height="18" forecolor="#000000" uuid="79e8f2fe-7131-436a-89f7-1f5f979a2c52"/>
+				<reportElement style="Column header" x="0" y="0" width="199" height="18" forecolor="#000000" uuid="2043a40b-2da8-4cf3-a67e-3db27bc882f9"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[RazaoSocial]]></text>
+				<text><![CDATA[CodCliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="265" y="0" width="265" height="18" forecolor="#000000" uuid="65e75405-9649-4668-9f0a-4623e14c78f2"/>
+				<reportElement style="Column header" x="199" y="0" width="199" height="18" forecolor="#000000" uuid="c2e91265-d14c-4ed7-bfb6-7aff2b8bc815"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[RamoAtuacao]]></text>
+				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="530" y="0" width="265" height="18" forecolor="#000000" uuid="ac3ae5d1-1d9a-44c8-8abf-c4604a80b852"/>
+				<reportElement style="Column header" x="398" y="0" width="199" height="18" forecolor="#000000" uuid="a40de6db-4611-4c94-b9f6-94019ebf6b42"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[DataFundacao]]></text>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="597" y="0" width="183" height="18" forecolor="#000000" uuid="06a18d9a-e89f-46e6-81a1-4e64c3a2fc0f"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -123,25 +104,32 @@
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="797" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="265" height="18" uuid="d5664078-e67b-4add-b513-a6072a2cf4be"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="199" height="18" uuid="606cc21e-3219-41b4-b8fd-69eb86283efc"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{RazaoSocial}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{CodCliente}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="265" y="0" width="265" height="18" uuid="998d3322-6e09-455a-ba62-c16e70d4e686"/>
+					<reportElement style="Detail" positionType="Float" x="199" y="0" width="199" height="18" uuid="f750e20a-859f-4be6-bf18-c28280c7b43c"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{RamoAtuacao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="530" y="0" width="265" height="18" uuid="aeedabea-e63d-4806-843e-97c90572b954"/>
+					<reportElement style="Detail" positionType="Float" x="398" y="0" width="199" height="18" uuid="a5a0153e-3abf-49ba-9bca-cf569e173164"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DataFundacao}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{Numero}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="597" y="0" width="128" height="18" uuid="4d2af39f-3f21-4eb8-aad7-8899c85ba15e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Email}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
