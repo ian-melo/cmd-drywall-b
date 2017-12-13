@@ -814,7 +814,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if ((!cliC.validarCnpj(pJur)) || (!"  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl()))) {
+        if (!cliC.validarCnpj(pJur)) {
             JOptionPane.showMessageDialog(null, "CNPJ, invalido");
             return false;
         }
