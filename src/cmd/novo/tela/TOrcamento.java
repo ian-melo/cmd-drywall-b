@@ -519,6 +519,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. cliente");
+        tableHeaders.add("E-mail");
         tableHeaders.add("CPF");
         tableHeaders.add("Nome");
         tableHeaders.add("Data de Nascimento");
@@ -532,6 +533,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             reg = new Vector();
             try {
                 reg.add(pf.getCodCliente());
+                reg.add(pf.getCliente().getEmail());
                 reg.add(pf.getCpf());
                 reg.add(pf.getNome());
                 if (pf.getDataNascimento() != null) {
@@ -548,6 +550,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             tableData.add(reg);
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
+        
+        tb_clientes.getColumnModel().getColumn(0).setMaxWidth(40);
+        
         linCliente = -1;
     }
 
@@ -562,6 +567,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
 
         Vector tableHeaders = new Vector();
         tableHeaders.add("Cód. cliente");
+        tableHeaders.add("E-mail");
         tableHeaders.add("CNPJ");
         tableHeaders.add("Razão social");
         tableHeaders.add("Data de fundação");
@@ -574,6 +580,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             reg = new Vector();
             try {
                 reg.add(pj.getCodCliente());
+                reg.add(pj.getCliente().getEmail());
                 reg.add(pj.getCnpj());
                 reg.add(pj.getRazaoSocial());
                 if (pj.getDataFundacao() == null) {
@@ -591,6 +598,9 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             }
         }
         tb_clientes.setModel(new DefaultTableModel(tableData, tableHeaders));
+        
+        tb_clientes.getColumnModel().getColumn(0).setMaxWidth(40);
+        
         linCliente = -1;
     }
 

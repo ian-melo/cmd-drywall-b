@@ -1160,13 +1160,14 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void setInfoPJuridica(int linha) {
 
-        PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 10);
+        PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 11);
         // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
 
         pJu.setTxt_cnpj_pnl(peJu.getCnpj());
         pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
         pJu.setTxt_ramoAtuacao_pnl(peJu.getRamoAtuacao());
         pJu.setTxt_razaoSocial_pnl(peJu.getRazaoSocial());
+        txt_email.setText(peJu.getCliente().getEmail());
 
         txt_cep.setText(peJu.getCliente().getEndereco().getCep());
         txt_logradouro.setText(peJu.getCliente().getEndereco().getLogradouro());
@@ -1205,11 +1206,12 @@ public class TCliente extends javax.swing.JInternalFrame {
     }
 
     private void setInfoPFisica(int linha) {
-        PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 9);
+        PessoaFisica peFi = (PessoaFisica) tb_FisicaEjuridica.getValueAt(linha, 10);
 
         pFi.setTxt_nome_pnl(peFi.getNome());
         pFi.setTxt_cpf_pnl(peFi.getCpf());
         pFi.setTxt_dataNasc_pnl(peFi.getDataNascimento());
+        txt_email.setText(peFi.getCliente().getEmail());
 
         txt_cep.setText(peFi.getCliente().getEndereco().getCep());
         txt_logradouro.setText(peFi.getCliente().getEndereco().getLogradouro());
@@ -1474,9 +1476,10 @@ public class TCliente extends javax.swing.JInternalFrame {
         ClienteController cleC = new ClienteController();
         //Titulo
         Vector cabecalho = new Vector();
-        cabecalho.add("CNPJ");
+        cabecalho.add("E-mail");
         cabecalho.add("Razão Social");
         cabecalho.add("Ramo Atual");
+        cabecalho.add("CNPJ");
         cabecalho.add("Data Fundação");
         //cabecalho.add("Telefone");
         cabecalho.add("CEP");
@@ -1493,9 +1496,10 @@ public class TCliente extends javax.swing.JInternalFrame {
 
         for (PessoaJuridica jx : cleC.listarPessoasJuridicas()) {
             item = new Vector();
-            item.add(jx.getCnpj());
+            item.add(jx.getCliente().getEmail());
             item.add(jx.getRazaoSocial());
             item.add(jx.getRamoAtuacao());
+            item.add(jx.getCnpj());
             item.add(jx.getDataFundacao());
             //item.add(jx.getCliente().getTelefones());
             item.add(jx.getCliente().getEndereco().getCep());
@@ -1513,7 +1517,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
 
-        tb_FisicaEjuridica.getColumnModel().getColumn(10).setMaxWidth(0);//     :)
+        tb_FisicaEjuridica.getColumnModel().getColumn(11).setMaxWidth(0);//     :)
 
     }
 
@@ -1523,6 +1527,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         ClienteController cleC = new ClienteController();
         //Titulo
         Vector cabecalho = new Vector();
+        cabecalho.add("E-mail");
         cabecalho.add("Nome");
         cabecalho.add("CPF");
         cabecalho.add("Data Nascimento");
@@ -1541,6 +1546,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 
         for (PessoaFisica fx : cleC.listarPessoasFisicas()) {
             item = new Vector();
+            item.add(fx.getCliente().getEmail());
             item.add(fx.getNome());
             item.add(fx.getCpf());
             item.add(fx.getDataNascimento());
@@ -1561,7 +1567,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         modeloTabela.setDataVector(dados, cabecalho);
         tb_FisicaEjuridica.setModel(modeloTabela);
 
-        tb_FisicaEjuridica.getColumnModel().getColumn(9).setMaxWidth(0);
+        tb_FisicaEjuridica.getColumnModel().getColumn(10).setMaxWidth(0);
 
     }
 
