@@ -720,13 +720,12 @@ public class TCliente extends javax.swing.JInternalFrame {
             return;
         }
 
-        if(validaEmail(txt_email.getText()) == false){
+        if (validaEmail(txt_email.getText()) == false) {
             JOptionPane.showMessageDialog(null, "Insira um e-mail valido, ex: e-mail@email.com");
             return;
         }
-   
-//----> A VERIFICAÇÃO ACIMA DEVE SER FEITO PARA AMBAS AS PESSOAS(CLIENTES)
 
+//----> A VERIFICAÇÃO ACIMA DEVE SER FEITO PARA AMBAS AS PESSOAS(CLIENTES)
 //==============================================================================
 //===========================PESSOA JURIDICA====================================
 //==============================================================================
@@ -911,7 +910,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 
     private void txt_numeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_numeroFocusLost
         Validar vali = new Validar();
-        if (vali.validarNumero(txt_numero.getText())) {
+        if (vali.validarNumeroSendoVazio(txt_numero.getText())) {
             return;
         }
 
@@ -1013,7 +1012,7 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
     private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
-        if(validaEmail(txt_email.getText()) == false){
+        if (validaEmail(txt_email.getText()) == false) {
             JOptionPane.showMessageDialog(null, "Insira um e-mail valido, ex: e-mail@email.com");
         }
     }//GEN-LAST:event_txt_emailFocusLost
@@ -1327,8 +1326,8 @@ public class TCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha a Razão Social");
             return false;
         }
-        
-               if ("".equals(pJu.getTxt_nomeReferencia_pnl().trim())) {
+
+        if ("".equals(pJu.getTxt_nomeReferencia_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha o nome para contato");
             return false;
         }
@@ -1592,7 +1591,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         pFi.setTxt_cpf_pnl("");
         pFi.setTxt_dataNasc_pnl(null);
         pFi.setTxt_nome_pnl("");
-        
+
         txt_email.setText("");
 
         habilitaCEP(true);
