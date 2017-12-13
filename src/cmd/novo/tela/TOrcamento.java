@@ -746,7 +746,7 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         List<Item> listaItens = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
-
+        String email = null;
         String cep = null;
         String logradouro = null;
         String numero = null;
@@ -759,9 +759,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         //listaItens = dao.listarFisica(String.valueOf(cod));
         // JOptionPane.showMessageDialog(rootPane, listaItens.size());
         if (linha != -1 && linha3.length != -1) {
-
-            String cpf = tb_clientes.getValueAt(linha, 1).toString();
-            String nome = tb_clientes.getValueAt(linha, 2).toString();
+            
+            email = tb_clientes.getValueAt(linha, 1).toString();
+            String cpf = tb_clientes.getValueAt(linha, 2).toString();
+            String nome = tb_clientes.getValueAt(linha, 3).toString();
 
             if (linha2 != -1) {
                 cep = tb_enderecos.getValueAt(linha2, 0).toString();
@@ -793,10 +794,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(mensagem);
                 mensagem = new Paragraph(" ");
                 doc.add(mensagem);
-
+                Paragraph EMAIL = new Paragraph("Email: \t" + email);
                 Paragraph CPF = new Paragraph("CPF: \t" + cpf);
                 Paragraph Nome = new Paragraph("Nome: \t" + nome);
-
+                doc.add(EMAIL);
                 doc.add(CPF);
                 doc.add(Nome);
                 if (linha2 != -1) {
@@ -942,14 +943,14 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         String complemento = null;
         String bairro = null;
         String uf = null;
-
+        String email = null;
         ItemDAO dao = new ItemDAO();
         listaItens = dao.listar();
 
         if (linha != -1 && linha2 != -1 && linha3.length != -1) {
-
-            String cpf = tb_clientes.getValueAt(linha, 1).toString();
-            String nome = tb_clientes.getValueAt(linha, 2).toString();
+            email = tb_clientes.getValueAt(linha, 1).toString();
+            String cpf = tb_clientes.getValueAt(linha, 2).toString();
+            String nome = tb_clientes.getValueAt(linha, 3).toString();
 
             if (linha2 != -1) {
                 cep = tb_enderecos.getValueAt(linha2, 0).toString();
@@ -980,9 +981,10 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                 doc.add(mensagem);
                 mensagem = new Paragraph(" ");
                 doc.add(mensagem);
-
+                Paragraph EMAIL = new Paragraph("Email: \t" + email);
                 Paragraph CPF = new Paragraph("CNPJ: \t" + cpf);
                 Paragraph Nome = new Paragraph("Razão Social: \t" + nome);
+                doc.add(EMAIL);
                 doc.add(CPF);
                 doc.add(Nome);
                 if (linha2 != -1) {

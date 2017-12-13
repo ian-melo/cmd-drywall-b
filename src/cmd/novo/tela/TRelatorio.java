@@ -275,7 +275,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
             stat = con.prepareStatement("SELECT * from pedido_orcamento");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
-            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pedidos.jasper", new HashMap(), relatresult);
+            JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\Pedidos_orc.jasper", new HashMap(), relatresult);
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
