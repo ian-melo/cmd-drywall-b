@@ -1064,8 +1064,9 @@ public class TCalculo extends javax.swing.JInternalFrame {
         NumberFormat nf = NumberFormat.getIntegerInstance();
 
         float num = Float.parseFloat(txt_max.getText());
-        //String s = nf.format(num);
+        NumberFormat.getCurrencyInstance().format(num);
 
+//String s = nf.format(num);
         int val = (int) num;
 
         sld_max.setValue(val);
