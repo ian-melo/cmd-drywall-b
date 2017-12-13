@@ -813,9 +813,11 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if (!cliC.validarCnpj(pJur)) {
-            JOptionPane.showMessageDialog(null, "CNPJ, invalido");
-            return false;
+        if (!"  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl())) {
+            if (!cliC.validarCnpj(pJur)) {
+                JOptionPane.showMessageDialog(null, "CNPJ, invalido");
+                return false;
+            }
         }
 
         if (!cliC.verificarCnpj(pJur)) {
@@ -877,9 +879,11 @@ public class TCliente extends javax.swing.JInternalFrame {
         cli.setTelefones(tels);
         cli.setXdead(false);
 
-        if (!cliC.validarCpf(pFis)) {
-            JOptionPane.showMessageDialog(null, "CPF, invalido");
-            return false;
+        if (!"   .   .   -  ".equals(pFi.getTxt_cpf_pnl())) {
+            if (!cliC.validarCpf(pFis)) {
+                JOptionPane.showMessageDialog(null, "CPF, invalido");
+                return false;
+            }
         }
 
         if (!cliC.verificarCpf(pFis)) {
