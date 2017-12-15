@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -32,7 +30,7 @@ public class TCarregamento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         barraProgresso.setValue(100);
 
     }
@@ -107,10 +105,6 @@ public class TCarregamento extends javax.swing.JDialog {
 
         porcentagem = 0;
 
-        //480 - 80
-        //240 - 40 segundos aproximadamente
-        //120 - 20
-        // 60 - 10
         timer = new Timer(240, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +118,7 @@ public class TCarregamento extends javax.swing.JDialog {
         });
         timer.start();
     }//GEN-LAST:event_formWindowActivated
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barraProgresso;
     private javax.swing.JLabel jLabel1;

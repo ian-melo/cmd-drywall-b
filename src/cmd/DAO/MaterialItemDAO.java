@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.MaterialItem;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Materiais instanciados em um Item
+ *
  * @author ian-melo
  */
 public class MaterialItemDAO implements DAO<MaterialItem> {
@@ -22,7 +22,7 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_3_: " + e);
             return false;
         }
@@ -37,7 +37,7 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -51,13 +51,14 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
 
     /**
      * Busca item
+     *
      * @param consulta Parâmetro de busca, necessário estar no modelo
      * "codMaterial,codItem"
      * @return item encontrado
@@ -70,12 +71,12 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             o = (MaterialItem) (s.createQuery("from MaterialItem where CodMaterial = :codm and CodItem = :codi")
-                .setInteger("codm", Integer.parseInt(vals[0]))
-                .setInteger("codi", Integer.parseInt(vals[1])).list().get(0));
+                    .setInteger("codm", Integer.parseInt(vals[0]))
+                    .setInteger("codi", Integer.parseInt(vals[1])).list().get(0));
             s.getTransaction().commit();
             s.close();
             return o;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -90,9 +91,9 @@ public class MaterialItemDAO implements DAO<MaterialItem> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

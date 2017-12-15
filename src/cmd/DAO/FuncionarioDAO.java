@@ -1,4 +1,3 @@
-//TODO: Estabilizar
 package cmd.DAO;
 
 import cmd.util.HibernateUtil;
@@ -7,9 +6,9 @@ import java.util.List;
 import cmd.entidade.Funcionario;
 import org.hibernate.HibernateException;
 
-
 /**
  * Classe DAO para Funcionario
+ *
  * @author ian-melo
  */
 public class FuncionarioDAO implements DAO<Funcionario> {
@@ -23,7 +22,7 @@ public class FuncionarioDAO implements DAO<Funcionario> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -37,7 +36,7 @@ public class FuncionarioDAO implements DAO<Funcionario> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -51,7 +50,7 @@ public class FuncionarioDAO implements DAO<Funcionario> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -63,11 +62,11 @@ public class FuncionarioDAO implements DAO<Funcionario> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             f = (Funcionario) (s.createQuery("from Funcionario where CodFuncionario = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return f;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -82,9 +81,9 @@ public class FuncionarioDAO implements DAO<Funcionario> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

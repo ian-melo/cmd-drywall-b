@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -15,6 +13,7 @@ import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
 /**
+ * Tela de registro de construção
  *
  * @author Usuario
  */
@@ -35,9 +34,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         return construcaoT;
     }
 
-//    public void setTxt_id(String cod) {
-//        this.txt_id.setText(cod);
-//    }
     /**
      * Creates new form ConstrucaoT
      */
@@ -549,11 +545,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chk_stActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_stActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_chk_stActionPerformed
 
     private void btn_procurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procurarActionPerformed
-
         JOptionPane.showMessageDialog(rootPane, "Selecione uma construção OU deixe vazio se caso seja uma nova construção");
         Thread t = new Thread() {
             @Override
@@ -563,17 +558,12 @@ public class TConstrucao extends javax.swing.JInternalFrame {
                     gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TConstrucaoSelecao.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
-
-
     }//GEN-LAST:event_btn_procurarActionPerformed
 
     private void btn_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarActionPerformed
@@ -677,11 +667,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmb_qualidadeActionPerformed
 
     private void btn_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sairActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void cadastrar() {
-
         boolean res = false; //Resultado da ação
         String info; //Texto informativo
         //Retorna, caso os campos estejam inválidos
@@ -700,8 +689,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         co.setDetalhes(txt_detalhes.getText());
         co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
         co.setXdead(false);
-// co.setItems(null);//Retirado da erro em relação as atualizações das classes de entidade
-// co.setMaterials(null);
 
         //Caso forro
         if (op_forro.isSelected()) {
@@ -732,7 +719,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             pa.setConstrucao(co);
 
             co.setParede(pa);
-            //co.setForro(null);
             //Inserção de parede
 
             controle = new ConstrucaoController();
@@ -749,34 +735,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         if (res) {
             resetarCampos();
         }
-
-//        System.out.println("==============PAREDE=======================");
-//        System.out.println("==============++++++=======================");
-//        System.out.println("AlturaLimite            = " + pa.getAlturaLimite());
-//        System.out.println("CodConstrucao           = " + pa.getCodConstrucao());
-//        System.out.println("EhRf                    = " + pa.getEhRf());
-//        System.out.println("EhRu                    = " + pa.getEhRu());
-//        System.out.println("EhSt                    = " + pa.getEhSt());
-//        System.out.println("Montante                = " + pa.getMontante());
-//        System.out.println("+++++++++++++++CONSTRUCAO++++++++++++++++++");
-//        System.out.println("Construcao.Qualidade    = " + pa.getConstrucao().getDescricao());
-//        System.out.println("Construcao.Detalhes     = " + pa.getConstrucao().getDetalhes());
-//        System.out.println("Construcao.CodConstrucao= " + pa.getConstrucao().getCodConstrucao());
-//        System.out.println("Construcao.Qualidade    = " + pa.getConstrucao().getQualidade());
-//        System.out.println("===========================================");
-//        System.out.println("=");
-//        System.out.println("=");
-//        System.out.println("===============CONSTRUCAO==================");
-//
-//        System.out.println("CodConstrucao = " + co.getCodConstrucao());
-//        System.out.println("Descricao     = " + co.getDescricao());
-//        System.out.println("Detalhes      = " + co.getDetalhes());
-//        System.out.println("Items         = " + co.getItems());
-//        System.out.println("Forro         = " + co.getForro());
-//        System.out.println("Materials     = " + co.getMaterials());
-//        System.out.println("Parede        = " + co.getParede());
-//        System.out.println("Qualidade     = " + co.getQualidade());
-//        System.out.println("===========================================");
     }
 
     private void alterar() {
@@ -797,7 +755,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         co.setDetalhes(txt_detalhes.getText());
         co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
         co.setXdead(Boolean.FALSE);
-// co.setItems(null);//Retirado da erro em relação as atualizações das classes de entidade
         co.setMaterials(null);
         //Caso forro
         if (op_forro.isSelected()) {
@@ -857,7 +814,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         co.setDetalhes(txt_detalhes.getText());
         co.setQualidade(Integer.parseInt(cmb_qualidade.getSelectedItem().toString()));
         co.setXdead(Boolean.FALSE);
-//co.setItems(null);
         co.setMaterials(null);
         //Caso forro
         if (op_forro.isSelected()) {
@@ -927,7 +883,6 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         habilitarParede(false);
         txt_id.setEditable(true);
         MudaBotao(false);
-        //habilitarAlteravel(false);//Tem q habilitar em outro local
     }
 
     private void MudaBotao(boolean val) {
@@ -960,7 +915,7 @@ public class TConstrucao extends javax.swing.JInternalFrame {
     /**
      * Valida campos de dados (exceto o código) da construção
      *
-     * @return true, caso seja válido<br/>false, caso não seja
+     * @return true, caso seja válido<br>false, caso não seja
      */
     private boolean validarCampos() {
         if (txt_descricao.getText().equals("")) {
@@ -971,25 +926,10 @@ public class TConstrucao extends javax.swing.JInternalFrame {
             exibirAlerta("Preencha os detalhes.");
             return false;
         }
-//        if (txt_qualidade.getText().equals("")) {
-//            exibirAlerta("Preencha a pontuação de qualidade.");
-//            return false;
-//        }
-//        try {
-//            Integer.parseInt(txt_qualidade.getText());
-//        } catch (NumberFormatException ex) {
-//            exibirAlerta("Preencha a qualidade limite corretamente.\nUse somente números.");
-//            return false;
-//        }
         if (!(chk_rf.isSelected() || chk_ru.isSelected() || chk_st.isSelected())) {
             exibirAlerta("Selecione ao menos um tipo de proteção.");
             return false;
         }
-
-//        if (txt_id.getText().equals("")) {
-//            exibirAlerta("Preencha a pontuação de qualidade.");//?????????????
-//            return false;
-//        }
         if (txt_montante.getText().equals("") && op_parede.isSelected()) {
             exibirAlerta("Preencha a montante limite.");
             return false;
@@ -1055,25 +995,11 @@ public class TConstrucao extends javax.swing.JInternalFrame {
         tAvi.setVisible(true);
     }
 
-//    private class ActionHabilitarParede implements ChangeListener<Toggle> {
-//
-//        @Override
-//          public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-//            if (grp_construcao.getSelectedToggle() != null) {
-//                if (grp_construcao.getSelectedToggle().equals(op_parede)) {
-//                    habilitarParede(true);
-//                } else {
-//                    habilitarParede(false);
-//                }
-//            }
-//        }
-//    }
     /**
      * Exibe uma mensagem de alerta
      *
      * @param txt Texto do corpo a ser exibido no conteúdo
      */
-//    
     private void exibirAlerta(String txt) {
         JOptionPane.showMessageDialog(null, txt);
     }

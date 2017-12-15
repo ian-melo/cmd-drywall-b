@@ -2,12 +2,11 @@ package cmd.novo.painel;
 
 import cmd.Validacao.Validar;
 import java.awt.Color;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Painel de Pessoa Jurídica
  *
  * @author Usuario
  */
@@ -16,35 +15,43 @@ public class PnlJuridica extends javax.swing.JPanel {
     public String getTxt_cnpj_pnl() {//Fornece acesso a outras classes
         return txt_cnpj_pnl.getText();
     }
+
     public String getTxt_razaoSocial_pnl() {//Fornece acesso a outras classes
         return txt_razaoSocial_pnl.getText();
     }
+
     public String getTxt_nomeReferencia_pnl() {//Fornece acesso a outras classes
         return txt_nomeReferencia_pnl.getText();
     }
+
     public String getTxt_ramoAtuacao_pnl() {//Fornece acesso a outras classes
         return txt_ramoAtuacao_pnl.getText();
     }
+
     public Date getTxt_datafundacao_pnl() {//Fornece acesso a outras classes
         return txt_datafundacao_pnl.getDate();
     }
-    
+
     public void setTxt_cnpj_pnl(String cnpj) {//Fornece acesso a outras classes
         this.txt_cnpj_pnl.setText(cnpj);
     }
+
     public void setTxt_razaoSocial_pnl(String razao) {//Fornece acesso a outras classes
         this.txt_razaoSocial_pnl.setText(razao);
     }
+
     public void setTxt_nomeReferencia_pnl(String nome) {//Fornece acesso a outras classes
         this.txt_nomeReferencia_pnl.setText(nome);
     }
+
     public void setTxt_ramoAtuacao_pnl(String ramo) {//Fornece acesso a outras classes
         this.txt_ramoAtuacao_pnl.setText(ramo);
     }
+
     public void setTxt_datafundacao_pnl(Date dat) {//Fornece acesso a outras classes
         this.txt_datafundacao_pnl.setDate(dat);
     }
-    
+
     public void setEnabled_cnpj_pnl(boolean val) {
         txt_cnpj_pnl.setEnabled(val);
     }
@@ -184,19 +191,16 @@ public class PnlJuridica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cnpj_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cnpj_pnlFocusLost
-//        Validar vali = new Validar();
-//        if (vali.validarCnpj(txt_cnpj_pnl.getText()) == false) {
-//            JOptionPane.showMessageDialog(null, "Verificar o CNPJ");
-//        }
+
     }//GEN-LAST:event_txt_cnpj_pnlFocusLost
 
     private void txt_nomeReferencia_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nomeReferencia_pnlFocusLost
-              Validar vali = new Validar();
+        Validar vali = new Validar();
         if (vali.validarVazio(txt_nomeReferencia_pnl.getText()) == true) {
             JOptionPane.showMessageDialog(null, "Verificar o nome para contato");
         }
     }//GEN-LAST:event_txt_nomeReferencia_pnlFocusLost
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -210,6 +214,4 @@ public class PnlJuridica extends javax.swing.JPanel {
     private javax.swing.JTextField txt_ramoAtuacao_pnl;
     private javax.swing.JTextField txt_razaoSocial_pnl;
     // End of variables declaration//GEN-END:variables
-    
-    //CNPJ válido: 31.061.861/0001-03
 }

@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.PessoaJuridica;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Pessoa Jurídica
+ *
  * @author ian-melo
  */
 public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
@@ -22,10 +22,10 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_pJuDAO_ " + e);
             return false;
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("__" + e);
             return false;
         }
@@ -38,17 +38,15 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.beginTransaction();
             s.update(item);
             s.getTransaction().commit();
-            //s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return false;
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("__" + e);
             return false;
         }
     }
-    
 
     @Override
     public boolean excluir(PessoaJuridica item) {
@@ -59,15 +57,14 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return false;
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("_" + e);
             return false;
         }
     }
-    
 
     @Override
     public PessoaJuridica buscar(String consulta) {
@@ -76,38 +73,43 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             pj = (PessoaJuridica) (s.createQuery("from PessoaJuridica where CodCliente = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
-            //s.close();
             return pj;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("__" + e);
             return null;
         }
     }
-    
-     public PessoaJuridica buscarCNPJ(String consulta) {
+
+    /**
+     * Busca Pessoa Jurídica pelo CNPJ
+     *
+     * @param consulta CNPJ para consulta
+     * @return Pessoa Jurídica encontrada
+     */
+    public PessoaJuridica buscarCNPJ(String consulta) {
         try {
             PessoaJuridica pj;
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             pj = (PessoaJuridica) (s.createQuery("from PessoaJuridica where Cnpj = :cod")
-                .setString("cod", consulta).list().get(0));
+                    .setString("cod", consulta).list().get(0));
             s.getTransaction().commit();
             s.close();
             return pj;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("_" + e);
             return null;
         }
     }
-    
+
     @Override
     public List<PessoaJuridica> listar() {
         try {
@@ -116,15 +118,14 @@ public class PessoaJuridicaDAO implements DAO<PessoaJuridica> {
             s.beginTransaction();
             li = s.createQuery("from PessoaJuridica").list();
             s.getTransaction().commit();
-            //s.close();//Aqui
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
     }
-    
+
 }

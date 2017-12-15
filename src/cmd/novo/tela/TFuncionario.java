@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -11,12 +9,14 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Tela de registro de funcionários
  * @author Usuario Cadastra novos usuarios
  */
 public class TFuncionario extends javax.swing.JInternalFrame {
 
-    //Controla a quantidade de Janelas abertas
+    /**
+     * Controla a quantidade de Janelas abertas
+     */
     public static TFuncionario funcionarioT;
 
     public static TFuncionario getInstancia() {

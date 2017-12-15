@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -15,17 +13,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
- *
+ * Tela de solicitação de Orçamento
  * @author Usuario
  */
 public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
 
-    //public static Pedidos ped = new Pedidos();
     public Pedidos ped = new Pedidos();
 
     GerenteDeJanelas gerenteDeJanelas;
 
-    //Controla a quantidade de Janelas abertas
+    /**
+     * Controla a quantidade de Janelas abertas
+     */
     public static TSolicaoOrcamento solicaoOrcamento;
 
     public static TSolicaoOrcamento getInstancia() {
@@ -225,12 +224,9 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         int linha = tb_orcamento.getSelectedRow();
 
         try {
-
-            //ped = new Pedidos();
             if ((float) tb_orcamento.getValueAt(linha, 1) > 0) {
                 ped.setAltura((float) tb_orcamento.getValueAt(linha, 1) / 100);
             }
-
             if ((float) tb_orcamento.getValueAt(linha, 2) > 0) {
                 ped.setLargura((float) tb_orcamento.getValueAt(linha, 2) / 100);
             }
@@ -275,14 +271,12 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
             gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
         } catch (IllegalArgumentException e) {
             gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
         }
 
         try {
             gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
         } catch (IllegalArgumentException e) {
             gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia(ped));
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
         }
 
 
@@ -292,8 +286,6 @@ public class TSolicaoOrcamento extends javax.swing.JInternalFrame {
         int linha;
         if (evt.getClickCount() == 1) {
             linha = tb_orcamento.getSelectedRow();
-
-            //Enviar info para TCalculo, enviar o cliente para TOrcamento
         }
     }//GEN-LAST:event_tb_orcamentoMouseClicked
 

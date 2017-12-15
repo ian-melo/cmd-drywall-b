@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Telefone;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Telefone
+ *
  * @author ian-melo
  */
 public class TelefoneDAO implements DAO<Telefone> {
@@ -22,7 +22,7 @@ public class TelefoneDAO implements DAO<Telefone> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("___telDAO____ " + e);
             return false;
         }
@@ -37,7 +37,7 @@ public class TelefoneDAO implements DAO<Telefone> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -51,13 +51,14 @@ public class TelefoneDAO implements DAO<Telefone> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
 
     /**
      * Busca item
+     *
      * @param consulta Parâmetro de busca, necessário estar no modelo
      * "codCliente,numero"
      * @return item encontrado
@@ -70,12 +71,12 @@ public class TelefoneDAO implements DAO<Telefone> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             t = (Telefone) (s.createQuery("from Telefone where CodCliente = :cod and Numero = :num")
-                .setInteger("cod", Integer.parseInt(vals[0]))
-                .setInteger("num", Integer.parseInt(vals[1])).list().get(0));
+                    .setInteger("cod", Integer.parseInt(vals[0]))
+                    .setInteger("num", Integer.parseInt(vals[1])).list().get(0));
             s.getTransaction().commit();
             s.close();
             return t;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -90,9 +91,9 @@ public class TelefoneDAO implements DAO<Telefone> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

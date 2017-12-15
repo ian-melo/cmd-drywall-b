@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -12,6 +10,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 /**
+ * Tela inicial
  *
  * @author Usuario Tela principal
  */
@@ -36,7 +35,7 @@ public class TPrincipal extends javax.swing.JFrame {
         pnl_gerenciamentoItens.setBackground(new Color(153, 153, 255));
         pnl_orcamento.setBackground(new Color(153, 153, 255));
         pnl_relatorios.setBackground(new Color(153, 153, 255));
-        
+
         pnl_funcionarios.setVisible(false);
 
         this.gerenteDeJanelas = new GerenteDeJanelas(jDesktopPane1);
@@ -350,24 +349,17 @@ public class TPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cadFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadFuncionariosActionPerformed
-//       TFuncionario fT = new TFuncionario();
-//        jDesktopPane1.add(fT);
-//        fT.setVisible(true);
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TFuncionario.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadFuncionariosActionPerformed
@@ -376,19 +368,14 @@ public class TPrincipal extends javax.swing.JFrame {
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TSolicaoOrcamento.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_solicitacaoOrcamentoActionPerformed
@@ -397,18 +384,14 @@ public class TPrincipal extends javax.swing.JFrame {
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TMaterial.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
 
@@ -418,41 +401,30 @@ public class TPrincipal extends javax.swing.JFrame {
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TOrcamento.getInstancia(true));
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
-
                 janelaCarregamentoFecha();
-
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
-        //t.isAlive();
     }//GEN-LAST:event_btn_calOrcamentoPrjActionPerformed
 
     private void btn_cadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadClientesActionPerformed
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadClientesActionPerformed
@@ -461,51 +433,39 @@ public class TPrincipal extends javax.swing.JFrame {
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TRelatorio.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_relatoriosActionPerformed
 
     private void btn_cadConstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadConstrucaoActionPerformed
-
         Thread t = new Thread() {
             @Override
             public void run() {
-
                 try {
                     gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TConstrucao.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
-
                 }
-
                 janelaCarregamentoFecha();
             }
         };
-
         t.start();
         janelaCarregamentoAbre();
     }//GEN-LAST:event_btn_cadConstrucaoActionPerformed
-    private void janelaCarregamentoAbre() {
 
+    private void janelaCarregamentoAbre() {
         tCar.setVisible(true);
     }
 
     private void janelaCarregamentoFecha() {
-
         tCar.setVisible(false);
     }
 
@@ -547,10 +507,8 @@ public class TPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TPrincipal(null).setVisible(true);
-                //new TPrincipal().setVisible(true);//Original, foi alterado quando tentei passar info fo Form Login Para este
             }
         });
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,20 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cmd.controle;
 
 import cmd.entidade.Cliente;
 import cmd.entidade.Item;
 
 /**
- *
+ * Classe de transporte de dados
  * @author Usuario
  */
 public class TransportaDadosController {
-
+    /**
+     * Cliente
+     */
     public static Cliente cliente;
+    /**
+     * Item do Orçamento
+     */
     public static Item item;
 
 }

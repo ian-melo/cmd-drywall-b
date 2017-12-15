@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Material;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Materiais de uma construção
+ *
  * @author ian-melo
  */
 public class MaterialDAO implements DAO<Material> {
@@ -22,7 +22,7 @@ public class MaterialDAO implements DAO<Material> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -36,7 +36,7 @@ public class MaterialDAO implements DAO<Material> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -50,7 +50,7 @@ public class MaterialDAO implements DAO<Material> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -62,11 +62,11 @@ public class MaterialDAO implements DAO<Material> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             m = (Material) (s.createQuery("from Material where CodMaterial = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return m;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -81,9 +81,9 @@ public class MaterialDAO implements DAO<Material> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

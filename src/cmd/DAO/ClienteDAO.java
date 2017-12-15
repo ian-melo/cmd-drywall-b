@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.util.HibernateUtil;
@@ -14,6 +13,9 @@ import org.hibernate.HibernateException;
  */
 public class ClienteDAO implements DAO<Cliente> {
 
+    /**
+     * Sessão da DAO
+     */
     Session s = null;
 
     @Override
@@ -43,7 +45,7 @@ public class ClienteDAO implements DAO<Cliente> {
         } catch (HibernateException e) {
             System.out.println("_" + e);
             return false;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("__" + e);
             return false;
         }
@@ -95,7 +97,6 @@ public class ClienteDAO implements DAO<Cliente> {
             s.beginTransaction();
             li = s.createQuery("from Cliente").list();
             s.getTransaction().commit();
-            // s.close();
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);
@@ -106,6 +107,11 @@ public class ClienteDAO implements DAO<Cliente> {
         }
     }
 
+    /**
+     * Fecha a sessão após listagem de clientes
+     *
+     * @deprecated Suscetível a erros, desnecessário
+     */
     public void fecharListar() {
         s.close();
     }

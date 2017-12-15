@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.RegistroAtividade;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Registro de Atividade (geral)
+ *
  * @author ian-melo
  */
 public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
@@ -22,7 +22,7 @@ public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -36,7 +36,7 @@ public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -50,7 +50,7 @@ public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -62,11 +62,11 @@ public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             r = (RegistroAtividade) (s.createQuery("from RegistroAtividade where CodRegistro = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return r;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -81,9 +81,9 @@ public class RegistroAtividadeDAO implements DAO<RegistroAtividade> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

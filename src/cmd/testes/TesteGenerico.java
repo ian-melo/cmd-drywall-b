@@ -1,3 +1,6 @@
+/*
+ * Deixai toda esperança, ó vós que entrais!
+ */
 package cmd.testes;
 
 public class TesteGenerico {

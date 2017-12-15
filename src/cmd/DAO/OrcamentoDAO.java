@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Orcamento;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Orçamento
+ *
  * @author ian-melo
  */
 public class OrcamentoDAO implements DAO<Orcamento> {
@@ -22,7 +22,7 @@ public class OrcamentoDAO implements DAO<Orcamento> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -36,7 +36,7 @@ public class OrcamentoDAO implements DAO<Orcamento> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -50,7 +50,7 @@ public class OrcamentoDAO implements DAO<Orcamento> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -62,11 +62,11 @@ public class OrcamentoDAO implements DAO<Orcamento> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             o = (Orcamento) (s.createQuery("from Orcamento where CodOrcamento = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return o;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
@@ -81,9 +81,9 @@ public class OrcamentoDAO implements DAO<Orcamento> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
         }
     }
-    
+
 }

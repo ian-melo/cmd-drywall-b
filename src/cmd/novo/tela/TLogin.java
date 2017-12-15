@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -11,7 +9,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Tela de login
  * @author Usuario
  */
 public class TLogin extends javax.swing.JFrame {
@@ -147,13 +145,11 @@ public class TLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //JOptionPane.showMessageDialog(null, "Teste_6");
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void bt_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_sairActionPerformed
         this.dispose();
-        //TPrincipal tPrincipal = new TPrincipal(txt_nome.getText());
-        //tPrincipal.show();
     }//GEN-LAST:event_bt_sairActionPerformed
 
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
@@ -174,14 +170,10 @@ public class TLogin extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "Usuário ou Senha incorretos", "C.M.D Informa!!!", 0);//simbolo vermelho
-            //JOptionPane.showMessageDialog(this, "Usuário ou Senha incorretos:", "C.M.D Informa!!!", 1);//simbolo azul
-            //JOptionPane.showMessageDialog(this , "Usuário ou Senha incorretos:", "C.M.D Informa!!!", 2);//simbolo amarelo
-            //JOptionPane.showMessageDialog(this , "Usuário ou Senha incorretos:", "C.M.D Informa!!!", 3);//simbolo imterrogação
             txt_nome.setText("");
             txt_senha.setText("");
 
         }
-        //}//retirar quando retirar o IF
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void txt_senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_senhaKeyPressed

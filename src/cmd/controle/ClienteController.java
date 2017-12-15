@@ -13,11 +13,18 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
+ * Controle para registro de Cliente
  *
- * @author voce
+ * @author Usuario
  */
 public class ClienteController {
 
+    /**
+     * Insere uma Pessoa Jurídica
+     *
+     * @param pJ Pessoa Jurídica
+     * @return true caso realizado com sucesso,<br>false caso contrário
+     */
     public boolean inserirPessoaJuridica(PessoaJuridica pJ) {
         if (pJ == null || pJ.getCliente() == null) {
             return false;
@@ -26,38 +33,34 @@ public class ClienteController {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
         EnderecoDAO endDAO = new EnderecoDAO();
         TelefoneDAO telDAO = new TelefoneDAO();
-
         if ((pJ.getCliente().getEndereco() != null) && (!endDAO.inserir(pJ.getCliente().getEndereco()))) {
             return false;
         }
         if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
             return false;
         }
-
-        int valor = pJ.getCliente().getCodCliente();//pega o valor q retornar do Hibernate
+        //Pega o valor que retorna do Hibernate
+        int valor = pJ.getCliente().getCodCliente();
         JOptionPane.showMessageDialog(null, "Código do cliente: " + valor);
 
         Telefone tt;
         Iterator<Telefone> iterator = pJ.getCliente().getTelefones().iterator();
         while (iterator.hasNext()) {
-            tt = iterator.next();//Separa objeto telefone em yma variavel
-            tt.getId().setCodCliente(valor);//Força o valor q retorna do Hibernate, no codCliente do objeto Telefone
-
-            if (telDAO.inserir(tt)) {
-                //System.out.println("Telefone Cadastrado_cadTel");//Teste
-            } else {
-                //System.out.println("_2_ " + iterator.next().getId().getNumero());//Teste
-                //System.out.println("Telefone NÃO Cadastrado_cadTel");//Teste
+            tt = iterator.next();
+            tt.getId().setCodCliente(valor);//Força o valor que retorna do Hibernate; codCliente do objeto Telefone
+            if (!telDAO.inserir(tt)) {
                 return false;
             }
         }
-
-//        if ((pJ.getCliente() != null) && (!pJuDAO.inserir(pJ))) {
-//            return false;
-//        }
         return true;
     }
 
+    /**
+     * Insere uma Pessoa Física
+     *
+     * @param pF Pessoa Física
+     * @return true caso realizado com sucesso,<br>false caso contrário
+     */
     public boolean inserirPessoaFisica(PessoaFisica pF) {
         if (pF == null || pF.getCliente() == null) {
             return false;
@@ -66,88 +69,102 @@ public class ClienteController {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         EnderecoDAO endDAO = new EnderecoDAO();
         TelefoneDAO telDAO = new TelefoneDAO();
-
         if ((pF.getCliente().getEndereco() != null) && (!endDAO.inserir(pF.getCliente().getEndereco()))) {
             return false;
         }
         if ((pF.getCliente() != null) && (!pFiDAO.inserir(pF))) {
             return false;
         }
-
-        int valor = pF.getCliente().getCodCliente();//pega o valor q retornar do Hibernate
+        //Pega o valor que retorna do Hibernate
+        int valor = pF.getCliente().getCodCliente();
         JOptionPane.showMessageDialog(null, "Código do cliente: " + valor);
 
         Telefone tt;
         Iterator<Telefone> iterator = pF.getCliente().getTelefones().iterator();
         while (iterator.hasNext()) {
-            tt = iterator.next();//Separa objeto telefone em uma variavel
-            tt.getId().setCodCliente(valor);//Força o valor q retorna do Hibernate, no codCliente do objeto Telefone
-
-            if (telDAO.inserir(tt)) {
-                //System.out.println("Telefone Cadastrado_cadTel");//Teste
-            } else {
-                //System.out.println("_2_ " + iterator.next().getId().getNumero());//Teste
-                //System.out.println("Telefone NÃO Cadastrado_cadTel");//Teste
+            tt = iterator.next();
+            tt.getId().setCodCliente(valor);//Força o valor que retorna do Hibernate; codCliente do objeto Telefone
+            if (!telDAO.inserir(tt)) {
                 return false;
             }
         }
         return true;
     }
 
+    /**
+     * Verifica se CPF da Pessoa Física já existe em registro
+     *
+     * @param pFi Pessoa Física
+     * @return true caso exista,<br>false caso contrário
+     */
     public boolean verificarCpf(PessoaFisica pFi) {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         if (pFi == null) {
             return false;
         }
-
         return (pFiDAO.buscarCPF(pFi.getCpf()) == null);
     }
 
+    /**
+     * Verifica se CNPJ da Pessoa Jurídica já existe em registro
+     *
+     * @param pJu Pessoa Jurídica
+     * @return true caso exista,<br>false caso contrário
+     */
     public boolean verificarCnpj(PessoaJuridica pJu) {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
         if (pJu == null) {
             return false;
         }
-
         return (pJuDAO.buscarCNPJ(pJu.getCnpj()) == null);
     }
 
+    /**
+     * Valida o CPF da Pessoa Física
+     *
+     * @param pFi Pessoa Física
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarCpf(PessoaFisica pFi) {
         if (pFi == null) {
             return false;
         }
 
         String cpf = pFi.getCpf();
-        //Quabra a string em partes e retira a pontuação
         cpf = cpf.substring(0, 3) + cpf.substring(4, 7)
                 + cpf.substring(8, 11) + cpf.substring(12, 14);
-
         return ValidaCPFeCNPJ.isCPF(cpf);
     }
 
+    /**
+     * Valida o CNPJ da Pessoa Jurídica
+     *
+     * @param pJu Pessoa Jurídica
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarCnpj(PessoaJuridica pJu) {
         if (pJu == null || "".equals(pJu.getCnpj())) {
             return false;
         }
 
         String cnpj = pJu.getCnpj();
-
-        //Quabra a string em partes e retira a pontuação
         cnpj = cnpj.substring(0, 2) + cnpj.substring(3, 6)
                 + cnpj.substring(7, 10) + cnpj.substring(11, 15) + cnpj.substring(16, 18);
-
         return ValidaCPFeCNPJ.isCNPJ(cnpj);
     }
 
+    /**
+     * Altera uma Pessoa Física
+     *
+     * @param pF Pessoa Física
+     * @return true caso realizado com sucesso,<br>false caso contrário
+     */
     public boolean alterarPessoaFisica(PessoaFisica pF) {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
         EnderecoDAO endDAO = new EnderecoDAO();
 
-        pF.setCodCliente(pFiDAO.buscarCPF(pF.getCpf()).getCodCliente());//Necessaro quebrarb em 2 linhas - Busca pelo CNPJ para recuperar o Cod
-
-        //esta linha vai gerar erro se algo for alterado
+        pF.setCodCliente(pFiDAO.buscarCPF(pF.getCpf()).getCodCliente());
         pF.getCliente().getEndereco().setCodEndereco(pF.getCodCliente());
-        
         if (pFiDAO.alterar(pF)) {
             if (endDAO.alterar(pF.getCliente().getEndereco())) {
                 return true;
@@ -156,22 +173,18 @@ public class ClienteController {
         return false;
     }
 
+    /**
+     * Altera uma Pessoa Jurídica
+     *
+     * @param pJ Pessoa Jurídica
+     * @return true caso realizado com sucesso,<br>false caso contrário
+     */
     public boolean alterarPessoaJuridica(PessoaJuridica pJ) {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
         EnderecoDAO endDAO = new EnderecoDAO();
-        //int cod = 0;
 
-        pJ.setCodCliente(pJuDAO.buscarCNPJ(pJ.getCnpj()).getCodCliente());//Necessaro quebrarb em 2 linhas - Busca pelo CNPJ para recuperar o Cod
-
-        //esta linha vai gerar erro se algo for alterado
+        pJ.setCodCliente(pJuDAO.buscarCNPJ(pJ.getCnpj()).getCodCliente());
         pJ.getCliente().getEndereco().setCodEndereco(pJ.getCodCliente());
-//        System.out.println("------------------");
-//        System.out.println(pJ.getCodCliente());
-//        System.out.println(pJ.getCliente().getEndereco().getCep());
-//        System.out.println(pJ.getCliente().getEndereco().getCodEndereco());
-//        System.out.println("------------------");
-
-        //Contem 1 erro ele pode alterar a pessoaJuridoca mas não o endereço
         if (pJuDAO.alterar(pJ)) {
             if (endDAO.alterar(pJ.getCliente().getEndereco())) {
                 return true;
@@ -180,19 +193,25 @@ public class ClienteController {
         return false;
     }
 
+    /**
+     * Lista as Pessoas Jurídicas
+     *
+     * @return Lista de Pessoas Jurídicas
+     */
     public List<PessoaJuridica> listarPessoasJuridicas() {
         PessoaJuridicaDAO pJuDAO = new PessoaJuridicaDAO();
-        //System.out.println("------------Cliente-Controle-----pJuridica-------");//Teste
         List<PessoaJuridica> pj = pJuDAO.listar();
-        //pFiDAO.fecharListar();
         return pj;
     }
 
+    /**
+     * Lista as Pessoas Físicas
+     *
+     * @return Lista de Pessoas Físicas
+     */
     public List<PessoaFisica> listarPessoasFisicas() {
         PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-        //System.out.println("------------Cliente-Controle-----pFisica-------");//Teste
         List<PessoaFisica> pf = pFiDAO.listar();
-        //pFiDAO.fecharListar();
         return pf;
     }
 }

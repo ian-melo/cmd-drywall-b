@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
+ * Painel de Pessoa Física
  *
  * @author Usuario
  */
@@ -14,23 +15,27 @@ public class PnlFisica extends javax.swing.JPanel {
     public String getTxt_nome_pnl() {//Fornece acesso a outras classes
         return txt_nome_pnl.getText();
     }
+
     public String getTxt_cpf_pnl() {//Fornece acesso a outras classes
         return txt_cpf_pnl.getText();
     }
+
     public Date getTxt_dataNasc_pnl() {//Fornece acesso a outras classes
         return txt_dataNasc_pnl.getDate();
     }
-    
+
     public void setEnabled_cnpj_pnl(boolean val) {
         txt_cpf_pnl.setEnabled(val);
     }
-    
+
     public void setTxt_nome_pnl(String nome_pnl) {
         this.txt_nome_pnl.setText(nome_pnl);
     }
+
     public void setTxt_cpf_pnl(String cpf_pnl) {
         this.txt_cpf_pnl.setText(cpf_pnl);
     }
+
     public void setTxt_dataNasc_pnl(Date dataNas_pnl) {
         this.txt_dataNasc_pnl.setDate(dataNas_pnl);
     }
@@ -138,10 +143,7 @@ public class PnlFisica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_cpf_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cpf_pnlFocusLost
-//        Validar vali = new Validar();
-//        if (vali.validarCpf(txt_cpf_pnl.getText()) == false) {
-//            JOptionPane.showMessageDialog(txt_nome_pnl, "Verificar o CPF");
-//        }
+
     }//GEN-LAST:event_txt_cpf_pnlFocusLost
 
     private void txt_nome_pnlFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_nome_pnlFocusLost

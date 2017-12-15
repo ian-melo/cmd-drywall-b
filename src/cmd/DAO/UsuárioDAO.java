@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cmd.DAO;
 
-/**
- *
- * @author fe_mm
- */
 import cmd.conexao.ConnectionFactory;
 import cmd.entidade.Funcionario;
 import java.sql.Connection;
@@ -17,11 +8,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Alert;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe de DAO para Usuário (Funcionário)
+ *
+ * @author fe_mm
+ */
 public class UsuárioDAO {
 
+    /**
+     * Verifica as credenciais de Usuário (Funcionário) para fazer login
+     *
+     * @param nome Login do Usuário
+     * @param senha Senha do Usuário
+     * @return true caso aceito,<br/>false caso contrário
+     */
     public boolean CheckLogin(String nome, String senha) {
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
@@ -45,6 +47,11 @@ public class UsuárioDAO {
         return check;
     }
 
+    /**
+     * Registra um Usuário (Funcionário)
+     *
+     * @param u Usuário a registrar
+     */
     public void create(Funcionario u) {
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
@@ -62,7 +69,6 @@ public class UsuárioDAO {
         } finally {
             ConnectionFactory.fechaConexão(con, stat);
         }
-
     }
 
 }

@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Parede;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Parede
+ *
  * @author ian-melo
  */
 public class ParedeDAO implements DAO<Parede> {
@@ -22,10 +22,10 @@ public class ParedeDAO implements DAO<Parede> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return false;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -40,9 +40,9 @@ public class ParedeDAO implements DAO<Parede> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -57,9 +57,9 @@ public class ParedeDAO implements DAO<Parede> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -72,14 +72,14 @@ public class ParedeDAO implements DAO<Parede> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             p = (Parede) (s.createQuery("from Parede where CodConstrucao = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return p;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
@@ -95,12 +95,12 @@ public class ParedeDAO implements DAO<Parede> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
     }
-    
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cmd.DAO;
 
 import cmd.conexao.ConnectionFactory;
@@ -17,24 +12,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Classe de DAO para pedidos gerados a partir do aplicativo
  *
  * @author fe_mmo
  */
-public class PedidosDAO 
-{
-    public List<Pedidos>Read()
-   {
-       Connection con = ConnectionFactory.getConexao();
-       PreparedStatement stat = null;
-       ResultSet rs = null;
-       List<Pedidos> eq = new ArrayList<>();
-        try 
-        {
+public class PedidosDAO {
+
+    /**
+     * Lista os pedidos
+     *
+     * @return Lista de Pedidos
+     */
+    public List<Pedidos> Read() {
+        Connection con = ConnectionFactory.getConexao();
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        List<Pedidos> eq = new ArrayList<>();
+        try {
             stat = con.prepareStatement("SELECT * FROM pedido_orcamento");
             rs = stat.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 Pedidos e = new Pedidos();
                 e.setId(rs.getInt("Id"));
                 e.setAltura(rs.getFloat("Altura"));
@@ -54,15 +52,11 @@ public class PedidosDAO
                 e.setMao_obra(rs.getString("Mao_obra"));
                 eq.add(e);
             }
-        } 
-        catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(PedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
+        } finally {
             ConnectionFactory.fechaConexão(con, stat, rs);
         }
         return eq;
-   }
+    }
 }

@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.PessoaFisica;
@@ -9,10 +8,14 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Pessoa Física
+ *
  * @author ian-melo
  */
 public class PessoaFisicaDAO implements DAO<PessoaFisica> {
 
+    /**
+     * Sessão da DAO
+     */
     Session s = null;
 
     @Override
@@ -25,7 +28,7 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.close();
             return true;
         } catch (HibernateException e) {
-           System.out.println("_" + e);
+            System.out.println("_" + e);
             return false;
         } catch (Exception ex) {
             System.out.println("__" + ex);
@@ -89,6 +92,12 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
         }
     }
 
+    /**
+     * Busca Pessoa Físisca pelo CPF
+     *
+     * @param consulta CPF para consulta
+     * @return Pessoa Física encontrada
+     */
     public PessoaFisica buscarCPF(String consulta) {
         try {
             PessoaFisica pf;
@@ -117,7 +126,6 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
             s.beginTransaction();
             li = s.createQuery("from PessoaFisica").list();
             s.getTransaction().commit();
-            //s.close();
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);
@@ -128,6 +136,11 @@ public class PessoaFisicaDAO implements DAO<PessoaFisica> {
         }
     }
 
+    /**
+     * Fecha a sessão após listagem de pessoas físicas
+     *
+     * @deprecated Suscetível a erros, desnecessário
+     */
     public void fecharListar() {
         s.close();
     }

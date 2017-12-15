@@ -1,5 +1,3 @@
-//TODO: Implementar
-//TODO: Testar
 package cmd.controle;
 
 /**
@@ -14,6 +12,7 @@ public class LoginController {
      * - Login - nome de acesso<br>
      * - Senha - senha de acesso
      * @return true, se é permitido acesso<br>false, caso contrário
+     * @deprecated Sem uso
      */
     public boolean fazerLogin(String[] input) {
         return false;
@@ -22,6 +21,7 @@ public class LoginController {
     /**
      * Realiza logout
      * @return true, se feito<br>false, caso contrário
+     * @deprecated Sem uso
      */
     public boolean fazerLogout() {
         return true;

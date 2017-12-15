@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Endereco;
@@ -30,7 +29,7 @@ public class EnderecoDAO implements DAO<Endereco> {
 
     @Override
     public boolean alterar(Endereco item) {
-        try {  
+        try {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             s.update(item);

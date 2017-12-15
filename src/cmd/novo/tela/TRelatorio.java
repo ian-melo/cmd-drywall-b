@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -15,17 +13,20 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-//import net.sf.jasperreports.*;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
+/**
+ * Tela de Relatórios
+ * @author voce
+ */
 public class TRelatorio extends javax.swing.JInternalFrame {
-    
+
     public static TRelatorio relatorioT;
-    
+
     public static TRelatorio getInstancia() {
         if (relatorioT == null) {
             relatorioT = new TRelatorio();
@@ -39,12 +40,6 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     public TRelatorio() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
-
-//        bt_rel1.setEnabled(false);
-//        //bt_rel2.setEnabled(false);
-//        bt_rel3.setEnabled(false);
-//        bt_rel4.setEnabled(false);
-//        bt_rel5.setEnabled(false);
         bt_rel5.setVisible(false);
     }
 
@@ -185,7 +180,7 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
-        
+
         try {
             stat = con.prepareStatement("SELECT * from material");
             rs = stat.executeQuery();
@@ -204,35 +199,25 @@ public class TRelatorio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bt_rel1ActionPerformed
 
     private void bt_pessoafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pessoafisicaActionPerformed
-        
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
-        
-        try {
-            
-            stat = con.prepareStatement("SELECT c.CodCliente, pf.Nome, t.Numero, c.Email \n" +
-            "FROM Cliente AS c\n" +
-            "INNER JOIN PessoaFisica AS pf on pf.CodCliente = c.CodCliente\n" +
-            "INNER JOIN Telefone AS t on t.CodCliente = c.CodCliente\n" +
-            "ORDER BY pf.Nome");
-            rs = stat.executeQuery();
-            
-            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
 
-            //Funciona executa assim
-            //Fico bom
-            //JasperPrint print = JasperFillManager.fillReport("C:\\Users\\fe_mm\\Documents\\NetBeansProjects\\cmd-drywall-b\\src\\cmd\\Relatorios\\Pessoa_fisica.jasper", new HashMap(), relatresult);
+        try {
+            stat = con.prepareStatement("SELECT c.CodCliente, pf.Nome, t.Numero, c.Email \n"
+                    + "FROM Cliente AS c\n"
+                    + "INNER JOIN PessoaFisica AS pf on pf.CodCliente = c.CodCliente\n"
+                    + "INNER JOIN Telefone AS t on t.CodCliente = c.CodCliente\n"
+                    + "ORDER BY pf.Nome");
+            rs = stat.executeQuery();
+            JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
             JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\PessoasFisicas.jasper", new HashMap(), relatresult);
-            
             JasperViewer view = new JasperViewer(print, false);
             view.setVisible(true);
             view.toFront();
-            
         } catch (SQLException ex) {
             Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException e) {
-            //JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatorio: \n" + e);
             System.out.println("_ERRO: " + e);
             Logger.getLogger(TRelatorio.class.getName()).log(Level.SEVERE, null, e);
         } finally {
@@ -244,13 +229,13 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
-        
-        try {            
-            stat = con.prepareStatement("SELECT c.CodCliente, pj.NomeReferencia, t.Numero, c.Email\n" +
-            "FROM Cliente AS c\n" +
-            "INNER JOIN PessoaJuridica AS pj ON pj.CodCliente = c.CodCliente\n" +
-            "INNER JOIN Telefone AS t ON t.CodCliente = c.CodCliente\n" +
-            "ORDER BY pj.NomeReferencia");
+
+        try {
+            stat = con.prepareStatement("SELECT c.CodCliente, pj.NomeReferencia, t.Numero, c.Email\n"
+                    + "FROM Cliente AS c\n"
+                    + "INNER JOIN PessoaJuridica AS pj ON pj.CodCliente = c.CodCliente\n"
+                    + "INNER JOIN Telefone AS t ON t.CodCliente = c.CodCliente\n"
+                    + "ORDER BY pj.NomeReferencia");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);
             JasperPrint print = JasperFillManager.fillReport("src\\cmd\\Relatorios\\PessoasJuridicas.jasper", new HashMap(), relatresult);
@@ -270,8 +255,8 @@ public class TRelatorio extends javax.swing.JInternalFrame {
         Connection con = ConnectionFactory.getConexao();
         PreparedStatement stat = null;
         ResultSet rs = null;
-        
-        try {            
+
+        try {
             stat = con.prepareStatement("SELECT * from pedido_orcamento");
             rs = stat.executeQuery();
             JRResultSetDataSource relatresult = new JRResultSetDataSource(rs);

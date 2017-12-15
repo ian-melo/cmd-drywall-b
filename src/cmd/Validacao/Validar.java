@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cmd.Validacao;
 
 import java.text.ParseException;
@@ -13,11 +8,18 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
+ * Classe de validação de texto geral
  *
  * @author Usuario
  */
 public class Validar {
 
+    /**
+     * Verifica se o valor é vazio
+     *
+     * @param val Valor a ser validado
+     * @return true caso vazio,<br>false caso contrário
+     */
     public boolean validarVazio(String val) {
         if ("".equals(val.trim())) {
             return true;
@@ -25,14 +27,25 @@ public class Validar {
         return false;
     }
 
+    /**
+     * Valida formato da senha
+     *
+     * @param senha Senha a ser validada
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarSenha(String senha) {
         if (senha == null || validarVazio(senha) == true) {
             senha = "";
         }
-//      Foi modificado para 6
         return (senha.length() >= 6 && senha.length() <= 16);
     }
 
+    /**
+     * Valida formato do telefone
+     *
+     * @param telefone Telefone a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarTelefone(String telefone) {
         if (telefone == null || validarVazio(telefone) == true) {
             telefone = "";
@@ -40,6 +53,12 @@ public class Validar {
         return Pattern.matches("(\\(\\d{2}\\))(\\d{4,5})-(\\d{4})", telefone);
     }
 
+    /**
+     * Valida formato do CPF
+     *
+     * @param cpf CPF a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarCpf(String cpf) {
         if (cpf == null || validarVazio(cpf) == true) {
             cpf = "";
@@ -47,6 +66,12 @@ public class Validar {
         return Pattern.matches("(\\d{3}).(\\d{3}).(\\d{3})-([0-9X]{2})", cpf);
     }
 
+    /**
+     * Valida formato do CNPJ
+     *
+     * @param cnpj CNPJ a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarCnpj(String cnpj) {
         if (cnpj == null || validarVazio(cnpj) == true) {
             cnpj = "";
@@ -54,6 +79,12 @@ public class Validar {
         return Pattern.matches("(\\d{2}).(\\d{3}).(\\d{3})/(\\d{4})-(\\d{2})", cnpj);
     }
 
+    /**
+     * Valida formato do CEP
+     *
+     * @param cep CEP a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarCep(String cep) {
         if (cep == null || validarVazio(cep) == true) {
             cep = "";
@@ -61,17 +92,36 @@ public class Validar {
         return Pattern.matches("(\\d{5})-(\\d{3})", cep);
     }
 
+    /**
+     * Valida formato do número do logradouro
+     *
+     * @param numero Número a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarNumero(String numero) {
         if (numero == null || validarVazio(numero) == true) {
             numero = "";
         }
         return Pattern.matches("^[0-9]*\\d+[0-9]*$", numero);
     }
-    
+
+    /**
+     * Valida formato do número do logradouro<br>
+     * Obs.: desconsidera-se vazio
+     *
+     * @param numero Número a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarNumeroSendoVazio(String numero) {
         return Pattern.matches("^[0-9]*\\d+[0-9]*$", numero);
     }
 
+    /**
+     * Valida formato do e-mail
+     *
+     * @param email E-mail a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarEmail(String email) {
         if (email == null) {
             email = "";
@@ -80,13 +130,12 @@ public class Validar {
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", email);
     }
 
-//    public boolean validarData(String data) {
-//        if (data == null || validarVazio(data) == true) {
-//            data = "";
-//        }
-//        return Pattern.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$", data);
-//    }
-    //Retorna NULL se não for data
+    /**
+     * Valida formato da data
+     *
+     * @param dataString Data a ser validada
+     * @return true caso válido,<br>false caso contrário
+     */
     public Date validarData(String dataString) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date dataDate = null;
@@ -97,9 +146,14 @@ public class Validar {
             return null;
         }
         return dataDate;
-
     }
 
+    /**
+     * Valida formato de Estado como Unidade Feredativa (UF)
+     *
+     * @param estado Estado a ser validado
+     * @return true caso válido,<br>false caso contrário
+     */
     public boolean validarEstado(String estado) {
         if (estado == null || validarVazio(estado) == true) {
             estado = "";
@@ -107,5 +161,4 @@ public class Validar {
         return Pattern.matches("([A-Z]{2})", estado);
     }
 
-    //Testar: http://tools.lymas.com.br/regexp_br.php
 }

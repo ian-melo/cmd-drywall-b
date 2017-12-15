@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Item;
@@ -80,7 +79,6 @@ public class ItemDAO implements DAO<Item> {
             s.beginTransaction();
             li = s.createQuery("from Item").list();
             s.getTransaction().commit();
-            //s.close();
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);
@@ -91,6 +89,13 @@ public class ItemDAO implements DAO<Item> {
         }
     }
 
+    /**
+     * Lista itens a partir pessoa física(?)
+     *
+     * @param cod Código do Orçamento
+     * @return Lista de itens
+     * @deprecated Suscetível a erros; use listar ao invés
+     */
     public List<Item> listarFisica(String cod) {
         try {
             List li;
@@ -98,9 +103,8 @@ public class ItemDAO implements DAO<Item> {
             s.beginTransaction();
             li = (List) s.createQuery("from Orcamento where CodOrcamento = :cod")
                     .setInteger("cod", Integer.parseInt(cod)).list().get(0);
-            
+
             s.getTransaction().commit();
-            //s.close();
             return li;
         } catch (HibernateException e) {
             System.out.println("_" + e);
@@ -110,9 +114,13 @@ public class ItemDAO implements DAO<Item> {
             return null;
         }
     }
-    
-    
 
+    /**
+     * Lista itens a partir pessoa jurídica(?)
+     *
+     * @return Lista de itens
+     * @deprecated Desnecessário; use listar ao invés
+     */
     public List<Item> listarJuridica() {
         try {
             List li;
@@ -123,7 +131,7 @@ public class ItemDAO implements DAO<Item> {
             //s.close();
             return li;
         } catch (HibernateException e) {
-           System.out.println("_" + e);
+            System.out.println("_" + e);
             return null;
         } catch (Exception e) {
             System.out.println("__" + e);

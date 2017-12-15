@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.controle;
 
 import cmd.DAO.DAO;
@@ -8,12 +7,14 @@ import java.util.List;
 
 /**
  * Classe de controle para CRUD de materiais
+ *
  * @author Usuario, ian-melo
  */
 public class MaterialController {
 
     /**
      * Realiza a inserção de um material
+     *
      * @param m Material
      * @return true, se realizado<br>false, caso contrário
      */
@@ -22,9 +23,10 @@ public class MaterialController {
         m.setXdead(false);
         return mdao.inserir(m);
     }
-    
+
     /**
      * Realiza a alteração de um material
+     *
      * @param m Material
      * @return true, se realizado<br>false, caso contrário
      */
@@ -33,9 +35,10 @@ public class MaterialController {
         m.setXdead(false);
         return mdao.alterar(m);
     }
-    
+
     /**
      * Realiza a exclusão de um material
+     *
      * @param m Material
      * @return true, se realizado<br>false, caso contrário
      */
@@ -44,9 +47,10 @@ public class MaterialController {
         m.setXdead(true);
         return mdao.excluir(m);
     }
-    
+
     /**
      * Realiza a busca de um material
+     *
      * @param codigo Código do material
      * @return true, se realizado<br>false, caso contrário
      */
@@ -54,9 +58,10 @@ public class MaterialController {
         DAO mdao = new MaterialDAO();
         return (Material) mdao.buscar(codigo);
     }
-    
+
     /**
      * Realiza a listagem de materiais
+     *
      * @return lista de materiais
      */
     public List<Material> listarMateriais() {

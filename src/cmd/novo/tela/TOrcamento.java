@@ -1,3 +1,6 @@
+/*
+ * Deixai toda esperança, ó vós que entrais!
+ */
 package cmd.novo.tela;
 
 import cmd.DAO.ItemDAO;
@@ -42,7 +45,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Tela de Orçamento
  * @author Usuario
  */
 public class TOrcamento extends javax.swing.JInternalFrame {
@@ -366,7 +369,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
         } catch (IllegalArgumentException e) {
             gerenteDeJanelas.abrirJanelas(TCliente.getInstancia());
-            //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
         }
     }//GEN-LAST:event_btn_cadClienteActionPerformed
 
@@ -378,7 +380,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
                 } catch (IllegalArgumentException e) {
                     gerenteDeJanelas.abrirJanelas(TCalculo.getInstancia());
-                    //System.err.println(e);//ERRO ! - Erro - contornado.... retirar todo o try
                 }
                 fecharJanelaCarregamento();
             }
@@ -422,10 +423,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_sairActionPerformed
 
     private void bt_folhafisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_folhafisicaActionPerformed
-//        if (tb_itens.getSelectedRow() == -1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um item");
-//            return;
-//        }
         //Pessoa fisica
         if (cmb_cliente.getSelectedIndex() == 0) {
             if (verificaFisica() == true) {
@@ -674,7 +671,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
             NumberFormat nf = NumberFormat.getCurrencyInstance();
             String s = nf.format(num);
 
-            //reg.add("R$ " + String.valueOf(it.getPrecoTotal()).replace(".", ","));
             reg.add(s);
 
             tableData.add(reg);
@@ -754,10 +750,6 @@ public class TOrcamento extends javax.swing.JInternalFrame {
         String bairro = null;
         String uf = null;
 
-        //PessoaFisicaDAO pFiDAO = new PessoaFisicaDAO();
-        //int cod = pFiDAO.buscarCPF(tb_clientes.getValueAt(linha, 1).toString()).getCodCliente();
-        //listaItens = dao.listarFisica(String.valueOf(cod));
-        // JOptionPane.showMessageDialog(rootPane, listaItens.size());
         if (linha != -1 && linha3.length != -1) {
             
             email = tb_clientes.getValueAt(linha, 1).toString();

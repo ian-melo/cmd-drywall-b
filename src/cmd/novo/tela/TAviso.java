@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -15,8 +13,8 @@ import java.awt.event.KeyEvent;
 public class TAviso extends javax.swing.JDialog {
 
     /**
-     * Creates new form NewJDialog
-     * Aviso padrão de quando for necessario consultar o guia
+     * Creates new form NewJDialog Aviso padrão de quando for necessario
+     * consultar o guia
      */
     public TAviso(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -99,19 +97,17 @@ public class TAviso extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
-        //this.dispose();
         this.setVisible(false);
     }//GEN-LAST:event_btn_OKActionPerformed
 
     private void btn_OKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_OKKeyPressed
         //A barra de espaço tambem funciona, é padrão, mas com esse codigo o enter tambem funciona
         //- Para fechar o JDialog
-
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btn_OK.doClick();
         }
     }//GEN-LAST:event_btn_OKKeyPressed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_OK;
     private javax.swing.JLabel lb_info;

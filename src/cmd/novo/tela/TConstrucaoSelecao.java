@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -14,6 +12,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Tela de seleção de construção
  *
  * @author Usuario
  */
@@ -40,8 +39,6 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         tabbedP_ParedeForro.setBackground(Color.WHITE);
         panel_forro.setBackground(Color.WHITE);
         panel_parede.setBackground(Color.WHITE);
-
-        //preencheAmbasTabelas();//Colocado no evento: formInternalFrameActivated
     }
 
     /**
@@ -263,7 +260,6 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         int linha;
         if (evt.getClickCount() == 1) {
             linha = tb_construcaoParede.getSelectedRow();
-
             cod = (int) tb_construcaoParede.getValueAt(linha, 0);
 
         }
@@ -273,7 +269,6 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
         int linha;
         if (evt.getClickCount() == 1) {
             linha = tb_construcaoForro.getSelectedRow();
-
             cod = (int) tb_construcaoForro.getValueAt(linha, 0);
 
         }
@@ -284,30 +279,20 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void preencheTeste() {
-
         ConstrucaoController conC = new ConstrucaoController();
         ConstrucaoDAO ccc = new ConstrucaoDAO();
-
         for (Forro forS : conC.listarForros()) {
             System.out.println("===================================================");
-
             System.out.println("" + forS.getCodConstrucao());
-
             String val = Integer.toString(forS.getCodConstrucao());
             System.out.println("" + ccc.buscar(val).getDescricao());
             System.out.println("" + ccc.buscar(val).getDetalhes());
             System.out.println("" + ccc.buscar(val).getQualidade());
-
-//            System.out.println("" + conC.buscarForro(val).getConstrucao().getDescricao());
-//            System.out.println("" + conC.buscarForro(val).getConstrucao().getDetalhes());
-//            System.out.println("" + conC.buscarForro(val).getConstrucao().getQualidade());
             System.out.println("" + forS.getEhRf());
             System.out.println("" + forS.getEhRu());
             System.out.println("" + forS.getEhSt());
             System.out.println("" + forS.getCodConstrucao());
-
         }
-
     }
 
     private void preencheAmbasTabelas() {
@@ -317,61 +302,45 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
 
     private void preencheTabForro() {
         tb_construcaoForro.removeAll();
-
         ConstrucaoController conC = new ConstrucaoController();
-
-        //foS = conC.listarForros();
-        //Titulo
         Vector cabecalho = new Vector();
 
         cabecalho.add("CodConstrucao");//Tem em ambos
-
         cabecalho.add("Descricao");
         cabecalho.add("Detalhes");
         cabecalho.add("Qualidade");
-
         cabecalho.add("EhRf");
         cabecalho.add("EhRu");
         cabecalho.add("EhSt");
 
-        //cabecalho.add("Objeto");///
         //Itens
         Vector dados = new Vector();
         Vector item;
 
         for (Forro forS : conC.listarForros()) {
             item = new Vector();
-
             item.add(forS.getCodConstrucao());
-
             String val = Integer.toString(forS.getCodConstrucao());
             item.add(conC.buscarForro(val).getConstrucao().getDescricao());
             item.add(conC.buscarForro(val).getConstrucao().getDetalhes());
             item.add(conC.buscarForro(val).getConstrucao().getQualidade());
-
             if (forS.getEhRf()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
             if (forS.getEhRu()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
             if (forS.getEhSt()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
-            //item.add(conS);//Adiciona o objeto em uma coluna q não existe
             dados.add(item);
-
         }
-
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.setDataVector(dados, cabecalho);
         tb_construcaoForro.setModel(modeloTabela);
@@ -380,74 +349,54 @@ public class TConstrucaoSelecao extends javax.swing.JInternalFrame {
 
     private void preencheTabParede() {
         tb_construcaoParede.removeAll();
-
         ConstrucaoController conC = new ConstrucaoController();
-
         //Itens
         Vector dados = new Vector();
         Vector item;
-
         //Titulo
         Vector cabecalho = new Vector();
-
         cabecalho.add("CodConstrucao");
-
         cabecalho.add("Descricao");
         cabecalho.add("Detalhes");
         cabecalho.add("Qualidade");
-
         cabecalho.add("AlturaLimiteo");
         cabecalho.add("Montante");
         cabecalho.add("EhRf");
         cabecalho.add("EhRu");
         cabecalho.add("EhSt");
-
         //Itens
         dados = new Vector();
-        //Vector item;
-
-        //conC.buscarParede(title)//-------------------------------------------------------------
         ConstrucaoDAO coDAO = new ConstrucaoDAO();
         for (Parede parS : conC.listarParedes()) {
             item = new Vector();
-
             item.add(parS.getCodConstrucao());
-
             String val = Integer.toString(parS.getCodConstrucao());
             item.add(coDAO.buscar(val).getDescricao());
             item.add(coDAO.buscar(val).getDetalhes());
             item.add(coDAO.buscar(val).getQualidade());
-
             item.add(parS.getAlturaLimite());
             item.add(parS.getMontante());
-
             if (parS.getEhRf()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
             if (parS.getEhRu()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
             if (parS.getEhSt()) {
                 item.add("SIM");
             } else {
                 item.add("NÃO");
             }
-
-            //item.add(conS);//Adiciona o objeto em uma coluna q não existe
             dados.add(item);
 
         }
-
         DefaultTableModel modeloTabela = new DefaultTableModel();
         modeloTabela.setDataVector(dados, cabecalho);
         tb_construcaoParede.setModel(modeloTabela);
-
     }
 
 

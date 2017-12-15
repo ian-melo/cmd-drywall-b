@@ -1,4 +1,3 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Construcao;
@@ -9,6 +8,7 @@ import org.hibernate.Session;
 
 /**
  * Classe de DAO para Construção
+ *
  * @author ian-melo
  */
 public class ConstrucaoDAO implements DAO<Construcao> {
@@ -22,7 +22,7 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -36,7 +36,7 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -50,9 +50,9 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -65,13 +65,13 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             c = (Construcao) (s.createQuery("from Construcao where CodConstrucao = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             //s.close();
             return c;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
@@ -85,14 +85,13 @@ public class ConstrucaoDAO implements DAO<Construcao> {
             s.beginTransaction();
             li = s.createQuery("from Construcao").list();
             s.getTransaction().commit();
-            //s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
     }
-    
+
 }

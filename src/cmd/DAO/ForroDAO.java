@@ -1,15 +1,14 @@
-//TODO: Testar
 package cmd.DAO;
 
 import cmd.entidade.Forro;
 import cmd.util.HibernateUtil;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
  * Classe de DAO para Forro
+ *
  * @author ian-melo
  */
 public class ForroDAO implements DAO<Forro> {
@@ -23,7 +22,7 @@ public class ForroDAO implements DAO<Forro> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -37,9 +36,9 @@ public class ForroDAO implements DAO<Forro> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return false;
         }
@@ -54,7 +53,7 @@ public class ForroDAO implements DAO<Forro> {
             s.getTransaction().commit();
             s.close();
             return true;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         }
     }
@@ -66,14 +65,14 @@ public class ForroDAO implements DAO<Forro> {
             Session s = HibernateUtil.getSessionFactory().openSession();
             s.beginTransaction();
             f = (Forro) (s.createQuery("from Forro where CodConstrucao = :cod")
-                .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
+                    .setInteger("cod", Integer.parseInt(consulta)).list().get(0));
             s.getTransaction().commit();
             s.close();
             return f;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             System.out.println("_" + e);
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
@@ -89,12 +88,12 @@ public class ForroDAO implements DAO<Forro> {
             s.getTransaction().commit();
             s.close();
             return li;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             return null;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("_" + ex);
             return null;
         }
     }
-    
+
 }

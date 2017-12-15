@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Deixai toda esperança, ó vós que entrais!
  */
 package cmd.novo.tela;
 
@@ -41,69 +39,12 @@ import javax.swing.text.MaskFormatter;
  * @author Usuario
  */
 public class TCliente extends javax.swing.JInternalFrame {
-
     public static TCliente clienteT;
     PnlFisica pFi = new PnlFisica();
     PnlJuridica pJu = new PnlJuridica();
     private Timer timer;
     ClienteController cliC;
 
-//    Thread tTempog = new Thread() {
-//        @Override
-//        public void run() {
-//            try {
-//                Thread.sleep(30 * 1000); // aguarda 30 segundos
-//                System.out.println("***Desbloqueado***");
-//                tCEPg.interrupt();//Não consegui testar.....
-//                habilitaCEP(true);//Libera apos 30 segundos de busca
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(TCliente.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (Exception e) {
-//                System.out.println("_" + e);
-//
-//            }
-//        }
-//    };
-    //private String Cep;
-//    Thread tCEPg = new Thread() {
-//        @Override
-//        public void run() {
-//
-//            //new Thread(() -> {//Antigo
-//            //Faz a busca para o cep 58043-280
-//            WebServiceCep webServiceCep = WebServiceCep.searchCep(Cep);
-//
-//            //A ferramenta de busca ignora qualquer caracter que não seja numero.
-//            //caso a busca ocorra bem, imprime os resultados.
-//            if (webServiceCep.wasSuccessful()) {
-//                txt_logradouro.setText(webServiceCep.getLogradouroFull());
-//                txt_cidade.setText(webServiceCep.getCidade());
-//                txt_bairro.setText(webServiceCep.getBairro());
-//                txt_uf.setText(webServiceCep.getUf());
-//                //txt_uf.setSelectedItem(webServiceCep.getUf());
-//                System.out.println("Cep: " + webServiceCep.getCep());
-//                System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
-//                System.out.println("Bairro: " + webServiceCep.getBairro());
-//                System.out.println("Cidade: "
-//                        + webServiceCep.getCidade() + "/" + webServiceCep.getUf());
-//                //caso haja problemas imprime as exceções.
-//            } else {
-//                //JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
-//                JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
-//            }
-//            habilitaCEP(true);
-//            try {
-//
-//                tTempog.interrupt();
-//
-//            } catch (Exception e) {
-//                System.out.println("_" + e);
-//            }
-//
-//            //}).start();//Antigo
-//        }
-//    };
-    //PnlTelefone pTe = new PnlTelefone();
     public static TCliente getInstancia() {
         if (clienteT == null) {
             clienteT = new TCliente();
@@ -126,20 +67,8 @@ public class TCliente extends javax.swing.JInternalFrame {
         pnl_baixo.setBackground(Color.WHITE);
         pnl_email.setBackground(Color.WHITE);
 
-        pJuridica();//Inicai com Pessoa Juridica Selecionado
+        pJuridica();//Inicia com Pessoa Juridica Selecionado
         colocaDataAtual();
-
-//        
-//        pnl_baixo.setLocation(10, 10);
-//        pnl_baixo.setSize(10, 10);
-//        int x = this.getHeight();
-//        int y = this.getWidth();
-//        this.setSize(y - 1, x - 1);
-//        this.setSize(y, x);
-        //pnl_scroll_telefone.removeAll();//remove cliente anterior
-        //GridLayout gerente1 = new GridLayout(5, 1);//Mostra até 2 itens um em baixo do outro
-        //pnl_scroll_telefone.setLayout(gerente1);//apenas um ajuste
-        //pnl_scroll_telefone.add(pTe);
     }
 
     /**
@@ -707,9 +636,6 @@ public class TCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmb_pessoaActionPerformed
 
     private void btn_CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CadastrarActionPerformed
-//        if (verificaCamposEndereco() == false) {
-//            JOptionPane.showMessageDialog(null, "Preencha todos os canpos referentes ao Endereço");
-//        }
         if ("".equals(txt_tel1.getText().trim()) || "(  )    -    ".equals(txt_tel1.getText())) {
             JOptionPane.showMessageDialog(null, "Preencha o Telefone");
             return;
@@ -750,21 +676,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                 return;
             }
         }
-        //LimparCampos();
-
-//        //Exemplo de como funciona para pegar valores dentro do JTextField de outro JPanel
-//        //Colocar igual ao exemplo do JOptionPane.showMessageDialog em baixo
-//        //Ele pega no com um get q foi colocado no JPanel
-//        if (cmb_pessoa.getSelectedIndex() == 0) {//Pessoa Juridica
-//
-//            JOptionPane.showMessageDialog(null, pJu.getTxt_cnpj_pnl());
-//            JOptionPane.showMessageDialog(null, pJu.getTxt_razaoSocial_pnl());
-//        }
-//        if (cmb_pessoa.getSelectedIndex() == 1) {//Pessoa Fisica
-//            JOptionPane.showMessageDialog(null, pFi.getTxt_cpf_pnl());
-//            JOptionPane.showMessageDialog(null, pFi.getTxt_nome_pnl());
-//        }
-
     }//GEN-LAST:event_btn_CadastrarActionPerformed
 
     private boolean salvaPjuridica() {
@@ -847,7 +758,7 @@ public class TCliente extends javax.swing.JInternalFrame {
 
 //===============================ENDERECO=======================================
         end = preencheEnderecoVAL(end);//Preenche endereco
-        end.setCodEndereco(2);//ERRO!!!!!!!!!
+        end.setCodEndereco(2);
 //==============================================================================
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -1048,7 +959,6 @@ public class TCliente extends javax.swing.JInternalFrame {
         HashSet<Telefone> tels = new HashSet<>();
 //===============================ENDERECO=======================================
         end = preencheEnderecoVAL(end);//Preenche endereco
-        //end.setCodEndereco(25);//ERRO!!!!!!!!!
 //==============================================================================
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -1164,7 +1074,6 @@ public class TCliente extends javax.swing.JInternalFrame {
     private void setInfoPJuridica(int linha) {
 
         PessoaJuridica peJu = (PessoaJuridica) tb_FisicaEjuridica.getValueAt(linha, 11);
-        // Object obj = tb_FisicaEjuridica.getValueAt(linha, 5);
 
         pJu.setTxt_cnpj_pnl(peJu.getCnpj());
         pJu.setTxt_datafundacao_pnl(peJu.getDataFundacao());
@@ -1203,9 +1112,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             txt_cel2.setText(val);
 
         }
-        // } catch (Exception e) {
-        //     System.out.println("___" + e);
-        // }
     }
 
     private void setInfoPFisica(int linha) {
@@ -1231,40 +1137,29 @@ public class TCliente extends javax.swing.JInternalFrame {
                 txt_tel1.setFormatterFactory(new DefaultFormatterFactory());
 
                 txt_tel1.setText(val);
-                //txt_tel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
 
             }
-            //txt_tel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
                 txt_cel1.setFormatterFactory(new DefaultFormatterFactory());
-                //  if (val.length() == 13) {
-                //txt_cel1.setText(val + "0");
-                // } else {
                 txt_cel1.setText(val);
-                //txt_cel1.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                // }
             }
 
             if (iterator.hasNext()) {
                 String val = iterator.next().getId().getNumero();
-                //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(new DecimalFormat(""))));
                 txt_cel2.setFormatterFactory(new DefaultFormatterFactory());
-                        //if (val.length() == 13) {
-                //  txt_cel2.setText(val + "0");
-
-                // } else {
                 txt_cel2.setText(val);
-                //txt_cel2.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("(##)####-####")));
-                //  }
-
             }
         } catch (Exception e) {
             System.out.println("___" + e);
         }
     }
 
-//Preenche ENDEREÇO tanto de PessoaJuridica quanto de Pessoa Fisica
+    /**
+     * Preenche ENDEREÇO tanto de PessoaJuridica quanto de Pessoa Fisica
+     * @param en Endereço
+     * @return Endereço preenchido
+     */
     private Endereco preencheEnderecoVAL(Endereco en) {
         en.setBairro(txt_bairro.getText());
         en.setCep(txt_cep.getText());
@@ -1278,14 +1173,18 @@ public class TCliente extends javax.swing.JInternalFrame {
         return en;
     }
 
-//Preenche TELEFONE tanto de PessoaJuridica quanto de Pessoa Fisica
+    /**
+     * Preenche TELEFONE tanto de PessoaJuridica quanto de Pessoa Fisica
+     * @param tes Telefones
+     * @param cli Clientes
+     * @return Lista de Telefones preenchidos
+     */
     private HashSet<Telefone> preencheTelefoneVAL(HashSet<Telefone> tes, Cliente cli) {
         Telefone tel = new Telefone();
         TelefoneId telId = new TelefoneId();
 
         telId.setNumero(txt_tel1.getText());
-        //telId.setCodCliente(cli.getCodCliente());
-        telId.setCodCliente(80);//Temporario
+        telId.setCodCliente(80);
         tel.setId(telId);
         tel.setCliente(cli);
         tel.setXdead(false);
@@ -1297,8 +1196,7 @@ public class TCliente extends javax.swing.JInternalFrame {
             telId = new TelefoneId();
 
             telId.setNumero(txt_cel1.getText());
-            //telId.setCodCliente(cli.getCodCliente());
-            telId.setCodCliente(1);//Temporario
+            telId.setCodCliente(1);
             tel.setId(telId);
             tel.setCliente(null);
             tel.setXdead(false);
@@ -1311,7 +1209,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             telId = new TelefoneId();
 
             telId.setNumero(txt_cel2.getText());
-            //telId.setCodCliente(cli.getCodCliente());//ERRO!!!!!!!!!!!!!!!!!
             telId.setCodCliente(1);//Temporario
             tel.setId(telId);
             tel.setCliente(null);
@@ -1323,12 +1220,7 @@ public class TCliente extends javax.swing.JInternalFrame {
         return tes;
     }
 
-    //Verifica se o campo foi preenchido
     public boolean verificaPessoaJuridica() {
-//        if ("".equals(pJu.getTxt_cnpj_pnl().trim()) || "  .   .   /    -  ".equals(pJu.getTxt_cnpj_pnl().trim())) {
-//            JOptionPane.showMessageDialog(null, "Preencha o CNPJ");
-//            return false;
-//        }
         if ("".equals(pJu.getTxt_razaoSocial_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha a Razão Social");
             return false;
@@ -1338,44 +1230,22 @@ public class TCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha o nome para contato");
             return false;
         }
-//        if (pJu.getTxt_datafundacao_pnl() == null) {
-//            JOptionPane.showMessageDialog(null, "Preencha o <<<<<<<<<<<<<<<<");
-//            return false;
-//        }
-//        Não obrigatorio?
-//        if ("".equals(pJu.getTxt_ramoAtuacao_pnl().trim())) {
-//            JOptionPane.showMessageDialog(null, "Preencha o Ramo de Atuação");
-//            return;
-//        }
-        return true;
+    return true;
     }
 
     public boolean verificaPessoaFisica() {
-//        if ("".equals(pFi.getTxt_cpf_pnl().trim()) || "   .   .   -  ".equals(pFi.getTxt_cpf_pnl().trim())) {
-//            JOptionPane.showMessageDialog(null, "Preencha o CPF");
-//            return false;
-//        }
         if ("".equals(pFi.getTxt_nome_pnl().trim())) {
             JOptionPane.showMessageDialog(null, "Preencha o Nome");
             return false;
         }
-//        if (pFi.getTxt_dataNasc_pnl() == null) {
-//            JOptionPane.showMessageDialog(null, "Preencha a Data");
-//            return false;
-//        }
-
         return true;
     }
 
     public void buscaCep(String cep) {
         habilitaCEP(false);
-        //Cep = cep;//Global
         Thread tCEP = new Thread() {
             @Override
             public void run() {
-
-                //new Thread(() -> {//Antigo
-                //Faz a busca para o cep 58043-280
                 WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
 
                 //A ferramenta de busca ignora qualquer caracter que não seja numero.
@@ -1385,7 +1255,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                     txt_cidade.setText(webServiceCep.getCidade());
                     txt_bairro.setText(webServiceCep.getBairro());
                     txt_uf.setText(webServiceCep.getUf());
-                    //txt_uf.setSelectedItem(webServiceCep.getUf());
                     System.out.println("Cep: " + webServiceCep.getCep());
                     System.out.println("Logradouro: " + webServiceCep.getLogradouroFull());
                     System.out.println("Bairro: " + webServiceCep.getBairro());
@@ -1394,14 +1263,10 @@ public class TCliente extends javax.swing.JInternalFrame {
 
                     //caso haja problemas imprime as exceções.
                 } else {
-                    //JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
                     JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
                 }
 
                 habilitaCEP(true);
-
-                // tTempo.start();
-                //}).start();//Antigo
             }
 
         };
@@ -1426,8 +1291,6 @@ public class TCliente extends javax.swing.JInternalFrame {
         };
         tCEP.start();
         tTempo.start();
-        // tCEPg.start();//Global
-        // tTempog.start();//Global
 
     }
 
@@ -1484,7 +1347,6 @@ public class TCliente extends javax.swing.JInternalFrame {
         cabecalho.add("Ramo Atual");
         cabecalho.add("CNPJ");
         cabecalho.add("Data Fundação");
-        //cabecalho.add("Telefone");
         cabecalho.add("CEP");
         cabecalho.add("Logradouro");
         cabecalho.add("Numero");
@@ -1504,7 +1366,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(jx.getRamoAtuacao());
             item.add(jx.getCnpj());
             item.add(jx.getDataFundacao());
-            //item.add(jx.getCliente().getTelefones());
             item.add(jx.getCliente().getEndereco().getCep());
             item.add(jx.getCliente().getEndereco().getLogradouro());
             item.add(jx.getCliente().getEndereco().getNumero());
@@ -1534,7 +1395,6 @@ public class TCliente extends javax.swing.JInternalFrame {
         cabecalho.add("Nome");
         cabecalho.add("CPF");
         cabecalho.add("Data Nascimento");
-        //cabecalho.add("Telefone");
         cabecalho.add("CEP");
         cabecalho.add("Logradouro");
         cabecalho.add("Numero");
@@ -1553,7 +1413,6 @@ public class TCliente extends javax.swing.JInternalFrame {
             item.add(fx.getNome());
             item.add(fx.getCpf());
             item.add(fx.getDataNascimento());
-            //item.add(fx.getCliente().getTelefones());
             item.add(fx.getCliente().getEndereco().getCep());
             item.add(fx.getCliente().getEndereco().getLogradouro());
             item.add(fx.getCliente().getEndereco().getNumero());
@@ -1622,10 +1481,6 @@ public class TCliente extends javax.swing.JInternalFrame {
                         return false;//False se NAO preenchido algum campo do endereço(dentro do pnl_endereco)
                         //break;
                     }
-
-                    //JOptionPane.showMessageDialog(null, "Preencher todos os campos");
-                    //return false;//False ser preenchido algum campo do endereço
-                    //break;
                 }
             }
         }
